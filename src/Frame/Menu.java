@@ -76,7 +76,7 @@ public class Menu extends javax.swing.JFrame {
                  //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                  JDFOpcionContrato opcontrato = new JDFOpcionContrato(new Frame(),isVisible(),Menu.this);
                 opcontrato.setVisible(true);
-                 
+                 panelconmin();
              }
          });
          
@@ -99,7 +99,7 @@ public class Menu extends javax.swing.JFrame {
                 contvigente.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(contvigente);
                 contvigente.show();
-                 
+                 panelconmin();
              }
          });
          
@@ -122,7 +122,7 @@ public class Menu extends javax.swing.JFrame {
             abonos.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             jdesktop.add(abonos);
             abonos.show();
-                 
+             panelconmin();
              }
          });
          
@@ -145,6 +145,7 @@ public class Menu extends javax.swing.JFrame {
             recojo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             jdesktop.add(recojo);
             recojo.show();
+             panelconmin();
                  
              }
          });
@@ -176,6 +177,7 @@ public class Menu extends javax.swing.JFrame {
                 venta.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(venta);
                 venta.show();
+                 panelconmin();
                  
              }
          });
@@ -209,6 +211,7 @@ public class Menu extends javax.swing.JFrame {
                 maquinaria.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(maquinaria);
                 maquinaria.show();
+                panelconmin();
                  
              }
          });
@@ -232,6 +235,7 @@ public class Menu extends javax.swing.JFrame {
                 aridos.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(aridos);
                 aridos.show();
+                 panelconmin();
                  
              }
          });
@@ -262,6 +266,7 @@ public class Menu extends javax.swing.JFrame {
                 ingresocaja.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(ingresocaja);
                 ingresocaja.show();
+                 panelconmin();
                  
              }
          });
@@ -285,6 +290,7 @@ public class Menu extends javax.swing.JFrame {
                 egresos.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(egresos);
                 egresos.show();
+                panelconmin();
                  
              }
          });
@@ -308,6 +314,7 @@ public class Menu extends javax.swing.JFrame {
             newegresos.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             jdesktop.add(newegresos);
             newegresos.show();
+             panelconmin();
                  
              }
          });
@@ -331,6 +338,7 @@ public class Menu extends javax.swing.JFrame {
             movcaja.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             jdesktop.add(movcaja);
             movcaja.show();
+             panelconmin();
                  
              }
          });
@@ -362,6 +370,7 @@ public class Menu extends javax.swing.JFrame {
                 maqrepaircli.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(maqrepaircli);
                 maqrepaircli.show();
+                 panelconmin();
                  
              }
          });
@@ -385,6 +394,7 @@ public class Menu extends javax.swing.JFrame {
                 reparacion.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(reparacion);
                 reparacion.show();
+                 panelconmin();
                  
              }
          });
@@ -416,6 +426,7 @@ public class Menu extends javax.swing.JFrame {
                 empresaregi.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(empresaregi);
                 empresaregi.show();
+                 panelconmin();
                  
              }
          });
@@ -439,6 +450,7 @@ public class Menu extends javax.swing.JFrame {
                 empleado.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                 jdesktop.add(empleado);
                 empleado.show();
+                 panelconmin();
                  
              }
          });
@@ -462,6 +474,7 @@ public class Menu extends javax.swing.JFrame {
               clientes.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
               jdesktop.add(clientes);
               clientes.show();
+               panelconmin();
                  
              }
          });
@@ -473,6 +486,30 @@ public class Menu extends javax.swing.JFrame {
          cliente.setBackground(new java.awt.Color(255, 204, 51));
          
          ////////////////////////////////////////////////////////
+           JButton provee= new JButton("PROVEEDORES");
+         provee.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    JIFProveedores  proveedor = new JIFProveedores();
+                 Dimension desktopSize = jdesktop.getSize();
+                 Dimension FrameSize = proveedor.getSize();
+                 proveedor.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+                 jdesktop.add(proveedor);
+                 proveedor.show();
+                  panelconmin();
+                 
+             }
+         });
+         
+         
+         jpanelcontenedor.add(provee);
+         provee.setBounds(20, 280, 200, 50);
+         provee.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
+         provee.setBackground(new java.awt.Color(255, 204, 51));
+         
+         //////////////////////////////////////////////////////////
          JButton catego= new JButton("CATEGORIAS");
          catego.addActionListener(new ActionListener() {
 
@@ -485,17 +522,55 @@ public class Menu extends javax.swing.JFrame {
                  categoria.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
                  jdesktop.add(categoria);
                  categoria.show();
+                  panelconmin();
                  
              }
          });
          
          
          jpanelcontenedor.add(catego);
-         catego.setBounds(20, 280, 200, 50);
+         catego.setBounds(20, 350, 200, 50);
          catego.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          catego.setBackground(new java.awt.Color(255, 204, 51));
+         
+         /////////////////////////////////////////////////////////////
+            JButton cotiz= new JButton("NUE. COTIZACION");
+         cotiz.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    JIFNuevaCotizacion  cotiza = new JIFNuevaCotizacion();
+                 Dimension desktopSize = jdesktop.getSize();
+                 Dimension FrameSize = cotiza.getSize();
+                 cotiza.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+                 jdesktop.add(cotiza);
+                 cotiza.show();
+                  panelconmin();
+                 
+             }
+         });
+         
+         
+         jpanelcontenedor.add(cotiz);
+         cotiz.setBounds(20, 420, 200, 50);
+         cotiz.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
+         cotiz.setBackground(new java.awt.Color(255, 204, 51));
+         /////////////////////////////////////////////
      
      }
+      public void panelconmin(){
+      Dimension dimm= new Dimension(2, 0);
+      jpanelcontenedor.setPreferredSize(dimm);
+      jpanelcontenedor.revalidate();
+      
+      }
+      public void panelconmax(){
+      Dimension dimm= new Dimension(237, 0);
+      jpanelcontenedor.setPreferredSize(dimm);
+      jpanelcontenedor.revalidate();
+      
+      }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -521,7 +596,6 @@ public class Menu extends javax.swing.JFrame {
         jlblempresa = new javax.swing.JLabel();
         jbtnactualizar = new javax.swing.JButton();
         jlbldireccion = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jbtnmenu = new javax.swing.JLabel();
         jpanelmenu = new javax.swing.JPanel();
         jlblarriendo = new javax.swing.JLabel();
@@ -530,7 +604,6 @@ public class Menu extends javax.swing.JFrame {
         jlblcaja = new javax.swing.JLabel();
         jlbltaller = new javax.swing.JLabel();
         jlblotros = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jpanelcontenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -657,18 +730,12 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/maquinaria-pesada.png"))); // NOI18N
-
         javax.swing.GroupLayout jdesktopLayout = new javax.swing.GroupLayout(jdesktop);
         jdesktop.setLayout(jdesktopLayout);
         jdesktopLayout.setHorizontalGroup(
             jdesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdesktopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(999, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdesktopLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(1417, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -677,12 +744,9 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jdesktopLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(30, 30, 30))
+                .addContainerGap(470, Short.MAX_VALUE))
         );
         jdesktop.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdesktop.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jbtnmenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menu.png"))); // NOI18N
         jbtnmenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -692,14 +756,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jpanelmenu.setBackground(new java.awt.Color(231, 76, 60));
+        jpanelmenu.setBackground(new java.awt.Color(185, 139, 90));
         jpanelmenu.setForeground(new java.awt.Color(231, 76, 60));
         jpanelmenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlblarriendo.setBackground(new java.awt.Color(26, 188, 156));
         jlblarriendo.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        jlblarriendo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arriendo.png"))); // NOI18N
-        jlblarriendo.setText("ARRIENDO");
+        jlblarriendo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconoarriendo.png"))); // NOI18N
         jlblarriendo.setToolTipText("ARRIENDO");
         jlblarriendo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jlblarriendo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -713,8 +776,7 @@ public class Menu extends javax.swing.JFrame {
         jpanelmenu.add(jlblarriendo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-65, 10, -1, -1));
 
         jlblventa.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        jlblventa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/venta4.png"))); // NOI18N
-        jlblventa.setText("VENTA      ");
+        jlblventa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconoventa.png"))); // NOI18N
         jlblventa.setToolTipText("VENTA");
         jlblventa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlblventa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -728,8 +790,7 @@ public class Menu extends javax.swing.JFrame {
         jpanelmenu.add(jlblventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-65, 60, -1, -1));
 
         jlblinventario.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        jlblinventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/inventario.png"))); // NOI18N
-        jlblinventario.setText("INVENTARIO ");
+        jlblinventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconoinventario.png"))); // NOI18N
         jlblinventario.setToolTipText("INVENTARIO");
         jlblinventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlblinventario.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -742,8 +803,7 @@ public class Menu extends javax.swing.JFrame {
         jpanelmenu.add(jlblinventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(-65, 110, -1, -1));
 
         jlblcaja.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        jlblcaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/caja.png"))); // NOI18N
-        jlblcaja.setText("CAJA            ");
+        jlblcaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconocaja.png"))); // NOI18N
         jlblcaja.setToolTipText("CAJA ");
         jlblcaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlblcaja.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -756,8 +816,7 @@ public class Menu extends javax.swing.JFrame {
         jpanelmenu.add(jlblcaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(-65, 160, -1, -1));
 
         jlbltaller.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        jlbltaller.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/taller.png"))); // NOI18N
-        jlbltaller.setText("TALLER     ");
+        jlbltaller.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconotaller.png"))); // NOI18N
         jlbltaller.setToolTipText("TALLER  ");
         jlbltaller.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlbltaller.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -770,8 +829,7 @@ public class Menu extends javax.swing.JFrame {
         jpanelmenu.add(jlbltaller, new org.netbeans.lib.awtextra.AbsoluteConstraints(-65, 210, -1, -1));
 
         jlblotros.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        jlblotros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/otros.png"))); // NOI18N
-        jlblotros.setText("OTROS     ");
+        jlblotros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconootros.png"))); // NOI18N
         jlblotros.setToolTipText("OTROS");
         jlblotros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlblotros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -783,19 +841,15 @@ public class Menu extends javax.swing.JFrame {
         });
         jpanelmenu.add(jlblotros, new org.netbeans.lib.awtextra.AbsoluteConstraints(-65, 260, 110, -1));
 
-        jLabel12.setBackground(new java.awt.Color(52, 152, 219));
-        jLabel12.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(52, 152, 219));
-        jLabel12.setText("MENU");
-
-        jpanelcontenedor.setBackground(new java.awt.Color(149, 165, 166));
+        jpanelcontenedor.setBackground(new java.awt.Color(238, 238, 238));
         jpanelcontenedor.setForeground(new java.awt.Color(41, 128, 185));
+        jpanelcontenedor.setPreferredSize(new java.awt.Dimension(2, 0));
 
         javax.swing.GroupLayout jpanelcontenedorLayout = new javax.swing.GroupLayout(jpanelcontenedor);
         jpanelcontenedor.setLayout(jpanelcontenedorLayout);
         jpanelcontenedorLayout.setHorizontalGroup(
             jpanelcontenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 237, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
         jpanelcontenedorLayout.setVerticalGroup(
             jpanelcontenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -810,29 +864,24 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jbtnmenu)
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbtnmenu))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpanelmenu, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpanelcontenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jdesktop))
+                .addComponent(jdesktop)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jdesktop)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtnmenu)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel12)))
+                .addComponent(jbtnmenu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpanelmenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpanelcontenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jpanelcontenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)))
         );
 
         pack();
@@ -874,6 +923,7 @@ public class Menu extends javax.swing.JFrame {
           jpanelcontenedor.repaint();
           menuarriendo();
       }
+       panelconmax();
     }//GEN-LAST:event_jlblarriendoMouseReleased
 
     private void jlblventaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblventaMouseReleased
@@ -887,6 +937,7 @@ public class Menu extends javax.swing.JFrame {
           jpanelcontenedor.repaint();
          menuventa();
       }
+       panelconmax();
         
     }//GEN-LAST:event_jlblventaMouseReleased
 
@@ -901,6 +952,7 @@ public class Menu extends javax.swing.JFrame {
           jpanelcontenedor.repaint();
           menuiventario();
       }
+       panelconmax();
     }//GEN-LAST:event_jlblinventarioMouseReleased
 
     private void jlblcajaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblcajaMouseReleased
@@ -914,6 +966,7 @@ public class Menu extends javax.swing.JFrame {
           jpanelcontenedor.repaint();
           menucaja();
       }
+       panelconmax();
     }//GEN-LAST:event_jlblcajaMouseReleased
 
     private void jlbltallerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbltallerMouseReleased
@@ -927,6 +980,7 @@ public class Menu extends javax.swing.JFrame {
           jpanelcontenedor.repaint();
           menutaller();
       }
+       panelconmax();
     }//GEN-LAST:event_jlbltallerMouseReleased
 
     private void jlblotrosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblotrosMouseReleased
@@ -940,6 +994,7 @@ public class Menu extends javax.swing.JFrame {
           jpanelcontenedor.repaint();
             menuotros();
       }
+       panelconmax();
     }//GEN-LAST:event_jlblotrosMouseReleased
 
     /**
@@ -980,8 +1035,6 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

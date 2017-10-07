@@ -7,6 +7,7 @@ package Frame;
 
 import Dao.DAOMaquinaria;
 import Pojos.Maquinaria;
+import java.awt.Frame;
 import java.util.List;
 
 /**
@@ -23,6 +24,9 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
     JIFContrato contrato;
     JDFEditarContrato jifeditar;
     String form =null;
+  
+    Maquinaria maquina = new Maquinaria();
+    JIFNuevaCotizacion jifnuevacot;        
     public JDFBuscarMaquinaria(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -44,6 +48,14 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         form="EDITAR";
     }
+    public JDFBuscarMaquinaria(java.awt.Frame parent, boolean modal,JIFNuevaCotizacion jifnuevacot) {
+        super(parent, modal);
+        initComponents();
+        listmaquinaria = daomaquinaria.view(jtabla,"ACTIVO","EMPRESA");
+       this.jifnuevacot=jifnuevacot;
+        this.setLocationRelativeTo(null);
+        form="COTIZACION";
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,10 +76,10 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 51, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("BUSCAR INVENTARIO ARRIENDO MAQ.");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -159,6 +171,14 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
             jifeditar.setinsertar(listmaquinaria.get(index));
             this.dispose();
             }
+       
+       
+       }
+        if(form.equals("COTIZACION")){
+            maquina= listmaquinaria.get(jtabla.getSelectedRow());
+          JDFCotizacionCantDias cantdia= new JDFCotizacionCantDias(new Frame(), isVisible(),maquina,jifnuevacot);
+          cantdia.setVisible(true);
+          this.dispose();
        
        
        }

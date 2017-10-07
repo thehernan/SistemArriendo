@@ -25,6 +25,7 @@ public class JFLogin extends javax.swing.JFrame {
     public JFLogin() {
         initComponents();
      listempresas=daoempresa.jcombobox(jcbempresa);
+     this.setLocationRelativeTo(null);
     }
 
     /**
