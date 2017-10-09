@@ -512,5 +512,55 @@ public class DAOCliente implements Interface.IntCliente{
             }  
      
     }
+
+    @Override
+    public boolean verifyclientdebtor(long idclient) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        boolean valida=false;
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_verificadeudacliente(?)");
+        ps.setLong(1, idclient);
+       
+        rs=ps.executeQuery();
+       
+        if (rs.next()){
+          valida=rs.getBoolean(1);
+//            cliente.setCopiacarne(rs.getBytes("vdomicilio"));		
+        }
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        
+       return  valida; 
+        
+    }
     
 }

@@ -24,4 +24,6 @@ public interface IntCliente {
     public void print();
     public boolean duplicate(long id,String cadena,String op);
     public Cliente search(String rut,String tipo);
+    public boolean  verifyclientdebtor(long idclient);
+    
 }

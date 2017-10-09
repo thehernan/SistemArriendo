@@ -64,6 +64,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         total=0.0;
         jlbltipoop.setText(tipodoc);
         this.tipodoc = tipodoc;
+        jlblmensajedeudor.setVisible(false);
     }
     
     public void setllenarmaquinaria(Maquinaria maq){
@@ -151,6 +152,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         jlblfono = new javax.swing.JLabel();
         jlblmensaje = new javax.swing.JLabel();
         jlbldomiciliotrab = new javax.swing.JTextField();
+        jlblmensajedeudor = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtabla = new javax.swing.JTable();
         jbtnmaquinaria = new javax.swing.JButton();
@@ -230,6 +232,21 @@ public class JIFContrato extends javax.swing.JInternalFrame {
 
         jlbldomiciliotrab.setEnabled(false);
 
+        jlblmensajedeudor.setForeground(new java.awt.Color(255, 51, 51));
+        jlblmensajedeudor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblmensajedeudor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlblmensajedeudor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlblmensajedeudorMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlblmensajedeudorMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jlblmensajedeudorMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -242,14 +259,6 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jlbldomiciliopart, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jlbldomiciliotrab, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlblfono, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -258,7 +267,18 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jlblrazons, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jlblrazons, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jlblfono, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jlblmensajedeudor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addGap(18, 18, 18)
+                            .addComponent(jlbldomiciliotrab, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -280,11 +300,17 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jlbldomiciliotrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jlblfono))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jlblfono))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(jlblmensajedeudor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
         );
 
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -365,8 +391,8 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnmaquinaria)
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtngenerar)
@@ -427,6 +453,12 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         jlblfono.setText(cliente.getTelefono());
         jlblmensaje.setText("");
         jlbldomiciliotrab.setEnabled(true);
+        jlblmensajedeudor.setVisible(true);
+         if(daocliente.verifyclientdebtor(cliente.getId())==true){
+           jlblmensajedeudor.setText("El cliente registra deuda clic aqui para generar reporte");
+       }else {
+           jlblmensajedeudor.setText("El cliente no registra deuda");
+       }
         }else {
         
         jlblmensaje.setText("Cliente no encontrado");
@@ -437,6 +469,9 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         cliente=null;
         jlbldomiciliotrab.setEnabled(false);
         jlbldomiciliotrab.setText("");
+        
+        jlblmensajedeudor.setVisible(false);
+        jlblmensajedeudor.setText("");
         }
         validagenerar();
     }//GEN-LAST:event_jtfrutKeyReleased
@@ -464,6 +499,25 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jbtngenerarActionPerformed
 
+    private void jlblmensajedeudorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblmensajedeudorMousePressed
+        // TODO add your handling code here:
+        jlblmensajedeudor.setText("Generando Reporte ....");
+    }//GEN-LAST:event_jlblmensajedeudorMousePressed
+
+    private void jlblmensajedeudorMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblmensajedeudorMouseReleased
+        // TODO add your handling code here:
+        jlblmensajedeudor.setText("Reporte generadoi correctamente");
+    }//GEN-LAST:event_jlblmensajedeudorMouseReleased
+
+    private void jlblmensajedeudorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblmensajedeudorMouseExited
+        // TODO add your handling code here:
+       if(daocliente.verifyclientdebtor(cliente.getId())==true){
+           jlblmensajedeudor.setText("El cliente registra deuda clic aqui para generar reporte");
+       }else {
+           jlblmensajedeudor.setText("El cliente no registra deuda");
+       }
+    }//GEN-LAST:event_jlblmensajedeudorMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -483,6 +537,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jlbldomiciliotrab;
     private javax.swing.JLabel jlblfono;
     private javax.swing.JLabel jlblmensaje;
+    private javax.swing.JLabel jlblmensajedeudor;
     private javax.swing.JLabel jlblrazons;
     private javax.swing.JLabel jlbltipoop;
     private javax.swing.JLabel jlbltotal;
