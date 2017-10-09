@@ -5,9 +5,8 @@
  */
 package Dao;
 
-import Pojos.Cotizacion;
+import Pojos.OrdenCompra;
 import Pojos.SingletonEmpresa;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,10 +19,11 @@ import javax.swing.JOptionPane;
  *
  * @author info2017
  */
-public class DAOCotizacion implements Interface.IntCotizacion{
+public class DAOOrdenCompra implements Interface.IntOrdenCompra{
     SingletonEmpresa empresa= SingletonEmpresa.getinstancia();
+            
     @Override
-    public long insert(Cotizacion cotizacion) {
+    public long insert(OrdenCompra orden) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
          Connection c =null;
         PreparedStatement ps= null;
@@ -31,11 +31,14 @@ public class DAOCotizacion implements Interface.IntCotizacion{
         long id= 0;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertcotizacion(?,?,?,?)");
-         ps.setString(1, cotizacion.getCondicionpago());
-          ps.setString(2, cotizacion.getEmitidapor());
-           ps.setLong(3,empresa.getId());
-        ps.setLong(4,cotizacion.getIdcliente());
+        ps = c.prepareStatement("SELECT * from sp_insertordencompra(?,?,?,?,?)");
+
+        ps.setLong(1,empresa.getId());
+        ps.setLong(2, orden.getIdcliente());
+        ps.setString(3,orden.getAprobada());
+        ps.setString(4, orden.getDespachar());
+        ps.setString(5, orden.getFormapago());
+        
        
        
     
@@ -44,7 +47,7 @@ public class DAOCotizacion implements Interface.IntCotizacion{
       
         while (rs.next()){
            id= rs.getLong("vid");
-           JOptionPane.showMessageDialog(null,"Cotizacion guardado con exito");	
+           JOptionPane.showMessageDialog(null,"Orden Compra guardado con exito");	
         }
 	
         } catch(Exception e)
@@ -55,27 +58,25 @@ public class DAOCotizacion implements Interface.IntCotizacion{
                    try {
                        c.close();
                    } catch (SQLException ex) {
-                       Logger.getLogger(DAOCotizacion.class.getName()).log(Level.SEVERE, null, ex);
+                       Logger.getLogger(DAOOrdenCompra.class.getName()).log(Level.SEVERE, null, ex);
                    }
                }
                if(ps!= null){
                    try {
                        ps.close();
                    } catch (SQLException ex) {
-                       Logger.getLogger(DAOCotizacion.class.getName()).log(Level.SEVERE, null, ex);
+                       Logger.getLogger(DAOOrdenCompra.class.getName()).log(Level.SEVERE, null, ex);
                    }
                }
                if(rs != null){
                    try {
                        rs.close();
                    } catch (SQLException ex) {
-                       Logger.getLogger(DAOCotizacion.class.getName()).log(Level.SEVERE, null, ex);
+                       Logger.getLogger(DAOOrdenCompra.class.getName()).log(Level.SEVERE, null, ex);
                    }
                }
             } 
         return id;
     }
-    
-    
     
 }

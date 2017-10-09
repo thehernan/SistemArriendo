@@ -67,6 +67,11 @@ public class JDFCotizacionCantDias extends javax.swing.JDialog {
 
         jLabel2.setText("Dias:");
 
+        jtfcantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfcantidadActionPerformed(evt);
+            }
+        });
         jtfcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfcantidadKeyReleased(evt);
@@ -76,6 +81,11 @@ public class JDFCotizacionCantDias extends javax.swing.JDialog {
             }
         });
 
+        jtfdias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfdiasActionPerformed(evt);
+            }
+        });
         jtfdias.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfdiasKeyReleased(evt);
@@ -168,6 +178,16 @@ public class JDFCotizacionCantDias extends javax.swing.JDialog {
         jifnuevacot.setagregar(maq, cant, dias);
         this.dispose();
     }//GEN-LAST:event_jbtnaceptarActionPerformed
+
+    private void jtfcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfcantidadActionPerformed
+        // TODO add your handling code here:
+        jbtnaceptar.doClick();
+    }//GEN-LAST:event_jtfcantidadActionPerformed
+
+    private void jtfdiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfdiasActionPerformed
+        // TODO add your handling code here:
+          jbtnaceptar.doClick();
+    }//GEN-LAST:event_jtfdiasActionPerformed
 
     /**
      * @param args the command line arguments

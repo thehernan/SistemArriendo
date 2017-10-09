@@ -6,12 +6,11 @@
 package Frame;
 
 import Dao.DAOCliente;
-import Dao.DAOCotizacion;
-import Dao.DAODetalleCotizacion;
+import Dao.DAODetalleOrden;
+import Dao.DAOOrdenCompra;
 import Pojos.Cliente;
-import Pojos.Cotizacion;
-import Pojos.DetalleCotizacion;
-import Pojos.Maquinaria;
+import Pojos.DetalleOrdenCompra;
+import Pojos.OrdenCompra;
 import java.awt.Frame;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -22,10 +21,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author info2017
  */
-public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
+public class JIFOrdenCompra extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form JIFNuevaCotizacion
+     * Creates new form JIFOrdenCompra
      */
      DefaultTableModel modelo= new DefaultTableModel(){
         public boolean isCellEditable(int row, int column) {
@@ -34,69 +33,70 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
          return false;
         }
         };
-        String titulos[]={"Item","Cantidad","Descripcion","Valor dia C/U","Dias","Total"};
-        Object datosmaq[] = new Object[6];
-        List<DetalleCotizacion> listdetc = new ArrayList<>();
-        Cliente cliente;
-        DAOCliente daocliente = new DAOCliente();
-        DAOCotizacion daocotizacion = new DAOCotizacion();
-        DAODetalleCotizacion daodetc = new DAODetalleCotizacion();
-    public JIFNuevaCotizacion() {
+        String titulos[]={"Codigo","Cantidad","Unidad med.","Descripcion","P. unit","% Dscto","Valor Total"};
+        Object datosmaq[] = new Object[7];
+        
+    Cliente cliente;
+    DAOCliente daocliente = new DAOCliente();
+    List<DetalleOrdenCompra> listdet = new ArrayList<>();
+    DAOOrdenCompra daoordencompra= new DAOOrdenCompra();
+    DAODetalleOrden daodetorden = new DAODetalleOrden();
+            
+    public JIFOrdenCompra() {
         initComponents();
-         modelo.setColumnIdentifiers(titulos);
-        tabla.setModel(modelo);
+          modelo.setColumnIdentifiers(titulos);
+        jtabla.setModel(modelo);
     }
     
-    public void setagregar(Maquinaria maq,Integer cant,Integer dias){
-        NumberFormat nf = NumberFormat.getInstance();
-        DetalleCotizacion det = new DetalleCotizacion();
-        datosmaq[0]=modelo.getRowCount();
-        datosmaq[1]=cant;
-        datosmaq[2]=maq.getMaquina()+" "+maq.getModelo()+" "+maq.getSerie();
-        datosmaq[3]=nf.format(maq.getPreciodiario());
-        datosmaq[4]=dias;
-        Double total= cant * (maq.getPreciodiario()*dias);
-        datosmaq[5]=nf.format(total);
-        
+    public void setdetalle(DetalleOrdenCompra detorden){
+        NumberFormat nf= NumberFormat.getInstance();
+        datosmaq[0]=detorden.getCodigo();
+        datosmaq[1]=detorden.getCantidad();
+        datosmaq[2]=detorden.getUnidad();
+        datosmaq[3]=detorden.getDescripcion();
+        datosmaq[4]=nf.format(detorden.getPreciounid());
+        datosmaq[5]="% "+ detorden.getDesc();
+        Double desc= (detorden.getCantidad()*detorden.getPreciounid())* (detorden.getDesc()/100);
+        Double total= (detorden.getCantidad()*detorden.getPreciounid())-desc;
+        detorden.setValortotal(total);
+        datosmaq[6]=nf.format(total);
         modelo.addRow(datosmaq);
-        det.setCantidad(cant);
-        det.setValordia(maq.getPreciodiario());
-        det.setIdmaq(maq.getId());
-        det.setDias(dias);
-        
-        listdetc.add(det);
+        listdet.add(detorden);
         validagenerar();
+    
     
     }
     public void validagenerar(){
-        if(cliente!=null && listdetc.size() >0 ){
+        if(cliente != null && listdet.size()>0){
         jbtnaceptar.setEnabled(true);
         }else {
         jbtnaceptar.setEnabled(false);
         }
     
+    
     }
-    public void nuevo(){
-        //// cliente
-    cliente = null;
+    public void nueva(){
+    cliente=null;
     jtfrut.setValue(null);
-    jlblmensaje.setText("");
     jlblrazons.setText("* * *");
     jlbldomiciliopart.setText("* * *");
     jlbldomiciliotrab.setText("* * *");
     jlblfono.setText("* * *");
+    jlbldomiciliotrab.setEnabled(false);
     jlbldomiciliotrab.setText("");
+    jtfaprobadopor.setText("");
+    jtfdespachar.setText("");
+    jtfformadepago.setText("");
     
-    //// detalle
-    listdetc = new ArrayList<>();
-    for (int i = 0; i < tabla.getRowCount(); i++) {
+    listdet= new ArrayList<>();
+     for (int i = 0; i < jtabla.getRowCount(); i++) {
     modelo.removeRow(i);
     i-=1;
     }
     jbtnaceptar.setEnabled(false);
-    jtfcondicionpago.setText("");
-    jtfemitidapor.setText("");
+    
     }
+            
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,20 +119,22 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
         jlblfono = new javax.swing.JLabel();
         jlblmensaje = new javax.swing.JLabel();
         jlbldomiciliotrab = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
+        jtabla = new javax.swing.JTable();
         jbtnagregar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jtfcondicionpago = new javax.swing.JTextField();
-        jtfemitidapor = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jtfaprobadopor = new javax.swing.JTextField();
+        jtfdespachar = new javax.swing.JTextField();
+        jtfformadepago = new javax.swing.JTextField();
         jbtnaceptar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del Cliente / Empresa"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del Proveedor"));
 
         jLabel2.setText("R.U.T:");
 
@@ -192,7 +194,7 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jlblrazons, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +222,31 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("NUEVA ORDEN COMPRA");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addContainerGap(426, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        jtabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -231,7 +257,7 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tabla);
+        jScrollPane1.setViewportView(jtabla);
 
         jbtnagregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/maquina.png"))); // NOI18N
         jbtnagregar.setText("Agregar");
@@ -241,9 +267,11 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Condicion Pago:");
+        jLabel1.setText("Aprobada por:");
 
-        jLabel4.setText("Emitida por:");
+        jLabel4.setText("Despachar a:");
+
+        jLabel6.setText("Forma de pago:");
 
         jbtnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept2.png"))); // NOI18N
         jbtnaceptar.setText("Aceptar / Imprimir");
@@ -254,83 +282,60 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("NUEVA COTIZACION");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtnagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(643, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfcondicionpago)
-                            .addComponent(jtfemitidapor, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
+                            .addComponent(jbtnagregar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfdespachar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfformadepago))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtfaprobadopor, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtnaceptar)
-                        .addGap(16, 16, 16))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1)
+                        .addGap(12, 12, 12)))
                 .addContainerGap())
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnagregar)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jtfcondicionpago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jtfemitidapor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnaceptar)
-                        .addGap(16, 16, 16))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jtfaprobadopor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jtfdespachar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jtfformadepago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnaceptar))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pack();
@@ -338,7 +343,7 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
 
     private void jtfrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrutKeyReleased
         // TODO add your handling code here:
-        cliente=daocliente.search(jtfrut.getText(),"CLIENTEEMPRESA");
+        cliente=daocliente.search(jtfrut.getText(),"PROVEEDOR");
         if(cliente!=null){
             jlblrazons.setText(cliente.getNombre()+"  "+cliente.getApellido());
             jlbldomiciliopart.setText(cliente.getDomiciliopart());
@@ -362,20 +367,20 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
 
     private void jbtnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnagregarActionPerformed
         // TODO add your handling code here:
-        JDFBuscarMaquinaria bmaq = new JDFBuscarMaquinaria(new Frame(), isVisible(),this);
-        bmaq.setVisible(true);
+        JDFDetalleOrdenCompra detc = new JDFDetalleOrdenCompra(new Frame(), isVisible(),this);
+        detc.setVisible(true);
     }//GEN-LAST:event_jbtnagregarActionPerformed
 
     private void jbtnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnaceptarActionPerformed
         // TODO add your handling code here:
-        Cotizacion cotiza = new Cotizacion();
-        cotiza.setIdcliente(cliente.getId());
-        cotiza.setCondicionpago(jtfcondicionpago.getText());
-        cotiza.setEmitidapor(jtfemitidapor.getText());
-        cotiza.setId(daocotizacion.insert(cotiza));
+        OrdenCompra orden = new OrdenCompra();
+        orden.setAprobada(jtfaprobadopor.getText().toUpperCase());
+        orden.setDespachar(jtfdespachar.getText().toUpperCase());
+        orden.setFormapago(jtfformadepago.getText().toUpperCase());
+        orden.setIdcliente(cliente.getId());
+        orden.setId(daoordencompra.insert(orden));
         
-        daodetc.insert(listdetc, cotiza.getId());
-        nuevo();
+        daodetorden.insert(listdet, orden.getId());
         
     }//GEN-LAST:event_jbtnaceptarActionPerformed
 
@@ -386,6 +391,7 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -399,9 +405,10 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlblfono;
     private javax.swing.JLabel jlblmensaje;
     private javax.swing.JLabel jlblrazons;
-    private javax.swing.JTextField jtfcondicionpago;
-    private javax.swing.JTextField jtfemitidapor;
+    private javax.swing.JTable jtabla;
+    private javax.swing.JTextField jtfaprobadopor;
+    private javax.swing.JTextField jtfdespachar;
+    private javax.swing.JTextField jtfformadepago;
     private javax.swing.JFormattedTextField jtfrut;
-    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

@@ -34,7 +34,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         initComponents();
         bloquearjbtn(true, false, false, false, false,false);
         bloquearjtf(false, false, false, false,false, false);
-        listcliente = daocliente.view(jtabla);
+        listcliente = daocliente.viewbusiness(jtabla,"PROVEEDOR");
     }
     
      public void bloquearjbtn(boolean nuevo,boolean editar,boolean guardar,boolean eliminar,boolean cancelar,
@@ -53,7 +53,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
      public void bloquearjtf(boolean nombre,boolean apellidos,boolean rut,boolean telefono,boolean domiciliopart,
      boolean domiciliotrab){
      jtfnombre.setEnabled(nombre);
-     jtfapellidos.setEnabled(apellidos);
+//     jtfapellidos.setEnabled(apellidos);
      jtfrut.setEnabled(rut);
      jtftelefono.setEnabled(telefono);
      jtfdomiciliopart.setEnabled(domiciliopart);
@@ -62,7 +62,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
      }
      public void limpiarjtf(){
      jtfnombre.setText("");
-     jtfapellidos.setText("");
+//     jtfapellidos.setText("");
      jtfrut.setText("");
      jtftelefono.setText("");
      jtfdomiciliopart.setText("");
@@ -71,12 +71,12 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
      }
      public void validaguardar(){
      String nomb= jtfnombre.getText().replaceAll("\\s", "");
-     String apell= jtfapellidos.getText().replaceAll("\\s", "");
+//     String apell= jtfapellidos.getText().replaceAll("\\s", "");
      String rut= jtfrut.getText().replaceAll("\\s", "");
      String tel = jtftelefono.getText().replaceAll("\\s", "");
      String dompart= jtfdomiciliopart.getText().replaceAll("\\s", "");
      String domtrab = jtfdomiciliotrab.getText().replaceAll("\\s", "");
-     if (nomb.length()>0 && apell.length()>0 && rut.length()>0 && tel.length() >0 && dompart.length() >0  &&
+     if (nomb.length()>0 &&  rut.length()>0 && tel.length() >0 && dompart.length() >0  &&
          domtrab.length() >0){
          jbtnguardar.setEnabled(true);
      
@@ -98,13 +98,11 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jtfnombre = new javax.swing.JTextField();
-        jtfapellidos = new javax.swing.JTextField();
         jtfrut = new javax.swing.JFormattedTextField();
         jtftelefono = new javax.swing.JTextField();
         jtfdomiciliopart = new javax.swing.JTextField();
@@ -149,9 +147,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setText("Nombres:");
-
-        jLabel3.setText("Apellidos:");
+        jLabel2.setText("Razon Social:");
 
         jLabel4.setText("R.U.T:");
 
@@ -164,12 +160,6 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         jtfnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfnombreKeyReleased(evt);
-            }
-        });
-
-        jtfapellidos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtfapellidosKeyReleased(evt);
             }
         });
 
@@ -310,17 +300,23 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(33, 33, 33)
+                                .addComponent(jtfnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbtneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)
+                                .addComponent(jbtnimprimir))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7))
                                 .addGap(22, 22, 22)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfnombre)
-                                    .addComponent(jtfapellidos)
                                     .addComponent(jtfrut)
                                     .addComponent(jtftelefono)
                                     .addComponent(jtfdomiciliopart)
@@ -330,13 +326,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlblruta)
-                                    .addComponent(jbtnadjuntar)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbtneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addComponent(jbtnimprimir)))
+                                    .addComponent(jbtnadjuntar))))
                         .addContainerGap(15, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -360,10 +350,6 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jtfnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jtfapellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -422,7 +408,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
     private void jbtnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnguardarActionPerformed
         // TODO add your handling code here:
        cliente.setNombre(jtfnombre.getText().toUpperCase());
-       cliente.setApellido(jtfapellidos.getText().toUpperCase());
+       cliente.setApellido(" ");
        cliente.setRut(jtfrut.getText().toUpperCase());
        cliente.setTelefono(jtftelefono.getText());
        cliente.setDomiciliatrab(jtfdomiciliotrab.getText().toUpperCase());
@@ -452,7 +438,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
 
         }
 
-        listcliente = daocliente.view(jtabla);
+        listcliente = daocliente.viewbusiness(jtabla,"PROVEEDOR");
         bloquearjbtn(true, false, false, false, false,false);
         bloquearjtf(false, false, false,false,false,false);
         limpiarjtf();
@@ -461,9 +447,9 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
     private void jbtneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneliminarActionPerformed
         // TODO add your handling code here:
 
-        if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR LA TARIFA","ELIMINAR",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+        if (JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar al proveedor","ELIMINAR",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
             daocliente.delete(cliente.getId());
-            listcliente = daocliente.view(jtabla);
+            listcliente = daocliente.viewbusiness(jtabla,"PROVEEDOR");
             limpiarjtf();
             bloquearjbtn(true, false, false, false, false,false);
 
@@ -492,7 +478,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         cliente = listcliente.get(jtabla.getSelectedRow());
         jtfnombre.setText(cliente.getNombre());
-        jtfapellidos.setText(cliente.getApellido());
+//        jtfapellidos.setText(cliente.getApellido());
         jtfrut.setText(cliente.getRut());
         jtfdomiciliopart.setText(cliente.getDomiciliopart());
         jtfdomiciliotrab.setText(cliente.getDomiciliatrab());
@@ -506,7 +492,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
          cliente = listcliente.get(jtabla.getSelectedRow());
         jtfnombre.setText(cliente.getNombre());
-        jtfapellidos.setText(cliente.getApellido());
+//        jtfapellidos.setText(cliente.getApellido());
         jtfrut.setText(cliente.getRut());
         jtfdomiciliopart.setText(cliente.getDomiciliopart());
         jtfdomiciliotrab.setText(cliente.getDomiciliatrab());
@@ -552,11 +538,6 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         validaguardar();
     }//GEN-LAST:event_jtfnombreKeyReleased
 
-    private void jtfapellidosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfapellidosKeyReleased
-        // TODO add your handling code here:
-        validaguardar();
-    }//GEN-LAST:event_jtfapellidosKeyReleased
-
     private void jtfrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrutKeyReleased
         // TODO add your handling code here:
         validaguardar();
@@ -581,7 +562,6 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -599,7 +579,6 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtnnew;
     private javax.swing.JLabel jlblruta;
     private javax.swing.JTable jtabla;
-    private javax.swing.JTextField jtfapellidos;
     private javax.swing.JTextField jtfbuscar;
     private javax.swing.JTextField jtfdomiciliopart;
     private javax.swing.JTextField jtfdomiciliotrab;

@@ -128,7 +128,7 @@ public class DAOCliente implements Interface.IntCliente{
         rs=ps.executeQuery();
       
         while (rs.next()){
-            JOptionPane.showMessageDialog(null,"Cliente guardado con exito");	
+            JOptionPane.showMessageDialog(null,"Guardado con exito");	
         }
 	
         } catch(Exception e)
@@ -185,7 +185,7 @@ public class DAOCliente implements Interface.IntCliente{
         rs=ps.executeQuery();
       
         while (rs.next()){
-            JOptionPane.showMessageDialog(null,"Cliente editado con exito");	
+            JOptionPane.showMessageDialog(null,"Editado con exito");	
         }
 	
         } catch(Exception e)
@@ -233,7 +233,7 @@ public class DAOCliente implements Interface.IntCliente{
         rs=ps.executeQuery();
       
         while (rs.next()){
-            JOptionPane.showMessageDialog(null,"Cliente eliminado con exito");	
+            JOptionPane.showMessageDialog(null,"Eliminado con exito");	
         }
 	
         } catch(Exception e)
@@ -321,7 +321,7 @@ public class DAOCliente implements Interface.IntCliente{
     }
 
     @Override
-    public Cliente search(String rut) {
+    public Cliente search(String rut,String tipo) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
@@ -330,8 +330,9 @@ public class DAOCliente implements Interface.IntCliente{
        
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_buscarcliente(?)");
+        ps = c.prepareStatement("SELECT * from sp_buscarcliente(?,?)");
         ps.setString(1, rut);
+        ps.setString(2, tipo);
         rs=ps.executeQuery();
        
         if (rs.next()){
@@ -380,7 +381,7 @@ public class DAOCliente implements Interface.IntCliente{
     }
 
     @Override
-    public List<Cliente> viewbusiness(JTable tabla) {
+    public List<Cliente> viewbusiness(JTable tabla,String tipo) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
          Connection c =null;
         PreparedStatement ps= null;
@@ -390,7 +391,7 @@ public class DAOCliente implements Interface.IntCliente{
         try{
 	c = Conexion.Connect();
         ps = c.prepareStatement("SELECT * from sp_mostrarclientes(?)");
-        ps.setString(1, "EMPRESA");
+        ps.setString(1, tipo);
         rs=ps.executeQuery();
         
          DefaultTableModel modelo= new DefaultTableModel(){
@@ -400,10 +401,10 @@ public class DAOCliente implements Interface.IntCliente{
          return false;
         }
         };
-        String titulos[]={"Nombre","Apellido","R.U.T"};
+        String titulos[]={"Razon Social","R.U.T"};
         modelo.setColumnIdentifiers(titulos);
         tabla.setModel(modelo);
-        Object datosR[] = new Object[3];
+        Object datosR[] = new Object[2];
        
              
         
@@ -418,8 +419,8 @@ public class DAOCliente implements Interface.IntCliente{
             cliente.setDomiciliatrab(rs.getString("vdomiciliotrab"));
             cliente.setCopiacarne(rs.getBytes("vcopia"));
             datosR[0]=cliente.getNombre();
-            datosR[1]=cliente.getApellido();
-            datosR[2]=cliente.getRut();
+           
+            datosR[1]=cliente.getRut();
             modelo.addRow(datosR);
             listcliente.add(cliente);
 		

@@ -34,7 +34,7 @@ public class JIFEmpresaRegistro extends javax.swing.JInternalFrame {
         initComponents();
         bloquearjbtn(true, false, false, false, false,false);
         bloquearjtf(false, false, false, false,false, false);
-        listcliente = daocliente.viewbusiness(jtabla);
+        listcliente = daocliente.viewbusiness(jtabla,"EMPRESA");
     }
     
      public void bloquearjbtn(boolean nuevo,boolean editar,boolean guardar,boolean eliminar,boolean cancelar,
@@ -408,7 +408,7 @@ public class JIFEmpresaRegistro extends javax.swing.JInternalFrame {
     private void jbtnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnguardarActionPerformed
         // TODO add your handling code here:
        cliente.setNombre(jtfnombre.getText().toUpperCase());
-//       cliente.setApellido(jtfapellidos.getText().toUpperCase());
+       cliente.setApellido(" ");
        cliente.setRut(jtfrut.getText().toUpperCase());
        cliente.setTelefono(jtftelefono.getText());
        cliente.setDomiciliatrab(jtfdomiciliotrab.getText().toUpperCase());
@@ -438,7 +438,7 @@ public class JIFEmpresaRegistro extends javax.swing.JInternalFrame {
 
         }
 
-        listcliente = daocliente.viewbusiness(jtabla);
+        listcliente = daocliente.viewbusiness(jtabla,"EMPRESA");
         bloquearjbtn(true, false, false, false, false,false);
         bloquearjtf(false, false, false,false,false,false);
         limpiarjtf();
@@ -447,9 +447,9 @@ public class JIFEmpresaRegistro extends javax.swing.JInternalFrame {
     private void jbtneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneliminarActionPerformed
         // TODO add your handling code here:
 
-        if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR LA TARIFA","ELIMINAR",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+        if (JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar la empresa","ELIMINAR",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
             daocliente.delete(cliente.getId());
-            listcliente = daocliente.viewbusiness(jtabla);
+            listcliente = daocliente.viewbusiness(jtabla,"EMPRESA");
             limpiarjtf();
             bloquearjbtn(true, false, false, false, false,false);
 

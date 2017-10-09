@@ -331,7 +331,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
 
     private void jtfrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrutKeyReleased
         // TODO add your handling code here:
-        cliente=daocliente.search(jtfrut.getText());
+        cliente=daocliente.search(jtfrut.getText(),"CLIENTEEMPRESA");
         if(cliente!=null){
         jlblrazonsocial.setText(cliente.getNombre()+"  "+cliente.getApellido());
         jlbldominiciliopart.setText(cliente.getDomiciliopart());

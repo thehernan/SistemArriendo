@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.util.Calendar;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,6 +31,10 @@ public class Menu extends javax.swing.JFrame {
      */
     private Dimension dim;
     SingletonEmpresa singletonempresa = SingletonEmpresa.getinstancia();
+    ////////////////////////////////////
+      java.util.Calendar calendario; 
+    int dia, mes, año, hora, minutos, segundos; 
+    //////////////////////////////////////
     public Menu() {
         initComponents();
           ///ADAPTAR AL TAMAÑO DE PANTALLA
@@ -38,6 +43,7 @@ public class Menu extends javax.swing.JFrame {
         /////////////////////////////////
         jlblempresa.setText(singletonempresa.getRazonS()+"  "+singletonempresa.getRut());
         jlbldireccion.setText(singletonempresa.getDomicilio());
+       // reloj();
     }
      public void cargarImagen(){
     try{
@@ -557,6 +563,30 @@ public class Menu extends javax.swing.JFrame {
          cotiz.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          cotiz.setBackground(new java.awt.Color(255, 204, 51));
          /////////////////////////////////////////////
+          JButton ordenc= new JButton("NUE. ORDEN COMPRA");
+         ordenc.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    JIFOrdenCompra  orden = new JIFOrdenCompra();
+                 Dimension desktopSize = jdesktop.getSize();
+                 Dimension FrameSize = orden.getSize();
+                 orden.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+                 jdesktop.add(orden);
+                 orden.show();
+                  panelconmin();
+                 
+             }
+         });
+         
+         
+         jpanelcontenedor.add(ordenc);
+         ordenc.setBounds(20, 490, 200, 50);
+         ordenc.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
+         ordenc.setBackground(new java.awt.Color(255, 204, 51));
+         ///////////////////////////////////////////////////////////
+         
      
      }
       public void panelconmin(){
@@ -571,6 +601,28 @@ public class Menu extends javax.swing.JFrame {
       jpanelcontenedor.revalidate();
       
       }
+      
+      private void reloj() { 
+        calendario = new java.util.GregorianCalendar(); 
+        segundos = calendario.get(Calendar.SECOND); 
+        javax.swing.Timer timer = new javax.swing.Timer(1000, new java.awt.event.ActionListener() { 
+        @ Override 
+        public void actionPerformed(java.awt.event.ActionEvent ae) { 
+        java.util.Date actual = new java.util.Date(); 
+        calendario.setTime(actual); 
+        dia = calendario.get(Calendar.DAY_OF_MONTH); 
+        mes = (calendario.get(Calendar.MONTH) + 1); 
+        año = calendario.get(Calendar.YEAR); 
+        hora = calendario.get(Calendar.HOUR_OF_DAY); 
+        minutos = calendario.get(Calendar.MINUTE); 
+        segundos = calendario.get(Calendar.SECOND); 
+        String hour = String.format("%02d : %02d : %02d", hora, minutos, segundos); 
+        String date = String.format("%02d / %02d / %02d", dia, mes, año); 
+        jlblhora.setText("<html><center>" + hour + "<br>" + date); 
+           } 
+        }); 
+        timer.start(); 
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -604,6 +656,7 @@ public class Menu extends javax.swing.JFrame {
         jlblcaja = new javax.swing.JLabel();
         jlbltaller = new javax.swing.JLabel();
         jlblotros = new javax.swing.JLabel();
+        jlblhora = new javax.swing.JLabel();
         jpanelcontenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -767,7 +820,6 @@ public class Menu extends javax.swing.JFrame {
         jlblarriendo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jlblarriendo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlblarriendo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jlblarriendo.setPreferredSize(new java.awt.Dimension(110, 40));
         jlblarriendo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jlblarriendoMouseReleased(evt);
@@ -780,7 +832,6 @@ public class Menu extends javax.swing.JFrame {
         jlblventa.setToolTipText("VENTA");
         jlblventa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlblventa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jlblventa.setPreferredSize(new java.awt.Dimension(110, 40));
         jlblventa.setVerifyInputWhenFocusTarget(false);
         jlblventa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -807,7 +858,6 @@ public class Menu extends javax.swing.JFrame {
         jlblcaja.setToolTipText("CAJA ");
         jlblcaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlblcaja.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jlblcaja.setPreferredSize(new java.awt.Dimension(110, 40));
         jlblcaja.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jlblcajaMouseReleased(evt);
@@ -820,7 +870,6 @@ public class Menu extends javax.swing.JFrame {
         jlbltaller.setToolTipText("TALLER  ");
         jlbltaller.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlbltaller.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jlbltaller.setPreferredSize(new java.awt.Dimension(110, 40));
         jlbltaller.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jlbltallerMouseReleased(evt);
@@ -833,13 +882,17 @@ public class Menu extends javax.swing.JFrame {
         jlblotros.setToolTipText("OTROS");
         jlblotros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlblotros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jlblotros.setPreferredSize(new java.awt.Dimension(110, 40));
         jlblotros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jlblotrosMouseReleased(evt);
             }
         });
         jpanelmenu.add(jlblotros, new org.netbeans.lib.awtextra.AbsoluteConstraints(-65, 260, 110, -1));
+
+        jlblhora.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jlblhora.setForeground(new java.awt.Color(255, 255, 255));
+        jlblhora.setText("* * *");
+        jpanelmenu.add(jlblhora, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
         jpanelcontenedor.setBackground(new java.awt.Color(238, 238, 238));
         jpanelcontenedor.setForeground(new java.awt.Color(41, 128, 185));
@@ -1051,6 +1104,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jlblcaja;
     private javax.swing.JLabel jlbldireccion;
     private javax.swing.JLabel jlblempresa;
+    private javax.swing.JLabel jlblhora;
     private javax.swing.JLabel jlblinventario;
     private javax.swing.JLabel jlblotros;
     private javax.swing.JLabel jlbltaller;

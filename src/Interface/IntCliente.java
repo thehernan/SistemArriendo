@@ -16,12 +16,12 @@ import javax.swing.JTable;
 public interface IntCliente {
     
     public List<Cliente> view (JTable tabla); 
-    public List<Cliente> viewbusiness(JTable tabla);
+    public List<Cliente> viewbusiness(JTable tabla,String tipo);
     public void insert (Cliente cli);
     public void update(Cliente cli);
     public void updatenophoto(Cliente cli);
     public void delete(Long id);
     public void print();
     public boolean duplicate(long id,String cadena,String op);
-    public Cliente search(String rut);
+    public Cliente search(String rut,String tipo);
 }

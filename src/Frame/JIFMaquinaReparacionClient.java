@@ -560,7 +560,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
 
     private void jtfrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrutKeyReleased
         // TODO add your handling code here:
-        cliente=daocliente.search(jtfrut.getText());
+        cliente=daocliente.search(jtfrut.getText(),"CLIENTEEMPRESA");
         if(cliente!=null){
             jlblrazons.setText(cliente.getNombre()+"  "+cliente.getApellido());
             jlbldomiciliopart.setText(cliente.getDomiciliopart());
