@@ -5,6 +5,12 @@
  */
 package Frame;
 
+import Dao.DAOUsuario;
+import Pojos.Usuario;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author info2017
@@ -14,10 +20,99 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIFusuarios
      */
+    boolean editar;
+    Usuario usuario= new Usuario();
+    DAOUsuario daousuario= new DAOUsuario();
+    List<Usuario> listuser = new ArrayList<>();
     public JIFusuarios() {
         initComponents();
+         bloquearjbtn(true, false,false, false, false,false);
+         bloquearjtf(false,false);
+         listuser=daousuario.view(jtabla);
+         bloquearjck(false);
+         
     }
+ public void bloquearjbtn(boolean nuevo,boolean editar,boolean guardar,boolean eliminar,boolean cancelar,
+    boolean ver ){
+    jbtnnew.setEnabled(nuevo);
+    jbtneditar.setEnabled(editar);
+    jbtnguardar.setEnabled(guardar);
+    jbtneliminar.setEnabled(eliminar);
+    jbtncancelar.setEnabled(cancelar);
+    jbtnver.setEnabled(ver);
+//    jbtnsalir.setEnabled(salir);
+     
+    
+    }
+ public void bloquearjtf(boolean usuario,boolean clave){
+     jtfusuario.setEnabled(usuario);
+     jtfclave.setEnabled(clave);
+ }
+ public void bloquearjck(boolean  blo){
+        jcknuevocontrato.setEnabled(blo);
+        jckcontratosvig.setEnabled(blo);
+        jckabonos.setEnabled(blo);
+        jckdevoluciones.setEnabled(blo);
+        jcknuevaventa.setEnabled(blo);
+        jckinvarriendo.setEnabled(blo);
+        jckinvventa.setEnabled(blo);
+        jckingresos.setEnabled(blo);
+        jckegresos.setEnabled(blo);
+        jcknuevoegreso.setEnabled(blo);
+        jckmovimientos.setEnabled(blo);
+        jcknuevrepcliente.setEnabled(blo);
+        jckreppropias.setEnabled(blo);
+        jckrepcliente.setEnabled(blo);
+        jckempresas.setEnabled(blo);
+        jckempleados.setEnabled(blo);
+        jckclientes.setEnabled(blo);
+        jckporveedores.setEnabled(blo);
+        jckcategorias.setEnabled(blo);
+        jcknuevcotizacion.setEnabled(blo);
+        jcknuevordencompra.setEnabled(blo);
+        jckcotizaciones.setEnabled(blo);
+        jckordenescompra.setEnabled(blo);
+        jckusuarios.setEnabled(blo);
+        jckempresas.setEnabled(blo);
+        jcktodo.setEnabled(blo);
+ 
+ 
+ }
+ public void limpiarjtf(){
+     jtfusuario.setText("");
+     jtfclave.setText("");
+     jtfusuario.requestFocus();
+     
+      jcknuevocontrato.setSelected(false);
+        jckcontratosvig.setSelected(false);
+        jckabonos.setSelected(false);
+        jckdevoluciones.setSelected(false);
+        jcknuevaventa.setSelected(false);
+        jckinvarriendo.setSelected(false);
+        jckinvventa.setSelected(false);
+        jckingresos.setSelected(false);
+        jckegresos.setSelected(false);
+        jcknuevoegreso.setSelected(false);
+        jckmovimientos.setSelected(false);
+        jcknuevrepcliente.setSelected(false);
+        jckreppropias.setSelected(false);
+        jckrepcliente.setSelected(false);
+        jckempresas.setSelected(false);
+        jckempleados.setSelected(false);
+        jckclientes.setSelected(false);
+        jckporveedores.setSelected(false);
+        jckcategorias.setSelected(false);
+        jcknuevcotizacion.setSelected(false);
+        jcknuevordencompra.setSelected(false);
+        jckcotizaciones.setSelected(false);
+        jckordenescompra.setSelected(false);
+        jckusuarios.setSelected(false);
+        jckempresas.setSelected(false);
+        jcktodo.setSelected(false);
+ }
 
+
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,37 +134,37 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
         jtfclave = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        jcknuevocontrato = new javax.swing.JCheckBox();
+        jckcontratosvig = new javax.swing.JCheckBox();
+        jckabonos = new javax.swing.JCheckBox();
+        jckdevoluciones = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        jckinvventa = new javax.swing.JCheckBox();
+        jcknuevaventa = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
-        jCheckBox7 = new javax.swing.JCheckBox();
+        jckinvarriendo = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
+        jckegresos = new javax.swing.JCheckBox();
+        jckingresos = new javax.swing.JCheckBox();
+        jcknuevoegreso = new javax.swing.JCheckBox();
+        jckmovimientos = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
-        jCheckBox13 = new javax.swing.JCheckBox();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jCheckBox15 = new javax.swing.JCheckBox();
+        jcknuevrepcliente = new javax.swing.JCheckBox();
+        jckreppropias = new javax.swing.JCheckBox();
+        jckrepcliente = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
-        jCheckBox12 = new javax.swing.JCheckBox();
-        jCheckBox16 = new javax.swing.JCheckBox();
-        jCheckBox17 = new javax.swing.JCheckBox();
-        jCheckBox18 = new javax.swing.JCheckBox();
-        jCheckBox19 = new javax.swing.JCheckBox();
-        jCheckBox20 = new javax.swing.JCheckBox();
-        jCheckBox21 = new javax.swing.JCheckBox();
-        jCheckBox22 = new javax.swing.JCheckBox();
-        jCheckBox23 = new javax.swing.JCheckBox();
+        jckempresas = new javax.swing.JCheckBox();
+        jckempleados = new javax.swing.JCheckBox();
+        jckclientes = new javax.swing.JCheckBox();
+        jckporveedores = new javax.swing.JCheckBox();
+        jckcategorias = new javax.swing.JCheckBox();
+        jcknuevcotizacion = new javax.swing.JCheckBox();
+        jcknuevordencompra = new javax.swing.JCheckBox();
+        jckcotizaciones = new javax.swing.JCheckBox();
+        jckordenescompra = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
-        jCheckBox24 = new javax.swing.JCheckBox();
-        jCheckBox25 = new javax.swing.JCheckBox();
+        jckusuarios = new javax.swing.JCheckBox();
+        jcktodo = new javax.swing.JCheckBox();
         jbtnver = new javax.swing.JButton();
 
         setClosable(true);
@@ -85,6 +180,11 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtablaMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtabla);
 
         jbtnnew.setBackground(new java.awt.Color(255, 255, 255));
@@ -134,74 +234,74 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Arriendo");
 
-        jCheckBox1.setText("Nuevo Contrato");
+        jcknuevocontrato.setText("Nuevo Contrato");
 
-        jCheckBox2.setText("Contratos Vig.");
+        jckcontratosvig.setText("Contratos Vig.");
 
-        jCheckBox3.setText("Abonos");
+        jckabonos.setText("Abonos");
 
-        jCheckBox4.setText("Devoluciones");
+        jckdevoluciones.setText("Devoluciones");
 
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("Venta");
 
-        jCheckBox5.setText("Inv. Venta");
+        jckinvventa.setText("Inv. Venta");
 
-        jCheckBox6.setText("Nuev. Venta");
+        jcknuevaventa.setText("Nuev. Venta");
 
         jLabel5.setForeground(new java.awt.Color(255, 51, 51));
         jLabel5.setText("Inventario");
 
-        jCheckBox7.setText("Inv. Arriendo");
+        jckinvarriendo.setText("Inv. Arriendo");
 
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText("Caja");
 
-        jCheckBox8.setText("Egresos");
+        jckegresos.setText("Egresos");
 
-        jCheckBox9.setText("Ingresos");
+        jckingresos.setText("Ingresos");
 
-        jCheckBox10.setText("Nuevo Egreso");
+        jcknuevoegreso.setText("Nuevo Egreso");
 
-        jCheckBox11.setText("Movimientos");
+        jckmovimientos.setText("Movimientos");
 
         jLabel7.setForeground(new java.awt.Color(255, 51, 51));
         jLabel7.setText("Taller");
 
-        jCheckBox13.setText("Nuev. Rep. Cliente");
+        jcknuevrepcliente.setText("Nuev. Rep. Cliente");
 
-        jCheckBox14.setText("Rep. Propias");
+        jckreppropias.setText("Rep. Propias");
 
-        jCheckBox15.setText("Rep. Cliente");
+        jckrepcliente.setText("Rep. Cliente");
 
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
         jLabel8.setText("Otros");
 
-        jCheckBox12.setText("jCheckBox12");
+        jckempresas.setText("Empresas");
 
-        jCheckBox16.setText("jCheckBox12");
+        jckempleados.setText("Empleados");
 
-        jCheckBox17.setText("jCheckBox12");
+        jckclientes.setText("Clientes");
 
-        jCheckBox18.setText("jCheckBox12");
+        jckporveedores.setText("Proveedores");
 
-        jCheckBox19.setText("jCheckBox12");
+        jckcategorias.setText("Categorias");
 
-        jCheckBox20.setText("jCheckBox12");
+        jcknuevcotizacion.setText("Nuev. Cotizacion");
 
-        jCheckBox21.setText("jCheckBox12");
+        jcknuevordencompra.setText("Nuev. Orden C.");
 
-        jCheckBox22.setText("jCheckBox12");
+        jckcotizaciones.setText("Cotizaciones");
 
-        jCheckBox23.setText("jCheckBox12");
+        jckordenescompra.setText("Ordenes Compra");
 
         jLabel9.setForeground(new java.awt.Color(255, 51, 51));
         jLabel9.setText("Usuarios");
 
-        jCheckBox24.setText("Usuarios");
+        jckusuarios.setText("Usuarios");
 
-        jCheckBox25.setForeground(new java.awt.Color(255, 51, 51));
-        jCheckBox25.setText("Seleccionar todo");
+        jcktodo.setForeground(new java.awt.Color(255, 51, 51));
+        jcktodo.setText("Seleccionar todo");
 
         jbtnver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ver.png"))); // NOI18N
 
@@ -216,41 +316,41 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox3)
-                            .addComponent(jCheckBox4)
+                            .addComponent(jcknuevocontrato)
+                            .addComponent(jckcontratosvig)
+                            .addComponent(jckabonos)
+                            .addComponent(jckdevoluciones)
                             .addComponent(jLabel4)
-                            .addComponent(jCheckBox6)
+                            .addComponent(jcknuevaventa)
                             .addComponent(jLabel5)
-                            .addComponent(jCheckBox5)
-                            .addComponent(jCheckBox7)
+                            .addComponent(jckinvventa)
+                            .addComponent(jckinvarriendo)
                             .addComponent(jLabel6)
-                            .addComponent(jCheckBox9)
-                            .addComponent(jCheckBox8)
-                            .addComponent(jCheckBox10)
-                            .addComponent(jCheckBox11))
+                            .addComponent(jckingresos)
+                            .addComponent(jckegresos)
+                            .addComponent(jcknuevoegreso)
+                            .addComponent(jckmovimientos))
                         .addGap(105, 105, 105)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jCheckBox23)
-                            .addComponent(jCheckBox22)
-                            .addComponent(jCheckBox21)
-                            .addComponent(jCheckBox20)
-                            .addComponent(jCheckBox19)
-                            .addComponent(jCheckBox18)
-                            .addComponent(jCheckBox17)
-                            .addComponent(jCheckBox16)
-                            .addComponent(jCheckBox12)
+                            .addComponent(jckordenescompra)
+                            .addComponent(jckcotizaciones)
+                            .addComponent(jcknuevordencompra)
+                            .addComponent(jcknuevcotizacion)
+                            .addComponent(jckcategorias)
+                            .addComponent(jckporveedores)
+                            .addComponent(jckclientes)
+                            .addComponent(jckempleados)
+                            .addComponent(jckempresas)
                             .addComponent(jLabel8)
-                            .addComponent(jCheckBox15)
-                            .addComponent(jCheckBox14)
-                            .addComponent(jCheckBox13)
-                            .addComponent(jCheckBox24)
+                            .addComponent(jckrepcliente)
+                            .addComponent(jckreppropias)
+                            .addComponent(jcknuevrepcliente)
+                            .addComponent(jckusuarios)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                                .addComponent(jCheckBox25))))
+                                .addComponent(jcktodo))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -282,13 +382,14 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbtnnew, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbtneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbtnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbtneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jtfusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -301,68 +402,68 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel7)
-                            .addComponent(jCheckBox25))
+                            .addComponent(jcktodo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox13))
+                            .addComponent(jcknuevocontrato)
+                            .addComponent(jcknuevrepcliente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox14))
+                            .addComponent(jckcontratosvig)
+                            .addComponent(jckreppropias))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox3)
-                            .addComponent(jCheckBox15))
+                            .addComponent(jckabonos)
+                            .addComponent(jckrepcliente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox4)
+                            .addComponent(jckdevoluciones)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jCheckBox12))
+                            .addComponent(jckempresas))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox6)
-                            .addComponent(jCheckBox16))
+                            .addComponent(jcknuevaventa)
+                            .addComponent(jckempleados))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jCheckBox17))
+                            .addComponent(jckclientes))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox5)
-                            .addComponent(jCheckBox18))
+                            .addComponent(jckinvventa)
+                            .addComponent(jckporveedores))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox7)
-                            .addComponent(jCheckBox19))
+                            .addComponent(jckinvarriendo)
+                            .addComponent(jckcategorias))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jCheckBox20))
+                            .addComponent(jcknuevcotizacion))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox9)
-                            .addComponent(jCheckBox21))
+                            .addComponent(jckingresos)
+                            .addComponent(jcknuevordencompra))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox8)
-                            .addComponent(jCheckBox22))
+                            .addComponent(jckegresos)
+                            .addComponent(jckcotizaciones))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox10)
-                            .addComponent(jCheckBox23))
+                            .addComponent(jcknuevoegreso)
+                            .addComponent(jckordenescompra))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox11)
+                            .addComponent(jckmovimientos)
                             .addComponent(jLabel9)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(jScrollPane1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox24))
+                .addComponent(jckusuarios))
         );
 
         pack();
@@ -370,66 +471,93 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
 
     private void jbtnnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnnewActionPerformed
         // TODO add your handling code here:
-        bloquearjtf(true);
-        bloquearjbtn(true, false, false, false, true);
-
+        bloquearjtf(true,true);
+        bloquearjbtn(true, false, false, false, true,false);
+        bloquearjck(true);
         limpiarjtf();
 
         editar=false;
-        jtfcategoria.requestFocus();
+       
     }//GEN-LAST:event_jbtnnewActionPerformed
 
     private void jbtneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneditarActionPerformed
         // TODO add your handling code here:
-        bloquearjtf(true);
+        bloquearjtf(true,true);
 
         editar=true;
-        bloquearjbtn(true, false, false, false, true);
+        bloquearjbtn(true, false, false, false, true,true);
     }//GEN-LAST:event_jbtneditarActionPerformed
 
     private void jbtnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnguardarActionPerformed
         // TODO add your handling code here:
-        categoria.setCategoria(jtfcategoria.getText().toUpperCase());
-        categoria.setTipocat(jcbtipo.getSelectedItem().toString());
+     usuario.setUsuario(jtfusuario.getText());
+     usuario.setClave(new String (jtfclave.getPassword()));
+     usuario.setNuevocontrato(jcknuevocontrato.isSelected());
+    usuario.setContratosvig(jckcontratosvig.isSelected());
+    usuario.setAbonos(jckabonos.isSelected());
+    usuario.setDevoluciones(jckdevoluciones.isSelected());
+    usuario.setNuevaventa(jcknuevaventa.isSelected());
+    usuario.setInvarriendo(jckinvarriendo.isSelected());
+    usuario.setInvventa(jckinvventa.isSelected());
+    usuario.setIngreso(jckingresos.isSelected());
+    usuario.setEgreso(jckegresos.isSelected());
+    usuario.setNuevoegreso(jcknuevoegreso.isSelected());
+    usuario.setMovimientos(jckmovimientos.isSelected());
+    usuario.setNuevarepcliente(jcknuevrepcliente.isSelected());
+    usuario.setReparacionpropia(jckreppropias.isSelected());
+    usuario.setReparacioncliente(jckrepcliente.isSelected());
+    usuario.setEmpresas(jckempresas.isSelected());
+    usuario.setEmpleados(jckempleados.isSelected());
+    usuario.setCliente(jckclientes.isSelected());
+    usuario.setProveedores(jckporveedores.isSelected());
+    usuario.setCategorias(jckcategorias.isSelected());
+    usuario.setNuevacotizacion(jcknuevcotizacion.isSelected());
+    usuario.setNuevaordencompra(jcknuevordencompra.isSelected());
+    usuario.setCotizaciones(jckcotizaciones.isSelected());
+    usuario.setOrdencompra(jckordenescompra.isSelected());
+    usuario.setUsuariobo(jckusuarios.isSelected());
+    usuario.setMiempresa(jckempresas.isSelected());
 
         if(editar==false){
             //  long id=Long.parseLong(jtabla.getValueAt(jtabla.getSelectedRow(), 0).toString());
-            if(daocategorias.duplicate(0, jtfcategoria.getText().toUpperCase(), "GUARDAR")==true){
+            if(daousuario.duplicate(0, jtfusuario.getText(), "GUARDAR")==true){
 
-                daocategorias.insert(categoria);
+                daousuario.insert(usuario);
 
             }else {
-                JOptionPane.showMessageDialog(null, "LA CATEGORIA "+jtfcategoria.getText().toUpperCase()+" YA SE ENCUENTRA REGISTRADA","SISTEMA",
+                JOptionPane.showMessageDialog(null, " El usuario "+jtfusuario.getText()+" ya se encuentra en uso","SISTEMA",
                     JOptionPane.INFORMATION_MESSAGE);
             }
 
         }    else{
             //                    usuario.setUsuario(jtfusuario.getText());
 
-            if(daocategorias.duplicate(categoria.getId(),jtfcategoria.getText().toUpperCase(), "EDITAR")==true){
-                daocategorias.update(categoria);
+            if(daousuario.duplicate(usuario.getId(),jtfusuario.getText(), "EDITAR")==true){
+                daousuario.update(usuario);
 
             }else {
-                JOptionPane.showMessageDialog(null, "LA CATEGORIA "+jtfcategoria.getText().toUpperCase()+" YA SE ENCUENTRA REGISTRADA","SISTEMA",
+                JOptionPane.showMessageDialog(null, " El usuario "+jtfusuario.getText()+" ya se encuentra en uso","SISTEMA",
                     JOptionPane.INFORMATION_MESSAGE);
             }
 
         }
 
-        listcategoria = daocategorias.view(jtabla);
-        bloquearjbtn(true, false, false, false, false);
-        bloquearjtf(false);
+        listuser = daousuario.view(jtabla);
+        bloquearjbtn(true, false, false, false, false,false);
+        bloquearjtf(true,true);
+        bloquearjck(true);
+        
         limpiarjtf();
     }//GEN-LAST:event_jbtnguardarActionPerformed
 
     private void jbtneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneliminarActionPerformed
         // TODO add your handling code here:
 
-        if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR LA TARIFA","ELIMINAR",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
-            daocategorias.delete(categoria.getId());
-            listcategoria = daocategorias.view(jtabla);
+        if (JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar al usuario","ELIMINAR",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+            daousuario.delete(usuario.getId());
+            listuser = daousuario.view(jtabla);
             limpiarjtf();
-            bloquearjbtn(true, false, false, false, false);
+            bloquearjbtn(true, false, false, false, false,false);
 
         }
     }//GEN-LAST:event_jbtneliminarActionPerformed
@@ -442,37 +570,46 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
         } else {
             limpiarjtf();
         }
-        bloquearjbtn(true, false, false, false, false);
-        bloquearjtf(false);
+        bloquearjbtn(true, false, false, false, false,false);
+        bloquearjtf(false,false);
     }//GEN-LAST:event_jbtncancelarActionPerformed
+
+    private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
+        // TODO add your handling code here:
+        usuario= listuser.get(jtabla.getSelectedRow());
+        
+        jtfusuario.setText(usuario.getUsuario());
+        jtfclave.setText(usuario.getClave());
+        jcknuevocontrato.setSelected(usuario.isNuevocontrato());
+        jckcontratosvig.setSelected(usuario.isContratosvig());
+        jckabonos.setSelected(usuario.isAbonos());
+        jckdevoluciones.setSelected(usuario.isDevoluciones());
+        jcknuevaventa.setSelected(usuario.isNuevaventa());
+        jckinvarriendo.setSelected(usuario.isInvarriendo());
+        jckinvventa.setSelected(usuario.isInvventa());
+        jckingresos.setSelected(usuario.isIngreso());
+        jckegresos.setSelected(usuario.isEgreso());
+        jcknuevoegreso.setSelected(usuario.isNuevoegreso());
+        jckmovimientos.setSelected(usuario.isMovimientos());
+        jcknuevrepcliente.setSelected(usuario.isNuevarepcliente());
+        jckreppropias.setSelected(usuario.isReparacionpropia());
+        jckrepcliente.setSelected(usuario.isReparacioncliente());
+        jckempresas.setSelected(usuario.isEmpresas());
+        jckempleados.setSelected(usuario.isEmpleados());
+        jckclientes.setSelected(usuario.isCliente());
+        jckporveedores.setSelected(usuario.isProveedores());
+        jckcategorias.setSelected(usuario.isCategorias());
+        jcknuevcotizacion.setSelected(usuario.isNuevacotizacion());
+        jcknuevordencompra.setSelected(usuario.isNuevaordencompra());
+        jckcotizaciones.setSelected(usuario.isCotizaciones());
+        jckordenescompra.setSelected(usuario.isOrdencompra());
+        jckusuarios.setSelected(usuario.isUsuariobo());
+        jckempresas.setSelected(usuario.isEmpresas());
+
+    }//GEN-LAST:event_jtablaMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox13;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox16;
-    private javax.swing.JCheckBox jCheckBox17;
-    private javax.swing.JCheckBox jCheckBox18;
-    private javax.swing.JCheckBox jCheckBox19;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox20;
-    private javax.swing.JCheckBox jCheckBox21;
-    private javax.swing.JCheckBox jCheckBox22;
-    private javax.swing.JCheckBox jCheckBox23;
-    private javax.swing.JCheckBox jCheckBox24;
-    private javax.swing.JCheckBox jCheckBox25;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -489,6 +626,31 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtnguardar;
     private javax.swing.JButton jbtnnew;
     private javax.swing.JButton jbtnver;
+    private javax.swing.JCheckBox jckabonos;
+    private javax.swing.JCheckBox jckcategorias;
+    private javax.swing.JCheckBox jckclientes;
+    private javax.swing.JCheckBox jckcontratosvig;
+    private javax.swing.JCheckBox jckcotizaciones;
+    private javax.swing.JCheckBox jckdevoluciones;
+    private javax.swing.JCheckBox jckegresos;
+    private javax.swing.JCheckBox jckempleados;
+    private javax.swing.JCheckBox jckempresas;
+    private javax.swing.JCheckBox jckingresos;
+    private javax.swing.JCheckBox jckinvarriendo;
+    private javax.swing.JCheckBox jckinvventa;
+    private javax.swing.JCheckBox jckmovimientos;
+    private javax.swing.JCheckBox jcknuevaventa;
+    private javax.swing.JCheckBox jcknuevcotizacion;
+    private javax.swing.JCheckBox jcknuevocontrato;
+    private javax.swing.JCheckBox jcknuevoegreso;
+    private javax.swing.JCheckBox jcknuevordencompra;
+    private javax.swing.JCheckBox jcknuevrepcliente;
+    private javax.swing.JCheckBox jckordenescompra;
+    private javax.swing.JCheckBox jckporveedores;
+    private javax.swing.JCheckBox jckrepcliente;
+    private javax.swing.JCheckBox jckreppropias;
+    private javax.swing.JCheckBox jcktodo;
+    private javax.swing.JCheckBox jckusuarios;
     private javax.swing.JTable jtabla;
     private javax.swing.JPasswordField jtfclave;
     private javax.swing.JTextField jtfusuario;

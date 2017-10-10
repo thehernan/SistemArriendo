@@ -29,42 +29,42 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevocontrato" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckcontratosvig" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckabonos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckdevoluciones" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevaventa" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckinvventa" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckinvarriendo" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox9" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox10" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox11" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckingresos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckegresos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevoegreso" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckmovimientos" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox23" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox22" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox21" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox20" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox19" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox18" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox17" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox16" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox12" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckordenescompra" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckcotizaciones" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevordencompra" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevcotizacion" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckcategorias" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckporveedores" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckclientes" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckempleados" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckempresas" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox15" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox14" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox13" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox24" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckrepcliente" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckreppropias" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevrepcliente" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckusuarios" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="181" max="32767" attributes="0"/>
-                              <Component id="jCheckBox25" min="-2" max="-2" attributes="0"/>
+                              <Component id="jcktodo" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -108,6 +108,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jbtnnew" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jbtneditar" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
@@ -115,7 +116,7 @@
                           <Component id="jbtneliminar" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jbtncancelar" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfusuario" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -130,76 +131,76 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox25" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcktodo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevocontrato" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevrepcliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckcontratosvig" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckreppropias" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckabonos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckrepcliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckdevoluciones" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckempresas" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox16" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevaventa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckempleados" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox17" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckclientes" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox18" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckinvventa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckporveedores" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox19" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckinvarriendo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckcategorias" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox20" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevcotizacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox21" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckingresos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevordencompra" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox22" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckegresos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckcotizaciones" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox23" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevoegreso" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckordenescompra" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jCheckBox11" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckmovimientos" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -209,7 +210,7 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jCheckBox24" min="-2" max="-2" attributes="0"/>
+              <Component id="jckusuarios" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -233,6 +234,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtablaMouseReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -313,22 +317,22 @@
         <Property name="text" type="java.lang.String" value="Arriendo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="jcknuevocontrato">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuevo Contrato"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+    <Component class="javax.swing.JCheckBox" name="jckcontratosvig">
       <Properties>
         <Property name="text" type="java.lang.String" value="Contratos Vig."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+    <Component class="javax.swing.JCheckBox" name="jckabonos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Abonos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox4">
+    <Component class="javax.swing.JCheckBox" name="jckdevoluciones">
       <Properties>
         <Property name="text" type="java.lang.String" value="Devoluciones"/>
       </Properties>
@@ -341,12 +345,12 @@
         <Property name="text" type="java.lang.String" value="Venta"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox5">
+    <Component class="javax.swing.JCheckBox" name="jckinvventa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inv. Venta"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox6">
+    <Component class="javax.swing.JCheckBox" name="jcknuevaventa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuev. Venta"/>
       </Properties>
@@ -359,7 +363,7 @@
         <Property name="text" type="java.lang.String" value="Inventario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox7">
+    <Component class="javax.swing.JCheckBox" name="jckinvarriendo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inv. Arriendo"/>
       </Properties>
@@ -372,22 +376,22 @@
         <Property name="text" type="java.lang.String" value="Caja"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox8">
+    <Component class="javax.swing.JCheckBox" name="jckegresos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Egresos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox9">
+    <Component class="javax.swing.JCheckBox" name="jckingresos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingresos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox10">
+    <Component class="javax.swing.JCheckBox" name="jcknuevoegreso">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuevo Egreso"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox11">
+    <Component class="javax.swing.JCheckBox" name="jckmovimientos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Movimientos"/>
       </Properties>
@@ -400,17 +404,17 @@
         <Property name="text" type="java.lang.String" value="Taller"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox13">
+    <Component class="javax.swing.JCheckBox" name="jcknuevrepcliente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuev. Rep. Cliente"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox14">
+    <Component class="javax.swing.JCheckBox" name="jckreppropias">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rep. Propias"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox15">
+    <Component class="javax.swing.JCheckBox" name="jckrepcliente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rep. Cliente"/>
       </Properties>
@@ -423,49 +427,49 @@
         <Property name="text" type="java.lang.String" value="Otros"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox12">
+    <Component class="javax.swing.JCheckBox" name="jckempresas">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Empresas"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox16">
+    <Component class="javax.swing.JCheckBox" name="jckempleados">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Empleados"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox17">
+    <Component class="javax.swing.JCheckBox" name="jckclientes">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Clientes"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox18">
+    <Component class="javax.swing.JCheckBox" name="jckporveedores">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Proveedores"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox19">
+    <Component class="javax.swing.JCheckBox" name="jckcategorias">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Categorias"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox20">
+    <Component class="javax.swing.JCheckBox" name="jcknuevcotizacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Nuev. Cotizacion"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox21">
+    <Component class="javax.swing.JCheckBox" name="jcknuevordencompra">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Nuev. Orden C."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox22">
+    <Component class="javax.swing.JCheckBox" name="jckcotizaciones">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Cotizaciones"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox23">
+    <Component class="javax.swing.JCheckBox" name="jckordenescompra">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Ordenes Compra"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
@@ -476,12 +480,12 @@
         <Property name="text" type="java.lang.String" value="Usuarios"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox24">
+    <Component class="javax.swing.JCheckBox" name="jckusuarios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Usuarios"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox25">
+    <Component class="javax.swing.JCheckBox" name="jcktodo">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="ff" type="rgb"/>

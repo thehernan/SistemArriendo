@@ -603,12 +603,12 @@ public class Menu extends javax.swing.JFrame {
              @Override
              public void actionPerformed(ActionEvent e) {
                  //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                 JIFVenta venta = new JIFVenta();
+                 JIFusuarios usuario = new JIFusuarios();
                 Dimension desktopSize = jdesktop.getSize();
-                Dimension FrameSize = venta.getSize();
-                venta.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-                jdesktop.add(venta);
-                venta.show();
+                Dimension FrameSize = usuario.getSize();
+                usuario.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+                jdesktop.add(usuario);
+                usuario.show();
                  panelconmin();
                  
              }
