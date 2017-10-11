@@ -83,33 +83,52 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
      jtfclave.setText("");
      jtfusuario.requestFocus();
      
-      jcknuevocontrato.setSelected(false);
-        jckcontratosvig.setSelected(false);
-        jckabonos.setSelected(false);
-        jckdevoluciones.setSelected(false);
-        jcknuevaventa.setSelected(false);
-        jckinvarriendo.setSelected(false);
-        jckinvventa.setSelected(false);
-        jckingresos.setSelected(false);
-        jckegresos.setSelected(false);
-        jcknuevoegreso.setSelected(false);
-        jckmovimientos.setSelected(false);
-        jcknuevrepcliente.setSelected(false);
-        jckreppropias.setSelected(false);
-        jckrepcliente.setSelected(false);
-        jckempresas.setSelected(false);
-        jckempleados.setSelected(false);
-        jckclientes.setSelected(false);
-        jckporveedores.setSelected(false);
-        jckcategorias.setSelected(false);
-        jcknuevcotizacion.setSelected(false);
-        jcknuevordencompra.setSelected(false);
-        jckcotizaciones.setSelected(false);
-        jckordenescompra.setSelected(false);
-        jckusuarios.setSelected(false);
-        jckempresas.setSelected(false);
-        jcktodo.setSelected(false);
+     
+    jcktodo.setSelected(false);
  }
+ public void selectjck(boolean bol){
+     jcknuevocontrato.setSelected(bol);
+    jckcontratosvig.setSelected(bol);
+    jckabonos.setSelected(bol);
+    jckdevoluciones.setSelected(bol);
+    jcknuevaventa.setSelected(bol);
+    jckinvarriendo.setSelected(bol);
+    jckinvventa.setSelected(bol);
+    jckingresos.setSelected(bol);
+    jckegresos.setSelected(bol);
+    jcknuevoegreso.setSelected(bol);
+    jckmovimientos.setSelected(bol);
+    jcknuevrepcliente.setSelected(bol);
+    jckreppropias.setSelected(bol);
+    jckrepcliente.setSelected(bol);
+    jckempresas.setSelected(bol);
+    jckempleados.setSelected(bol);
+    jckclientes.setSelected(bol);
+    jckporveedores.setSelected(bol);
+    jckcategorias.setSelected(bol);
+    jcknuevcotizacion.setSelected(bol);
+    jcknuevordencompra.setSelected(bol);
+    jckcotizaciones.setSelected(bol);
+    jckordenescompra.setSelected(bol);
+    jckusuarios.setSelected(bol);
+    jckempresas.setSelected(bol);
+ 
+ 
+ }
+  public void valida(){
+  String usuar = jtfusuario.getText().replaceAll("\\s", "");
+  String clave = new String(jtfclave.getPassword()).replaceAll("\\s", "");
+  
+  if(usuar.length() >0 && clave.length() >0)
+  jbtnguardar.setEnabled(true);
+  else 
+      jbtnguardar.setEnabled(false);
+  
+  
+  
+  
+  
+  }
 
 
  
@@ -229,81 +248,223 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Usuario:");
 
+        jtfusuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfusuarioKeyReleased(evt);
+            }
+        });
+
+        jtfclave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfclaveKeyReleased(evt);
+            }
+        });
+
         jLabel2.setText("Clave:");
 
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Arriendo");
 
         jcknuevocontrato.setText("Nuevo Contrato");
+        jcknuevocontrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcknuevocontratoActionPerformed(evt);
+            }
+        });
 
         jckcontratosvig.setText("Contratos Vig.");
+        jckcontratosvig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckcontratosvigActionPerformed(evt);
+            }
+        });
 
         jckabonos.setText("Abonos");
+        jckabonos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckabonosActionPerformed(evt);
+            }
+        });
 
         jckdevoluciones.setText("Devoluciones");
+        jckdevoluciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckdevolucionesActionPerformed(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("Venta");
 
         jckinvventa.setText("Inv. Venta");
+        jckinvventa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckinvventaActionPerformed(evt);
+            }
+        });
 
         jcknuevaventa.setText("Nuev. Venta");
+        jcknuevaventa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcknuevaventaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setForeground(new java.awt.Color(255, 51, 51));
         jLabel5.setText("Inventario");
 
         jckinvarriendo.setText("Inv. Arriendo");
+        jckinvarriendo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckinvarriendoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText("Caja");
 
         jckegresos.setText("Egresos");
+        jckegresos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckegresosActionPerformed(evt);
+            }
+        });
 
         jckingresos.setText("Ingresos");
+        jckingresos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckingresosActionPerformed(evt);
+            }
+        });
 
         jcknuevoegreso.setText("Nuevo Egreso");
+        jcknuevoegreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcknuevoegresoActionPerformed(evt);
+            }
+        });
 
         jckmovimientos.setText("Movimientos");
+        jckmovimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckmovimientosActionPerformed(evt);
+            }
+        });
 
         jLabel7.setForeground(new java.awt.Color(255, 51, 51));
         jLabel7.setText("Taller");
 
         jcknuevrepcliente.setText("Nuev. Rep. Cliente");
+        jcknuevrepcliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcknuevrepclienteActionPerformed(evt);
+            }
+        });
 
         jckreppropias.setText("Rep. Propias");
+        jckreppropias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckreppropiasActionPerformed(evt);
+            }
+        });
 
         jckrepcliente.setText("Rep. Cliente");
+        jckrepcliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckrepclienteActionPerformed(evt);
+            }
+        });
 
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
         jLabel8.setText("Otros");
 
         jckempresas.setText("Empresas");
+        jckempresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckempresasActionPerformed(evt);
+            }
+        });
 
         jckempleados.setText("Empleados");
+        jckempleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckempleadosActionPerformed(evt);
+            }
+        });
 
         jckclientes.setText("Clientes");
+        jckclientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckclientesActionPerformed(evt);
+            }
+        });
 
         jckporveedores.setText("Proveedores");
+        jckporveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckporveedoresActionPerformed(evt);
+            }
+        });
 
         jckcategorias.setText("Categorias");
+        jckcategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckcategoriasActionPerformed(evt);
+            }
+        });
 
         jcknuevcotizacion.setText("Nuev. Cotizacion");
+        jcknuevcotizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcknuevcotizacionActionPerformed(evt);
+            }
+        });
 
         jcknuevordencompra.setText("Nuev. Orden C.");
+        jcknuevordencompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcknuevordencompraActionPerformed(evt);
+            }
+        });
 
         jckcotizaciones.setText("Cotizaciones");
+        jckcotizaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckcotizacionesActionPerformed(evt);
+            }
+        });
 
         jckordenescompra.setText("Ordenes Compra");
+        jckordenescompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckordenescompraActionPerformed(evt);
+            }
+        });
 
         jLabel9.setForeground(new java.awt.Color(255, 51, 51));
         jLabel9.setText("Usuarios");
 
         jckusuarios.setText("Usuarios");
+        jckusuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckusuariosActionPerformed(evt);
+            }
+        });
 
         jcktodo.setForeground(new java.awt.Color(255, 51, 51));
         jcktodo.setText("Seleccionar todo");
+        jcktodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcktodoActionPerformed(evt);
+            }
+        });
 
         jbtnver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ver.png"))); // NOI18N
+        jbtnver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -314,43 +475,6 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcknuevocontrato)
-                            .addComponent(jckcontratosvig)
-                            .addComponent(jckabonos)
-                            .addComponent(jckdevoluciones)
-                            .addComponent(jLabel4)
-                            .addComponent(jcknuevaventa)
-                            .addComponent(jLabel5)
-                            .addComponent(jckinvventa)
-                            .addComponent(jckinvarriendo)
-                            .addComponent(jLabel6)
-                            .addComponent(jckingresos)
-                            .addComponent(jckegresos)
-                            .addComponent(jcknuevoegreso)
-                            .addComponent(jckmovimientos))
-                        .addGap(105, 105, 105)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jckordenescompra)
-                            .addComponent(jckcotizaciones)
-                            .addComponent(jcknuevordencompra)
-                            .addComponent(jcknuevcotizacion)
-                            .addComponent(jckcategorias)
-                            .addComponent(jckporveedores)
-                            .addComponent(jckclientes)
-                            .addComponent(jckempleados)
-                            .addComponent(jckempresas)
-                            .addComponent(jLabel8)
-                            .addComponent(jckrepcliente)
-                            .addComponent(jckreppropias)
-                            .addComponent(jcknuevrepcliente)
-                            .addComponent(jckusuarios)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                                .addComponent(jcktodo))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -371,10 +495,50 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtfusuario, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                                     .addComponent(jtfclave))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(jbtnver))
                             .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcknuevocontrato)
+                            .addComponent(jckcontratosvig)
+                            .addComponent(jckabonos)
+                            .addComponent(jckdevoluciones)
+                            .addComponent(jLabel4)
+                            .addComponent(jcknuevaventa)
+                            .addComponent(jLabel5)
+                            .addComponent(jckinvventa)
+                            .addComponent(jckinvarriendo)
+                            .addComponent(jLabel6)
+                            .addComponent(jckingresos)
+                            .addComponent(jckegresos)
+                            .addComponent(jcknuevoegreso)
+                            .addComponent(jckmovimientos))
+                        .addGap(105, 105, 105)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                                .addComponent(jcktodo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jckordenescompra)
+                                    .addComponent(jckcotizaciones)
+                                    .addComponent(jcknuevordencompra)
+                                    .addComponent(jcknuevcotizacion)
+                                    .addComponent(jckcategorias)
+                                    .addComponent(jckporveedores)
+                                    .addComponent(jckclientes)
+                                    .addComponent(jckempleados)
+                                    .addComponent(jckempresas)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jckrepcliente)
+                                    .addComponent(jckreppropias)
+                                    .addComponent(jcknuevrepcliente)
+                                    .addComponent(jckusuarios))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -475,7 +639,7 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
         bloquearjbtn(true, false, false, false, true,false);
         bloquearjck(true);
         limpiarjtf();
-
+        selectjck(false);
         editar=false;
        
     }//GEN-LAST:event_jbtnnewActionPerformed
@@ -483,7 +647,7 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
     private void jbtneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneditarActionPerformed
         // TODO add your handling code here:
         bloquearjtf(true,true);
-
+        bloquearjck(true);
         editar=true;
         bloquearjbtn(true, false, false, false, true,true);
     }//GEN-LAST:event_jbtneditarActionPerformed
@@ -544,10 +708,11 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
 
         listuser = daousuario.view(jtabla);
         bloquearjbtn(true, false, false, false, false,false);
-        bloquearjtf(true,true);
-        bloquearjck(true);
+        bloquearjtf(false,false);
+        bloquearjck(false);
         
         limpiarjtf();
+         selectjck(false);
     }//GEN-LAST:event_jbtnguardarActionPerformed
 
     private void jbtneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneliminarActionPerformed
@@ -557,6 +722,7 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
             daousuario.delete(usuario.getId());
             listuser = daousuario.view(jtabla);
             limpiarjtf();
+             selectjck(false);
             bloquearjbtn(true, false, false, false, false,false);
 
         }
@@ -572,6 +738,8 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
         }
         bloquearjbtn(true, false, false, false, false,false);
         bloquearjtf(false,false);
+        bloquearjck(false);
+         selectjck(false);
     }//GEN-LAST:event_jbtncancelarActionPerformed
 
     private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
@@ -605,8 +773,182 @@ public class JIFusuarios extends javax.swing.JInternalFrame {
         jckordenescompra.setSelected(usuario.isOrdencompra());
         jckusuarios.setSelected(usuario.isUsuariobo());
         jckempresas.setSelected(usuario.isEmpresas());
+        
+          bloquearjbtn(true, true, false, true, false,true); 
 
     }//GEN-LAST:event_jtablaMouseReleased
+
+    private void jcktodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcktodoActionPerformed
+        // TODO add your handling code here:
+        if(jcktodo.isSelected()==true)
+            selectjck(true);
+        else 
+            selectjck(false);
+        
+         valida();
+        
+        
+    }//GEN-LAST:event_jcktodoActionPerformed
+
+    private void jcknuevocontratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcknuevocontratoActionPerformed
+        // TODO add your handling code here:jck
+        jcktodo.setSelected(false);
+        valida();
+    }//GEN-LAST:event_jcknuevocontratoActionPerformed
+
+    private void jckcontratosvigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckcontratosvigActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckcontratosvigActionPerformed
+
+    private void jckabonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckabonosActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckabonosActionPerformed
+
+    private void jckdevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckdevolucionesActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckdevolucionesActionPerformed
+
+    private void jcknuevaventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcknuevaventaActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jcknuevaventaActionPerformed
+
+    private void jckinvventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckinvventaActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckinvventaActionPerformed
+
+    private void jckinvarriendoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckinvarriendoActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckinvarriendoActionPerformed
+
+    private void jckingresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckingresosActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckingresosActionPerformed
+
+    private void jckegresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckegresosActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckegresosActionPerformed
+
+    private void jcknuevoegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcknuevoegresoActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jcknuevoegresoActionPerformed
+
+    private void jckmovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckmovimientosActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckmovimientosActionPerformed
+
+    private void jcknuevrepclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcknuevrepclienteActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jcknuevrepclienteActionPerformed
+
+    private void jckreppropiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckreppropiasActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckreppropiasActionPerformed
+
+    private void jckrepclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckrepclienteActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckrepclienteActionPerformed
+
+    private void jckempresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckempresasActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckempresasActionPerformed
+
+    private void jckempleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckempleadosActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckempleadosActionPerformed
+
+    private void jckclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckclientesActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckclientesActionPerformed
+
+    private void jckporveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckporveedoresActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckporveedoresActionPerformed
+
+    private void jckcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckcategoriasActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckcategoriasActionPerformed
+
+    private void jcknuevcotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcknuevcotizacionActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jcknuevcotizacionActionPerformed
+
+    private void jcknuevordencompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcknuevordencompraActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jcknuevordencompraActionPerformed
+
+    private void jckcotizacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckcotizacionesActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckcotizacionesActionPerformed
+
+    private void jckordenescompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckordenescompraActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckordenescompraActionPerformed
+
+    private void jckusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckusuariosActionPerformed
+        // TODO add your handling code here:
+        jcktodo.setSelected(false);
+         valida();
+    }//GEN-LAST:event_jckusuariosActionPerformed
+
+    private void jbtnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnverActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, new String(jtfclave.getPassword()));
+    }//GEN-LAST:event_jbtnverActionPerformed
+
+    private void jtfusuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfusuarioKeyReleased
+        // TODO add your handling code here:
+        valida();
+        
+    }//GEN-LAST:event_jtfusuarioKeyReleased
+
+    private void jtfclaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfclaveKeyReleased
+        // TODO add your handling code here:
+        valida();
+    }//GEN-LAST:event_jtfclaveKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

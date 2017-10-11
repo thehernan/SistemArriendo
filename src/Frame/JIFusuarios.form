@@ -27,47 +27,6 @@
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jcknuevocontrato" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckcontratosvig" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckabonos" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckdevoluciones" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jcknuevaventa" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckinvventa" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckinvarriendo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckingresos" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckegresos" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jcknuevoegreso" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckmovimientos" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckordenescompra" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckcotizaciones" min="-2" max="-2" attributes="0"/>
-                          <Component id="jcknuevordencompra" min="-2" max="-2" attributes="0"/>
-                          <Component id="jcknuevcotizacion" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckcategorias" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckporveedores" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckclientes" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckempleados" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckempresas" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckrepcliente" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckreppropias" min="-2" max="-2" attributes="0"/>
-                          <Component id="jcknuevrepcliente" min="-2" max="-2" attributes="0"/>
-                          <Component id="jckusuarios" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="181" max="32767" attributes="0"/>
-                              <Component id="jcktodo" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -91,12 +50,58 @@
                                   <Component id="jtfusuario" pref="177" max="32767" attributes="0"/>
                                   <Component id="jtfclave" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jbtnver" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jcknuevocontrato" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckcontratosvig" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckabonos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckdevoluciones" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevaventa" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckinvventa" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckinvarriendo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckingresos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckegresos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcknuevoegreso" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jckmovimientos" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="181" max="32767" attributes="0"/>
+                              <Component id="jcktodo" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckordenescompra" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckcotizaciones" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jcknuevordencompra" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jcknuevcotizacion" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckcategorias" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckporveedores" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckclientes" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckempleados" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckempresas" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckrepcliente" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckreppropias" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jcknuevrepcliente" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jckusuarios" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -125,7 +130,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jtfclave" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbtnver" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="jbtnver" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -301,8 +306,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfusuario">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfusuarioKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jtfclave">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfclaveKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -321,21 +332,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuevo Contrato"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcknuevocontratoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckcontratosvig">
       <Properties>
         <Property name="text" type="java.lang.String" value="Contratos Vig."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckcontratosvigActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckabonos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Abonos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckabonosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckdevoluciones">
       <Properties>
         <Property name="text" type="java.lang.String" value="Devoluciones"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckdevolucionesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -349,11 +372,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Inv. Venta"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckinvventaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcknuevaventa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuev. Venta"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcknuevaventaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -367,6 +396,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Inv. Arriendo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckinvarriendoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -380,21 +412,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Egresos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckegresosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckingresos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingresos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckingresosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcknuevoegreso">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuevo Egreso"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcknuevoegresoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckmovimientos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Movimientos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckmovimientosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -408,16 +452,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuev. Rep. Cliente"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcknuevrepclienteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckreppropias">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rep. Propias"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckreppropiasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckrepcliente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rep. Cliente"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckrepclienteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
@@ -431,46 +484,73 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Empresas"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckempresasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckempleados">
       <Properties>
         <Property name="text" type="java.lang.String" value="Empleados"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckempleadosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckclientes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Clientes"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckclientesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckporveedores">
       <Properties>
         <Property name="text" type="java.lang.String" value="Proveedores"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckporveedoresActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckcategorias">
       <Properties>
         <Property name="text" type="java.lang.String" value="Categorias"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckcategoriasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcknuevcotizacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuev. Cotizacion"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcknuevcotizacionActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcknuevordencompra">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuev. Orden C."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcknuevordencompraActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckcotizaciones">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cotizaciones"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckcotizacionesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jckordenescompra">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ordenes Compra"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckordenescompraActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
@@ -484,6 +564,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Usuarios"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckusuariosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcktodo">
       <Properties>
@@ -492,6 +575,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Seleccionar todo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcktodoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnver">
       <Properties>
@@ -499,6 +585,9 @@
           <Image iconType="3" name="/img/ver.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnverActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

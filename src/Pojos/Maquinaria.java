@@ -16,6 +16,7 @@ public class Maquinaria {
     private String serie;
     private String modelo;
     private long idcategoria;
+    private String categoria;
     private long idempresa;
     private Double preciodiario;
     private String estado;
@@ -31,6 +32,14 @@ public class Maquinaria {
         this.idempresa = idempresa;
         this.preciodiario = preciodiario;
         this.estado = estado;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getEstado() {

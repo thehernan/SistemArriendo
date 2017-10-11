@@ -30,7 +30,9 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
     List<Maquinaria> listmaquinaria;
     DAOCategoria daocategoria = new DAOCategoria();
     List<Categoria> listcategoria;
+     List<Categoria> listcategoriabusc;
     Categoria categoria = new Categoria();
+    Categoria categoriab = new Categoria();
     SingletonEmpresa singletonemp = SingletonEmpresa.getinstancia();
     public JIFMaquinaria() {
         initComponents();
@@ -38,6 +40,7 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
         bloquearjtf(false, false, false, false, false, false);
         listmaquinaria= daoMaquinaria.view(jtabla,"TODO","EMPRESA");
         listcategoria=daocategoria.jcombobox(jcbcategoria,"ARRIENDO");
+        listcategoriabusc= daocategoria.jcombobox(jcbbuscarcate, "ARRIENDO");
     }
     
      public void bloquearjbtn(boolean nuevo,boolean editar,boolean guardar,boolean eliminar,boolean cancelar
@@ -135,14 +138,15 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
         jbtneliminar = new javax.swing.JButton();
         jbtncancelar = new javax.swing.JButton();
         jbtnimprimir = new javax.swing.JButton();
+        jcbbuscarcate = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
 
-        jPanel1.setBackground(new java.awt.Color(102, 51, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("INVENTARIO ARRIENDO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -224,9 +228,20 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
                 jtablaMouseReleased(evt);
             }
         });
+        jtabla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtablaKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtabla);
 
-        jLabel8.setText("Buscar:");
+        jtfbbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfbbuscarKeyReleased(evt);
+            }
+        });
+
+        jLabel8.setText("Maquina:");
 
         jbtnnew.setBackground(new java.awt.Color(255, 255, 255));
         jbtnnew.setText("NUEVO");
@@ -275,22 +290,31 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
             }
         });
 
+        jcbbuscarcate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbbuscarcate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbbuscarcateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addContainerGap()
                         .addComponent(jLabel8)
-                        .addGap(24, 24, 24)
-                        .addComponent(jtfbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,14 +350,16 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jtfbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)
+                        .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jbtnnew, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
@@ -370,7 +396,7 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -476,6 +502,7 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
         jtfmarca.setText(maquinaria.getMarca());
         jtfserie.setText(maquinaria.getSerie());
         jtfmodelo.setText(maquinaria.getModelo());
+        jcbcategoria.setSelectedItem(maquinaria.getCategoria());
         /// vcategoria
         jtfprecio.setValue(maquinaria.getPreciodiario());
          bloquearjbtn(true, true, false, true, false); 
@@ -511,6 +538,36 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
         validaguardar();
     }//GEN-LAST:event_jtfprecioKeyReleased
 
+    private void jtablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtablaKeyReleased
+        // TODO add your handling code here:
+        maquinaria=listmaquinaria.get(jtabla.getSelectedRow());
+        jtfmaquina.setText(maquinaria.getMaquina());
+        jtfmarca.setText(maquinaria.getMarca());
+        jtfserie.setText(maquinaria.getSerie());
+        jtfmodelo.setText(maquinaria.getModelo());
+        jcbcategoria.setSelectedItem(maquinaria.getCategoria());
+        /// vcategoria
+        jtfprecio.setValue(maquinaria.getPreciodiario());
+         bloquearjbtn(true, true, false, true, false); 
+    }//GEN-LAST:event_jtablaKeyReleased
+
+    private void jtfbbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbbuscarKeyReleased
+        // TODO add your handling code here:
+        categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+        listmaquinaria=daoMaquinaria.searchsentitive(jtabla, title, title, categoriab.getId());
+    }//GEN-LAST:event_jtfbbuscarKeyReleased
+
+    private void jcbbuscarcateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbbuscarcateActionPerformed
+        // TODO add your handling code here:
+        if(listcategoriabusc.size()>0){
+         System.out.println("listcstgeb"+listcategoriabusc.size());
+        
+        }
+       
+//        categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+//        listmaquinaria=daoMaquinaria.searchsentitive(jtabla, title, title, categoriab.getId());
+    }//GEN-LAST:event_jcbbuscarcateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -529,6 +586,7 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtnguardar;
     private javax.swing.JButton jbtnimprimir;
     private javax.swing.JButton jbtnnew;
+    private javax.swing.JComboBox jcbbuscarcate;
     private javax.swing.JComboBox jcbcategoria;
     private javax.swing.JTable jtabla;
     private javax.swing.JTextField jtfbbuscar;

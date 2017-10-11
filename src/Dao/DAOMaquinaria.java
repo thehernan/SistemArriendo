@@ -50,10 +50,10 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
          return false;
         }
         };
-        String titulos[]={"Maquina","Serie","Estado"};
+        String titulos[]={"Maquina","Serie","Estado","Categoria"};
         modelo.setColumnIdentifiers(titulos);
         tabla.setModel(modelo);
-        Object datosR[] = new Object[3];
+        Object datosR[] = new Object[4];
        
              
         
@@ -67,10 +67,12 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
             maquina.setIdcategoria(rs.getLong("vidcat"));
             maquina.setEstado(rs.getString("vestado"));
             maquina.setPreciodiario(rs.getDouble("vprecio"));
+            maquina.setCategoria(rs.getString("vcategoria"));
         
             datosR[0]=maquina.getMaquina();
             datosR[1]=maquina.getSerie();
             datosR[2]=maquina.getEstado();
+            datosR[3]=maquina.getCategoria();
             modelo.addRow(datosR);
             listmaquinaria.add(maquina);
 		
@@ -526,6 +528,92 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
             }  
         
        return  listrepa;
+    }
+
+    @Override
+    public List<Maquinaria> searchsentitive(JTable tabla,String estado,String propiedad ,long idcategoria) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        
+        List<Maquinaria> listmaquinaria= new ArrayList<>();
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_busquedasensitivamaquinaria(?,?,?,?)");
+        ps.setString(1, estado);
+        ps.setLong(2,singletonempresa.getId());
+        ps.setString(3, propiedad);
+        ps.setLong(4, idcategoria);
+        rs=ps.executeQuery();
+        
+         DefaultTableModel modelo= new DefaultTableModel(){
+        public boolean isCellEditable(int row, int column) {
+        //      if (column == 5) return true;
+        //else
+         return false;
+        }
+        };
+        String titulos[]={"Maquina","Serie","Estado","Categoria"};
+        modelo.setColumnIdentifiers(titulos);
+        tabla.setModel(modelo);
+        Object datosR[] = new Object[4];
+       
+             
+        
+        while (rs.next()){
+            Maquinaria maquina = new Maquinaria();
+            maquina.setId(rs.getLong("id"));
+            maquina.setMaquina(rs.getString("vmaquina"));
+            maquina.setMarca(rs.getString("vmarca"));
+            maquina.setSerie(rs.getString("vserie"));
+            maquina.setModelo(rs.getString("vmodelo"));
+            maquina.setIdcategoria(rs.getLong("vidcat"));
+            maquina.setEstado(rs.getString("vestado"));
+            maquina.setPreciodiario(rs.getDouble("vprecio"));
+            maquina.setCategoria(rs.getString("vcategoria"));
+        
+            datosR[0]=maquina.getMaquina();
+            datosR[1]=maquina.getSerie();
+            datosR[2]=maquina.getEstado();
+            datosR[3]=maquina.getCategoria();
+            modelo.addRow(datosR);
+            listmaquinaria.add(maquina);
+		
+        }
+        if(modelo.getRowCount()>0){
+        tabla.setRowSelectionInterval(0, 0);
+        
+        }
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOArido.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOArido.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOArido.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        
+       return  listmaquinaria;
     }
 
    

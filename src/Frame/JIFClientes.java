@@ -511,6 +511,7 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         jtfdomiciliopart.setText(cliente.getDomiciliopart());
         jtfdomiciliotrab.setText(cliente.getDomiciliatrab());
         jtftelefono.setText(cliente.getTelefono());
+          bloquearjbtn(true, true, false, true, false,false); 
     }//GEN-LAST:event_jtablaKeyReleased
 
     private void jbtnadjuntarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnadjuntarActionPerformed
