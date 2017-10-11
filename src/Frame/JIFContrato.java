@@ -19,6 +19,7 @@ import Pojos.Maquinaria;
 import Pojos.SingletonEmpresa;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -69,13 +70,14 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     
     public void setllenarmaquinaria(Maquinaria maq){
     listmaquinaria.add(maq);
+    NumberFormat nf= NumberFormat.getInstance();
     datosmaq[0]=maq.getMaquina();
     datosmaq[1]=maq.getSerie();
-    datosmaq[2]=maq.getPreciodiario();
+    datosmaq[2]=nf.format(maq.getPreciodiario());
     modelo.addRow(datosmaq);
     validagenerar();
     total = total + maq.getPreciodiario();
-    jlbltotal.setText(total.toString());
+    jlbltotal.setText(nf.format(total));
     }
     
     public void validagenerar(){
@@ -163,7 +165,6 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         jlbltotal = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 formKeyReleased(evt);

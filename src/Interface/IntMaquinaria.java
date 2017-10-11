@@ -25,6 +25,6 @@ public interface IntMaquinaria {
     public void print(Long id);
     public boolean duplicate(long id,String cadena,String op);
     public void movement(JTable tabla, long idmaq);
-    public List<Maquinaria> searchsentitive(JTable tabla,String estado,String propiedad, long idcategoria);
+    public List<Maquinaria> searchsentitive(JTable tabla,String estado,String propiedad, long idcategoria,String cadena);
     
 }

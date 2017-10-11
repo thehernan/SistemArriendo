@@ -24,7 +24,7 @@ public class JIFEgresos extends javax.swing.JInternalFrame {
         Date fecha = new Date();
         jdpfecha.setDate(fecha);
         Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        daodetcaja.view(jtabla, "EGRESOSDIA", time, null);
+        jlbltotal.setText(daodetcaja.view(jtabla, "EGRESOSDIA", time, null));
         
     }
 
@@ -47,15 +47,15 @@ public class JIFEgresos extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtabla = new javax.swing.JTable();
+        jlbltotal = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
         setResizable(true);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("EGRESOS DEL DIA / MES");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -122,48 +122,55 @@ public class JIFEgresos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtabla);
 
+        jlbltotal.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jlbltotal.setForeground(new java.awt.Color(255, 51, 51));
+        jlbltotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlbltotal.setText("* * *");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(13, 13, 13)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlbltotal, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(13, 13, 13)))))
                 .addGap(30, 30, 30))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(32, 32, 32)
-                            .addComponent(jrbtndia)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jdpfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jrbtnmes)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcbmes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)))
-                    .addContainerGap()))
+                    .addGap(38, 38, 38)
+                    .addComponent(jrbtndia)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jdpfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jrbtnmes)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jcbmes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(407, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                .addGap(10, 10, 10))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbltotal)
+                .addContainerGap(12, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGap(71, 71, 71)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jdpfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jcbmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,7 +188,7 @@ public class JIFEgresos extends javax.swing.JInternalFrame {
             jcbmes.setEnabled(true);
             jdpfecha.setEnabled(false);
         }
-        daodetcaja.view(jtabla, "EGRESOSMES", null, jcbmes.getSelectedItem().toString());
+        jlbltotal.setText(daodetcaja.view(jtabla, "EGRESOSMES", null, jcbmes.getSelectedItem().toString()));
     }//GEN-LAST:event_jrbtnmesActionPerformed
 
     private void jrbtndiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtndiaActionPerformed
@@ -192,20 +199,20 @@ public class JIFEgresos extends javax.swing.JInternalFrame {
 
         }
         Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        daodetcaja.view(jtabla, "EGRESOSDIA", time, null);
+        jlbltotal.setText(daodetcaja.view(jtabla, "EGRESOSDIA", time, null));
         
     }//GEN-LAST:event_jrbtndiaActionPerformed
 
     private void jdpfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpfechaActionPerformed
         // TODO add your handling code here:
        Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        daodetcaja.view(jtabla, "EGRESOSDIA", time, null);
+        jlbltotal.setText(daodetcaja.view(jtabla, "EGRESOSDIA", time, null));
     }//GEN-LAST:event_jdpfechaActionPerformed
 
     private void jcbmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbmesActionPerformed
         // TODO add your handling code here:
         
-        daodetcaja.view(jtabla, "EGRESOSMES", null, jcbmes.getSelectedItem().toString());
+        jlbltotal.setText(daodetcaja.view(jtabla, "EGRESOSMES", null, jcbmes.getSelectedItem().toString()));
     }//GEN-LAST:event_jcbmesActionPerformed
 
 
@@ -217,6 +224,7 @@ public class JIFEgresos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbmes;
     private org.jdesktop.swingx.JXDatePicker jdpfecha;
+    private javax.swing.JLabel jlbltotal;
     private javax.swing.JRadioButton jrbtndia;
     private javax.swing.JRadioButton jrbtnmes;
     private javax.swing.JTable jtabla;

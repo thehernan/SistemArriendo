@@ -30,7 +30,7 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
     List<Maquinaria> listmaquinaria;
     DAOCategoria daocategoria = new DAOCategoria();
     List<Categoria> listcategoria;
-     List<Categoria> listcategoriabusc;
+     List<Categoria> listcategoriabusc = new ArrayList<>();
     Categoria categoria = new Categoria();
     Categoria categoriab = new Categoria();
     SingletonEmpresa singletonemp = SingletonEmpresa.getinstancia();
@@ -39,8 +39,8 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
         bloquearjbtn(true, false,false, false, false);
         bloquearjtf(false, false, false, false, false, false);
         listmaquinaria= daoMaquinaria.view(jtabla,"TODO","EMPRESA");
-        listcategoria=daocategoria.jcombobox(jcbcategoria,"ARRIENDO");
-        listcategoriabusc= daocategoria.jcombobox(jcbbuscarcate, "ARRIENDO");
+        listcategoria=daocategoria.jcombobox(jcbcategoria,"ARRIENDO","");
+        listcategoriabusc= daocategoria.jcombobox(jcbbuscarcate, "ARRIENDO","BUSCAR");
     }
     
      public void bloquearjbtn(boolean nuevo,boolean editar,boolean guardar,boolean eliminar,boolean cancelar
@@ -141,7 +141,6 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
         jcbbuscarcate = new javax.swing.JComboBox();
 
         setClosable(true);
-        setIconifiable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -241,7 +240,7 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel8.setText("Maquina:");
+        jLabel8.setText("Maquina / serie:");
 
         jbtnnew.setBackground(new java.awt.Color(255, 255, 255));
         jbtnnew.setText("NUEVO");
@@ -303,18 +302,16 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,16 +550,62 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
 
     private void jtfbbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbbuscarKeyReleased
         // TODO add your handling code here:
+        System.out.println("getselect"+jcbbuscarcate.getSelectedIndex());
         categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
-        listmaquinaria=daoMaquinaria.searchsentitive(jtabla, title, title, categoriab.getId());
+        if(jcbbuscarcate.getSelectedIndex()!=0)
+        listmaquinaria=daoMaquinaria.searchsentitive(jtabla,"TODO","EMPRESA", categoriab.getId(),jtfbbuscar.getText().toUpperCase());
+        else
+        listmaquinaria=daoMaquinaria.searchsentitive(jtabla,"TODOSINCATEGORIA","EMPRESA", categoriab.getId(),jtfbbuscar.getText().toUpperCase());
+        
+        
+        if(jtabla.getSelectedRow()>=0){
+            maquinaria=listmaquinaria.get(jtabla.getSelectedRow());
+            jtfmaquina.setText(maquinaria.getMaquina());
+            jtfmarca.setText(maquinaria.getMarca());
+            jtfserie.setText(maquinaria.getSerie());
+            jtfmodelo.setText(maquinaria.getModelo());
+            jcbcategoria.setSelectedItem(maquinaria.getCategoria());
+            /// vcategoria
+            jtfprecio.setValue(maquinaria.getPreciodiario());
+             bloquearjbtn(true, true, false, true, false); 
+        }else {
+            limpiarjtf();
+            bloquearjbtn(true, false, false, false, false);
+            bloquearjtf(false, false, false,false,false,false);
+        }
     }//GEN-LAST:event_jtfbbuscarKeyReleased
 
     private void jcbbuscarcateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbbuscarcateActionPerformed
         // TODO add your handling code here:
-        if(listcategoriabusc.size()>0){
+//        if(jcbbuscarcate.getItemCount()>0){
          System.out.println("listcstgeb"+listcategoriabusc.size());
-        
+         if(listcategoriabusc.size()>0){
+             categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+              if(jcbbuscarcate.getSelectedIndex()!=0)
+            listmaquinaria=daoMaquinaria.searchsentitive(jtabla,"TODO","EMPRESA", categoriab.getId(),jtfbbuscar.getText().toUpperCase());
+            else
+            listmaquinaria=daoMaquinaria.searchsentitive(jtabla,"TODOSINCATEGORIA","EMPRESA", categoriab.getId(),jtfbbuscar.getText().toUpperCase());
+         
+         
+         }
+          if(jtabla.getSelectedRow()>=0){
+            maquinaria=listmaquinaria.get(jtabla.getSelectedRow());
+            jtfmaquina.setText(maquinaria.getMaquina());
+            jtfmarca.setText(maquinaria.getMarca());
+            jtfserie.setText(maquinaria.getSerie());
+            jtfmodelo.setText(maquinaria.getModelo());
+            jcbcategoria.setSelectedItem(maquinaria.getCategoria());
+            /// vcategoria
+            jtfprecio.setValue(maquinaria.getPreciodiario());
+             bloquearjbtn(true, true, false, true, false); 
+        }else {
+            limpiarjtf();
+            bloquearjbtn(true, false, false, false, false);
+            bloquearjtf(false, false, false,false,false,false);
         }
+         
+//        
+//        }
        
 //        categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
 //        listmaquinaria=daoMaquinaria.searchsentitive(jtabla, title, title, categoriab.getId());

@@ -24,7 +24,7 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
         Date fecha = new Date();
         jdpfecha.setDate(fecha);
         Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        daodetcaja.view(jtabla, "TODODIA", time, null);
+        jlbltotal.setText(daodetcaja.view(jtabla, "TODODIA", time, null));
     }
 
     /**
@@ -41,22 +41,21 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jdpfecha = new org.jdesktop.swingx.JXDatePicker();
         jcbmes = new javax.swing.JComboBox();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtabla = new javax.swing.JTable();
-        jlblcierra = new javax.swing.JLabel();
+        jlbltotal = new javax.swing.JLabel();
         jrbtndia = new javax.swing.JRadioButton();
         jrbtnmes = new javax.swing.JRadioButton();
         jbtnimprimir = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
+        setResizable(true);
         setPreferredSize(new java.awt.Dimension(817, 509));
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("MOVIMIENTO DEL DIA / MES");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -90,8 +89,6 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setText("Cierra con:");
-
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -105,7 +102,10 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtabla);
 
-        jlblcierra.setText("* * *");
+        jlbltotal.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jlbltotal.setForeground(new java.awt.Color(255, 51, 51));
+        jlbltotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlbltotal.setText("* * *");
 
         buttonGroup1.add(jrbtndia);
         jrbtndia.setSelected(true);
@@ -135,23 +135,19 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jlbltotal, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jlblcierra, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jrbtndia)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jdpfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jrbtnmes)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jcbmes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtnimprimir))))
+                        .addComponent(jrbtndia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jdpfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jrbtnmes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbmes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                        .addComponent(jbtnimprimir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jScrollPane1)))
@@ -169,12 +165,10 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
                     .addComponent(jrbtnmes)
                     .addComponent(jbtnimprimir))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jlblcierra))
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbltotal)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -188,7 +182,7 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
 
         }
         Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        daodetcaja.view(jtabla, "TODODIA", time, null);
+       jlbltotal.setText(daodetcaja.view(jtabla, "TODODIA", time, null));
     }//GEN-LAST:event_jrbtndiaActionPerformed
 
     private void jrbtnmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtnmesActionPerformed
@@ -197,31 +191,30 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
             jcbmes.setEnabled(true);
             jdpfecha.setEnabled(false);
         }
-        daodetcaja.view(jtabla, "TODOMES", null, jcbmes.getSelectedItem().toString());
+       jlbltotal.setText(daodetcaja.view(jtabla, "TODOMES", null, jcbmes.getSelectedItem().toString()));
     }//GEN-LAST:event_jrbtnmesActionPerformed
 
     private void jdpfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpfechaActionPerformed
         // TODO add your handling code here:
         Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        daodetcaja.view(jtabla, "TODODIA", time, null);
+        jlbltotal.setText(daodetcaja.view(jtabla, "TODODIA", time, null));
     }//GEN-LAST:event_jdpfechaActionPerformed
 
     private void jcbmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbmesActionPerformed
         // TODO add your handling code here:
-          daodetcaja.view(jtabla, "TODOMES", null, jcbmes.getSelectedItem().toString());
+          jlbltotal.setText(daodetcaja.view(jtabla, "TODOMES", null, jcbmes.getSelectedItem().toString()));
     }//GEN-LAST:event_jcbmesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnimprimir;
     private javax.swing.JComboBox jcbmes;
     private org.jdesktop.swingx.JXDatePicker jdpfecha;
-    private javax.swing.JLabel jlblcierra;
+    private javax.swing.JLabel jlbltotal;
     private javax.swing.JRadioButton jrbtndia;
     private javax.swing.JRadioButton jrbtnmes;
     private javax.swing.JTable jtabla;

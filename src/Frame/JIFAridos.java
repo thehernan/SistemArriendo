@@ -10,6 +10,7 @@ import Dao.DAOCategoria;
 import Pojos.Arido;
 import Pojos.Categoria;
 import Pojos.SingletonEmpresa;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -23,17 +24,20 @@ public class JIFAridos extends javax.swing.JInternalFrame {
     List<Arido> listaridos;
       Arido arido = new Arido();
       boolean editar=false;
-      SingletonEmpresa singletonemp = SingletonEmpresa.getinstancia();
+    
       DAOCategoria daocategoria = new DAOCategoria();
       Categoria categoria = new Categoria();
+      Categoria categoriab = new Categoria();
       List<Categoria> listcategoria;
       SingletonEmpresa singletonempresa= SingletonEmpresa.getinstancia();
+      List<Categoria> listcategoriabusc = new ArrayList<>();
     public JIFAridos() {
         
         initComponents();
 
-        listaridos = daoaridos.view(jtabla,singletonemp.getId());
-        listcategoria = daocategoria.jcombobox(jcbcategoria, "VENTA");
+        listaridos = daoaridos.view(jtabla);
+        listcategoria = daocategoria.jcombobox(jcbcategoria, "VENTA","");
+        listcategoriabusc= daocategoria.jcombobox(jcbbuscarcate, "VENTA","BUSCAR");
         bloquearjbtn(true, false, false, false, false);
         bloquearjtf(false, false, false,false,false);
     }
@@ -110,15 +114,15 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         jbtnimprimir = new javax.swing.JButton();
         jcbcategoria = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jcbbuscarcate = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("INVENTARIO VENTA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -135,7 +139,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -183,7 +187,13 @@ public class JIFAridos extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Und Medida:");
 
-        jLabel5.setText("Buscar:");
+        jLabel5.setText("Descripcion:");
+
+        jtfbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfbuscarKeyReleased(evt);
+            }
+        });
 
         jtfcantidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jtfcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -265,75 +275,85 @@ public class JIFAridos extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Categoria");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbbuscarcate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbbuscarcate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbbuscarcateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jbtnnew, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addComponent(jbtneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addComponent(jbtnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jbtneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbtncancelar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jbtnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(35, 35, 35)
-                                    .addComponent(jLabel8))
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbunidmed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jcbcategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtfinvinicial, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfprecioventa, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfcantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jComboBox1, 0, 13, Short.MAX_VALUE)
-                .addGap(628, 628, 628))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jbtnnew, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jbtneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jbtnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jbtneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbtncancelar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jbtnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(35, 35, 35)
+                                            .addComponent(jLabel8))
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jcbcategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jtfinvinicial, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jtfprecioventa, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jtfcantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jcbunidmed, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 19, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jbtnnew, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtnnew, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jbtneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jbtnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -385,6 +405,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         jcbunidmed.setSelectedItem(arido.getUndmed());
         jtfprecioventa.setValue(arido.getPrecio());
         jtfinvinicial.setValue(arido.getInvinicial());
+         jcbcategoria.setSelectedItem(arido.getCategoria());
         bloquearjbtn(true, true, false, true, false); 
     }//GEN-LAST:event_jtablaKeyReleased
 
@@ -395,13 +416,28 @@ public class JIFAridos extends javax.swing.JInternalFrame {
 
     private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
         // TODO add your handling code here:
-        arido=listaridos.get(jtabla.getSelectedRow());
-        jtfdescripcion.setText(arido.getDescripcion());
-        jtfcantidad.setValue(arido.getCantidad());
-        jcbunidmed.setSelectedItem(arido.getUndmed());
-        jtfprecioventa.setValue(arido.getPrecio());
-        jtfinvinicial.setValue(arido.getInvinicial());
-        bloquearjbtn(true, true, false, true, false); 
+       System.out.println("getselect"+jcbbuscarcate.getSelectedIndex());
+        categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+        if(jcbbuscarcate.getSelectedIndex()!=0)
+        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"CONCATEGORIA",jtfbuscar.getText().toUpperCase());
+        else
+        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"SINCATEGORIA",jtfbuscar.getText().toUpperCase());
+        
+        
+        if(jtabla.getSelectedRow()>=0){
+            arido=listaridos.get(jtabla.getSelectedRow());
+            jtfdescripcion.setText(arido.getDescripcion());
+            jtfcantidad.setValue(arido.getCantidad());
+            jcbunidmed.setSelectedItem(arido.getUndmed());
+            jtfprecioventa.setValue(arido.getPrecio());
+            jtfinvinicial.setValue(arido.getInvinicial());
+            jcbcategoria.setSelectedItem(arido.getCategoria());
+            bloquearjbtn(true, true, false, true, false); 
+        }else {
+            limpiarjtf();
+            bloquearjbtn(true, false, false, false, false);
+            bloquearjtf(false, false, false,false,false);
+        }
       
     }//GEN-LAST:event_jtablaMouseReleased
 
@@ -435,7 +471,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         if(editar==false){
             //  long id=Long.parseLong(jtabla.getValueAt(jtabla.getSelectedRow(), 0).toString());
             if(daoaridos.duplicate(0, jtfdescripcion.getText().toUpperCase(), "GUARDAR")==true){
-                arido.setIdempresa(singletonemp.getId());
+//                arido.setIdempresa(singletonemp.getId());
                 daoaridos.insert(arido);
 
             }else {
@@ -456,7 +492,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
 
         }
 
-         listaridos = daoaridos.view(jtabla,singletonemp.getId());
+         listaridos = daoaridos.view(jtabla);
         bloquearjbtn(true, false, false, false, false);
         bloquearjtf(false, false, false,false,false);
         limpiarjtf();
@@ -470,7 +506,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
        
             if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR LA TARIFA","ELIMINAR",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
                 daoaridos.delete(arido.getId());
-                listaridos = daoaridos.view(jtabla,singletonemp.getId());
+                listaridos = daoaridos.view(jtabla);
                 limpiarjtf();
                 bloquearjbtn(true, false, false, false, false);
 
@@ -527,9 +563,65 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jcbcategoriaActionPerformed
 
+    private void jtfbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarKeyReleased
+        // TODO add your handling code here:
+         System.out.println("getselect"+jcbbuscarcate.getSelectedIndex());
+        categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+        if(jcbbuscarcate.getSelectedIndex()!=0)
+        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"CONCATEGORIA",jtfbuscar.getText().toUpperCase());
+        else
+        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"SINCATEGORIA",jtfbuscar.getText().toUpperCase());
+        
+        
+        if(jtabla.getSelectedRow()>=0){
+            arido=listaridos.get(jtabla.getSelectedRow());
+            jtfdescripcion.setText(arido.getDescripcion());
+            jtfcantidad.setValue(arido.getCantidad());
+            jcbunidmed.setSelectedItem(arido.getUndmed());
+            jtfprecioventa.setValue(arido.getPrecio());
+            jtfinvinicial.setValue(arido.getInvinicial());
+            jcbcategoria.setSelectedItem(arido.getCategoria());
+            bloquearjbtn(true, true, false, true, false); 
+        }else {
+            limpiarjtf();
+            bloquearjbtn(true, false, false, false, false);
+            bloquearjtf(false, false, false,false,false);
+        }
+    }//GEN-LAST:event_jtfbuscarKeyReleased
+
+    private void jcbbuscarcateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbbuscarcateActionPerformed
+        // TODO add your handling code here:
+         System.out.println("listcstgeb"+listcategoriabusc.size());
+         if(listcategoriabusc.size()>0){
+             categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+             if(jcbbuscarcate.getSelectedIndex()!=0)
+        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"CONCATEGORIA",jtfbuscar.getText().toUpperCase());
+        else
+        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"SINCATEGORIA",jtfbuscar.getText().toUpperCase());
+         
+         
+         }
+         
+        if(jtabla.getSelectedRow()>=0){
+            arido=listaridos.get(jtabla.getSelectedRow());
+            jtfdescripcion.setText(arido.getDescripcion());
+            jtfcantidad.setValue(arido.getCantidad());
+            jcbunidmed.setSelectedItem(arido.getUndmed());
+            jtfprecioventa.setValue(arido.getPrecio());
+            jtfinvinicial.setValue(arido.getInvinicial());
+            jcbcategoria.setSelectedItem(arido.getCategoria());
+            bloquearjbtn(true, true, false, true, false); 
+        }else {
+            limpiarjtf();
+            bloquearjbtn(true, false, false, false, false);
+            bloquearjtf(false, false, false,false,false);
+        }
+        
+        
+    }//GEN-LAST:event_jcbbuscarcateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -546,6 +638,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtnguardar;
     private javax.swing.JButton jbtnimprimir;
     private javax.swing.JButton jbtnnew;
+    private javax.swing.JComboBox jcbbuscarcate;
     private javax.swing.JComboBox jcbcategoria;
     private javax.swing.JComboBox jcbunidmed;
     private javax.swing.JTable jtabla;

@@ -119,10 +119,10 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         jbtncancelar = new javax.swing.JButton();
         jlblmensajeventa = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("NUEVA VENTA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -244,6 +244,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtabla);
 
+        jbtnagregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/maquina.png"))); // NOI18N
         jbtnagregar.setText("Agregar");
         jbtnagregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

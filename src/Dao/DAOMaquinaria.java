@@ -531,7 +531,7 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
     }
 
     @Override
-    public List<Maquinaria> searchsentitive(JTable tabla,String estado,String propiedad ,long idcategoria) {
+    public List<Maquinaria> searchsentitive(JTable tabla,String estado,String propiedad ,long idcategoria,String cadena) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
@@ -540,11 +540,12 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
         List<Maquinaria> listmaquinaria= new ArrayList<>();
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_busquedasensitivamaquinaria(?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_busquedasensitivamaquinaria(?,?,?,?,?)");
         ps.setString(1, estado);
         ps.setLong(2,singletonempresa.getId());
         ps.setString(3, propiedad);
-        ps.setLong(4, idcategoria);
+        ps.setString(4, cadena);
+        ps.setLong(5, idcategoria);
         rs=ps.executeQuery();
         
          DefaultTableModel modelo= new DefaultTableModel(){

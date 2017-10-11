@@ -20,6 +20,6 @@ public interface IntCategoria {
     public void update(Categoria cat);
     public void delete(Long id);
     public boolean duplicate(long id,String cadena,String op);
-    public List<Categoria> jcombobox(JComboBox combo,String tipo);
+    public List<Categoria> jcombobox(JComboBox combo,String tipo,String vista);
     
 }

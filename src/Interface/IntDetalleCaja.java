@@ -18,6 +18,6 @@ public interface IntDetalleCaja {
     public void insetpaysale(DetalleCaja detcaja);
     public void insertdischarge(DetalleCaja detcaja);
     public void insertrepair(DetalleCaja detcaja);
-    public void view(JTable tabla,String tipob,Timestamp fecha,String mes);
+    public String view(JTable tabla,String tipob,Timestamp fecha,String mes);
     
 }

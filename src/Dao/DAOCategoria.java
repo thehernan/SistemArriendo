@@ -291,7 +291,7 @@ public class DAOCategoria implements Interface.IntCategoria{
     }
 
     @Override
-    public List<Categoria> jcombobox(JComboBox combo,String tipo) {
+    public List<Categoria> jcombobox(JComboBox combo,String tipo,String vista) {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
          Connection c =null;
         PreparedStatement ps= null;
@@ -310,7 +310,10 @@ public class DAOCategoria implements Interface.IntCategoria{
      
        
         Object datosR[] = new Object[1];
-       
+        if(vista.equals("BUSCAR")){
+         modelo.addElement("TODO");
+          listcategoria.add(new Categoria());
+        }
              
         
         while (rs.next()){

@@ -5,9 +5,12 @@
  */
 package Frame;
 
+import Dao.DAOCategoria;
 import Dao.DAOMaquinaria;
+import Pojos.Categoria;
 import Pojos.Maquinaria;
 import java.awt.Frame;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +29,10 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
     String form =null;
   
     Maquinaria maquina = new Maquinaria();
-    JIFNuevaCotizacion jifnuevacot;        
+    JIFNuevaCotizacion jifnuevacot;   
+    List<Categoria> listcategoriabusc = new ArrayList<>();
+    DAOCategoria daocategoria = new DAOCategoria();
+     Categoria categoriab = new Categoria();
     public JDFBuscarMaquinaria(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -39,6 +45,7 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
         this.contrato= contrato;
         this.setLocationRelativeTo(null);
         form="CONTRATO";
+        listcategoriabusc= daocategoria.jcombobox(jcbbuscarcate, "ARRIENDO","BUSCAR");
     }
     public JDFBuscarMaquinaria(java.awt.Frame parent, boolean modal,JDFEditarContrato jifeditar) {
         super(parent, modal);
@@ -47,6 +54,7 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
         this.jifeditar=jifeditar;
         this.setLocationRelativeTo(null);
         form="EDITAR";
+          listcategoriabusc= daocategoria.jcombobox(jcbbuscarcate, "ARRIENDO","BUSCAR");
     }
     public JDFBuscarMaquinaria(java.awt.Frame parent, boolean modal,JIFNuevaCotizacion jifnuevacot) {
         super(parent, modal);
@@ -55,6 +63,7 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
        this.jifnuevacot=jifnuevacot;
         this.setLocationRelativeTo(null);
         form="COTIZACION";
+          listcategoriabusc= daocategoria.jcombobox(jcbbuscarcate, "ARRIENDO","BUSCAR");
     }
 
     /**
@@ -69,10 +78,11 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jtfserie = new javax.swing.JTextField();
+        jtfbbuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtabla = new javax.swing.JTable();
         jbtnaceptar = new javax.swing.JButton();
+        jcbbuscarcate = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -89,7 +99,7 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,7 +109,18 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setText("Serie:");
+        jLabel2.setText("Maquina / Serie:");
+
+        jtfbbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfbbuscarActionPerformed(evt);
+            }
+        });
+        jtfbbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfbbuscarKeyReleased(evt);
+            }
+        });
 
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,12 +133,26 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtablaMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtabla);
 
+        jbtnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept2.png"))); // NOI18N
         jbtnaceptar.setText("Aceptar");
+        jbtnaceptar.setEnabled(false);
         jbtnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnaceptarActionPerformed(evt);
+            }
+        });
+
+        jcbbuscarcate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbbuscarcate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbbuscarcateActionPerformed(evt);
             }
         });
 
@@ -133,7 +168,9 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jtfserie, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtnaceptar)))
                 .addContainerGap())
@@ -145,8 +182,9 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtfserie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnaceptar))
+                    .addComponent(jtfbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnaceptar)
+                    .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 25, Short.MAX_VALUE))
@@ -185,6 +223,54 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
       
       
     }//GEN-LAST:event_jbtnaceptarActionPerformed
+
+    private void jtfbbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbbuscarKeyReleased
+        // TODO add your handling code here:
+        categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+        if(jcbbuscarcate.getSelectedIndex()!=0)
+        listmaquinaria=daomaquinaria.searchsentitive(jtabla,"TODO","EMPRESA", categoriab.getId(),jtfbbuscar.getText().toUpperCase());
+        else
+        listmaquinaria=daomaquinaria.searchsentitive(jtabla,"TODOSINCATEGORIA","EMPRESA", categoriab.getId(),jtfbbuscar.getText().toUpperCase());
+        
+        if(jtabla.getSelectedRow()>=0){
+        jbtnaceptar.setEnabled(true);
+        }else {
+        jbtnaceptar.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_jtfbbuscarKeyReleased
+
+    private void jcbbuscarcateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbbuscarcateActionPerformed
+        // TODO add your handling code here:
+          if(listcategoriabusc.size()>0){
+             categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+              if(jcbbuscarcate.getSelectedIndex()!=0)
+            listmaquinaria=daomaquinaria.searchsentitive(jtabla,"TODO","EMPRESA", categoriab.getId(),jtfbbuscar.getText().toUpperCase());
+            else
+            listmaquinaria=daomaquinaria.searchsentitive(jtabla,"TODOSINCATEGORIA","EMPRESA", categoriab.getId(),jtfbbuscar.getText().toUpperCase());
+         
+         
+         }
+        if(jtabla.getSelectedRow()>=0){
+        jbtnaceptar.setEnabled(true);
+        }else {
+        jbtnaceptar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jcbbuscarcateActionPerformed
+
+    private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
+        // TODO add your handling code here:
+         if(jtabla.getSelectedRow()>=0){
+        jbtnaceptar.setEnabled(true);
+        }else {
+        jbtnaceptar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jtablaMouseReleased
+
+    private void jtfbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfbbuscarActionPerformed
+        // TODO add your handling code here:
+        jbtnaceptar.doClick();
+    }//GEN-LAST:event_jtfbbuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,7 +320,8 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnaceptar;
+    private javax.swing.JComboBox jcbbuscarcate;
     private javax.swing.JTable jtabla;
-    private javax.swing.JTextField jtfserie;
+    private javax.swing.JTextField jtfbbuscar;
     // End of variables declaration//GEN-END:variables
 }

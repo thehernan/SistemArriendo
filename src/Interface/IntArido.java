@@ -15,11 +15,11 @@ import javax.swing.JTable;
  */
 public interface IntArido {
     
-    public List<Arido> view (JTable tabla,long idempre); 
+    public List<Arido> view (JTable tabla); 
     public void insert (Arido arido);
     public void update(Arido arido);
     public void delete(Long id);
     public void print();
     public boolean duplicate(long id,String cadena,String op);
-    
+     public List<Arido> searchsensitive(JTable tabla,long idcat,String op,String caden); 
 }

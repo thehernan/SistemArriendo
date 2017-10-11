@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.NumberFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -222,13 +223,14 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
     }
 
     @Override
-    public void view(JTable tabla,String tipob, Timestamp fecha, String mes) {
+    public String view(JTable tabla,String tipob, Timestamp fecha, String mes) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
         ResultSet rs= null;
-        
-      
+        Double total=0.0;
+        Double importe=0.0;
+        NumberFormat nf=  NumberFormat.getInstance();
         try{
 	c = Conexion.Connect();
         ps = c.prepareStatement("SELECT * from sp_mostrarmovimientocaja(?,?,?,?)");
@@ -253,11 +255,13 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
              
         
         while (rs.next()){
-           
+           importe=rs.getDouble("vimporte");
+           total=total+importe;
+                   
             datosR[0]=rs.getObject("vcodventa");
             datosR[1]=rs.getObject("vcodcontrato");
             datosR[2]=rs.getObject("vcodreparacion");
-            datosR[3]=rs.getObject("vimporte");
+            datosR[3]=nf.format(importe);
             datosR[4]=rs.getObject("vobservacion");
             datosR[5]=rs.getObject("vfecha");
             modelo.addRow(datosR);
@@ -291,7 +295,7 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
                    }
                }
             }  
-       
+       return "Total $: "+nf.format(total);
     }
     
 }

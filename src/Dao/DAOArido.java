@@ -6,6 +6,7 @@
 package Dao;
 
 import Pojos.Arido;
+import Pojos.SingletonEmpresa;
 import java.awt.HeadlessException;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -33,12 +34,12 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class DAOArido implements Interface.IntArido{
     private  Conexion cn;
-   
+    SingletonEmpresa empresa = SingletonEmpresa.getinstancia();
      
     
 
     @Override
-    public List<Arido> view(JTable tabla,long idempre) {
+    public List<Arido> view(JTable tabla) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
@@ -48,7 +49,7 @@ public class DAOArido implements Interface.IntArido{
         try{
 	c = Conexion.Connect();
         ps = c.prepareStatement("SELECT * from sp_mostrararidos(?)");
-        ps.setLong(1, idempre);
+        ps.setLong(1, empresa.getId());
         rs=ps.executeQuery();
         
          DefaultTableModel modelo= new DefaultTableModel(){
@@ -76,7 +77,7 @@ public class DAOArido implements Interface.IntArido{
             arido.setInvinicial(rs.getDouble("vinvinicial"));
             arido.setIdempresa(rs.getLong("videmp"));
             arido.setIdcatgoria(rs.getLong("vidcategoria"));
-        
+            arido.setCategoria(rs.getString("vcategoria"));
             datosR[0]=arido.getDescripcion();
             datosR[1]=arido.getUndmed();
             datosR[2]=nf.format(arido.getPrecio());
@@ -129,7 +130,7 @@ public class DAOArido implements Interface.IntArido{
         ps.setString(2,arido.getUndmed());
         ps.setBigDecimal(3,new  BigDecimal(arido.getPrecio()));
         ps.setBigDecimal(4,new BigDecimal(arido.getInvinicial()));
-        ps.setLong(5, arido.getIdempresa());
+        ps.setLong(5,empresa.getId());
         ps.setLong(6,arido.getId());
         rs=ps.executeQuery();
       
@@ -341,6 +342,88 @@ public class DAOArido implements Interface.IntArido{
                }
             }  
         return duplicado;
+    }
+
+    @Override
+    public List<Arido> searchsensitive(JTable tabla,  long idcat,String op,String cadena) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        
+        List<Arido> listarido= new ArrayList<>();
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_busquedasensitivaaridos(?,?,?,?)");
+        ps.setLong(1, empresa.getId());
+        ps.setLong(2, idcat);
+        ps.setString(3, op);
+        ps.setString(4, cadena);
+        rs=ps.executeQuery();
+        
+         DefaultTableModel modelo= new DefaultTableModel(){
+        public boolean isCellEditable(int row, int column) {
+        //      if (column == 5) return true;
+        //else
+         return false;
+        }
+        };
+        String titulos[]={"Descripcion","Unidad. Med","Precio","Cantidad/stock"};
+        modelo.setColumnIdentifiers(titulos);
+        tabla.setModel(modelo);
+        Object datosR[] = new Object[4];
+       
+             
+        
+        while (rs.next()){
+            NumberFormat nf= NumberFormat.getInstance();
+            Arido arido = new Arido();
+            arido.setId(rs.getLong("id"));
+            arido.setDescripcion(rs.getString("vdescripcion"));
+            arido.setCantidad(rs.getDouble("vcantidad"));
+            arido.setUndmed(rs.getString("vunidmed"));
+            arido.setPrecio(rs.getDouble("vprecio"));
+            arido.setInvinicial(rs.getDouble("vinvinicial"));
+            arido.setIdempresa(rs.getLong("videmp"));
+            arido.setIdcatgoria(rs.getLong("vidcategoria"));
+            arido.setCategoria(rs.getString("vcategoria"));
+            datosR[0]=arido.getDescripcion();
+            datosR[1]=arido.getUndmed();
+            datosR[2]=nf.format(arido.getPrecio());
+            datosR[3]=nf.format(arido.getCantidad());
+            modelo.addRow(datosR);
+            listarido.add(arido);
+		
+        }
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOArido.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOArido.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOArido.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        
+       return  listarido; 
     }
    
     

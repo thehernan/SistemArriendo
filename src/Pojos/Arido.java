@@ -18,6 +18,7 @@ public class Arido {
     private Double invinicial;
     private Long idempresa;
     private Long idcatgoria;
+    private String categoria;
     public Arido() {
     }
 
@@ -29,6 +30,14 @@ public class Arido {
         this.precio = precio;
         this.invinicial = invinicial;
         this.idempresa = idempresa;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public Long getIdcatgoria() {

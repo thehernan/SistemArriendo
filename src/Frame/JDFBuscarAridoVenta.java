@@ -6,8 +6,11 @@
 package Frame;
 
 import Dao.DAOArido;
+import Dao.DAOCategoria;
 import Pojos.Arido;
+import Pojos.Categoria;
 import Pojos.SingletonEmpresa;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 
@@ -23,20 +26,24 @@ public class JDFBuscarAridoVenta extends javax.swing.JDialog {
     DAOArido daoarido = new DAOArido();
     Arido arido = new Arido();
     List<Arido> listarido;
-    SingletonEmpresa singletonempresa = SingletonEmpresa.getinstancia();
+    List<Categoria> listcategoriabusc = new ArrayList<>();
+    DAOCategoria daocategoria = new DAOCategoria();
+     Categoria categoriab = new Categoria();
     JIFVenta jifventa;
     public JDFBuscarAridoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        listarido = daoarido.view(jtabla, singletonempresa.getId());
+       
+       
               
     }
      public JDFBuscarAridoVenta(java.awt.Frame parent, boolean modal,JIFVenta jifventa) {
         super(parent, modal);
         initComponents();
-        listarido = daoarido.view(jtabla, singletonempresa.getId());
+        listarido = daoarido.view(jtabla);
         this.jifventa=jifventa;     
         this.setLocationRelativeTo(null);
+         listcategoriabusc= daocategoria.jcombobox(jcbbuscarcate, "VENTA","BUSCAR");
     }
 
     /**
@@ -50,17 +57,25 @@ public class JDFBuscarAridoVenta extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jtfbuscar = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtabla = new javax.swing.JTable();
         jbtnaceptar = new javax.swing.JButton();
+        jcbbuscarcate = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
-        jLabel1.setText("Buscar");
+        jLabel1.setText("Descripcion:");
 
-        jtfbuscar.setBorder(null);
+        jtfbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfbuscarActionPerformed(evt);
+            }
+        });
+        jtfbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfbuscarKeyReleased(evt);
+            }
+        });
 
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,13 +88,26 @@ public class JDFBuscarAridoVenta extends javax.swing.JDialog {
 
             }
         ));
+        jtabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtablaMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtabla);
 
-        jbtnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept.png"))); // NOI18N
+        jbtnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept2.png"))); // NOI18N
         jbtnaceptar.setText("Aceptar");
+        jbtnaceptar.setEnabled(false);
         jbtnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnaceptarActionPerformed(evt);
+            }
+        });
+
+        jcbbuscarcate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbbuscarcate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbbuscarcateActionPerformed(evt);
             }
         });
 
@@ -87,32 +115,32 @@ public class JDFBuscarAridoVenta extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addGap(20, 20, 20)
-                .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jbtnaceptar))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jcbbuscarcate, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnaceptar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(jbtnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -126,6 +154,49 @@ public class JDFBuscarAridoVenta extends javax.swing.JDialog {
         cant.setVisible(true);
         
     }//GEN-LAST:event_jbtnaceptarActionPerformed
+
+    private void jtfbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarKeyReleased
+        // TODO add your handling code here:
+          System.out.println("getselect"+jcbbuscarcate.getSelectedIndex());
+        categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+        if(jcbbuscarcate.getSelectedIndex()!=0)
+        listarido=daoarido.searchsensitive(jtabla, categoriab.getId(),"CONCATEGORIA",jtfbuscar.getText().toUpperCase());
+        else
+        listarido=daoarido.searchsensitive(jtabla, categoriab.getId(),"SINCATEGORIA",jtfbuscar.getText().toUpperCase());
+        
+        if(jtabla.getSelectedRow()>=0){
+        jbtnaceptar.setEnabled(true);
+        }else {
+        jbtnaceptar.setEnabled(false);
+        }
+        
+      
+    }//GEN-LAST:event_jtfbuscarKeyReleased
+
+    private void jcbbuscarcateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbbuscarcateActionPerformed
+        // TODO add your handling code here:
+         System.out.println("listcstgeb"+listcategoriabusc.size());
+         if(listcategoriabusc.size()>0){
+             categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+             if(jcbbuscarcate.getSelectedIndex()!=0)
+        listarido=daoarido.searchsensitive(jtabla, categoriab.getId(),"CONCATEGORIA",jtfbuscar.getText().toUpperCase());
+        else
+        listarido=daoarido.searchsensitive(jtabla, categoriab.getId(),"SINCATEGORIA",jtfbuscar.getText().toUpperCase());
+         
+         
+         }
+        
+    }//GEN-LAST:event_jcbbuscarcateActionPerformed
+
+    private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
+        // TODO add your handling code here:
+        jbtnaceptar.setEnabled(true);
+    }//GEN-LAST:event_jtablaMouseReleased
+
+    private void jtfbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfbuscarActionPerformed
+        // TODO add your handling code here:
+        jbtnaceptar.doClick();
+    }//GEN-LAST:event_jtfbuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,8 +243,8 @@ public class JDFBuscarAridoVenta extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnaceptar;
+    private javax.swing.JComboBox jcbbuscarcate;
     private javax.swing.JTable jtabla;
     private javax.swing.JTextField jtfbuscar;
     // End of variables declaration//GEN-END:variables

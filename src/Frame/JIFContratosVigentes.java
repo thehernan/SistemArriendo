@@ -56,8 +56,6 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         jbtnimprimircliente = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jtfbuscarclientenombre = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
         jbtneditarcliente = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -68,16 +66,14 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jtfbuscarempresaclient = new javax.swing.JTextField();
         jbtneditarempresa = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
 
         setClosable(true);
         setIconifiable(true);
 
-        jPanel3.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("CONTRATOS VIGENTES");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -97,10 +93,8 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search2.png"))); // NOI18N
         jLabel2.setText("Codigo:");
 
-        jtfbuscarclientecod.setBorder(null);
         jtfbuscarclientecod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfbuscarclientecodKeyReleased(evt);
@@ -132,10 +126,8 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         jbtnimprimircliente.setText("Imprimir");
         jbtnimprimircliente.setEnabled(false);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search2.png"))); // NOI18N
         jLabel4.setText("Cliente / Empresa:");
 
-        jtfbuscarclientenombre.setBorder(null);
         jtfbuscarclientenombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfbuscarclientenombreKeyReleased(evt);
@@ -157,64 +149,45 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfbuscarclientecod, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                                    .addComponent(jSeparator1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtneditarcliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbtnimprimircliente))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                                    .addComponent(jtfbuscarclientenombre))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfbuscarclientecod, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfbuscarclientenombre, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(263, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtneditarcliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtnimprimircliente)
+                .addGap(16, 16, 16))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jtfbuscarclientecod, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jbtnimprimircliente)
-                        .addComponent(jbtneditarcliente)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(jtfbuscarclientenombre, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)))
+                        .addComponent(jtfbuscarclientenombre, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfbuscarclientecod, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtneditarcliente)
+                    .addComponent(jbtnimprimircliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("CLIENTE", jPanel2);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search2.png"))); // NOI18N
         jLabel3.setText("Codigo:");
 
-        jtfempresacodigo.setBorder(null);
         jtfempresacodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfempresacodigoKeyReleased(evt);
@@ -251,10 +224,8 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         jbtnimprimirempresa.setText("Imprimir");
         jbtnimprimirempresa.setEnabled(false);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search2.png"))); // NOI18N
         jLabel5.setText("Cliente / Empresa:");
 
-        jtfbuscarempresaclient.setBorder(null);
         jtfbuscarempresaclient.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfbuscarempresaclientKeyReleased(evt);
@@ -277,51 +248,39 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfempresacodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                                    .addComponent(jSeparator3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtneditarempresa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbtnimprimirempresa))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                                    .addComponent(jtfbuscarempresaclient))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addComponent(jtfempresacodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfbuscarempresaclient)
+                        .addGap(211, 211, 211))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 650, Short.MAX_VALUE)
+                        .addComponent(jbtneditarempresa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnimprimirempresa)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jtfempresacodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jbtnimprimirempresa)
-                        .addComponent(jbtneditarempresa)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtfempresacodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtfbuscarempresaclient))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(jtfbuscarempresaclient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtneditarempresa)
+                    .addComponent(jbtnimprimirempresa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("EMPRESA", jPanel1);
@@ -338,7 +297,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE))
         );
 
         pack();
@@ -365,33 +324,6 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         }  
     }//GEN-LAST:event_jtfbuscarclientecodKeyTyped
 
-    private void jtfempresacodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfempresacodigoKeyTyped
-        // TODO add your handling code here:
-          char c = evt.getKeyChar();
-        if (!(Character.isDigit(c) ||
-        (c == evt.VK_BACK_SPACE) ||
-        (c == evt.VK_DELETE))) {
-        getToolkit().beep();
-        evt.consume();
-        }  
-    }//GEN-LAST:event_jtfempresacodigoKeyTyped
-
-    private void jtfbuscarempresaclientKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarempresaclientKeyReleased
-        // TODO add your handling code here:
-        daocontrato.searchsensitive(jtablaempresa, singletonempre.getId(), "VIGENTEEMPRESACLIENTE", 0, jtfbuscarempresaclient.getText());
-                
-    }//GEN-LAST:event_jtfbuscarempresaclientKeyReleased
-
-    private void jtfempresacodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfempresacodigoKeyReleased
-        // TODO add your handling code here:
-        try {
-            long cod=Long.parseLong(jtfempresacodigo.getText());
-        daocontrato.searchsensitive(jtablaempresa, singletonempre.getId(), "VIGENTEEMPRESACODIGO", cod, null);
-        } catch (Exception e) {
-        }
-        
-    }//GEN-LAST:event_jtfempresacodigoKeyReleased
-
     private void jtfbuscarclientenombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarclientenombreKeyReleased
         // TODO add your handling code here:
         daocontrato.searchsensitive(jtablacliente, singletonempre.getId(), "VIGENTECLIENTECLIENTE", 0, jtfbuscarclientenombre.getText());
@@ -404,25 +336,6 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         jbtnimprimircliente.setEnabled(true);
             
     }//GEN-LAST:event_jtablaclienteMouseReleased
-
-    private void jtablaempresaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtablaempresaKeyReleased
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jtablaempresaKeyReleased
-
-    private void jtablaempresaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaempresaMouseReleased
-        // TODO add your handling code here:
-        
-       jbtneditarempresa.setEnabled(true);
-       jbtnimprimirempresa.setEnabled(true);
-    }//GEN-LAST:event_jtablaempresaMouseReleased
-
-    private void jbtneditarempresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneditarempresaActionPerformed
-        // TODO add your handling code here:
-        contrato = listcontremp.get(jtablaempresa.getSelectedRow());
-            JDFEditarContrato  editcontrato = new JDFEditarContrato(new Frame(), isVisible(),contrato);
-            editcontrato.setVisible(true);
-    }//GEN-LAST:event_jbtneditarempresaActionPerformed
 
     private void jbtneditarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneditarclienteActionPerformed
         // TODO add your handling code here:
@@ -437,6 +350,52 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
             
     }//GEN-LAST:event_jbtneditarclienteActionPerformed
 
+    private void jbtneditarempresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneditarempresaActionPerformed
+        // TODO add your handling code here:
+        contrato = listcontremp.get(jtablaempresa.getSelectedRow());
+        JDFEditarContrato  editcontrato = new JDFEditarContrato(new Frame(), isVisible(),contrato);
+        editcontrato.setVisible(true);
+    }//GEN-LAST:event_jbtneditarempresaActionPerformed
+
+    private void jtfbuscarempresaclientKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarempresaclientKeyReleased
+        // TODO add your handling code here:
+        daocontrato.searchsensitive(jtablaempresa, singletonempre.getId(), "VIGENTEEMPRESACLIENTE", 0, jtfbuscarempresaclient.getText());
+
+    }//GEN-LAST:event_jtfbuscarempresaclientKeyReleased
+
+    private void jtablaempresaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtablaempresaKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jtablaempresaKeyReleased
+
+    private void jtablaempresaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaempresaMouseReleased
+        // TODO add your handling code here:
+
+        jbtneditarempresa.setEnabled(true);
+        jbtnimprimirempresa.setEnabled(true);
+    }//GEN-LAST:event_jtablaempresaMouseReleased
+
+    private void jtfempresacodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfempresacodigoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) ||
+            (c == evt.VK_BACK_SPACE) ||
+            (c == evt.VK_DELETE))) {
+        getToolkit().beep();
+        evt.consume();
+        }
+    }//GEN-LAST:event_jtfempresacodigoKeyTyped
+
+    private void jtfempresacodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfempresacodigoKeyReleased
+        // TODO add your handling code here:
+        try {
+            long cod=Long.parseLong(jtfempresacodigo.getText());
+            daocontrato.searchsensitive(jtablaempresa, singletonempre.getId(), "VIGENTEEMPRESACODIGO", cod, null);
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jtfempresacodigoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -449,10 +408,6 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton jbtneditarcliente;
     private javax.swing.JButton jbtneditarempresa;
