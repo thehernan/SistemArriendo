@@ -21,6 +21,7 @@ public interface IntMaquinaria {
    public List<Reparacion> viewrepair(JTable tabla,long idmaq);
     public long insertmaqrepairclient(Maquinaria maq);
     public void update(Maquinaria maq);
+    public void updatenocategoria(Maquinaria maq);
     public void delete(Long id);
     public void print(Long id);
     public boolean duplicate(long id,String cadena,String op);

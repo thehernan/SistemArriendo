@@ -160,7 +160,7 @@ public class DAOReparacion implements Interface.IntReparacion{
         long id=0;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertreparacionclientesinempleado(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertreparacionclientesinempleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         ps.setString(1, repara.getDescripci());    
         ps.setLong(2, repara.getIdmaqui());
         ps.setLong(3, repara.getIdcliente());
@@ -174,6 +174,8 @@ public class DAOReparacion implements Interface.IntReparacion{
         ps.setBigDecimal(11,new BigDecimal(repara.getRepuesto()));
         ps.setBigDecimal(12,new  BigDecimal(repara.getIva()));
         ps.setLong(13,singletonempre.getId());
+        ps.setBigDecimal(14,new BigDecimal(repara.getRevision()));
+        ps.setString(15, repara.getEntregadopor());
         rs=ps.executeQuery();
         
         while (rs.next()){
@@ -219,7 +221,7 @@ public class DAOReparacion implements Interface.IntReparacion{
         long id=0;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertreparacionclienteempleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertreparacionclienteempleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         ps.setString(1, repara.getDescripci());    
         ps.setLong(2, repara.getIdmaqui());
         ps.setLong(3, repara.getIdcliente());
@@ -234,6 +236,8 @@ public class DAOReparacion implements Interface.IntReparacion{
         ps.setBigDecimal(12,new  BigDecimal(repara.getIva()));
         ps.setLong(13, repara.getIdempleado());
         ps.setLong(14, singletonempre.getId());
+        ps.setBigDecimal(15,new BigDecimal(repara.getRevision()));
+        ps.setString(16,repara.getEntregadopor());
         rs=ps.executeQuery();
         
         while (rs.next()){
@@ -362,6 +366,132 @@ public class DAOReparacion implements Interface.IntReparacion{
             }  
         return lisobj;
         
+    }
+
+    @Override
+    public void update(Reparacion repara) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+       
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_updatereparacion(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        ps.setLong(1, repara.getId());
+        ps.setString(2, repara.getDescripci());    
+        ps.setLong(3, repara.getIdmaqui());
+        ps.setLong(4, repara.getIdcliente());
+        ps.setString(5, repara.getObservacion());
+        ps.setBigDecimal(6,new BigDecimal(repara.getManoobra()));
+        ps.setBigDecimal(7,new BigDecimal(repara.getSubtotal()));
+        ps.setBigDecimal(8,new BigDecimal(repara.getTotal()));
+        ps.setBoolean(9,repara.isAcepta());
+        ps.setLong(10, repara.getIdempleado());
+        ps.setTimestamp(11, repara.getFechaentrega());
+        ps.setString(12, repara.getTrabajorealizado());
+        ps.setBoolean(13, repara.isEntregada());
+        ps.setString(14, repara.getEntregadopor());
+        ps.setBigDecimal(15,new BigDecimal(repara.getRepuesto()));
+        ps.setBigDecimal(16,new  BigDecimal(repara.getIva()));
+        ps.setBigDecimal(17,new BigDecimal(repara.getRevision()));
+        rs=ps.executeQuery();
+        
+        if (rs.next()){
+            JOptionPane.showMessageDialog(null,"Reparación actualizado con exito");	
+          
+        }
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+      
+        
+    }
+
+    @Override
+    public void updatenoempleado(Reparacion repara) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+       
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_updatereparacionnoempleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+       ps.setLong(1, repara.getId());
+        ps.setString(2, repara.getDescripci());    
+        ps.setLong(3, repara.getIdmaqui());
+        ps.setLong(4, repara.getIdcliente());
+        ps.setString(5, repara.getObservacion());
+        ps.setBigDecimal(6,new BigDecimal(repara.getManoobra()));
+        ps.setBigDecimal(7,new BigDecimal(repara.getSubtotal()));
+        ps.setBigDecimal(8,new BigDecimal(repara.getTotal()));
+        ps.setBoolean(9,repara.isAcepta());
+  
+        ps.setTimestamp(10, repara.getFechaentrega());
+        ps.setString(11, repara.getTrabajorealizado());
+        ps.setBoolean(12, repara.isEntregada());
+        ps.setString(13, repara.getEntregadopor());
+        ps.setBigDecimal(14,new BigDecimal(repara.getRepuesto()));
+        ps.setBigDecimal(15,new  BigDecimal(repara.getIva()));
+        ps.setBigDecimal(16,new BigDecimal(repara.getRevision()));
+        rs=ps.executeQuery();
+        
+        while (rs.next()){
+            JOptionPane.showMessageDialog(null,"Reparación actualizado con exito");	
+        
+        }
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }   
     }
     
 }

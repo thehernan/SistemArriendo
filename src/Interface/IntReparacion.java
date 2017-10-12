@@ -19,4 +19,6 @@ public interface IntReparacion {
     public long insertrepairclientnoemploye(Reparacion repara);
     public long insertrepairclientemploye(Reparacion repara);
     public List<Object> search(long id);
+    public void update(Reparacion repa);
+    public void updatenoempleado(Reparacion repa);
 }

@@ -16,4 +16,5 @@ import javax.swing.JTable;
 public interface IntRepuesto {
      public void insert (List<Repuesto> listrepuesto, long idrepara);
     public List<Repuesto> view (JTable tabla,long id); 
+    public void delete(long id);
 }
