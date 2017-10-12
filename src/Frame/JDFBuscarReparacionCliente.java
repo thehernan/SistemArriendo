@@ -6,6 +6,9 @@
 package Frame;
 
 import Dao.DAOReparacion;
+import Pojos.Reparacion;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,13 +19,24 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
     /**
      * Creates new form JDFBuscarReparacionCliente
      */
+    JIFMaquinaReparacionClient jifmaqrepclient;
     DAOReparacion daoreparacion = new DAOReparacion();
+    List<Reparacion> listrepa = new ArrayList<>();
+    Reparacion reparacion;
     public JDFBuscarReparacionCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        daoreparacion.view(jtabla, false, "CLIENTEESTADO");
-        this.setLocationRelativeTo(null);
+     
     }
+    
+    public JDFBuscarReparacionCliente(java.awt.Frame parent, boolean modal,JIFMaquinaReparacionClient jifmaqrepclient) {
+        super(parent, modal);
+        initComponents();
+        listrepa=daoreparacion.view(jtabla, false, "CLIENTEESTADO");
+        this.setLocationRelativeTo(null);
+        this.jifmaqrepclient=jifmaqrepclient;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,6 +58,11 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
 
         jbtnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept2.png"))); // NOI18N
         jbtnaceptar.setText("Aceptar");
+        jbtnaceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnaceptarActionPerformed(evt);
+            }
+        });
 
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -58,22 +77,22 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jtabla);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search2.png"))); // NOI18N
-        jLabel1.setText("Buscar:");
+        jLabel1.setText("Codigo / Cliente / Empresa:");
+        jLabel1.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnaceptar)))
                 .addGap(29, 29, 29))
         );
@@ -85,13 +104,21 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
                     .addComponent(jbtnaceptar)
                     .addComponent(jLabel1)
                     .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnaceptarActionPerformed
+        // TODO add your handling code here:
+        reparacion = listrepa.get(jtabla.getSelectedRow());
+        jifmaqrepclient.setbuscar(reparacion.getId());
+        this.dispose();
+        
+    }//GEN-LAST:event_jbtnaceptarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -30,7 +30,16 @@ public class Reparacion {
     private Double repuesto;
     private Double iva;
     private long idempresa;
+    private Double revision;
     public Reparacion() {
+    }
+
+    public Double getRevision() {
+        return revision;
+    }
+
+    public void setRevision(Double revision) {
+        this.revision = revision;
     }
 
     public long getIdempresa() {

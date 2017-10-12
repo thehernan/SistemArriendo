@@ -5,6 +5,9 @@
  */
 package Dao;
 
+import Pojos.Cliente;
+import Pojos.Empleado;
+import Pojos.Maquinaria;
 import Pojos.Reparacion;
 import Pojos.SingletonEmpresa;
 import java.math.BigDecimal;
@@ -52,18 +55,18 @@ public class DAOReparacion implements Interface.IntReparacion{
         String titulos[]={"Cod.","Cliente / Empresa","Fecha"};
         modelo.setColumnIdentifiers(titulos);
         tabla.setModel(modelo);
-        Object datosR[] = new Object[2];
+        Object datosR[] = new Object[3];
        
              
         
         while (rs.next()){
             Reparacion repa = new Reparacion();
             repa.setId(rs.getLong("vid"));
-            repa.setDescripci(rs.getString("vdescripcion"));
+             // repa.setDescripci(rs.getString("vdescripcion"));
             repa.setFecha(rs.getString("vfecha"));
             datosR[0]=rs.getObject("vcod");
-            datosR[0]=rs.getObject("vcliente");
-            datosR[1]=repa.getFecha();
+            datosR[1]=rs.getObject("vcliente");
+            datosR[2]=repa.getFecha();
           
             modelo.addRow(datosR);
             listrepa.add(repa);
@@ -269,7 +272,96 @@ public class DAOReparacion implements Interface.IntReparacion{
 
     @Override
     public List<Object> search(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        Maquinaria maquina= new Maquinaria();
+        Empleado empleado = new Empleado();
+        Cliente cliente = new Cliente();
+        Reparacion repara= new Reparacion();
+        List<Object> lisobj= new ArrayList<>();
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_buscarreparacion(?)");
+        ps.setLong(1, id);    
+ 
+        rs=ps.executeQuery();
+      
+        if (rs.next()){
+//            JOptionPane.showMessageDialog(null,"Reparación guardado con exito");	
+            ///// cliente///////////////////
+            cliente.setId(rs.getLong("vidcliente"));
+            cliente.setRut(rs.getString("vrut"));
+            cliente.setNombre(rs.getString("vnombre"));
+            cliente.setDomiciliopart(rs.getString("vdomiciliopartcli"));
+            cliente.setDomiciliatrab(rs.getString("vdomiciliotrabcli"));
+            cliente.setTelefono(rs.getString("vtelefono"));
+            
+            //////////////////////////////////
+            maquina.setId(rs.getLong("vidmaq"));
+            maquina.setMaquina(rs.getString("vmaquina"));
+            maquina.setMarca(rs.getString("vmarca"));
+            maquina.setSerie(rs.getString("vserie"));
+            maquina.setModelo(rs.getString("vmodelo"));
+            //////////////////////////////
+            empleado.setId(rs.getLong("videmple"));
+            empleado.setRut(rs.getString("vrutemple"));
+            empleado.setNombre(rs.getString("nombreemple"));
+            //////////////////////////////////////////////
+            repara.setId(rs.getLong("vidrepara"));
+            repara.setObservacion(rs.getString("vobservacion"));
+            repara.setManoobra(rs.getDouble("vmanoobra"));
+            repara.setSubtotal(rs.getDouble("vsubtotal"));
+            repara.setTotal(rs.getDouble("vtotal"));
+            repara.setAcepta(rs.getBoolean("vacepta"));
+            repara.setEntregadopor(rs.getString("ventregadapor"));
+            repara.setEntregada(rs.getBoolean("ventregada"));
+            repara.setTrabajorealizado(rs.getString("vtrabajoreal"));
+            repara.setRepuesto(rs.getDouble("vrepuestos"));
+            repara.setIva(rs.getDouble("viva"));
+            repara.setRevision(rs.getDouble("vrevision"));
+            repara.setFechaentrega(rs.getTimestamp("vfecha"));
+            //----------------
+            repara.setIdmaqui(maquina.getId());
+            repara.setIdcliente(cliente.getId());
+            repara.setIdempleado(empleado.getId());
+            
+            lisobj.add(cliente);
+            lisobj.add(maquina);
+            lisobj.add(empleado);
+            lisobj.add(repara);
+            
+        }
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        return lisobj;
+        
     }
     
 }

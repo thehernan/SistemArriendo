@@ -60,6 +60,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         Double total=0.0;
         DAOEmpleado daoempleado = new DAOEmpleado();
         Empleado empleado;
+        List<Object> listobj = new ArrayList<>();
     public JIFMaquinaReparacionClient() {
         initComponents();
         modelo.setColumnIdentifiers(titulos);
@@ -67,6 +68,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         Date date= new Date();
         jdpfecha.setDate(date);
         jtfrut.requestFocus();
+        jtfrevision.setText("10000");
     }
     public void valida(){
         String modelo= jtfmodelo.getText().replaceAll("\\s", "");
@@ -116,6 +118,53 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         }
  
     }
+    
+    public void setbuscar(long id){
+    listobj = daoreparair.search(id);
+        System.out.println("listobj"+listobj.size());
+    cliente = (Cliente)listobj.get(0);
+    maquina = (Maquinaria)listobj.get(1);
+    empleado= (Empleado)listobj.get(2);
+    reparacion= (Reparacion)listobj.get(3);
+    /////////////////////////////
+    jtfrut.setValue(cliente.getRut());
+    jlblrazons.setText(cliente.getNombre());
+    jlbldomiciliopart.setText(cliente.getDomiciliopart());
+    jlbldomiciliotrab.setText(cliente.getDomiciliatrab());
+    jlblfono.setText(cliente.getTelefono());
+    //////////////////
+    jtfmodelo.setText(maquina.getModelo());
+    jtfmarca.setText(maquina.getMaquina());
+    jtfserie.setText(maquina.getSerie());
+    jtfdescripcion.setText(maquina.getMaquina());
+    ///////////////////////////
+    jtfaobservacion.setText(reparacion.getObservacion());
+    jtatrabajosrealizados.setText(reparacion.getTrabajorealizado());
+    //////////////////////////////
+    jtfrevision.setText(reparacion.getRevision().toString());
+    jtfrepuestos.setText(reparacion.getRepuesto().toString());
+    jtfmanoobra.setText(reparacion.getManoobra().toString());
+    jlblsubtotal.setText(reparacion.getSubtotal().toString());
+    jlbliva.setText(reparacion.getIva().toString());
+    jlbltotal.setText(reparacion.getTotal().toString());
+    jdpfecha.setDate(reparacion.getFechaentrega());
+    
+    //////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -162,6 +211,8 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         jlblsubtotal = new javax.swing.JFormattedTextField();
         jlbltotal = new javax.swing.JFormattedTextField();
         jlbliva = new javax.swing.JFormattedTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jtfrevision = new javax.swing.JTextField();
         jrbtnsi = new javax.swing.JRadioButton();
         jrbtnno = new javax.swing.JRadioButton();
         jLabel19 = new javax.swing.JLabel();
@@ -177,7 +228,6 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         jtabla = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
         jbtnbuscar = new javax.swing.JButton();
-        jtfbuscar = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtatrabajosrealizados = new javax.swing.JTextArea();
         jLabel24 = new javax.swing.JLabel();
@@ -206,7 +256,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         jlblrazons.setText("* * *");
-        getContentPane().add(jlblrazons, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 240, -1));
+        getContentPane().add(jlblrazons, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 360, -1));
 
         jLabel5.setText("Domicilio Particular:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
@@ -325,7 +375,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                 jbtnceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtnceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 610, -1, -1));
+        getContentPane().add(jbtnceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 670, -1, -1));
         getContentPane().add(jlblmensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 250, 20));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Valor de Reparacion"));
@@ -365,6 +415,8 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         jlbliva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
         jlbliva.setEnabled(false);
 
+        jLabel16.setText("Revision:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -373,10 +425,6 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(36, 36, 36)
-                        .addComponent(jtfrepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
                             .addComponent(jLabel13)
@@ -384,17 +432,29 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                             .addComponent(jLabel15))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfmanoobra)
+                            .addComponent(jtfmanoobra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jlblsubtotal)
                                 .addComponent(jlbliva, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jlbltotal, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))))
+                                .addComponent(jlbltotal, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel16))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfrepuestos, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jtfrevision))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jtfrevision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jtfrepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -417,21 +477,21 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
                     .addComponent(jlbltotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 3, 390, 190));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 3, 390, 240));
 
         buttonGroup1.add(jrbtnsi);
         jrbtnsi.setText("Si");
-        getContentPane().add(jrbtnsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, -1, -1));
+        getContentPane().add(jrbtnsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, -1, -1));
 
         buttonGroup1.add(jrbtnno);
         jrbtnno.setText("No");
-        getContentPane().add(jrbtnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, -1, -1));
+        getContentPane().add(jrbtnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 250, -1, -1));
 
         jLabel19.setText("Acepta:");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, 30));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, -1, 30));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Trabajo realizado por"));
 
@@ -498,7 +558,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 390, 120));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, 390, 120));
 
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -523,10 +583,10 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jtabla);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 390, 130));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 390, 130));
 
         jLabel23.setText("Repuestos a Cambiar");
-        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
 
         jbtnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search2.png"))); // NOI18N
         jbtnbuscar.setText("Buscar");
@@ -535,17 +595,16 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                 jbtnbuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, 30));
-        getContentPane().add(jtfbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 110, 30));
+        getContentPane().add(jbtnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, 30));
 
         jtatrabajosrealizados.setColumns(20);
         jtatrabajosrealizados.setRows(5);
         jScrollPane3.setViewportView(jtatrabajosrealizados);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 730, -1));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 730, -1));
 
         jLabel24.setText("Trabajos Realizados:");
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, -1));
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, -1, -1));
 
         jbtnagregarrepuesto.setText("Agregar");
         jbtnagregarrepuesto.addActionListener(new java.awt.event.ActionListener() {
@@ -553,7 +612,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                 jbtnagregarrepuestoActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtnagregarrepuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, -1, -1));
+        getContentPane().add(jbtnagregarrepuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 560, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -738,7 +797,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
 
     private void jbtnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnbuscarActionPerformed
         // TODO add your handling code here:
-        JDFBuscarReparacionCliente reparacioncli =new JDFBuscarReparacionCliente(new Frame(), isVisible());
+        JDFBuscarReparacionCliente reparacioncli =new JDFBuscarReparacionCliente(new Frame(), isVisible(),this);
         reparacioncli.setVisible(true);
     }//GEN-LAST:event_jbtnbuscarActionPerformed
 
@@ -752,6 +811,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -791,12 +851,12 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtabla;
     private javax.swing.JTextArea jtatrabajosrealizados;
     private javax.swing.JTextArea jtfaobservacion;
-    private javax.swing.JTextField jtfbuscar;
     private javax.swing.JTextField jtfdescripcion;
     private javax.swing.JTextField jtfmanoobra;
     private javax.swing.JTextField jtfmarca;
     private javax.swing.JTextField jtfmodelo;
     private javax.swing.JTextField jtfrepuestos;
+    private javax.swing.JTextField jtfrevision;
     private javax.swing.JFormattedTextField jtfrut;
     private javax.swing.JFormattedTextField jtfrutempleado;
     private javax.swing.JTextField jtfserie;
