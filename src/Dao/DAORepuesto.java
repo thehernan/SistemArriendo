@@ -159,7 +159,7 @@ public class DAORepuesto implements Interface.IntRepuesto{
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(List<Repuesto> listrep) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
@@ -168,12 +168,16 @@ public class DAORepuesto implements Interface.IntRepuesto{
         try{
 	c = Conexion.Connect();
         
-   
-             ps = c.prepareStatement("SELECT * from sp_deleterepuesto(?)");
+        for(Repuesto rep: listrep){
+            if(rep.getId()!=0){
+                  ps = c.prepareStatement("SELECT * from sp_deleterepuesto(?)");
         
-            ps.setLong(1, id);
-            
-            rs=ps.executeQuery();
+                    ps.setLong(1, rep.getId());
+
+                    rs=ps.executeQuery();
+            }     
+        }
+           
             
      
 //        while (rs.next()){

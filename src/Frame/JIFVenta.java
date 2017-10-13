@@ -44,7 +44,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
     
         Double total;
         DAOCliente daocliente = new DAOCliente();
-        Cliente cliente;
+        Cliente cliente= new Cliente();
         DAOVenta daoventa= new DAOVenta();
         DAODetVenta daodetventa= new DAODetVenta();
         Venta venta = new Venta();
@@ -75,7 +75,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
     public void setvender(){
         venta.setIdempresa(singletonempresa.getId());
         venta.setDescuento(0.0);
-    if(cliente!=null){
+    if(cliente.getId()!=0){
         /// insert venta con cliente
         venta.setIdcliente(cliente.getId());
         venta.setId(daoventa.insert(venta));
@@ -333,7 +333,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
     private void jtfrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrutKeyReleased
         // TODO add your handling code here:
         cliente=daocliente.search(jtfrut.getText(),"CLIENTEEMPRESA");
-        if(cliente!=null){
+        if(cliente.getId()!=0){
         jlblrazonsocial.setText(cliente.getNombre()+"  "+cliente.getApellido());
         jlbldominiciliopart.setText(cliente.getDomiciliopart());
         jlbldirecciontrab.setText(cliente.getDomiciliatrab());
@@ -346,7 +346,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         jlblrazonsocial.setText("* * *");
         jlbldominiciliopart.setText("* * *");
         jlbldirecciontrab.setText("* * *");
-        cliente=null;
+       
         
         }
         

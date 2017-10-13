@@ -63,6 +63,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         DAOEmpleado daoempleado = new DAOEmpleado();
         Empleado empleado = new Empleado();
         List<Object> listobj = new ArrayList<>();
+        List<Repuesto> lisrepuestodelete = new ArrayList<>();
     public JIFMaquinaReparacionClient() {
         initComponents();
         modelo.setColumnIdentifiers(titulos);
@@ -71,6 +72,8 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         jdpfecha.setDate(date);
         jtfrut.requestFocus();
         jtfrevision.setText("10000");
+        jtfmanoobra.setText("0");
+        calcualartotal();
     }
     public void valida(){
         String modelo= jtfmodelo.getText().replaceAll("\\s", "");
@@ -78,7 +81,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         String marca= jtfmarca.getText().replaceAll("\\s", "");
         String descrip = jtfdescripcion.getText().replaceAll("\\s","");
         String obser = jtfaobservacion.getText().replaceAll("\\s", "");
-    if(cliente!=null && modelo.length()>0 && serie.length()>0 && marca.length()>0
+    if(cliente.getId()!=0 && modelo.length()>0 && serie.length()>0 && marca.length()>0
             && descrip.length()>0 && obser.length()> 0){
         jbtnceptar.setEnabled(true);
     }else {
@@ -136,7 +139,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
  
     }
     
-    public void setbuscar(long id){
+    public void setbuscar(long id,String codigo){
     
     listobj = daoreparair.search(id);
     System.out.println("listobj"+listobj.size());
@@ -145,21 +148,22 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     empleado= (Empleado)listobj.get(2);
     reparacion= (Reparacion)listobj.get(3);
         DecimalFormat df = new DecimalFormat("###");
-    /////////////////////////////
+    /////////////////////////////cliente
     jtfrut.setValue(cliente.getRut());
     jlblrazons.setText(cliente.getNombre());
     jlbldomiciliopart.setText(cliente.getDomiciliopart());
     jlbldomiciliotrab.setText(cliente.getDomiciliatrab());
     jlblfono.setText(cliente.getTelefono());
-    //////////////////
+    //////////////////maquina
     jtfmodelo.setText(maquina.getModelo());
     jtfmarca.setText(maquina.getMaquina());
     jtfserie.setText(maquina.getSerie());
     jtfdescripcion.setText(maquina.getMaquina());
-    ///////////////////////////
+    ///////////////////////////reparacion
     jtfaobservacion.setText(reparacion.getObservacion());
     jtatrabajosrealizados.setText(reparacion.getTrabajorealizado());
     //////////////////////////////
+    jlblcodigo.setText(codigo);
     jtfrevision.setText(df.format(reparacion.getRevision()));
     jtfrepuestos.setValue(reparacion.getRepuesto());
     jtfmanoobra.setText(df.format(reparacion.getManoobra()));
@@ -167,6 +171,10 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     jlbliva.setValue(reparacion.getIva());
     jlbltotal.setValue(reparacion.getTotal());
     jdpfecha.setDate(reparacion.getFechaentrega());
+    //////////////////////////// empleado
+    jtfrutempleado.setValue(empleado.getRut());
+    jlblnombretrabajador.setText(empleado.getNombre());
+    ///////////////////////////////
     
     if(reparacion.isAcepta()==true)
         jrbtnsi.setSelected(true);
@@ -179,6 +187,51 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     modelo=(DefaultTableModel) jtabla.getModel();  
      valida();
     }
+    
+    public void nuevo(){
+    cliente = new Cliente();
+    empleado= new Empleado();
+    reparacion = new Reparacion();
+    maquina = new Maquinaria();
+    listrepuesto = new ArrayList<>();
+    lisrepuestodelete= new ArrayList<>();
+    ///// cliente
+    jtfrut.setValue(null);
+    jlblrazons.setText("* * *");
+    jlbldomiciliopart.setText("* * *");
+    jlbldomiciliotrab.setText("* * *");
+    jlblfono.setText("* * *");
+    //////// maquina
+    jtfmodelo.setText("");
+    jtfmarca.setText("");
+    jtfserie.setText("");
+    jtfdescripcion.setText("");
+    //// reparacion
+    jtfaobservacion.setText("");
+    jtatrabajosrealizados.setText("");
+    jtfentradopor.setText("");
+    //
+    jtfrevision.setText("10000");
+    jtfrepuestos.setValue(0);
+    jtfmanoobra.setText("0");
+    calcualartotal();
+    ///////
+    jrbtnno.setSelected(true);
+     for (int i = 0; i < jtabla.getRowCount(); i++) {
+        modelo.removeRow(i);
+        i-=1;
+        }
+    ////
+     jtfrutempleado.setValue(null);
+     jlblnombretrabajador.setText("* * *");
+     jdpfecha.setDate(new Date());
+     
+    jlblcodigo.setText("* * *");
+    jtfrut.requestFocus();
+    
+    
+    }
+    
     
     
 
@@ -250,6 +303,8 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         jbtnagregarrepuesto = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jtfentradopor = new javax.swing.JTextField();
+        jlblcodigo = new javax.swing.JLabel();
+        jbtncancelar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Orden de Trabajo");
@@ -260,39 +315,44 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfrut.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfrutFocusLost(evt);
+            }
+        });
         jtfrut.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfrutKeyReleased(evt);
             }
         });
-        getContentPane().add(jtfrut, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 105, -1));
+        getContentPane().add(jtfrut, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 105, -1));
 
         jLabel2.setText("R.U.T. Cliente:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jLabel3.setText("Señor(es):");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jlblrazons.setText("* * *");
-        getContentPane().add(jlblrazons, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 360, -1));
+        getContentPane().add(jlblrazons, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 360, -1));
 
         jLabel5.setText("Domicilio Particular:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         jlbldomiciliopart.setText("* * *");
-        getContentPane().add(jlbldomiciliopart, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 310, -1));
+        getContentPane().add(jlbldomiciliopart, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 310, -1));
 
         jLabel7.setText("Domicilio Trabajo:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         jLabel9.setText("Fono:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jlblfono.setText("* * *");
-        getContentPane().add(jlblfono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 190, -1));
+        getContentPane().add(jlblfono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 190, -1));
 
         jlbldomiciliotrab.setText("* * *");
-        getContentPane().add(jlbldomiciliotrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 350, -1));
+        getContentPane().add(jlbldomiciliotrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 350, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Descripción Maquina"));
 
@@ -393,7 +453,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                 jbtnceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtnceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 700, -1, -1));
+        getContentPane().add(jbtnceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 640, -1, -1));
         getContentPane().add(jlblmensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 250, 20));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Valor de Reparacion"));
@@ -529,6 +589,16 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfrutempleado.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfrutempleadoFocusLost(evt);
+            }
+        });
+        jtfrutempleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jtfrutempleadoMouseExited(evt);
+            }
+        });
         jtfrutempleado.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfrutempleadoKeyReleased(evt);
@@ -628,10 +698,10 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         jtatrabajosrealizados.setRows(5);
         jScrollPane3.setViewportView(jtatrabajosrealizados);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 730, -1));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 440, -1));
 
         jLabel24.setText("Trabajos Realizados:");
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, -1, -1));
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, -1, -1));
 
         jbtnagregarrepuesto.setText("Agregar");
         jbtnagregarrepuesto.addActionListener(new java.awt.event.ActionListener() {
@@ -642,8 +712,22 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         getContentPane().add(jbtnagregarrepuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 560, -1, -1));
 
         jLabel17.setText("Entregado por:");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 710, -1, 20));
-        getContentPane().add(jtfentradopor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 710, 510, -1));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, -1, 20));
+        getContentPane().add(jtfentradopor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 440, -1));
+
+        jlblcodigo.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
+        jlblcodigo.setForeground(new java.awt.Color(255, 51, 51));
+        jlblcodigo.setText("***");
+        getContentPane().add(jlblcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 270, -1));
+
+        jbtncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel.png"))); // NOI18N
+        jbtncancelar.setText("Cancelar");
+        jbtncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtncancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbtncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 640, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -651,7 +735,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     private void jtfrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrutKeyReleased
         // TODO add your handling code here:
         cliente=daocliente.search(jtfrut.getText(),"CLIENTEEMPRESA");
-        if(cliente!=null){
+        if(cliente.getId()!=0){
             jlblrazons.setText(cliente.getNombre()+"  "+cliente.getApellido());
             jlbldomiciliopart.setText(cliente.getDomiciliopart());
             jlbldomiciliotrab.setText(cliente.getDomiciliatrab());
@@ -665,7 +749,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
             jlbldomiciliopart.setText("* * *");
             jlbldomiciliotrab.setText("* * *");
             jlblfono.setText("* * *");
-            cliente=null;
+           
             jlbldomiciliotrab.setEnabled(false);
             jlbldomiciliotrab.setText("");
         }
@@ -723,10 +807,11 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         long id =0;        
         
         if(valida==true){
-          maquina.setId(daomaquina.insertmaqrepairclient(maquina));
-          reparacion.setIdmaqui(maquina.getId());
-          System.out.println("idmaq"+maquina.getId());
+         
             if(reparacion.getId()==0){ //// insert+
+                maquina.setId(daomaquina.insertmaqrepairclient(maquina));
+                reparacion.setIdmaqui(maquina.getId());
+                System.out.println("idmaq"+maquina.getId());
                 System.out.println("insert");
                  if(empleado.getId()!=0){
                     reparacion.setIdempleado(empleado.getId());
@@ -737,7 +822,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                 }  
                      System.out.println("lisrtep"+listrepuesto.size());
                 daorepuesto.insert(listrepuesto, id);
-
+                
             }else { /// update
                  if(empleado.getId()!=0){
                reparacion.setIdempleado(empleado.getId());
@@ -755,8 +840,9 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         }else {
         JOptionPane.showMessageDialog(null, "Ingrese cantidad valida en revision o mano de obra");
         }
-       
+        daorepuesto.delete(lisrepuestodelete);
         
+        nuevo();
         
 //        detcaja.setImporte(10000.0);
 //        detcaja.setIdreparir(id);
@@ -811,14 +897,13 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
             Repuesto repuesto;
             NumberFormat nf= NumberFormat.getInstance();
             repuesto= listrepuesto.get(index);
-            
+            System.out.println("listrep"+listrepuesto.size());
+            System.out.println("idrep"+repuesto.getId());
+            lisrepuestodelete.add(repuesto);
             listrepuesto.remove(index);
             modelo.removeRow(index);
             calcualartotal();
-            if(repuesto.getId()!=0){
-            daorepuesto.delete(repuesto.getId());
-            
-            }
+           
         
         }
               
@@ -881,6 +966,34 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         calcualartotal();
     }//GEN-LAST:event_jtfmanoobraKeyReleased
 
+    private void jtfrutempleadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfrutempleadoMouseExited
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_jtfrutempleadoMouseExited
+
+    private void jtfrutempleadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfrutempleadoFocusLost
+        // TODO add your handling code here:
+          System.out.println("rutempl"+jtfrutempleado.getText());
+        if(empleado.getId()==0){
+        jtfrutempleado.setValue(null);
+        jlblmensajetrab.setText("");
+        }
+    }//GEN-LAST:event_jtfrutempleadoFocusLost
+
+    private void jtfrutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfrutFocusLost
+        // TODO add your handling code here:
+        if(cliente.getId()==0){
+        jtfrut.setValue(null);
+        
+        }
+    }//GEN-LAST:event_jtfrutFocusLost
+
+    private void jbtncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtncancelarActionPerformed
+        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(null,"Esta seguro de cancelar la operacion","",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+        nuevo();
+    }//GEN-LAST:event_jbtncancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -915,8 +1028,10 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton jbtnagregarrepuesto;
     private javax.swing.JButton jbtnbuscar;
+    private javax.swing.JButton jbtncancelar;
     private javax.swing.JButton jbtnceptar;
     private org.jdesktop.swingx.JXDatePicker jdpfecha;
+    private javax.swing.JLabel jlblcodigo;
     private javax.swing.JLabel jlbldomiciliopart;
     private javax.swing.JLabel jlbldomiciliotrab;
     private javax.swing.JLabel jlblfono;

@@ -21,4 +21,5 @@ public interface IntReparacion {
     public List<Object> search(long id);
     public void update(Reparacion repa);
     public void updatenoempleado(Reparacion repa);
+    public List<Reparacion> searchsensitive (JTable tabla,boolean entreg,String tiop,String cadena); 
 }

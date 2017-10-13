@@ -46,7 +46,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         String titulos[]={"Maquina","Serie","Valor Dia"};
         Object datosmaq[] = new Object[3];
         DAOCliente daocliente = new DAOCliente();
-        Cliente cliente ;
+        Cliente cliente= new Cliente() ;
         Double total;
         DAOContrato daocontrato = new DAOContrato();
         DAODetContrato daodetcontrato = new DAODetContrato();
@@ -81,7 +81,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     }
     
     public void validagenerar(){
-    if (cliente!=null && modelo.getRowCount()>0){
+    if (cliente.getId()!=0 && modelo.getRowCount()>0){
         jbtngenerar.setEnabled(true);
     }else {
         jbtngenerar.setEnabled(false);
@@ -112,16 +112,10 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         contrato=new Contrato();
         cliente = new Cliente();
         listmaquinaria = new ArrayList<>();
-        modelo= new DefaultTableModel(){
-        public boolean isCellEditable(int row, int column) {
-        //      if (column == 5) return true;
-        //else
-         return false;
+         for (int i = 0; i < jtabla.getRowCount(); i++) {
+        modelo.removeRow(i);
+        i-=1;
         }
-        };
-        String titulos[]={"Maquina","Serie","Valor Dia"};
-        modelo.setColumnIdentifiers(titulos);
-        jtabla.setModel(modelo);
         jbtngenerar.setEnabled(false);
         jlbltotal.setText("* * *");
         total=0.0;
@@ -447,7 +441,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     private void jtfrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrutKeyReleased
         // TODO add your handling code here:
         cliente=daocliente.search(jtfrut.getText(),"CLIENTEEMPRESA");
-        if(cliente!=null){
+        if(cliente.getId()!=0){
         jlblrazons.setText(cliente.getNombre()+"  "+cliente.getApellido());
         jlbldomiciliopart.setText(cliente.getDomiciliopart());
         jlbldomiciliotrab.setText(cliente.getDomiciliatrab());
@@ -467,7 +461,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         jlbldomiciliopart.setText("* * *");
         jlbldomiciliotrab.setText("* * *");
         jlblfono.setText("* * *");
-        cliente=null;
+      
         jlbldomiciliotrab.setEnabled(false);
         jlbldomiciliotrab.setText("");
         

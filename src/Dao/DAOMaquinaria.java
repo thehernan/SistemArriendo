@@ -428,7 +428,7 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
       
         while (rs.next()){
             id=rs.getLong("id");
-            JOptionPane.showMessageDialog(null,"Maquina guardada con exito");	
+//            JOptionPane.showMessageDialog(null,"Maquina guardada con exito");	
         }
 	
         } catch(Exception e)
@@ -626,7 +626,7 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
         
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_updatemaquinarianocategoria(?,?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_updatemaquinarianocategoria(?,?,?,?,?)");
         ps.setLong(1, maq.getId());
         ps.setString(2, maq.getMaquina());
         ps.setString(3,maq.getMarca());
@@ -634,15 +634,15 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
         ps.setString(5, maq.getModelo());
        
 //        ps.setLong(6, maq.getIdempresa());
-        ps.setBigDecimal(7,new  BigDecimal(maq.getPreciodiario()));
+//        ps.setBigDecimal(7,new  BigDecimal(maq.getPreciodiario()));
         
         rs=ps.executeQuery();
       
-//        while (rs.next()){
+//        if (rs.next()){
 //            JOptionPane.showMessageDialog(null,"Maquina editada con exito");	
 //        }
 	
-        } catch(Exception e)
+        } catch(SQLException e)
             {
             JOptionPane.showMessageDialog(null, e.getMessage());
             }finally{

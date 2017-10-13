@@ -31,7 +31,16 @@ public class Reparacion {
     private Double iva;
     private long idempresa;
     private Double revision;
+    private String codigo;
     public Reparacion() {
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public Double getRevision() {

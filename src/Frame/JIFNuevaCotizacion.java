@@ -37,7 +37,7 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
         String titulos[]={"Item","Cantidad","Descripcion","Valor dia C/U","Dias","Total"};
         Object datosmaq[] = new Object[6];
         List<DetalleCotizacion> listdetc = new ArrayList<>();
-        Cliente cliente;
+        Cliente cliente= new Cliente();
         DAOCliente daocliente = new DAOCliente();
         DAOCotizacion daocotizacion = new DAOCotizacion();
         DAODetalleCotizacion daodetc = new DAODetalleCotizacion();
@@ -69,7 +69,7 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
     
     }
     public void validagenerar(){
-        if(cliente!=null && listdetc.size() >0 ){
+        if(cliente.getId()!=0 && listdetc.size() >0 ){
         jbtnaceptar.setEnabled(true);
         }else {
         jbtnaceptar.setEnabled(false);
@@ -78,7 +78,7 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
     }
     public void nuevo(){
         //// cliente
-    cliente = null;
+    cliente = new Cliente();
     jtfrut.setValue(null);
     jlblmensaje.setText("");
     jlblrazons.setText("* * *");
@@ -339,7 +339,7 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
     private void jtfrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrutKeyReleased
         // TODO add your handling code here:
         cliente=daocliente.search(jtfrut.getText(),"CLIENTEEMPRESA");
-        if(cliente!=null){
+        if(cliente.getId()!=0){
             jlblrazons.setText(cliente.getNombre()+"  "+cliente.getApellido());
             jlbldomiciliopart.setText(cliente.getDomiciliopart());
             jlbldomiciliotrab.setText(cliente.getDomiciliatrab());
@@ -353,7 +353,7 @@ public class JIFNuevaCotizacion extends javax.swing.JInternalFrame {
             jlbldomiciliopart.setText("* * *");
             jlbldomiciliotrab.setText("* * *");
             jlblfono.setText("* * *");
-            cliente=null;
+           
             jlbldomiciliotrab.setEnabled(false);
             jlbldomiciliotrab.setText("");
         }

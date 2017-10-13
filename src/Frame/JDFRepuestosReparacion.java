@@ -71,6 +71,11 @@ public class JDFRepuestosReparacion extends javax.swing.JDialog {
 
         jLabel1.setText("Cantidad:");
 
+        jtfcantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfcantidadActionPerformed(evt);
+            }
+        });
         jtfcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfcantidadKeyReleased(evt);
@@ -82,12 +87,22 @@ public class JDFRepuestosReparacion extends javax.swing.JDialog {
 
         jLabel2.setText("Descripcion:");
 
+        jtfdescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfdescripcionActionPerformed(evt);
+            }
+        });
         jtfdescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfdescripcionKeyReleased(evt);
             }
         });
 
+        jtfvalor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfvalorActionPerformed(evt);
+            }
+        });
         jtfvalor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfvalorKeyReleased(evt);
@@ -195,6 +210,21 @@ public class JDFRepuestosReparacion extends javax.swing.JDialog {
         // TODO add your handling code here:
         valida();
     }//GEN-LAST:event_jtfvalorKeyReleased
+
+    private void jtfcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfcantidadActionPerformed
+        // TODO add your handling code here:
+        jbtnagregar.doClick();
+    }//GEN-LAST:event_jtfcantidadActionPerformed
+
+    private void jtfdescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfdescripcionActionPerformed
+       // TODO add your handling code here:
+        jbtnagregar.doClick();
+    }//GEN-LAST:event_jtfdescripcionActionPerformed
+
+    private void jtfvalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfvalorActionPerformed
+        // TODO add your handling code here:
+        jbtnagregar.doClick();
+    }//GEN-LAST:event_jtfvalorActionPerformed
 
     /**
      * @param args the command line arguments

@@ -62,9 +62,10 @@ public class DAOReparacion implements Interface.IntReparacion{
         while (rs.next()){
             Reparacion repa = new Reparacion();
             repa.setId(rs.getLong("vid"));
+            repa.setCodigo(rs.getString("vcod"));
              // repa.setDescripci(rs.getString("vdescripcion"));
             repa.setFecha(rs.getString("vfecha"));
-            datosR[0]=rs.getObject("vcod");
+            datosR[0]=repa.getCodigo();
             datosR[1]=rs.getObject("vcliente");
             datosR[2]=repa.getFecha();
           
@@ -492,6 +493,85 @@ public class DAOReparacion implements Interface.IntReparacion{
                    }
                }
             }   
+    }
+
+    @Override
+    public List<Reparacion> searchsensitive(JTable tabla, boolean entreg, String tiop, String cadena) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        
+        List<Reparacion> listrepa= new ArrayList<>();
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_busquedasensitivareparaciones(?,?,?,?)");
+        ps.setLong(1, singletonempre.getId());
+        ps.setBoolean(2, entreg);
+        ps.setString(3, tiop);
+        ps.setString(4, cadena);
+        rs=ps.executeQuery();
+        
+         DefaultTableModel modelo= new DefaultTableModel(){
+        public boolean isCellEditable(int row, int column) {
+        //      if (column == 5) return true;
+        //else
+         return false;
+        }
+        };
+        String titulos[]={"Cod.","Cliente / Empresa","Fecha"};
+        modelo.setColumnIdentifiers(titulos);
+        tabla.setModel(modelo);
+        Object datosR[] = new Object[3];
+       
+             
+        
+        while (rs.next()){
+            Reparacion repa = new Reparacion();
+            repa.setId(rs.getLong("vid"));
+            repa.setCodigo(rs.getString("vcod"));
+             // repa.setDescripci(rs.getString("vdescripcion"));
+            repa.setFecha(rs.getString("vfecha"));
+            datosR[0]=repa.getCodigo();
+            datosR[1]=rs.getObject("vcliente");
+            datosR[2]=repa.getFecha();
+          
+            modelo.addRow(datosR);
+            listrepa.add(repa);
+		
+        }
+        if(modelo.getRowCount()>0){
+        tabla.setRowSelectionInterval(0, 0);
+        }
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        
+       return  listrepa;
     }
     
 }

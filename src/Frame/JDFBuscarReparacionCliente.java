@@ -58,6 +58,7 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
 
         jbtnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept2.png"))); // NOI18N
         jbtnaceptar.setText("Aceptar");
+        jbtnaceptar.setEnabled(false);
         jbtnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnaceptarActionPerformed(evt);
@@ -75,10 +76,26 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtablaMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtabla);
 
         jLabel1.setText("Codigo / Cliente / Empresa:");
         jLabel1.setToolTipText("");
+
+        jtfbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfbuscarActionPerformed(evt);
+            }
+        });
+        jtfbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfbuscarKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,7 +121,7 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
                     .addComponent(jbtnaceptar)
                     .addComponent(jLabel1)
                     .addComponent(jtfbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -115,10 +132,31 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
     private void jbtnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnaceptarActionPerformed
         // TODO add your handling code here:
         reparacion = listrepa.get(jtabla.getSelectedRow());
-        jifmaqrepclient.setbuscar(reparacion.getId());
+        jifmaqrepclient.setbuscar(reparacion.getId(),"Cod.: "+reparacion.getCodigo());
         this.dispose();
         
     }//GEN-LAST:event_jbtnaceptarActionPerformed
+
+    private void jtfbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarKeyReleased
+        // TODO add your handling code here:
+       listrepa= daoreparacion.searchsensitive(jtabla, false, "CLIENTEESTADO", jtfbuscar.getText().toUpperCase());
+       if(jtabla.getSelectedRow()>=0){
+       jbtnaceptar.setEnabled(true);
+       }else {
+       jbtnaceptar.setEnabled(false);
+       
+       }
+    }//GEN-LAST:event_jtfbuscarKeyReleased
+
+    private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
+        // TODO add your handling code here:
+          jbtnaceptar.setEnabled(true);
+    }//GEN-LAST:event_jtablaMouseReleased
+
+    private void jtfbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfbuscarActionPerformed
+        // TODO add your handling code here:
+        jbtnaceptar.doClick();
+    }//GEN-LAST:event_jtfbuscarActionPerformed
 
     /**
      * @param args the command line arguments

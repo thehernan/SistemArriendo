@@ -326,7 +326,7 @@ public class DAOCliente implements Interface.IntCliente{
         Connection c =null;
         PreparedStatement ps= null;
         ResultSet rs= null;
-        Cliente cliente=null;
+        Cliente cliente=new Cliente();
        
         try{
 	c = Conexion.Connect();
