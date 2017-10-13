@@ -55,7 +55,7 @@ public class DAORepuesto implements Interface.IntRepuesto{
 //           id= rs.getLong("vid");
 //        }
 	
-        } catch(Exception e)
+        } catch(SQLException e)
             {
             JOptionPane.showMessageDialog(null, e.getMessage());
             }finally{

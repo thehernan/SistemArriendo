@@ -19,7 +19,9 @@ import Pojos.Reparacion;
 import Pojos.Repuesto;
 import Pojos.SingletonEmpresa;
 import java.awt.Frame;
+import java.awt.event.KeyEvent;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,7 +61,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     
     
         DAOEmpleado daoempleado = new DAOEmpleado();
-        Empleado empleado;
+        Empleado empleado = new Empleado();
         List<Object> listobj = new ArrayList<>();
     public JIFMaquinaReparacionClient() {
         initComponents();
@@ -90,10 +92,10 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         datosmaq[0]=nf.format(repuesto.getCantidad());
         datosmaq[1]=repuesto.getDescripcion();
         datosmaq[2]=nf.format(repuesto.getValor());
-        total=total+repuesto.getValor();
-        jtfrepuestos.setText(nf.format(total));
+      
         modelo.addRow(datosmaq);
-        listrepuesto.add(repuesto);
+        listrepuesto.add(repuesto); 
+     
     }
     public void calcualartotal(){
         
@@ -108,7 +110,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
             if(jtfmanoobra.getText().replaceAll("\\s", "").length()>0)
                 manoobra= Double.parseDouble(jtfmanoobra.getText());
             
-            if(jtfmanoobra.getText().replaceAll("\\s", "").length()>0)
+            if(jtfrevision.getText().replaceAll("\\s", "").length()>0)
                 revision=Double.parseDouble(jtfrevision.getText());
             
             for(Repuesto rep : listrepuesto)
@@ -118,18 +120,18 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
             subtotal=total/1.19;
             iva=total-subtotal;
             
-            jtfrepuestos.setValue(nf.format(repues));
-            jtfrevision.setText(nf.format(revision));
-            jtfmanoobra.setText(nf.format(manoobra));
+            jtfrepuestos.setValue(repues);
+//            jtfrevision.setValue(revision);
+//            jtfmanoobra.setValue(manoobra);
             jlblsubtotal.setValue(subtotal);
-            jlbliva.setValue(nf.format(iva));
-            jlbltotal.setValue(nf.format(total));
+            jlbliva.setValue(iva);
+            jlbltotal.setValue(total);
             
             
         } catch (Exception e) {
-             jlbltotal.setText("* * *");
-            jlbliva.setText("* * *");
-            jlblsubtotal.setText("* * *");
+             jlbltotal.setValue(0);
+            jlbliva.setValue(0);
+            jlblsubtotal.setValue(0);
         }
  
     }
@@ -142,7 +144,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     maquina = (Maquinaria)listobj.get(1);
     empleado= (Empleado)listobj.get(2);
     reparacion= (Reparacion)listobj.get(3);
-    NumberFormat nf = NumberFormat.getInstance();
+        DecimalFormat df = new DecimalFormat("###");
     /////////////////////////////
     jtfrut.setValue(cliente.getRut());
     jlblrazons.setText(cliente.getNombre());
@@ -158,14 +160,19 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     jtfaobservacion.setText(reparacion.getObservacion());
     jtatrabajosrealizados.setText(reparacion.getTrabajorealizado());
     //////////////////////////////
-    jtfrevision.setText(nf.format(reparacion.getRevision()));
-    jtfrepuestos.setText(nf.format(reparacion.getRepuesto()));
-    jtfmanoobra.setText(nf.format(reparacion.getManoobra()));
-    jlblsubtotal.setText(nf.format(reparacion.getSubtotal()));
-    jlbliva.setText(nf.format(reparacion.getIva()));
-    jlbltotal.setText(nf.format(reparacion.getTotal()));
+    jtfrevision.setText(df.format(reparacion.getRevision()));
+    jtfrepuestos.setValue(reparacion.getRepuesto());
+    jtfmanoobra.setText(df.format(reparacion.getManoobra()));
+    jlblsubtotal.setValue(reparacion.getSubtotal());
+    jlbliva.setValue(reparacion.getIva());
+    jlbltotal.setValue(reparacion.getTotal());
     jdpfecha.setDate(reparacion.getFechaentrega());
-    jtfrevision.setText(nf.format(reparacion.getRevision()));
+    
+    if(reparacion.isAcepta()==true)
+        jrbtnsi.setSelected(true);
+    else 
+        jrbtnno.setSelected(true);
+ 
     jtfentradopor.setText(reparacion.getEntregadopor());
     //////////////////////////////////////
     listrepuesto=daorepuesto.view(jtabla, id);
@@ -215,13 +222,13 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jtfmanoobra = new javax.swing.JTextField();
         jlblsubtotal = new javax.swing.JFormattedTextField();
         jlbltotal = new javax.swing.JFormattedTextField();
         jlbliva = new javax.swing.JFormattedTextField();
         jLabel16 = new javax.swing.JLabel();
-        jtfrevision = new javax.swing.JTextField();
         jtfrepuestos = new javax.swing.JFormattedTextField();
+        jtfrevision = new javax.swing.JTextField();
+        jtfmanoobra = new javax.swing.JTextField();
         jrbtnsi = new javax.swing.JRadioButton();
         jrbtnno = new javax.swing.JRadioButton();
         jLabel19 = new javax.swing.JLabel();
@@ -379,14 +386,14 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 440, 130));
 
         jbtnceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept2.png"))); // NOI18N
-        jbtnceptar.setText("Aceptar");
+        jbtnceptar.setText("Aceptar / Imprimir");
         jbtnceptar.setEnabled(false);
         jbtnceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtnceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 690, -1, -1));
+        getContentPane().add(jbtnceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 700, -1, -1));
         getContentPane().add(jlblmensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 250, 20));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Valor de Reparacion"));
@@ -401,6 +408,33 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
 
         jLabel15.setText("Total:");
 
+        jlblsubtotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        jlblsubtotal.setEnabled(false);
+        jlblsubtotal.setValue(0);
+
+        jlbltotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        jlbltotal.setEnabled(false);
+        jlbltotal.setValue(0);
+
+        jlbliva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        jlbliva.setEnabled(false);
+        jlbliva.setValue(0);
+
+        jLabel16.setText("Revision:");
+
+        jtfrepuestos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        jtfrepuestos.setEnabled(false);
+        jtfrepuestos.setValue(0);
+
+        jtfrevision.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfrevisionKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfrevisionKeyTyped(evt);
+            }
+        });
+
         jtfmanoobra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfmanoobraKeyReleased(evt);
@@ -410,26 +444,13 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
             }
         });
 
-        jlblsubtotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        jlblsubtotal.setEnabled(false);
-
-        jlbltotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        jlbltotal.setEnabled(false);
-
-        jlbliva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        jlbliva.setEnabled(false);
-
-        jLabel16.setText("Revision:");
-
-        jtfrepuestos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
@@ -437,20 +458,19 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                             .addComponent(jLabel14)
                             .addComponent(jLabel15))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfmanoobra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jlblsubtotal)
-                                .addComponent(jlbliva, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jlbltotal, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlblsubtotal)
+                            .addComponent(jlbliva, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlbltotal, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jtfmanoobra)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(jLabel16))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfrevision, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(jtfrepuestos))))
+                            .addComponent(jtfrepuestos, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jtfrevision))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -493,6 +513,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         getContentPane().add(jrbtnsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, -1, -1));
 
         buttonGroup1.add(jrbtnno);
+        jrbtnno.setSelected(true);
         jrbtnno.setText("No");
         getContentPane().add(jrbtnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 250, -1, -1));
 
@@ -659,51 +680,82 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         maquina.setSerie(jtfserie.getText().toUpperCase());
         maquina.setMaquina(jtfdescripcion.getText().toUpperCase());
         maquina.setIdcliente(cliente.getId());
-        maquina.setId(daomaquina.insertmaqrepairclient(maquina));
+       
         
-        reparacion.setDescripci(jtfaobservacion.getText().toUpperCase());
+        reparacion.setObservacion(jtfaobservacion.getText().toUpperCase());
         reparacion.setIdcliente(cliente.getId());
-        reparacion.setIdmaqui(maquina.getId());
-        System.out.println("idmaq"+maquina.getId());
-        Double repuesto=0.0,manoobra=0.0,subtotal=0.0,iva=0.0,total=0.0;
+       
+        Double manoobra=0.0,revision=0.0;
+        boolean valida=true;
         try {
-            repuesto= Double.parseDouble(jtfrepuestos.getText());
+            revision= Double.parseDouble(jtfrevision.getText());
+            manoobra = Double.parseDouble(jtfmanoobra.getText());
            
-            subtotal= Double.parseDouble(jlblsubtotal.getText());
-            iva = Double.parseDouble(jlbliva.getText());
-            total = Double.parseDouble(jlbltotal.getText());
         } catch (Exception e) {
+            valida=false;
         }
-            
-        try {
-            
-             manoobra = Double.parseDouble(jtfmanoobra.getText());
-                    
-                    
-            
-        } catch (Exception e) {
-        }
-        String observacion = jtfaobservacion.getText();
-        String trabajos = jtatrabajosrealizados.getText();
         
-        reparacion.setRepuesto(repuesto);
+         
+        Double subtotal= Double.parseDouble(jlblsubtotal.getValue().toString());
+        Double iva = Double.parseDouble(jlbliva.getValue().toString());
+        Double total = Double.parseDouble(jlbltotal.getValue().toString());
+        
+         
+        
+      
+       
+        reparacion.setObservacion(jtfaobservacion.getText().toUpperCase());
+        reparacion.setRepuesto( Double.parseDouble(jtfrepuestos.getValue().toString()));
         reparacion.setManoobra(manoobra);
         reparacion.setSubtotal(subtotal);
         reparacion.setIva(iva);
         reparacion.setTotal(total);
-      
+        reparacion.setRevision(revision);
+        reparacion.setTrabajorealizado(jtatrabajosrealizados.getText().toUpperCase());
+        
+        
         reparacion.setAcepta(jrbtnsi.isSelected());
         
+            
+        reparacion.setEntregadopor(jtfentradopor.getText().toUpperCase());
         reparacion.setFechaentrega(new Timestamp(jdpfecha.getDate().getTime()));
         
-        long id =0;
-        if(empleado!=null){
-            reparacion.setIdempleado(empleado.getId());
-            id= daoreparair.insertrepairclientemploye(reparacion);
-        }    else {
-            id= daoreparair.insertrepairclientnoemploye(reparacion);
-        }  
-        daorepuesto.insert(listrepuesto, id);
+        long id =0;        
+        
+        if(valida==true){
+          maquina.setId(daomaquina.insertmaqrepairclient(maquina));
+          reparacion.setIdmaqui(maquina.getId());
+          System.out.println("idmaq"+maquina.getId());
+            if(reparacion.getId()==0){ //// insert+
+                System.out.println("insert");
+                 if(empleado.getId()!=0){
+                    reparacion.setIdempleado(empleado.getId());
+                    id= daoreparair.insertrepairclientemploye(reparacion);
+                     System.out.println("idreoara"+id);
+                }    else {
+                    id= daoreparair.insertrepairclientnoemploye(reparacion);
+                }  
+                     System.out.println("lisrtep"+listrepuesto.size());
+                daorepuesto.insert(listrepuesto, id);
+
+            }else { /// update
+                 if(empleado.getId()!=0){
+               reparacion.setIdempleado(empleado.getId());
+                   daoreparair.update(reparacion);
+                }    else {
+                   daoreparair.updatenoempleado(reparacion);
+                }  
+               daomaquina.updatenocategoria(maquina);
+                System.out.println("lisrtep"+listrepuesto.size());
+                daorepuesto.insert(listrepuesto, reparacion.getId());
+            }
+           
+        
+        
+        }else {
+        JOptionPane.showMessageDialog(null, "Ingrese cantidad valida en revision o mano de obra");
+        }
+       
         
         
 //        detcaja.setImporte(10000.0);
@@ -759,11 +811,10 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
             Repuesto repuesto;
             NumberFormat nf= NumberFormat.getInstance();
             repuesto= listrepuesto.get(index);
-            total=total-repuesto.getValor();
-            jtfrepuestos.setText(nf.format(total));
+            
             listrepuesto.remove(index);
             modelo.removeRow(index);
-            
+            calcualartotal();
             if(repuesto.getId()!=0){
             daorepuesto.delete(repuesto.getId());
             
@@ -775,32 +826,17 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtablaMousePressed
 
-    private void jtfmanoobraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfmanoobraKeyReleased
-        // TODO add your handling code here:
-        calcualartotal();
-    }//GEN-LAST:event_jtfmanoobraKeyReleased
-
-    private void jtfmanoobraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfmanoobraKeyTyped
-        // TODO add your handling code here:
-            char c = evt.getKeyChar();
-        if (!(Character.isDigit(c) ||
-        (c == evt.VK_BACK_SPACE) ||
-        (c == evt.VK_DELETE))) {
-        getToolkit().beep();
-        evt.consume();
-        }  
-    }//GEN-LAST:event_jtfmanoobraKeyTyped
-
     private void jtfrutempleadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrutempleadoKeyReleased
         // TODO add your handling code here:
         empleado=daoempleado.search(jtfrutempleado.getText());
         System.out.println(jtfrut.getText());
-        if(empleado!=null){
+        if(empleado.getId()!=0){
         jlblnombretrabajador.setText(empleado.getNombre()+" "+empleado.getApellido());
         jlblmensajetrab.setText("");
         }else {
         jlblmensajetrab.setText("No encontrado");
         jlblnombretrabajador.setText("* * *");
+       
         }
         
         
@@ -812,6 +848,38 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         JDFBuscarReparacionCliente reparacioncli =new JDFBuscarReparacionCliente(new Frame(), isVisible(),this);
         reparacioncli.setVisible(true);
     }//GEN-LAST:event_jbtnbuscarActionPerformed
+
+    private void jtfrevisionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrevisionKeyTyped
+        // TODO add your handling code here:
+          char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) 
+        && (caracter != KeyEvent.VK_BACK_SPACE)
+        && (caracter != '.' || jtfrevision.getText().contains(".")) ) {
+            evt.consume();
+}
+        
+    }//GEN-LAST:event_jtfrevisionKeyTyped
+
+    private void jtfmanoobraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfmanoobraKeyTyped
+        // TODO add your handling code here:
+          char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) 
+        && (caracter != KeyEvent.VK_BACK_SPACE)
+        && (caracter != '.' || jtfmanoobra.getText().contains(".")) ) {
+            evt.consume();
+}
+        
+    }//GEN-LAST:event_jtfmanoobraKeyTyped
+
+    private void jtfrevisionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfrevisionKeyReleased
+        // TODO add your handling code here:
+        calcualartotal();
+    }//GEN-LAST:event_jtfrevisionKeyReleased
+
+    private void jtfmanoobraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfmanoobraKeyReleased
+        // TODO add your handling code here:
+        calcualartotal();
+    }//GEN-LAST:event_jtfmanoobraKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

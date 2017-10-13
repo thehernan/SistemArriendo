@@ -279,7 +279,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/accept2.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Aceptar"/>
+        <Property name="text" type="java.lang.String" value="Aceptar / Imprimir"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -287,7 +287,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="780" y="690" width="-1" height="-1"/>
+          <AbsoluteConstraints x="720" y="700" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -317,7 +317,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -326,13 +326,11 @@
                               <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jtfmanoobra" pref="250" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jlblsubtotal" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jlbliva" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jlbltotal" alignment="0" pref="250" max="32767" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jlblsubtotal" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlbliva" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jlbltotal" alignment="0" pref="250" max="32767" attributes="0"/>
+                              <Component id="jtfmanoobra" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -342,8 +340,8 @@
                           </Group>
                           <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jtfrevision" pref="250" max="32767" attributes="0"/>
-                              <Component id="jtfrepuestos" max="32767" attributes="0"/>
+                              <Component id="jtfrepuestos" pref="250" max="32767" attributes="0"/>
+                              <Component id="jtfrevision" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -359,7 +357,7 @@
                       <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtfrevision" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtfrepuestos" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -420,18 +418,15 @@
             <Property name="text" type="java.lang.String" value="Total:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfmanoobra">
-          <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfmanoobraKeyReleased"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfmanoobraKeyTyped"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JFormattedTextField" name="jlblsubtotal">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format subtype="1" type="0"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="0" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jlbltotal">
@@ -440,6 +435,9 @@
               <Format subtype="1" type="0"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="0" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jlbliva">
@@ -448,6 +446,9 @@
               <Format subtype="1" type="0"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="0" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
@@ -455,14 +456,28 @@
             <Property name="text" type="java.lang.String" value="Revision:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfrevision">
-        </Component>
         <Component class="javax.swing.JFormattedTextField" name="jtfrepuestos">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format subtype="1" type="0"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="0" type="code"/>
+            </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfrevision">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfrevisionKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfrevisionKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfmanoobra">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfmanoobraKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfmanoobraKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -484,6 +499,7 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="No"/>
       </Properties>
       <Constraints>

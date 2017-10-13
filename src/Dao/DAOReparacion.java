@@ -245,7 +245,7 @@ public class DAOReparacion implements Interface.IntReparacion{
             id = rs.getLong("id");
         }
 	
-        } catch(Exception e)
+        } catch(SQLException e)
             {
             JOptionPane.showMessageDialog(null, e.getMessage());
             }finally{

@@ -310,7 +310,7 @@ public class DAOEmpleado implements Interface.InEmpleado{
         Connection c =null;
         PreparedStatement ps= null;
         ResultSet rs= null;
-        Empleado empleado=null ;
+        Empleado empleado=new Empleado();
         try{
 	c = Conexion.Connect();
         ps = c.prepareStatement("SELECT * from sp_buscarempleado(?)");
