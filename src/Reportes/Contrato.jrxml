@@ -2,12 +2,15 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b9c9ae4-f039-4515-8f1f-491271c7658f">
 	<property name="ireport.zoom" value="1.3310000000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="79"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="idcontrato" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[sELECT  contrato.fecha,miempresa.razonsocial,miempresa.representelegal,
+		<![CDATA[sELECT case when length(contrato.id_contrato::text)=1 then concat('N°. 00000',contrato.id_contrato)
+when length(contrato.id_contrato::text)=2 then concat('N°. 0000',contrato.id_contrato) when length(contrato.id_contrato::text)=3 
+then concat('N°. 000',contrato.id_contrato) when length(contrato.id_contrato::text)=4 then concat('N°. 00',contrato.id_contrato)
+when length(contrato.id_contrato::text)=5 then concat('N°. 0',contrato.id_contrato)else concat('N°. ',contrato.id_contrato) end, contrato.fecha,miempresa.razonsocial,miempresa.representelegal,
 miempresa.rutrepresentante,miempresa.domiciliorepresentante,miempresa.telefonorepresentante,
 concat(cliente.nombre,' ',cliente.apellido),cliente.rut,cliente.domicilioparticular,
 cliente.domiciliotrabajo,cliente.telefono, 
@@ -18,13 +21,13 @@ cliente on cliente.id_cliente=contrato.id_cliente inner join detalle_contrato
 on contrato.id_contrato = detalle_contrato.id_contrato inner join maquina on
 maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{idcontrato};]]>
 	</queryString>
+	<field name="concat" class="java.lang.String"/>
 	<field name="fecha" class="java.sql.Timestamp"/>
 	<field name="razonsocial" class="java.lang.String"/>
 	<field name="representelegal" class="java.lang.String"/>
 	<field name="rutrepresentante" class="java.lang.String"/>
 	<field name="domiciliorepresentante" class="java.lang.String"/>
 	<field name="telefonorepresentante" class="java.lang.String"/>
-	<field name="concat" class="java.lang.String"/>
 	<field name="rut" class="java.lang.String"/>
 	<field name="domicilioparticular" class="java.lang.String"/>
 	<field name="domiciliotrabajo" class="java.lang.String"/>
@@ -42,79 +45,102 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 	<title>
 		<band height="116" splitType="Stretch">
 			<staticText>
-				<reportElement x="425" y="0" width="130" height="20" uuid="8808b086-5f87-4fea-8f11-5241b27ad816"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="454" y="0" width="99" height="11" uuid="8808b086-5f87-4fea-8f11-5241b27ad816"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
 				<text><![CDATA[HORARIO DE ATENCIÓN]]></text>
 			</staticText>
-			<textField pattern="">
-				<reportElement x="47" y="0" width="213" height="39" uuid="959325cf-7daf-40f3-9250-301812a39b86"/>
-				<textElement>
-					<font size="22"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{razonsocial}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="47" y="39" width="253" height="20" uuid="15490c44-6e1e-4a61-a0dd-02f6015b4d97"/>
-				<textElement>
-					<font size="8"/>
+				<reportElement x="415" y="11" width="140" height="12" uuid="37163bce-26a7-4e55-a632-febb04c356a2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
-				<text><![CDATA[SERVICIO PARA LA CONSTRUCCIÓN - ARRIENDO DE MAQUINAS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="374" y="19" width="181" height="20" uuid="37163bce-26a7-4e55-a632-febb04c356a2"/>
-				<textElement textAlignment="Right"/>
 				<text><![CDATA[LUNES A VIERNES DE 8:30 A 14:00]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="429" y="39" width="126" height="20" uuid="c354d7de-5181-41f4-8092-7acc40a6c1d4"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="425" y="23" width="126" height="12" uuid="c354d7de-5181-41f4-8092-7acc40a6c1d4"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
 				<text><![CDATA[TARDE DE 15:00 A 19:30]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="431" y="59" width="124" height="20" uuid="27f9fc40-ac7f-41a6-9dcf-e558527e51ed"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="430" y="35" width="124" height="13" uuid="27f9fc40-ac7f-41a6-9dcf-e558527e51ed"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
 				<text><![CDATA[SABADOS 08:30 A 14:00]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="96" width="425" height="20" uuid="4ce39b00-d6ea-4a5e-8c27-e2ac59da01a3"/>
+				<reportElement x="0" y="96" width="381" height="20" uuid="4ce39b00-d6ea-4a5e-8c27-e2ac59da01a3"/>
 				<textElement>
-					<font size="14" isUnderline="true"/>
+					<font fontName="Segoe UI Light" size="14" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[CONTRATO DE ARRIENDO DE EQUIPOS Y HERRAMIENTAS]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="411" y="96" width="142" height="20" uuid="7e0d257e-1334-489e-b048-b5d104f97b12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="5" y="0" width="353" height="76" uuid="5f3c8012-b9bc-425d-aa71-f051f91e8245"/>
+				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="164" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="10" width="47" height="15" uuid="61c799e6-c344-4251-bbfb-64cc3e7953f7"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[CALAMA]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="47" y="10" width="161" height="15" uuid="bf744671-4eea-4018-b08f-906706258b23"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="208" y="10" width="39" height="15" uuid="d8cf0faf-4fd9-4b40-8ee1-035a858c5b4c"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[ENTRE]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="247" y="10" width="126" height="15" uuid="ee0cb1a8-6599-4dd4-9c12-532f5b14abb9"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{razonsocial}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="373" y="10" width="182" height="15" uuid="e3783f2b-2a1e-4d54-818e-f865605c0c08"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[, EN ADELANTE "EL ARRENDADOR"]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="25" width="373" height="16" uuid="8abc1a13-cdd7-482e-b304-e2b50b3ac8f7"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[DEBIDAMENTE REPRESENTADA POR SU REPRESENTANTE LEGAL DON:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="373" y="25" width="171" height="16" uuid="bb13b484-fecc-470f-a605-7609fd7b0c09"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{representelegal}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -123,82 +149,142 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="41" width="34" height="14" uuid="de0f7341-4092-408a-a780-6273e67f320d"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[RUT.:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="34" y="41" width="104" height="14" uuid="b105a940-aea3-44be-ba4a-4d773672f384"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{rutrepresentante}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="138" y="41" width="132" height="14" uuid="645e429f-4ea3-4f4e-b82f-96734f1bbda2"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[AMBOS DOMICILIADO EN]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="273" y="41" width="158" height="14" uuid="8103d551-94ed-4c3c-af90-00f725f05f23"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{domiciliorepresentante}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="431" y="41" width="43" height="14" uuid="6eff914d-cf98-45df-92e4-1706919adf22"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[, FONO:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="474" y="41" width="81" height="14" uuid="0e0da4d8-e3c1-4e2a-88f8-d2d2313f9842"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{telefonorepresentante}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="55" width="164" height="14" uuid="bba9fd6a-e127-4172-8eb0-f64b8ecb8b4f"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[POR UNA PARTE Y POR LA OTRA.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="69" width="27" height="14" uuid="96b4d0bf-08ce-48f0-8173-67b1b6d0315d"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[DON:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="28" y="69" width="353" height="14" uuid="e0b409d1-ca55-4d60-83d5-c2593fd3d9b1"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="381" y="69" width="27" height="14" uuid="977e6467-4fc0-43f1-83d7-c771920ed12b"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[RUT.:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="408" y="69" width="147" height="14" uuid="999cd848-8906-448d-9994-96874bc65ac4"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{rut}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="1" y="83" width="100" height="15" uuid="3029a878-2b70-4b76-bf55-33547af4c045"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[DOM. PARTICULAR:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="101" y="83" width="454" height="15" uuid="aacb1e54-ea77-493b-a013-c23bd9d59d7a"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{domicilioparticular}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="1" y="98" width="122" height="15" uuid="0525a728-2ba7-4a13-b67c-bbe0640c3408"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[DOMICILIO DE TRABAJO:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="123" y="98" width="258" height="15" uuid="e2200754-05c5-4315-9e89-871441073eb8"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{domiciliotrabajo}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="381" y="98" width="34" height="15" uuid="61c9c693-d9d1-4e5e-a8ab-386f341dbb49"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[FONO:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="415" y="98" width="140" height="15" uuid="a46ed355-9c7c-4dde-8270-107594ce86bb"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="1" y="113" width="554" height="14" uuid="c6a369ad-b045-4ac6-bc42-b39a3329f5c7"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[EN ADELANTE "EL ARRENDATARIO", SE HA CONVENIDO EL SIGUIENTE CONTRATO DE ARRENDAMIENTO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="127" width="554" height="14" uuid="5926c267-42c0-4bb1-aff8-70a2fac58ab7"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[1° EL ARRENDADOR ENTREGA EL ARRIENDO AL ARRENDATARIO, QUIEN PLENAMENTE CONFORME A SU ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="141" width="555" height="14" uuid="0e49c6c5-450f-457d-938c-0d9ab26b5bc7"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[SATISFACCIÓN Y PREVIA DEMOSTRACIÓN DE SU USO EL (LOS) SIGUIENTE(S) EQUIPO(S) EN ARRIENDO(S)]]></text>
 			</staticText>
 		</band>
@@ -208,96 +294,244 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 			<textField>
 				<reportElement x="16" y="0" width="329" height="17" uuid="29f17c53-e068-4896-ad92-2b0f9b32744d"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{maquina}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="345" y="0" width="66" height="17" uuid="778a251c-413b-44d2-acb8-d754f3c4f5d7"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<text><![CDATA[VALOR DIA]]></text>
 			</staticText>
 			<textField pattern="#,##0">
 				<reportElement x="415" y="0" width="123" height="17" uuid="19cb2646-9e9f-4b9c-b9eb-3418ff8633ba"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="1" y="0" width="16" height="17" uuid="ec6e4581-977e-4ad6-99bd-6b1f1bbe7075"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<text><![CDATA[*]]></text>
 			</staticText>
 		</band>
 	</detail>
 	<summary>
-		<band height="98" splitType="Stretch">
+		<band height="406" splitType="Stretch">
 			<staticText>
 				<reportElement x="370" y="0" width="41" height="15" uuid="49230e79-d221-4add-a517-837a25140426"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[FLETE]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="411" y="0" width="100" height="15" uuid="a8e836af-af08-4e02-9040-3dc6579bf650"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{flete}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="370" y="15" width="38" height="15" uuid="01791af2-bcd6-4159-be5d-3392da341c81"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[TOTAL:]]></text>
 			</staticText>
 			<textField pattern="#,##0">
 				<reportElement x="408" y="15" width="103" height="15" uuid="c39a5dc7-ab49-4df6-99cf-3081fc4eeaa4"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="0" width="182" height="15" uuid="ea48c9e9-db77-4555-8cde-c69774297432"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[2° EL VALOR DEL ARRIENDO ES DE $]]></text>
 			</staticText>
 			<textField pattern="#,##0">
 				<reportElement x="182" y="0" width="100" height="15" uuid="b3a6d19a-0f95-487e-95e7-456f76609c95"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="282" y="0" width="41" height="15" uuid="7c40edff-7712-4897-a629-2e64967c604a"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[+I.V.A.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="15" width="311" height="15" uuid="a734af04-6a17-4a81-8abc-51d80d71c8c9"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[POR CADA DIA DE CALENDARIO EL TOTAL DE ESTE ARRIENDO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="30" width="553" height="14" uuid="3dbf3bfc-e738-490f-af70-00328d1212a0"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[SERA CANCELADO POR EL ARRENDATARIO AL MOMENTO DE EFECTUAR EL ARRIENDO.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="44" width="239" height="16" uuid="f6468c2b-700d-4420-ac70-e82747ad897c"/>
 				<textElement>
-					<font isBold="false"/>
+					<font fontName="Segoe UI Light" isBold="false"/>
 				</textElement>
 				<text><![CDATA[3° ESTE CONTRATO ENTRA EN VIGENCIA EL DIA ]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy h.mm a">
 				<reportElement x="239" y="44" width="317" height="16" uuid="649cb07d-a5e4-4839-b06b-f3767cbb3606"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="2" y="60" width="555" height="15" uuid="5934620b-35e3-4b21-94e9-60a2933096c8"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[SI EL ARRENDATARIO NO UTILIZA EL EQUIOP DURANTE LA VIGENCIA DE ESTE, SEA CUAL SEA EL MOTIVO, NO LE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="75" width="554" height="15" uuid="f6376496-d39c-4abb-962d-f5d2764ba70a"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[DARA DERECHO A RECLAMAR DESCUENTO O DEVOLUCION DEL DINERO.]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="2" y="90" width="553" height="14" uuid="87f00569-7306-4bfc-9db3-738a267ae4ad"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[4° EL ARRENDATARIO DEVOLVERA EL DOCUMENTO UNA VEZ QUE SE DE TERMINO AL CONTRATO, SE CANCELE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="104" width="553" height="14" uuid="49d30a25-135a-44db-a0c8-a0a07c3da34b"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[INTEGRAMENTE EL VALOR DE ARRENDATARIO Y SEA(N) DEVUELTO(S) EL (LOS) EQUIPO(S) SATISFACTORIOS PARA EL ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="118" width="553" height="14" uuid="aa2b5160-3471-4ec0-9171-336aa59d2973"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[PARA EL ARRENDADOR, SIN EMBARGO, EL ARRENDATARIO FACULTA IRREVOCABLEMENTE AL ARRENDADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="132" width="553" height="14" uuid="28959c1d-5aa0-4949-92b5-f39f1d17c1da"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[PARA HACER EFECTIVO EL DOCUMENTO YA SEA POR EL TOTAL DEL VALOR O EN LA PORCION QUE ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="146" width="553" height="14" uuid="0d5cac23-d7ec-4785-954f-f60f42387aea"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[CORRESPONDA, CUANDO EL ARRENDATARIO INCURRA EN CUALQUIERA DE LAS SIGUIENTES CAUSALES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="169" width="553" height="14" uuid="7e739ad2-a64c-497a-86aa-e9f8eab6ec8f"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[A) INCUMPLIMIENTO EN EL VALOR DEL PAGO DE ARRIENDO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="183" width="553" height="14" uuid="b227bd9f-2ca4-426f-9185-4512645b569e"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[B) PERDIDA O DESTRUCCION, TOTAL O PARCIAL DE EQUIPO POR CUALQUIER CAUSA.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="197" width="553" height="14" uuid="15ea9d49-6b9c-492d-860a-0bd29d2b2c3f"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[C) PERDIDA O DESTRUCCION DE CUALQUIERA DE SUS PARTES, PIEZAS O ACCESORIOS.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="211" width="553" height="14" uuid="7dec130a-c0a6-4070-b0f3-49eef0b191a2"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[D) MANTENCION O USO INADECUADO DEL O LOS EQUIPOS O ACCESORIOS.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="225" width="553" height="14" uuid="be23d0a2-1fc0-4879-94d2-df0e72a1085a"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[E) SUBARRENDAR LOS EQUIPOS A TERCERAS PERSONAS.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="249" width="553" height="14" uuid="cbab4ad5-8be5-4c64-bea3-9307608ded63"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[5° AUTORIZO A "SERINGCO" PARA QUE EN CASO DE SIMPLE RETARDO, MORA O INCUMPLIMIENTO DE LAS ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="263" width="553" height="14" uuid="7428beba-19c1-4ff9-ac96-834cf2e68324"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[OBLIGACIONES CONTRAIDAS EN EL PRESENTE CONTRATO MIS DATOS PERSONALES Y LOS DEMAS DERIVADOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="277" width="553" height="14" uuid="19cd1849-57c3-45d8-a0ee-5ad8dae98391"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[DEL PRESENTE CONTRATO PUEDAN SER TRATADOS Y/O COMUNICADOS A TERCEROS SIN RESTRICCIONES ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="291" width="553" height="14" uuid="8a09718a-1107-410f-a88c-1c86759e7c02"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[EN LA BASE DE DATOS SICOM (SISTEMA CONSOLIDADO DE MOROSIDAD Y PROTESTOS) DE EQUIFAX CHILE S.A.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="350" width="112" height="14" uuid="f5198cfb-ffb1-46e4-ab91-e25c3e59eb8c"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[FIRMA ARRENDADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="350" width="130" height="14" uuid="86453e8b-3e86-48d9-9ba9-8833e565846a"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[FIRMA ARRENDATARIO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="33" y="349" width="113" height="1" uuid="32ad3f2b-91d5-4e89-b714-3a450b8346f4"/>
+			</line>
+			<line>
+				<reportElement x="408" y="348" width="130" height="1" uuid="9823f3cd-ebe9-4889-8800-8b6fd9bedd27"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>

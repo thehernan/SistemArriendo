@@ -8,6 +8,7 @@ package Frame;
 import AppPackage.AnimationClass;
 import ClasesGlobales.ImagenFondo;
 import Pojos.SingletonEmpresa;
+import com.sun.awt.AWTUtilities;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -627,13 +628,22 @@ public class Menu extends javax.swing.JFrame {
              @Override
              public void actionPerformed(ActionEvent e) {
                  //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                 JIFVenta venta = new JIFVenta();
-                Dimension desktopSize = jdesktop.getSize();
-                Dimension FrameSize = venta.getSize();
-                venta.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-                jdesktop.add(venta);
-                venta.show();
-                 panelconmin();
+                if(JOptionPane.showConfirmDialog(null, "SEGURO QUE DESEA CERRAR SESIÓN","",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+            int componentes=jdesktop.getComponentCount();
+            System.out.println("ventanas "+componentes);
+            if(componentes==1){
+                singletonempresa.getdestruir();
+               
+                Menu.this.dispose();
+                JFLogin nuevaSesion = new JFLogin();
+//                AWTUtilities.setWindowOpaque(nuevaSesion, false);
+                nuevaSesion.setVisible(true);
+
+            }else{
+                JOptionPane.showMessageDialog(null, "IMPOSIBLE CERRAR SESION, CIERRE LAS VENTANAS ABIERTAS E INTENTE NUEVAMENTE","SISTEMA",JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        }
                  
              }
          });
@@ -662,27 +672,29 @@ public class Menu extends javax.swing.JFrame {
       
       }
       
-      private void reloj() { 
-        calendario = new java.util.GregorianCalendar(); 
-        segundos = calendario.get(Calendar.SECOND); 
-        javax.swing.Timer timer = new javax.swing.Timer(1000, new java.awt.event.ActionListener() { 
-        @ Override 
-        public void actionPerformed(java.awt.event.ActionEvent ae) { 
-        java.util.Date actual = new java.util.Date(); 
-        calendario.setTime(actual); 
-        dia = calendario.get(Calendar.DAY_OF_MONTH); 
-        mes = (calendario.get(Calendar.MONTH) + 1); 
-        año = calendario.get(Calendar.YEAR); 
-        hora = calendario.get(Calendar.HOUR_OF_DAY); 
-        minutos = calendario.get(Calendar.MINUTE); 
-        segundos = calendario.get(Calendar.SECOND); 
-        String hour = String.format("%02d : %02d : %02d", hora, minutos, segundos); 
-        String date = String.format("%02d / %02d / %02d", dia, mes, año); 
-        jlblhora.setText("<html><center>" + hour + "<br>" + date); 
-           } 
-        }); 
-        timer.start(); 
-}
+      
+      
+//      private void reloj() { 
+//        calendario = new java.util.GregorianCalendar(); 
+//        segundos = calendario.get(Calendar.SECOND); 
+//        javax.swing.Timer timer = new javax.swing.Timer(1000, new java.awt.event.ActionListener() { 
+//        @ Override 
+//        public void actionPerformed(java.awt.event.ActionEvent ae) { 
+//        java.util.Date actual = new java.util.Date(); 
+//        calendario.setTime(actual); 
+//        dia = calendario.get(Calendar.DAY_OF_MONTH); 
+//        mes = (calendario.get(Calendar.MONTH) + 1); 
+//        año = calendario.get(Calendar.YEAR); 
+//        hora = calendario.get(Calendar.HOUR_OF_DAY); 
+//        minutos = calendario.get(Calendar.MINUTE); 
+//        segundos = calendario.get(Calendar.SECOND); 
+//        String hour = String.format("%02d : %02d : %02d", hora, minutos, segundos); 
+//        String date = String.format("%02d / %02d / %02d", dia, mes, año); 
+//        jlblhora.setText("<html><center>" + hour + "<br>" + date); 
+//           } 
+//        }); 
+//        timer.start(); 
+//}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -708,7 +720,6 @@ public class Menu extends javax.swing.JFrame {
         jlblempresa = new javax.swing.JLabel();
         jbtnactualizar = new javax.swing.JButton();
         jlbldireccion = new javax.swing.JLabel();
-        jlblhora = new javax.swing.JLabel();
         jbtnmenu = new javax.swing.JLabel();
         jpanelmenu = new javax.swing.JPanel();
         jlblarriendo = new javax.swing.JLabel();
@@ -724,6 +735,11 @@ public class Menu extends javax.swing.JFrame {
         setUndecorated(true);
 
         jdesktop.setBackground(new java.awt.Color(255, 255, 255));
+        jdesktop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jdesktopMouseReleased(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(149, 165, 166));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -844,19 +860,13 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jlblhora.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jlblhora.setForeground(new java.awt.Color(0, 0, 0));
-        jlblhora.setText("* * *");
-
         javax.swing.GroupLayout jdesktopLayout = new javax.swing.GroupLayout(jdesktop);
         jdesktop.setLayout(jdesktopLayout);
         jdesktopLayout.setHorizontalGroup(
             jdesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdesktopLayout.createSequentialGroup()
                 .addContainerGap(1393, Short.MAX_VALUE)
-                .addGroup(jdesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlblhora)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
         jdesktopLayout.setVerticalGroup(
@@ -864,12 +874,9 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jdesktopLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlblhora)
-                .addGap(66, 66, 66))
+                .addContainerGap(470, Short.MAX_VALUE))
         );
         jdesktop.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdesktop.setLayer(jlblhora, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jbtnmenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menu.png"))); // NOI18N
         jbtnmenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1144,6 +1151,11 @@ public class Menu extends javax.swing.JFrame {
        panelconmax();
     }//GEN-LAST:event_jlblusuariosMouseReleased
 
+    private void jdesktopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdesktopMouseReleased
+        // TODO add your handling code here:
+         panelconmin();
+    }//GEN-LAST:event_jdesktopMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1198,7 +1210,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jlblcaja;
     private javax.swing.JLabel jlbldireccion;
     private javax.swing.JLabel jlblempresa;
-    private javax.swing.JLabel jlblhora;
     private javax.swing.JLabel jlblinventario;
     private javax.swing.JLabel jlblotros;
     private javax.swing.JLabel jlbltaller;

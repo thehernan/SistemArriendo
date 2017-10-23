@@ -10,7 +10,7 @@
 		<![CDATA[select fecha,case when length(venta.id_venta::character)=1 then concat('00000',venta.id_venta)
 when length(venta.id_venta::text)=2 then concat('0000',venta.id_venta) when length(venta.id_venta::text)=3 
 then concat('000',venta.id_venta) when length(venta.id_venta::text)=4 then concat('00',venta.id_venta)
-when length(venta.id_venta::text)=5 then concat('0',venta.id_venta)else venta.id_venta::text end as cod,miempresa.razonsocial,miempresa.rut,miempresa.domicilio,
+when length(venta.id_venta::text)=5 then concat('0',venta.id_venta)else venta.id_venta::text end as cod,miempresa.razonsocial,miempresa.rut,miempresa.domicilio,miempresa.telefono as teleemp,miempresa.celular as celemp,
 concat(cliente.nombre,' ',cliente.apellido),cliente.rut as rutcli,
 cliente.domicilioparticular,cliente.domiciliotrabajo,detalle_venta.cantidad,
  aridos.descripcion, detalle_venta.cantidad *
@@ -24,6 +24,8 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 	<field name="razonsocial" class="java.lang.String"/>
 	<field name="rut" class="java.lang.String"/>
 	<field name="domicilio" class="java.lang.String"/>
+	<field name="teleemp" class="java.lang.String"/>
+	<field name="celemp" class="java.lang.String"/>
 	<field name="concat" class="java.lang.String"/>
 	<field name="rutcli" class="java.lang.String"/>
 	<field name="domicilioparticular" class="java.lang.String"/>
@@ -38,87 +40,133 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="176" splitType="Stretch">
+		<band height="241" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="363" y="62" width="176" height="17" uuid="23253e32-9bc0-466c-9507-2492c100a6b8"/>
+				<reportElement x="379" y="78" width="176" height="17" uuid="23253e32-9bc0-466c-9507-2492c100a6b8"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
+			<rectangle radius="10">
+				<reportElement x="383" y="1" width="162" height="67" uuid="f6d627c2-9205-49a7-82c0-12f7c7b8342c"/>
+			</rectangle>
 			<staticText>
-				<reportElement x="420" y="16" width="119" height="20" uuid="c7f850e2-30a0-401b-828d-5e23b7244e01"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="383" y="22" width="162" height="20" uuid="c7f850e2-30a0-401b-828d-5e23b7244e01"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<text><![CDATA[BOLETA DE VENTAS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="23" y="16" width="254" height="12" uuid="6047291e-7026-4e8b-bd62-4a9922aeaa91"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[SERVICIO PARA LA CONSTRUCCIÓN - ARRIENDO DE MAQUINAS]]></text>
+				<text><![CDATA[COMPROBANTE DE PAGO]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="23" y="29" width="254" height="14" uuid="ae0b96aa-5e62-40f2-bb8f-a12dca21e8cc"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="383" y="7" width="161" height="15" uuid="641677f6-6e5c-4895-a16b-eb38c203edc6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{razonsocial}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="59" y="46" width="121" height="15" uuid="641677f6-6e5c-4895-a16b-eb38c203edc6"/>
 				<textFieldExpression><![CDATA[$F{rut}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="23" y="46" width="36" height="15" uuid="6da9952d-0ee8-42e4-ae1a-a101b8d1958e"/>
-				<text><![CDATA[R.U.T.:]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="23" y="63" width="264" height="16" uuid="ec38c7f0-dd94-4ec2-af32-2fee3dfdd388"/>
+				<reportElement x="3" y="79" width="264" height="16" uuid="ec38c7f0-dd94-4ec2-af32-2fee3dfdd388"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{domicilio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="439" y="36" width="100" height="20" uuid="a3b0d809-3394-4b83-a9f0-c471a89421a2"/>
-				<textFieldExpression><![CDATA[$F{cod}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="420" y="36" width="19" height="20" uuid="b1985fc4-b1f5-403d-8e4d-bc2e8d3148bf"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="383" y="42" width="162" height="20" uuid="a3b0d809-3394-4b83-a9f0-c471a89421a2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light"/>
 				</textElement>
-				<text><![CDATA[N°.]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["N°: "+$F{cod}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="10">
+				<reportElement x="3" y="117" width="536" height="100" uuid="a1c792c7-9df4-4682-92ef-2267d6e459b1"/>
+			</rectangle>
 			<staticText>
-				<reportElement x="23" y="90" width="53" height="20" uuid="2547d9f9-f957-4eed-a0af-e041bce4a511"/>
+				<reportElement x="10" y="126" width="53" height="20" uuid="2547d9f9-f957-4eed-a0af-e041bce4a511"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[Señor(es):]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="23" y="110" width="53" height="20" uuid="0da562ef-2000-4d78-ac5e-6fb04c47f519"/>
+				<reportElement x="10" y="146" width="53" height="20" uuid="0da562ef-2000-4d78-ac5e-6fb04c47f519"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[R.U.T.:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="23" y="130" width="79" height="20" uuid="d0a5f021-2c35-4bb4-abe1-a0a027a5b9ed"/>
+				<reportElement x="10" y="166" width="79" height="20" uuid="d0a5f021-2c35-4bb4-abe1-a0a027a5b9ed"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[Domicilio Part.:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="23" y="152" width="79" height="20" uuid="d43f112d-96a3-4a33-b797-500777d4685e"/>
+				<reportElement x="10" y="188" width="79" height="20" uuid="d43f112d-96a3-4a33-b797-500777d4685e"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<text><![CDATA[Domicilio Trab.:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="76" y="90" width="363" height="20" uuid="62059710-c7af-4d19-88da-45c527ec705e"/>
+				<reportElement x="63" y="126" width="363" height="20" uuid="62059710-c7af-4d19-88da-45c527ec705e"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="76" y="110" width="152" height="20" uuid="cf5d79b5-f023-4d05-aba0-9fd62833a6d5"/>
+				<reportElement x="63" y="146" width="152" height="20" uuid="cf5d79b5-f023-4d05-aba0-9fd62833a6d5"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{rutcli}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="102" y="132" width="261" height="20" uuid="1cb81d41-e7ae-4fe5-8651-9b79024368b9"/>
+				<reportElement x="89" y="168" width="261" height="20" uuid="1cb81d41-e7ae-4fe5-8651-9b79024368b9"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{domicilioparticular}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="102" y="152" width="261" height="20" uuid="e9f1422c-2edd-49af-81a6-3cc4cd165969"/>
+				<reportElement x="89" y="188" width="261" height="20" uuid="e9f1422c-2edd-49af-81a6-3cc4cd165969"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{domiciliotrabajo}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="3" y="1" width="311" height="78" uuid="c8ad6395-e1ae-4d7e-a073-2e49d42fca9f"/>
+				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="3" y="95" width="73" height="20" uuid="eb33d3f1-caec-46ac-b5dd-408a3f5dbcea"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{teleemp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="95" width="114" height="20" uuid="7c63cc4e-0892-47a6-b37d-c80d8e6e4a0e"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{celemp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="77" y="95" width="12" height="20" uuid="e9d41b0e-ac88-4176-93ff-bb0d3d025df2"/>
+				<text><![CDATA[,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="221" width="377" height="20" uuid="25244871-c45b-4bd2-92fa-248f13124006"/>
+				<textElement>
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sirvace Recibir Conforme Siguiente:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
@@ -126,21 +174,21 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 			<staticText>
 				<reportElement x="2" y="3" width="74" height="16" uuid="36701ea6-64d1-4743-9e70-aaaf0c951690"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="76" y="3" width="363" height="16" uuid="2421663e-7f60-459e-be3a-4229d8c05cb5"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<text><![CDATA[  Descripción]]></text>
+				<text><![CDATA[  Detalle]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="439" y="3" width="100" height="16" uuid="a0ed2a2a-1992-4c4f-a01d-7f93fdd2c822"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Valor]]></text>
 			</staticText>
@@ -165,42 +213,43 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="35" splitType="Stretch">
+		<band height="15" splitType="Stretch">
 			<textField>
-				<reportElement x="2" y="0" width="74" height="20" uuid="f92f5434-45c9-447b-b272-aaa0ad723ee4"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="2" y="0" width="74" height="14" uuid="f92f5434-45c9-447b-b272-aaa0ad723ee4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="80" y="0" width="359" height="20" uuid="c3e1b3ca-0731-4b79-9db3-1e71aaad5141"/>
+				<reportElement x="75" y="0" width="363" height="14" uuid="c3e1b3ca-0731-4b79-9db3-1e71aaad5141"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="439" y="0" width="100" height="20" uuid="f26fe1da-cae8-45d3-a16c-cfe87cb9bd3e"/>
-				<textElement textAlignment="Center"/>
+			<textField pattern="#,##0">
+				<reportElement x="439" y="0" width="100" height="14" uuid="f26fe1da-cae8-45d3-a16c-cfe87cb9bd3e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="59" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch">
-			<textField>
+			<textField pattern="#,##0">
 				<reportElement x="439" y="2" width="100" height="20" uuid="6e63594c-6dc3-438e-a664-5ea508051ec1"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{valor_1}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="393" y="2" width="46" height="20" uuid="cabebdc2-969c-446f-8f66-06a6e4270e38"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ TOTAL $]]></text>
 			</staticText>
