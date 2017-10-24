@@ -21,7 +21,7 @@ public interface IntCliente {
     public void update(Cliente cli);
     public void updatenophoto(Cliente cli);
     public void delete(Long id);
-    public void print();
+    public void printdebtor(Long id);
     public boolean duplicate(long id,String cadena,String op);
     public Cliente search(String rut,String tipo);
     public boolean  verifyclientdebtor(long idclient);

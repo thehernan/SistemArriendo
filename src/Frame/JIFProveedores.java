@@ -471,7 +471,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
 
     private void jbtnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirActionPerformed
         // TODO add your handling code here:
-        daocliente.print();
+//        daocliente.print();
     }//GEN-LAST:event_jbtnimprimirActionPerformed
 
     private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased

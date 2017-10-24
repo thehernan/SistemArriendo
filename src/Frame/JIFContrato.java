@@ -501,7 +501,8 @@ public class JIFContrato extends javax.swing.JInternalFrame {
 
     private void jlblmensajedeudorMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblmensajedeudorMouseReleased
         // TODO add your handling code here:
-        jlblmensajedeudor.setText("Reporte generadoi correctamente");
+        daocliente.printdebtor(cliente.getId());
+        jlblmensajedeudor.setText("Reporte generado correctamente");
     }//GEN-LAST:event_jlblmensajedeudorMouseReleased
 
     private void jlblmensajedeudorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblmensajedeudorMouseExited
