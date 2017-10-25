@@ -108,6 +108,11 @@ public class JIFEgresos extends javax.swing.JInternalFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print2.png"))); // NOI18N
         jButton1.setText("Imprimir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -214,6 +219,17 @@ public class JIFEgresos extends javax.swing.JInternalFrame {
         
         jlbltotal.setText(daodetcaja.view(jtabla, "EGRESOSMES", null, jcbmes.getSelectedItem().toString()));
     }//GEN-LAST:event_jcbmesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
+        if(jrbtndia.isSelected()==true)
+            daodetcaja.print("Egresos del dia / Mes",  "EGRESOSDIA", time, jcbmes.getSelectedItem().toString());
+        else 
+           daodetcaja.print("Egresos del dia / Mes",  "EGRESOSMES", time, jcbmes.getSelectedItem().toString());
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

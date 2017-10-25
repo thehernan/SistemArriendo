@@ -6,7 +6,6 @@
 package Dao;
 
 import Pojos.Arido;
-import Pojos.Maquinaria;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

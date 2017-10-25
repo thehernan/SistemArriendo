@@ -19,6 +19,7 @@ public class JIFIngresosCaja extends javax.swing.JInternalFrame {
      * Creates new form JIFIngresos
      */
     DAODetCaja daodetcaja = new DAODetCaja();
+    
     public JIFIngresosCaja() {
         initComponents();
          Date fecha = new Date();
@@ -45,7 +46,7 @@ public class JIFIngresosCaja extends javax.swing.JInternalFrame {
         jrbtndia = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtabla = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jbtnimprimir = new javax.swing.JButton();
         jlbltotal = new javax.swing.JLabel();
 
         setClosable(true);
@@ -118,8 +119,13 @@ public class JIFIngresosCaja extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtabla);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print2.png"))); // NOI18N
-        jButton1.setText("Imprimir");
+        jbtnimprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print2.png"))); // NOI18N
+        jbtnimprimir.setText("Imprimir");
+        jbtnimprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnimprimirActionPerformed(evt);
+            }
+        });
 
         jlbltotal.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jlbltotal.setForeground(new java.awt.Color(255, 51, 51));
@@ -134,7 +140,7 @@ public class JIFIngresosCaja extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbtnimprimir, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlbltotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +164,7 @@ public class JIFIngresosCaja extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
-                .addComponent(jButton1)
+                .addComponent(jbtnimprimir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 387, Short.MAX_VALUE)
                 .addComponent(jlbltotal)
                 .addGap(16, 16, 16))
@@ -209,13 +215,27 @@ public class JIFIngresosCaja extends javax.swing.JInternalFrame {
         jlbltotal.setText(daodetcaja.view(jtabla, "INGRESOSDIA", time, null));
     }//GEN-LAST:event_jdpfechaActionPerformed
 
+    private void jbtnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirActionPerformed
+        // TODO add your handling code here:
+        Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
+        if(jrbtndia.isSelected()==true){
+          daodetcaja.print("Ingresos del dia / Mes",  "INGRESOSDIA", time, jcbmes.getSelectedItem().toString());
+        
+        }else {
+         daodetcaja.print("Ingresos del dia / Mes",  "INGRESOSMES", time, jcbmes.getSelectedItem().toString());
+        }
+         
+      
+        
+    }//GEN-LAST:event_jbtnimprimirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtnimprimir;
     private javax.swing.JComboBox jcbmes;
     private org.jdesktop.swingx.JXDatePicker jdpfecha;
     private javax.swing.JLabel jlbltotal;

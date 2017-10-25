@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="90d3ffa6-df91-4beb-a3d8-484be0166025">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idempresa" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tipob" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="titulo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * from sp_mostrarmovimientocaja($P{idempresa},$P{tipob},$P{fecha},$P{mes});]]>
+	</queryString>
+	<field name="vcodventa" class="java.lang.String"/>
+	<field name="vcodcontrato" class="java.lang.String"/>
+	<field name="vcodreparacion" class="java.lang.String"/>
+	<field name="vimporte" class="java.math.BigDecimal"/>
+	<field name="vobservacion" class="java.lang.String"/>
+	<field name="vfecha" class="java.lang.String"/>
+	<variable name="vimporte_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{vimporte}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<image hAlign="Center">
+				<reportElement x="135" y="0" width="288" height="85" uuid="ffe40cfa-e124-454e-9799-575a100be140"/>
+				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="9" width="555" height="20" uuid="d69651fa-832e-4e4c-887f-8cd6d3db4b34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="20" uuid="43451da1-05af-43da-99ef-a135a4c959c3"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod. Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="0" width="73" height="20" uuid="31f8f100-2f3c-4736-a324-20cf6aa7963d"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod. Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="0" width="81" height="20" uuid="cec33c78-ebcb-4138-b7c0-c7d6fbddd5f8"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod. Reparacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="0" width="84" height="20" uuid="b0aad3e9-09af-40b0-abd8-eecb1a69c207"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="140" height="20" uuid="e2bbe4c7-a45f-4b82-b2fd-274fdf986d25"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  Observacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="115" height="20" uuid="58788cb3-1f2f-4a11-8927-634c2e124a44"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="62" height="20" uuid="1fb3a412-c16b-4a0c-bbd4-cce2eb06983e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vcodventa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="0" width="73" height="20" uuid="8fd7b5a5-f7dd-4d4f-8e45-f5af3b86a9ca"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vcodcontrato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="81" height="20" uuid="b0fc2de5-c79e-4158-82cc-576fc07a64f5"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vcodreparacion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="216" y="0" width="84" height="20" uuid="c7c67820-d090-4e08-af4a-2714c48ae10a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vimporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="140" height="20" uuid="66f4a9bd-a0a7-44d1-bd45-daf886df992a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[  $F{vobservacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="115" height="20" uuid="6ad0d89b-0398-45c6-bc68-0e1f32eafb11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vfecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="440" y="0" width="115" height="20" forecolor="#FF3333" uuid="a4eafa05-bc0a-484a-bb83-a849754b3127"/>
+				<textElement>
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vimporte_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="362" y="0" width="78" height="20" uuid="e43c0daa-bf3a-4904-a46e-25ff410c6ce6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI Light" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total: ]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

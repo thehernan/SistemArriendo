@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajo_Repuestos" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3548e1cf-449d-4a66-bb9f-0c97cbf4d570">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idreparacion" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * from public.sp_mostrarrepuestos(
+   $P{idreparacion}
+);]]>
+	</queryString>
+	<field name="vidrepuesto" class="java.lang.Long"/>
+	<field name="vcantidad" class="java.math.BigDecimal"/>
+	<field name="vdescrip" class="java.lang.String"/>
+	<field name="vvalor" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="74" height="20" uuid="1fefbec2-08c8-4c5b-9ba5-325bf87c84c2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="74" y="0" width="113" height="20" uuid="4c69cfad-bc1d-4170-b478-6792475428e0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="187" y="0" width="71" height="20" uuid="2c27da70-87d1-447b-888c-03ee506a7c55"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="74" height="20" uuid="b3dec2d2-1b60-4387-a3f0-233c02345c48"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="0" width="113" height="20" uuid="3ec21dea-94f8-4cbb-8cc4-694a7b722ea6"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[  Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="0" width="71" height="20" uuid="3bbc1bbe-7db9-4937-83d6-37b48f5c41e9"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="258" height="20" uuid="c1b18977-ea29-49fa-ab15-a8ccd8ad417d"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="0" y="0" width="74" height="20" uuid="293de032-969a-4fa5-a659-92e6239e8510"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{vcantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="0" width="113" height="20" uuid="72c4b029-e8ff-4463-a847-c5349ad1d77a"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[  $F{vdescrip}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="187" y="0" width="71" height="20" uuid="1577eeba-c1c5-4481-9ea6-2445b03e677e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{vvalor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

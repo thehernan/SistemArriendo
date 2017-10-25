@@ -7,6 +7,7 @@ package Dao;
 
 import Pojos.DetalleCaja;
 import Pojos.SingletonEmpresa;
+import java.awt.HeadlessException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,11 +15,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -29,7 +36,7 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
 
     @Override
     public void insertpaycontrato(DetalleCaja detcaja) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
         ResultSet rs= null;
@@ -296,6 +303,39 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
                }
             }  
        return "Total $: "+nf.format(total);
+    }
+
+    @Override
+    public void print(String titulo, String tipob, Timestamp fecha, String mes) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try{
+            Conexion conexion = new Conexion();
+            Connection  cn = null;           
+            String  rutaInforme  = "src/Reportes/MovimientoCaja.jasper";
+            
+            Map parametros = new HashMap();
+            parametros.put("titulo",  titulo);
+            parametros.put("idempresa",  singletonempresa.getId());
+            parametros.put("tipob",  tipob);
+            parametros.put("fecha",  fecha);
+            parametros.put("mes",  mes);
+            
+            
+            JasperPrint informe=null;
+            informe = JasperFillManager.fillReport(rutaInforme, parametros,Conexion.Connect());
+            
+           // JasperPrintManager.printReport(informe, true);
+            
+            JasperViewer jv = new JasperViewer(informe,false);  
+        
+             jv.setVisible(true);
+             jv.setTitle(rutaInforme);
+            
+          
+        }catch (HeadlessException | JRException ex) {
+        JOptionPane.showMessageDialog(null, "ERROR EN EL REPORTE", "ERROR",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null,ex.getMessage());
+        }
     }
     
 }

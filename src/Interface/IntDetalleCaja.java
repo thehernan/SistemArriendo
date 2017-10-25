@@ -19,5 +19,5 @@ public interface IntDetalleCaja {
     public void insertdischarge(DetalleCaja detcaja);
     public void insertrepair(DetalleCaja detcaja);
     public String view(JTable tabla,String tipob,Timestamp fecha,String mes);
-    
+    public void print(String titulo,String tipob,Timestamp fecha,String mes);   
 }

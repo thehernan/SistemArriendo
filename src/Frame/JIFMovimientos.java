@@ -126,6 +126,11 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
 
         jbtnimprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print2.png"))); // NOI18N
         jbtnimprimir.setText("Imprimir");
+        jbtnimprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnimprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,6 +209,16 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
           jlbltotal.setText(daodetcaja.view(jtabla, "TODOMES", null, jcbmes.getSelectedItem().toString()));
     }//GEN-LAST:event_jcbmesActionPerformed
+
+    private void jbtnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirActionPerformed
+        // TODO add your handling code here:
+        
+          Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
+          if(jrbtndia.isSelected()==true)
+            daodetcaja.print("Movimientos del dia / Mes",  "TODODIA", time, jcbmes.getSelectedItem().toString());
+          else 
+           daodetcaja.print("Movimientos del dia / Mes",  "TODOMES", time, jcbmes.getSelectedItem().toString());   
+    }//GEN-LAST:event_jbtnimprimirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
