@@ -6,6 +6,8 @@
 package Interface;
 
 import Pojos.Cotizacion;
+import java.util.List;
+import javax.swing.JTable;
 
 /**
  *
@@ -13,8 +15,8 @@ import Pojos.Cotizacion;
  */
 public interface IntCotizacion {
     public long insert(Cotizacion cotizacion);
-    
-    
-            
+    public List<Cotizacion> view(long idempre,JTable tabla);
+    public void print(long id);
+    public List<Cotizacion> searchsensitive(long idempre,JTable tabla,String cadena);        
     
 }

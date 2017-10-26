@@ -307,7 +307,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             long cod=Long.parseLong(jtfbuscarclientecod.getText());
-        daocontrato.searchsensitive(jtablacliente, singletonempre.getId(), "VIGENTECLIENTECODIGO", cod, null);
+        daocontrato.searchsensitive(jtablacliente, singletonempre.getId(), "VIGENTECLIENTECODIGO", cod, null,true);
         } catch (Exception e) {
         }
         
@@ -326,7 +326,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
 
     private void jtfbuscarclientenombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarclientenombreKeyReleased
         // TODO add your handling code here:
-        daocontrato.searchsensitive(jtablacliente, singletonempre.getId(), "VIGENTECLIENTECLIENTE", 0, jtfbuscarclientenombre.getText());
+        daocontrato.searchsensitive(jtablacliente, singletonempre.getId(), "VIGENTECLIENTECLIENTE", 0, jtfbuscarclientenombre.getText(),true);
     }//GEN-LAST:event_jtfbuscarclientenombreKeyReleased
 
     private void jtablaclienteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaclienteMouseReleased
@@ -359,7 +359,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
 
     private void jtfbuscarempresaclientKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarempresaclientKeyReleased
         // TODO add your handling code here:
-        daocontrato.searchsensitive(jtablaempresa, singletonempre.getId(), "VIGENTEEMPRESACLIENTE", 0, jtfbuscarempresaclient.getText());
+        daocontrato.searchsensitive(jtablaempresa, singletonempre.getId(), "VIGENTEEMPRESACLIENTE", 0, jtfbuscarempresaclient.getText(),true);
 
     }//GEN-LAST:event_jtfbuscarempresaclientKeyReleased
 
@@ -390,7 +390,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             long cod=Long.parseLong(jtfempresacodigo.getText());
-            daocontrato.searchsensitive(jtablaempresa, singletonempre.getId(), "VIGENTEEMPRESACODIGO", cod, null);
+            daocontrato.searchsensitive(jtablaempresa, singletonempre.getId(), "VIGENTEEMPRESACODIGO", cod, null,true);
         } catch (Exception e) {
         }
 

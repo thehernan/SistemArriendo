@@ -6,9 +6,12 @@
 package Frame;
 
 import Dao.DAOEmpresa;
+import Dao.DAOUsuario;
 import Pojos.Empresa;
 import Pojos.SingletonEmpresa;
+import Pojos.Usuario;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,10 +25,13 @@ public class JFLogin extends javax.swing.JFrame {
     DAOEmpresa daoempresa = new DAOEmpresa();
     SingletonEmpresa singletonempresa = SingletonEmpresa.getinstancia();
     List<Empresa> listempresas;
+    DAOUsuario daousuario= new DAOUsuario();
+    Usuario usu;
     public JFLogin() {
         initComponents();
      listempresas=daoempresa.jcombobox(jcbempresa);
-     this.setLocationRelativeTo(null);
+     jtfusuario.requestFocus();
+     this.setLocationRelativeTo(null);  
     }
 
     /**
@@ -49,6 +55,18 @@ public class JFLogin extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jtfusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfusuarioActionPerformed(evt);
+            }
+        });
+
+        jtfclave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfclaveActionPerformed(evt);
+            }
+        });
 
         jbtnaceptar.setText("Aceptar");
         jbtnaceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +109,7 @@ public class JFLogin extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbempresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -114,14 +132,32 @@ public class JFLogin extends javax.swing.JFrame {
 
     private void jbtnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnaceptarActionPerformed
         // TODO add your handling code here:
-        singletonempresa.setcargarempresa(listempresas.get(jcbempresa.getSelectedIndex()));
-        Menu menu = new Menu();
+        usu= daousuario.valida(jtfusuario.getText(), new String (jtfclave.getPassword()));
+        if(usu!=null){
+         singletonempresa.setcargarempresa(listempresas.get(jcbempresa.getSelectedIndex()));
+        Menu menu = new Menu(usu);
         menu.cargarImagen();
         menu.setVisible(true);
         this.dispose();
         
+        }else {
+            JOptionPane.showMessageDialog(null, "Usuario o Clave erroneos");
+        
+        }
+       
+        
         
     }//GEN-LAST:event_jbtnaceptarActionPerformed
+
+    private void jtfusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfusuarioActionPerformed
+        // TODO add your handling code here:
+        jbtnaceptar.doClick();
+    }//GEN-LAST:event_jtfusuarioActionPerformed
+
+    private void jtfclaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfclaveActionPerformed
+        // TODO add your handling code here:
+         jbtnaceptar.doClick();
+    }//GEN-LAST:event_jtfclaveActionPerformed
 
     /**
      * @param args the command line arguments

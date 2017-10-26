@@ -8,16 +8,16 @@ package Frame;
 import AppPackage.AnimationClass;
 import ClasesGlobales.ImagenFondo;
 import Pojos.SingletonEmpresa;
-import com.sun.awt.AWTUtilities;
+import Pojos.Usuario;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
-import java.util.Calendar;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -36,7 +36,13 @@ public class Menu extends javax.swing.JFrame {
       java.util.Calendar calendario; 
     int dia, mes, año, hora, minutos, segundos; 
     //////////////////////////////////////
-    public Menu() {
+    Usuario usu;
+       public Menu() {
+        initComponents();
+          ///ADAPTAR AL TAMAÑO DE PANTALLA
+       
+    }
+    public Menu(Usuario usu) {
         initComponents();
           ///ADAPTAR AL TAMAÑO DE PANTALLA
         dim=super.getToolkit().getScreenSize();
@@ -45,6 +51,8 @@ public class Menu extends javax.swing.JFrame {
         jlblempresa.setText(singletonempresa.getRazonS()+"  "+singletonempresa.getRut());
         jlbldireccion.setText(singletonempresa.getDomicilio());
 //        reloj();
+        this.usu=usu;
+         jlblbienvenido.setText(usu.getUsuario());
     }
      public void cargarImagen(){
     try{
@@ -75,6 +83,7 @@ public class Menu extends javax.swing.JFrame {
          titulo.setFont(new java.awt.Font("Segoe UI Light", 1, 20));
          
          ////////////////////////////////////////////////////////
+         if(usu.isNuevocontrato()==true){
          JButton nuevocontrato= new JButton("NUEVO CONTRATO");
          nuevocontrato.addActionListener(new ActionListener() {
 
@@ -92,8 +101,10 @@ public class Menu extends javax.swing.JFrame {
          nuevocontrato.setBounds(20, 70, 200, 50);
          nuevocontrato.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          nuevocontrato.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          /////////////////////////////////////////////////////////
+         if(usu.isContratosvig()==true){
+     
         JButton contratovig= new JButton("CONTRATOS VIGENT.");
          contratovig.addActionListener(new ActionListener() {
 
@@ -115,8 +126,11 @@ public class Menu extends javax.swing.JFrame {
          contratovig.setBounds(20, 140, 200, 50);
          contratovig.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          contratovig.setBackground(new java.awt.Color(255, 204, 51));
+             
          
+         }
          /////////////////////////////////////////////////////////////
+         if(usu.isAbonos()==true){
              JButton abono= new JButton("ABONOS");
          abono.addActionListener(new ActionListener() {
 
@@ -138,8 +152,9 @@ public class Menu extends javax.swing.JFrame {
          abono.setBounds(20, 210, 200, 50);
          abono.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          abono.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          ////////////////////////////////////////////////////////
+         if(usu.isDevoluciones()==true){
          JButton devolucion= new JButton("DEVOLUCIONES");
          devolucion.addActionListener(new ActionListener() {
 
@@ -162,7 +177,7 @@ public class Menu extends javax.swing.JFrame {
          devolucion.setBounds(20, 280, 200, 50);
          devolucion.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          devolucion.setBackground(new java.awt.Color(255, 204, 51));
-     
+         }
      }
      
       public void menuventa(){              
@@ -172,6 +187,7 @@ public class Menu extends javax.swing.JFrame {
          titulo.setFont(new java.awt.Font("Segoe UI Light", 1, 20));
          
          ////////////////////////////////////////////////////////
+         if(usu.isNuevaventa()==true){
          JButton nuevaventa= new JButton("NUEVA VENTA");
          nuevaventa.addActionListener(new ActionListener() {
 
@@ -194,7 +210,7 @@ public class Menu extends javax.swing.JFrame {
          nuevaventa.setBounds(20, 70, 200, 50);
          nuevaventa.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          nuevaventa.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
         
      
      }
@@ -206,6 +222,7 @@ public class Menu extends javax.swing.JFrame {
          titulo.setFont(new java.awt.Font("Segoe UI Light", 1, 20));
          
          ////////////////////////////////////////////////////////
+         if(usu.isInvarriendo()==true){
          JButton invarriendo= new JButton("INV. ARRIENDO");
          invarriendo.addActionListener(new ActionListener() {
 
@@ -228,8 +245,9 @@ public class Menu extends javax.swing.JFrame {
          invarriendo.setBounds(20, 70, 200, 50);
          invarriendo.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          invarriendo.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          /////////////////////////////////////////////////////////
+         if(usu.isInvventa()==true){
         JButton invventa= new JButton("INV. VENTA");
          invventa.addActionListener(new ActionListener() {
 
@@ -252,6 +270,7 @@ public class Menu extends javax.swing.JFrame {
          invventa.setBounds(20, 140, 200, 50);
          invventa.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          invventa.setBackground(new java.awt.Color(255, 204, 51));
+         }
       }
       
       public void menucaja(){
@@ -261,6 +280,7 @@ public class Menu extends javax.swing.JFrame {
          titulo.setFont(new java.awt.Font("Segoe UI Light", 1, 20));
          
          ////////////////////////////////////////////////////////
+         if(usu.isIngreso()==true){
          JButton ingresos= new JButton("INGRESOS");
          ingresos.addActionListener(new ActionListener() {
 
@@ -283,8 +303,9 @@ public class Menu extends javax.swing.JFrame {
          ingresos.setBounds(20, 70, 200, 50);
          ingresos.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          ingresos.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          /////////////////////////////////////////////////////////
+         if(usu.isEgreso()==true){
         JButton egreso= new JButton("EGRESOS");
          egreso.addActionListener(new ActionListener() {
 
@@ -307,8 +328,9 @@ public class Menu extends javax.swing.JFrame {
          egreso.setBounds(20, 140, 200, 50);
          egreso.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          egreso.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          /////////////////////////////////////////////////////////////
+         if(usu.isNuevoegreso()==true){
              JButton nuevoegreso= new JButton("NUEVO EGRESO");
          nuevoegreso.addActionListener(new ActionListener() {
 
@@ -331,8 +353,9 @@ public class Menu extends javax.swing.JFrame {
          nuevoegreso.setBounds(20, 210, 200, 50);
          nuevoegreso.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          nuevoegreso.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          ////////////////////////////////////////////////////////
+         if(usu.isMovimientos()==true){
          JButton movimiento= new JButton("MOVIMIENTOS");
          movimiento.addActionListener(new ActionListener() {
 
@@ -355,7 +378,7 @@ public class Menu extends javax.swing.JFrame {
          movimiento.setBounds(20, 280, 200, 50);
          movimiento.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          movimiento.setBackground(new java.awt.Color(255, 204, 51));
-     
+         }
      }
       
       public void menutaller(){
@@ -365,6 +388,7 @@ public class Menu extends javax.swing.JFrame {
          titulo.setFont(new java.awt.Font("Segoe UI Light", 1, 20));
          
          ////////////////////////////////////////////////////////
+         if(usu.isReparacioncliente()==true){
          JButton repcliente= new JButton("REP. CLIENTE");
          repcliente.addActionListener(new ActionListener() {
 
@@ -387,8 +411,9 @@ public class Menu extends javax.swing.JFrame {
          repcliente.setBounds(20, 70, 200, 50);
          repcliente.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          repcliente.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          /////////////////////////////////////////////////////////
+         if(usu.isReparacionpropia()==true){
         JButton reppropia= new JButton("REP. PROPIA");
          reppropia.addActionListener(new ActionListener() {
 
@@ -411,6 +436,7 @@ public class Menu extends javax.swing.JFrame {
          reppropia.setBounds(20, 140, 200, 50);
          reppropia.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          reppropia.setBackground(new java.awt.Color(255, 204, 51));
+         }
       }
       
       
@@ -421,6 +447,7 @@ public class Menu extends javax.swing.JFrame {
          titulo.setFont(new java.awt.Font("Segoe UI Light", 1, 20));
          
          ////////////////////////////////////////////////////////
+         if(usu.isEmpresas()==true){
          JButton empresa= new JButton("EMPRESAS");
          empresa.addActionListener(new ActionListener() {
 
@@ -443,8 +470,9 @@ public class Menu extends javax.swing.JFrame {
          empresa.setBounds(20, 70, 200, 50);
          empresa.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          empresa.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          /////////////////////////////////////////////////////////
+         if(usu.isEmpleados()==true){
         JButton empleado= new JButton("EMPLEADOS");
          empleado.addActionListener(new ActionListener() {
 
@@ -467,8 +495,9 @@ public class Menu extends javax.swing.JFrame {
          empleado.setBounds(20, 140, 200, 50);
          empleado.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          empleado.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          /////////////////////////////////////////////////////////////
+         if(usu.isCliente()==true){
              JButton cliente= new JButton("CLIENTES");
          cliente.addActionListener(new ActionListener() {
 
@@ -491,8 +520,9 @@ public class Menu extends javax.swing.JFrame {
          cliente.setBounds(20, 210, 200, 50);
          cliente.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          cliente.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          ////////////////////////////////////////////////////////
+         if(usu.isProveedores()==true){
            JButton provee= new JButton("PROVEEDORES");
          provee.addActionListener(new ActionListener() {
 
@@ -515,8 +545,9 @@ public class Menu extends javax.swing.JFrame {
          provee.setBounds(20, 280, 200, 50);
          provee.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          provee.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          //////////////////////////////////////////////////////////
+         if(usu.isCategorias()==true){
          JButton catego= new JButton("CATEGORIAS");
          catego.addActionListener(new ActionListener() {
 
@@ -539,8 +570,9 @@ public class Menu extends javax.swing.JFrame {
          catego.setBounds(20, 350, 200, 50);
          catego.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          catego.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          /////////////////////////////////////////////////////////////
+         if(usu.isNuevacotizacion()==true){
             JButton cotiz= new JButton("NUE. COTIZACION");
          cotiz.addActionListener(new ActionListener() {
 
@@ -563,7 +595,9 @@ public class Menu extends javax.swing.JFrame {
          cotiz.setBounds(20, 420, 200, 50);
          cotiz.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          cotiz.setBackground(new java.awt.Color(255, 204, 51));
+         }
          /////////////////////////////////////////////
+         if(usu.isNuevaordencompra()==true){
           JButton ordenc= new JButton("NUE. ORDEN COMPRA");
          ordenc.addActionListener(new ActionListener() {
 
@@ -587,7 +621,59 @@ public class Menu extends javax.swing.JFrame {
          ordenc.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          ordenc.setBackground(new java.awt.Color(255, 204, 51));
          ///////////////////////////////////////////////////////////
+         }
+         //////////////
+         if(usu.isCotizaciones()==true){
+         JButton cotiz= new JButton("COTIZACIONES");
+         cotiz.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    JIFBuscarCotizacion  bcotiza = new JIFBuscarCotizacion();
+                 Dimension desktopSize = jdesktop.getSize();
+                 Dimension FrameSize = bcotiza.getSize();
+                 bcotiza.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+                 jdesktop.add(bcotiza);
+                 bcotiza.show();
+                  panelconmin();
+                 
+             }
+         });
          
+         
+         jpanelcontenedor.add(cotiz);
+         cotiz.setBounds(20, 560, 200, 50);
+         cotiz.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
+         cotiz.setBackground(new java.awt.Color(255, 204, 51));
+         
+         }
+         if(usu.isOrdencompra()==true){
+          JButton orden= new JButton("ORDENES DE COMPRA");
+         orden.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                 JIFBuscarOdenCompra  borden = new JIFBuscarOdenCompra();
+                 Dimension desktopSize = jdesktop.getSize();
+                 Dimension FrameSize = borden.getSize();
+                 borden.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+                 jdesktop.add(borden);
+                 borden.show();
+                  panelconmin();
+                 
+             }
+         });
+         
+         
+         jpanelcontenedor.add(orden);
+         orden.setBounds(20, 630, 200, 50);
+         orden.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
+         orden.setBackground(new java.awt.Color(255, 204, 51));
+         
+         
+         }
      
      }
       
@@ -598,6 +684,7 @@ public class Menu extends javax.swing.JFrame {
          titulo.setFont(new java.awt.Font("Segoe UI Light", 1, 20));
          
          ////////////////////////////////////////////////////////
+         if(usu.isUsuariobo()==true){
          JButton user= new JButton("USUARIOS");
          user.addActionListener(new ActionListener() {
 
@@ -620,7 +707,7 @@ public class Menu extends javax.swing.JFrame {
          user.setBounds(20, 70, 200, 50);
          user.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          user.setBackground(new java.awt.Color(255, 204, 51));
-         
+         }
          /////////////////////////////////////////////////////////
            JButton cerrar= new JButton("CERRAR SESION");
          cerrar.addActionListener(new ActionListener() {
@@ -631,7 +718,7 @@ public class Menu extends javax.swing.JFrame {
                 if(JOptionPane.showConfirmDialog(null, "SEGURO QUE DESEA CERRAR SESIÓN","",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
             int componentes=jdesktop.getComponentCount();
             System.out.println("ventanas "+componentes);
-            if(componentes==1){
+            if(componentes==2){
                 singletonempresa.getdestruir();
                
                 Menu.this.dispose();
@@ -708,18 +795,10 @@ public class Menu extends javax.swing.JFrame {
         jdesktop = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jlblbienvenido = new javax.swing.JLabel();
         jlblempresa = new javax.swing.JLabel();
-        jbtnactualizar = new javax.swing.JButton();
         jlbldireccion = new javax.swing.JLabel();
+        jlblminimizar = new javax.swing.JLabel();
         jbtnmenu = new javax.swing.JLabel();
         jpanelmenu = new javax.swing.JPanel();
         jlblarriendo = new javax.swing.JLabel();
@@ -731,7 +810,7 @@ public class Menu extends javax.swing.JFrame {
         jlblusuarios = new javax.swing.JLabel();
         jpanelcontenedor = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
 
         jdesktop.setBackground(new java.awt.Color(255, 255, 255));
@@ -741,56 +820,23 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(149, 165, 166));
+        jPanel1.setBackground(new java.awt.Color(238, 238, 238));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("BIENVENIDO:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("RESUMEN");
+        jlblbienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jlblbienvenido.setForeground(new java.awt.Color(0, 0, 0));
+        jlblbienvenido.setText("jLabel9");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Maquinaria Registrada:");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Clientes Registrados:");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Ingresos del Mes:");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Maquinaria Arrendada:");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Maquinaria en Reparación:");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Ingresos del Dia: // hasta fechahora");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("jLabel9");
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Empleados Registrados:");
-
-        jlblempresa.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
-        jlblempresa.setForeground(new java.awt.Color(255, 255, 255));
+        jlblempresa.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jlblempresa.setForeground(new java.awt.Color(0, 0, 0));
         jlblempresa.setText("jLabel12");
 
-        jbtnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/update.png"))); // NOI18N
-
-        jlbldireccion.setForeground(new java.awt.Color(255, 255, 255));
+        jlbldireccion.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jlbldireccion.setForeground(new java.awt.Color(0, 0, 0));
         jlbldireccion.setText("jLabel13");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -801,27 +847,11 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlblempresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbtnactualizar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel10)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel8))
-                            .addComponent(jLabel2)
-                            .addComponent(jlbldireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 14, Short.MAX_VALUE)))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlblbienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlbldireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -830,53 +860,46 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel9))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jlblempresa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlbldireccion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jLabel2)
+                    .addComponent(jlblbienvenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(3, 3, 3)
-                .addComponent(jLabel6)
+                .addComponent(jlbldireccion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtnactualizar)
-                .addContainerGap())
+                .addComponent(jlblempresa)
+                .addGap(234, 234, 234))
         );
+
+        jlblminimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minimize2.png"))); // NOI18N
+        jlblminimizar.setToolTipText("Minimizar");
+        jlblminimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlblminimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jlblminimizarMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jdesktopLayout = new javax.swing.GroupLayout(jdesktop);
         jdesktop.setLayout(jdesktopLayout);
         jdesktopLayout.setHorizontalGroup(
             jdesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdesktopLayout.createSequentialGroup()
-                .addContainerGap(1393, Short.MAX_VALUE)
+            .addGroup(jdesktopLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1367, Short.MAX_VALUE)
+                .addComponent(jlblminimizar)
+                .addContainerGap())
         );
         jdesktopLayout.setVerticalGroup(
             jdesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdesktopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(470, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jdesktopLayout.createSequentialGroup()
+                .addComponent(jlblminimizar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jdesktop.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdesktop.setLayer(jlblminimizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jbtnmenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menu.png"))); // NOI18N
         jbtnmenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1004,18 +1027,19 @@ public class Menu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpanelcontenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jdesktop)
-                .addContainerGap())
+                .addComponent(jdesktop))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdesktop)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jbtnmenu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpanelmenu, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
                     .addComponent(jpanelcontenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jdesktop)
+                .addContainerGap())
         );
 
         pack();
@@ -1156,6 +1180,11 @@ public class Menu extends javax.swing.JFrame {
          panelconmin();
     }//GEN-LAST:event_jdesktopMouseReleased
 
+    private void jlblminimizarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblminimizarMouseReleased
+        // TODO add your handling code here:
+          setExtendedState(JFrame.CROSSHAIR_CURSOR);
+    }//GEN-LAST:event_jlblminimizarMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1193,24 +1222,16 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton jbtnactualizar;
     private javax.swing.JLabel jbtnmenu;
     public javax.swing.JDesktopPane jdesktop;
     private javax.swing.JLabel jlblarriendo;
+    private javax.swing.JLabel jlblbienvenido;
     private javax.swing.JLabel jlblcaja;
     private javax.swing.JLabel jlbldireccion;
     private javax.swing.JLabel jlblempresa;
     private javax.swing.JLabel jlblinventario;
+    private javax.swing.JLabel jlblminimizar;
     private javax.swing.JLabel jlblotros;
     private javax.swing.JLabel jlbltaller;
     private javax.swing.JLabel jlblusuarios;

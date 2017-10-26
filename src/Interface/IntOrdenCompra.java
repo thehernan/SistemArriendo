@@ -6,6 +6,8 @@
 package Interface;
 
 import Pojos.OrdenCompra;
+import java.util.List;
+import javax.swing.JTable;
 
 /**
  *
@@ -13,5 +15,7 @@ import Pojos.OrdenCompra;
  */
 public interface IntOrdenCompra {
     public long insert(OrdenCompra orden);
-    
+    public List<OrdenCompra> view(long idempre,JTable tabla);
+    public void print(long id);
+    public List<OrdenCompra> searchsensitive(long idempre,JTable tabla,String cadena);        
 }

@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="idcotizacion" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT miempresa.domicilio, miempresa.telefono as telemp,
 miempresa.celular as celemp,cliente.nombre,cliente.apellido,cliente.telefono,
@@ -17,7 +20,7 @@ detalle_cotizacion.valordia*detalle_cotizacion.dias as total
   FROM public.cotizacion  inner join cliente on cliente.id_cliente=cotizacion.id_cotizacion
   inner join miempresa on miempresa.id_empresa= cotizacion.id_empresa inner join 
   detalle_cotizacion on detalle_cotizacion.id_cotizacion=cotizacion.id_cotizacion inner join maquina
-  on maquina.id_maquina=detalle_cotizacion.id_maquina;]]>
+  on maquina.id_maquina=detalle_cotizacion.id_maquina where cotizacion.id_cotizacion=$P{idcotizacion};]]>
 	</queryString>
 	<field name="domicilio" class="java.lang.String"/>
 	<field name="telemp" class="java.lang.String"/>

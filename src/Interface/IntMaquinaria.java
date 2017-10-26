@@ -23,7 +23,7 @@ public interface IntMaquinaria {
     public void update(Maquinaria maq);
     public void updatenocategoria(Maquinaria maq);
     public void delete(Long id);
-    public void print(Long id);
+    public void print();
     public boolean duplicate(long id,String cadena,String op);
     public void movement(JTable tabla, long idmaq);
     public List<Maquinaria> searchsentitive(JTable tabla,String estado,String propiedad, long idcategoria,String cadena);

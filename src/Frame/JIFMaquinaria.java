@@ -489,7 +489,7 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
     private void jbtnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirActionPerformed
         // TODO add your handling code here:
         /// id empresa
-     //   daoMaquinaria.print();
+        daoMaquinaria.print();
     }//GEN-LAST:event_jbtnimprimirActionPerformed
 
     private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased

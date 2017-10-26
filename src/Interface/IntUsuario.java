@@ -19,5 +19,5 @@ public interface IntUsuario {
     public List<Usuario> view (JTable tabla);
      public boolean duplicate(long id,String cadena,String op);
     public void update(Usuario user);
-    
+    public Usuario valida(String usu,String clave);
 }

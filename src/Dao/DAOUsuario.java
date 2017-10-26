@@ -378,5 +378,84 @@ public class DAOUsuario implements Interface.IntUsuario{
             }  
         return duplicado;
     }
+
+    @Override
+    public Usuario valida(String usu, String clave) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+         Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+         Usuario usuario=null;
+      
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_validausuario(?,?)");
+        ps.setString(1, usu);
+        ps.setString(2,clave);
+        rs=ps.executeQuery();
+    
+        while (rs.next()){
+            usuario = new Usuario();
+            usuario.setId(rs.getLong("id"));
+            usuario.setUsuario(rs.getString("vusuario"));
+            usuario.setClave(rs.getString("vclave"));
+            usuario.setNuevocontrato(rs.getBoolean("vnuevocontrato"));
+            usuario.setContratosvig(rs.getBoolean("vcontratosvigentes"));
+            usuario.setAbonos(rs.getBoolean("vabonos"));
+            usuario.setDevoluciones(rs.getBoolean("vdevoluciones"));
+            usuario.setNuevaventa(rs.getBoolean("vnuevaventa"));
+            usuario.setInvarriendo(rs.getBoolean("vinvarriendo"));
+            usuario.setInvventa(rs.getBoolean("vinvventa"));
+            usuario.setIngreso(rs.getBoolean("vingreso"));
+            usuario.setEgreso(rs.getBoolean("vegreso"));
+            usuario.setNuevoegreso(rs.getBoolean("vnuevoeegreso"));
+            usuario.setMovimientos(rs.getBoolean("vmovimientos"));
+            usuario.setNuevarepcliente(rs.getBoolean("vnuevarepcliente"));
+            usuario.setReparacionpropia(rs.getBoolean("vreparacionpropia"));
+            usuario.setReparacioncliente(rs.getBoolean("vreparacioncliente"));
+            usuario.setEmpresas(rs.getBoolean("vempresas"));
+            usuario.setEmpleados(rs.getBoolean("vempleados"));
+            usuario.setCliente(rs.getBoolean("vclientes"));
+            usuario.setProveedores(rs.getBoolean("vproveedores"));
+            usuario.setCategorias(rs.getBoolean("vcategorias"));
+            usuario.setNuevacotizacion(rs.getBoolean("vnuevacotizacion"));
+            usuario.setNuevaordencompra(rs.getBoolean("vnuevaordencompra"));
+            usuario.setCotizaciones(rs.getBoolean("vcotizaciones"));
+            usuario.setOrdencompra(rs.getBoolean("vordenescompra"));
+            usuario.setUsuariobo(rs.getBoolean("vusuariobo"));
+            usuario.setMiempresa(rs.getBoolean("vmiempresa"));  
+        }
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        
+       return  usuario;
+    }
+    
     
 }

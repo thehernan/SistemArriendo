@@ -319,8 +319,8 @@ public class DAOContrato implements  Interface.IntContrato{
                }
             } 
     }
-    
-     public List<Contrato> searchsensitive(JTable tabla, long idempre,String tipob,long cod,String cli) {
+     @Override
+     public List<Contrato> searchsensitive(JTable tabla, long idempre,String tipob,long cod,String cli,boolean activo) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
@@ -329,11 +329,12 @@ public class DAOContrato implements  Interface.IntContrato{
         List<Contrato> listcontrato= new ArrayList<>();
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_busquedasensitivacontrato(?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_busquedasensitivacontrato(?,?,?,?,?)");
         ps.setLong(1, idempre);
         ps.setString(2, tipob);
         ps.setLong(3, cod);
         ps.setString(4, cli);
+        ps.setBoolean(5, activo);
         rs=ps.executeQuery();
         
          DefaultTableModel modelo= new DefaultTableModel(){
@@ -363,6 +364,8 @@ public class DAOContrato implements  Interface.IntContrato{
             listcontrato.add(contrato);
 		
         }
+        if(modelo.getRowCount()>0)
+            tabla.setRowSelectionInterval(0, 0);
 	
         } catch(Exception e)
             {

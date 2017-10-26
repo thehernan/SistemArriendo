@@ -2,7 +2,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b8a4634-dcc8-42e7-af23-a79d2e255f95">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="26"/>
-	<property name="ireport.y" value="298"/>
+	<property name="ireport.y" value="200"/>
+	<parameter name="idorden" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT case when length(ordencompra.id_ordencompra::text)=1 then concat('N°. 00000',ordencompra.id_ordencompra)
 when length(ordencompra.id_ordencompra::text)=2 then concat('N°. 0000',ordencompra.id_ordencompra) when length(ordencompra.id_ordencompra::text)=3 
@@ -16,7 +19,7 @@ miempresa.rut as rutemp,miempresa.domicilio as domempr,miempresa.telefono as tel
   FROM public.ordencompra inner join cliente on cliente.id_cliente=ordencompra.id_cliente
   inner join miempresa on miempresa.id_empresa=ordencompra.id_empresa
   inner join detalle_ordencompra on 
-  detalle_ordencompra.id_ordencompra=ordencompra.id_ordencompra;]]>
+  detalle_ordencompra.id_ordencompra=ordencompra.id_ordencompra where ordencompra.id_ordencompra= $P{idorden};]]>
 	</queryString>
 	<field name="concat" class="java.lang.String"/>
 	<field name="rutemp" class="java.lang.String"/>

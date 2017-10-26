@@ -37,9 +37,13 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
         listcontr=daocontrato.view(jtablacontrato, singletonempre.getId(),true,"TODOACTIVO");
     }
     public void setbuscardetcontrato(){
+        if(jtablacontrato.getSelectedRow()>=0){
         contrato = listcontr.get(jtablacontrato.getSelectedRow());
         listdetcont = daodetcont.search(jtabladetalle, contrato.getId());
-    
+        }else {
+        contrato = new Contrato();
+        listdetcont = daodetcont.search(jtabladetalle, contrato.getId());
+        }
     }
     public void validagenerar(){
         int cont=0;
@@ -71,12 +75,11 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
         jtablacontrato = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtabladetalle = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jtfcontrato = new javax.swing.JTextField();
         jbtngenerarguiadev = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jtfcliente = new javax.swing.JTextField();
 
         setClosable(true);
-        setIconifiable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -92,7 +95,7 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(511, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,14 +152,20 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jtabladetalle);
 
-        jLabel2.setText("N°. Contrato:");
-
         jbtngenerarguiadev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
         jbtngenerarguiadev.setText("Generar guia devolución");
         jbtngenerarguiadev.setEnabled(false);
         jbtngenerarguiadev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtngenerarguiadevActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Cod. / Cliente / Epresa:");
+
+        jtfcliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfclienteKeyReleased(evt);
             }
         });
 
@@ -172,30 +181,29 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jbtngenerarguiadev))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfcontrato, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 16, Short.MAX_VALUE)))
+                                .addComponent(jtfcliente)))
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtfcontrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtfcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtngenerarguiadev)
                 .addGap(8, 8, 8))
@@ -251,16 +259,23 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jbtngenerarguiadevActionPerformed
 
+    private void jtfclienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfclienteKeyReleased
+        // TODO add your handling code here:
+        listcontr=daocontrato.searchsensitive(jtablacontrato, singletonempre.getId(), "TODOVIGENTE", 0
+                , jtfcliente.getText().toUpperCase(),true);
+         setbuscardetcontrato();
+    }//GEN-LAST:event_jtfclienteKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtngenerarguiadev;
     private javax.swing.JTable jtablacontrato;
     private javax.swing.JTable jtabladetalle;
-    private javax.swing.JTextField jtfcontrato;
+    private javax.swing.JTextField jtfcliente;
     // End of variables declaration//GEN-END:variables
 }

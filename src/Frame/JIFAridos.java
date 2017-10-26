@@ -117,7 +117,6 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         jcbbuscarcate = new javax.swing.JComboBox();
 
         setClosable(true);
-        setIconifiable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
