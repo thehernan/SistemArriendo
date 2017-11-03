@@ -11,6 +11,7 @@ import Pojos.Empresa;
 import Pojos.SingletonEmpresa;
 import Pojos.Usuario;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,9 @@ public class JFLogin extends javax.swing.JFrame {
     /**
      * Creates new form JFLogin
      */
+    
+     int posx;
+    int posy;
     DAOEmpresa daoempresa = new DAOEmpresa();
     SingletonEmpresa singletonempresa = SingletonEmpresa.getinstancia();
     List<Empresa> listempresas;
@@ -51,81 +55,86 @@ public class JFLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jlblcerrar = new javax.swing.JLabel();
+        jlblminimizar = new javax.swing.JLabel();
+        jlblfondo = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        getContentPane().add(jcbempresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 692, -1));
 
         jtfusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfusuarioActionPerformed(evt);
             }
         });
+        getContentPane().add(jtfusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 159, -1));
 
         jtfclave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfclaveActionPerformed(evt);
             }
         });
+        getContentPane().add(jtfclave, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 159, -1));
 
+        jbtnaceptar.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jbtnaceptar.setText("Aceptar");
         jbtnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnaceptarActionPerformed(evt);
             }
         });
+        getContentPane().add(jbtnaceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel1.setText("Empresa:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel3.setText("Usuario:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel4.setText("Clave:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(181, 393, Short.MAX_VALUE)
-                .addComponent(jbtnaceptar)
-                .addGap(65, 65, 65))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jtfclave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                    .addComponent(jtfusuario, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jcbempresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbempresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jbtnaceptar)
-                .addGap(23, 23, 23))
-        );
+        jlblcerrar.setToolTipText("Cerrar");
+        jlblcerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlblcerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jlblcerrarMouseReleased(evt);
+            }
+        });
+        getContentPane().add(jlblcerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 0, 30, 30));
+
+        jlblminimizar.setToolTipText("Minimizar");
+        jlblminimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlblminimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jlblminimizarMouseReleased(evt);
+            }
+        });
+        getContentPane().add(jlblminimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 0, 30, 30));
+
+        jlblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/banner-home2.jpg"))); // NOI18N
+        jlblfondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jlblfondoMouseDragged(evt);
+            }
+        });
+        jlblfondo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlblfondoMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jlblfondoMouseReleased(evt);
+            }
+        });
+        getContentPane().add(jlblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -158,6 +167,34 @@ public class JFLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
          jbtnaceptar.doClick();
     }//GEN-LAST:event_jtfclaveActionPerformed
+
+    private void jlblfondoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblfondoMouseReleased
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jlblfondoMouseReleased
+
+    private void jlblfondoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblfondoMouseDragged
+        // TODO add your handling code here:
+           int xp=evt.getXOnScreen() - posx;
+        int yp=evt.getYOnScreen() - posy;
+        this.setLocation(xp, yp);
+    }//GEN-LAST:event_jlblfondoMouseDragged
+
+    private void jlblcerrarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblcerrarMouseReleased
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jlblcerrarMouseReleased
+
+    private void jlblminimizarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblminimizarMouseReleased
+        // TODO add your handling code here:
+           setExtendedState(JFrame.CROSSHAIR_CURSOR);
+    }//GEN-LAST:event_jlblminimizarMouseReleased
+
+    private void jlblfondoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblfondoMousePressed
+        // TODO add your handling code here:
+          posy=evt.getY();
+        posx=evt.getX();
+    }//GEN-LAST:event_jlblfondoMousePressed
 
     /**
      * @param args the command line arguments
@@ -201,6 +238,9 @@ public class JFLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbtnaceptar;
     private javax.swing.JComboBox jcbempresa;
+    private javax.swing.JLabel jlblcerrar;
+    private javax.swing.JLabel jlblfondo;
+    private javax.swing.JLabel jlblminimizar;
     private javax.swing.JPasswordField jtfclave;
     private javax.swing.JTextField jtfusuario;
     // End of variables declaration//GEN-END:variables

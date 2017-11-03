@@ -122,7 +122,6 @@ public class JIFEmpresaRegistro extends javax.swing.JInternalFrame {
         jlblruta = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
