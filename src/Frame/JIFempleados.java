@@ -104,16 +104,14 @@ public class JIFempleados extends javax.swing.JInternalFrame {
         jbtnguardar = new javax.swing.JButton();
         jbtneliminar = new javax.swing.JButton();
         jbtncancelar = new javax.swing.JButton();
-        jbtnimprimir = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
 
-        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("EMPLEADOS");
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("REGISTRO DE EMPLEADOS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -190,6 +188,12 @@ public class JIFempleados extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Buscar:");
 
+        jtfbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfbuscarKeyReleased(evt);
+            }
+        });
+
         jbtnnew.setBackground(new java.awt.Color(255, 255, 255));
         jbtnnew.setText("NUEVO");
         jbtnnew.addActionListener(new java.awt.event.ActionListener() {
@@ -227,13 +231,6 @@ public class JIFempleados extends javax.swing.JInternalFrame {
         jbtncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtncancelarActionPerformed(evt);
-            }
-        });
-
-        jbtnimprimir.setText("IMPRIMIR");
-        jbtnimprimir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnimprimirActionPerformed(evt);
             }
         });
 
@@ -279,9 +276,7 @@ public class JIFempleados extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbtneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jbtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbtnimprimir)))
+                        .addComponent(jbtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -305,9 +300,8 @@ public class JIFempleados extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbtneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtnimprimir))
-                        .addGap(18, 18, 18)
+                            .addComponent(jbtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -415,11 +409,6 @@ public class JIFempleados extends javax.swing.JInternalFrame {
         bloquearjtf(false, false, false,false,false);
     }//GEN-LAST:event_jbtncancelarActionPerformed
 
-    private void jbtnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirActionPerformed
-        // TODO add your handling code here:
-        daoempleado.print();
-    }//GEN-LAST:event_jbtnimprimirActionPerformed
-
     private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
         // TODO add your handling code here:
         empleado = listempleado.get(jtabla.getSelectedRow());
@@ -428,7 +417,7 @@ public class JIFempleados extends javax.swing.JInternalFrame {
         jtfrut.setText(empleado.getRut());
         jtfdomicilio.setText(empleado.getDomicilio());
         jtftelefono.setText(empleado.getTelefono());
-        
+         bloquearjbtn(true, true, false, true, false); 
                 
     }//GEN-LAST:event_jtablaMouseReleased
 
@@ -457,6 +446,26 @@ public class JIFempleados extends javax.swing.JInternalFrame {
         validaguardar();
     }//GEN-LAST:event_jtfrutKeyReleased
 
+    private void jtfbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarKeyReleased
+        // TODO add your handling code here:
+      listempleado= daoempleado.searchsensitive(jtabla, jtfbuscar.getText().toUpperCase());
+      if(jtabla.getSelectedRow()>=0){
+        empleado = listempleado.get(jtabla.getSelectedRow());
+        jtfnombres.setText(empleado.getNombre());
+        jtfapellidos.setText(empleado.getApellido());
+        jtfrut.setText(empleado.getRut());
+        jtfdomicilio.setText(empleado.getDomicilio());
+        jtftelefono.setText(empleado.getTelefono());
+          bloquearjbtn(true, true, false, true, false); 
+      }else {
+          limpiarjtf();
+      
+        bloquearjbtn(true, false, false, false, false);
+        bloquearjtf(false, false, false,false,false);
+      
+      }
+    }//GEN-LAST:event_jtfbuscarKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -472,7 +481,6 @@ public class JIFempleados extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtneditar;
     private javax.swing.JButton jbtneliminar;
     private javax.swing.JButton jbtnguardar;
-    private javax.swing.JButton jbtnimprimir;
     private javax.swing.JButton jbtnnew;
     private javax.swing.JTable jtabla;
     private javax.swing.JTextField jtfapellidos;

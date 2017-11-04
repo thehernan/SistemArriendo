@@ -10,22 +10,16 @@
 		<![CDATA[SELECT copiacarne
   FROM public.cliente where id_cliente=$P{idcliente};]]>
 	</queryString>
-	<field name="copiacarne" class="java.lang.Object"/>
+	<field name="copiacarne" class="java.io.InputStream"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="802" splitType="Stretch">
 			<image scaleImage="FillFrame">
-				<reportElement x="10" y="26" width="535" height="753" uuid="0fadfca5-a009-438b-9ed5-75574918e55d"/>
-				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage ((byte []) $F{copiacarne})]]></imageExpression>
+				<reportElement x="9" y="10" width="542" height="778" uuid="0fadfca5-a009-438b-9ed5-75574918e55d"/>
+				<imageExpression><![CDATA[$F{copiacarne}]]></imageExpression>
 			</image>
 		</band>
 	</title>
-	<columnFooter>
-		<band splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band splitType="Stretch"/>
-	</pageFooter>
 </jasperReport>

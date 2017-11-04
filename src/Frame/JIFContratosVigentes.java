@@ -68,7 +68,6 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         jbtneditarempresa = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -297,7 +296,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1))
         );
 
         pack();
@@ -345,7 +344,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
          JDFEditarContrato  editcontrato = new JDFEditarContrato(new Frame(), isVisible(),contrato);
          editcontrato.setVisible(true);
       } else {
-          JOptionPane.showMessageDialog(null, "El contrato ya paso de 2 horas de tolerancia; Imposible editar");
+         JDFClaveEdicionContrato clave = new JDFClaveEdicionContrato(new Frame(), isVisible(),contrato);
         }
             
     }//GEN-LAST:event_jbtneditarclienteActionPerformed

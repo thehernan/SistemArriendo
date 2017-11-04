@@ -591,5 +591,190 @@ public class DAOCliente implements Interface.IntCliente{
        return  valida; 
         
     }
+
+    @Override
+    public void print(long id) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.}
+          try{
+            Conexion conexion = new Conexion();
+            Connection  cn = null;           
+            String  rutaInforme  = "src/Reportes/copiacliente.jasper";
+            
+            Map parametros = new HashMap();
+            parametros.put("idcliente",  id);                 
+            JasperPrint informe=null;
+            informe = JasperFillManager.fillReport(rutaInforme, parametros,Conexion.Connect());
+            
+           // JasperPrintManager.printReport(informe, true);
+            
+            JasperViewer jv = new JasperViewer(informe,false);  
+        
+             jv.setVisible(true);
+             jv.setTitle(rutaInforme);
+            
+          
+        }catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "No registra archivo adjunto", "Información",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null,ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<Cliente> searchsensitive(JTable tabla, String tipo, String cadena) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        
+        List<Cliente> listcliente= new ArrayList<>();
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_busquedasensitivaclientes(?,?)");
+        ps.setString(1, tipo);
+        ps.setString(2, cadena);
+        rs=ps.executeQuery();
+        
+         DefaultTableModel modelo= new DefaultTableModel(){
+        public boolean isCellEditable(int row, int column) {
+        //      if (column == 5) return true;
+        //else
+         return false;
+        }
+        };
+        String titulos[]={"Nombre","Apellido","R.U.T"};
+        modelo.setColumnIdentifiers(titulos);
+        tabla.setModel(modelo);
+        Object datosR[] = new Object[3];
+       
+             
+        
+        while (rs.next()){
+            Cliente cliente = new Cliente();
+            cliente.setId(rs.getLong("id"));
+            cliente.setNombre(rs.getString("vnombre"));
+            cliente.setApellido(rs.getString("vapellido"));
+            cliente.setRut(rs.getString("vrut"));
+            cliente.setTelefono(rs.getString("vtelefono"));
+            cliente.setDomiciliopart(rs.getString("vdomiciliopart"));
+            cliente.setDomiciliatrab(rs.getString("vdomiciliotrab"));
+            cliente.setCopiacarne(rs.getBytes("vcopia"));
+            datosR[0]=cliente.getNombre();
+            datosR[1]=cliente.getApellido();
+            datosR[2]=cliente.getRut();
+            modelo.addRow(datosR);
+            listcliente.add(cliente);
+		
+        }
+         if(modelo.getRowCount()>0)
+            tabla.setRowSelectionInterval(0, 0);
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        
+       return  listcliente;
+    }
+
+    @Override
+    public List<Cliente> searchsensitivebusines(JTable tabla, String tipo, String cadena) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        
+        List<Cliente> listcliente= new ArrayList<>();
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_busquedasensitivaclientes(?,?)");
+        ps.setString(1, tipo);
+         ps.setString(2, cadena);
+        rs=ps.executeQuery();
+        
+         DefaultTableModel modelo= new DefaultTableModel(){
+        public boolean isCellEditable(int row, int column) {
+        //      if (column == 5) return true;
+        //else
+         return false;
+        }
+        };
+        String titulos[]={"Razon Social","R.U.T"};
+        modelo.setColumnIdentifiers(titulos);
+        tabla.setModel(modelo);
+        Object datosR[] = new Object[2];
+       
+             
+        
+        while (rs.next()){
+            Cliente cliente = new Cliente();
+            cliente.setId(rs.getLong("id"));
+            cliente.setNombre(rs.getString("vnombre"));
+            cliente.setApellido(rs.getString("vapellido"));
+            cliente.setRut(rs.getString("vrut"));
+            cliente.setTelefono(rs.getString("vtelefono"));
+            cliente.setDomiciliopart(rs.getString("vdomiciliopart"));
+            cliente.setDomiciliatrab(rs.getString("vdomiciliotrab"));
+            cliente.setCopiacarne(rs.getBytes("vcopia"));
+            datosR[0]=cliente.getNombre();
+           
+            datosR[1]=cliente.getRut();
+            modelo.addRow(datosR);
+            listcliente.add(cliente);
+		
+        }
+        if(modelo.getRowCount()>0)
+            tabla.setRowSelectionInterval(0, 0);
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        
+       return  listcliente;
+    }
     
 }

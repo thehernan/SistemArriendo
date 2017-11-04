@@ -24,6 +24,9 @@ public interface IntCliente {
     public void printdebtor(Long id);
     public boolean duplicate(long id,String cadena,String op);
     public Cliente search(String rut,String tipo);
+     public List<Cliente> searchsensitive(JTable tabla,String tipo,String cadena); 
+     public List<Cliente> searchsensitivebusines(JTable tabla,String tipo,String cadena); 
     public boolean  verifyclientdebtor(long idclient);
+    public void print(long id);
     
 }

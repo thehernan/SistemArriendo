@@ -21,5 +21,6 @@ public interface InEmpleado {
     public void print();
     public boolean duplicate(long id,String cadena,String op);
      public Empleado search(String rut);
+      public List<Empleado> searchsensitive (JTable tabla,String cadena); 
     
 }

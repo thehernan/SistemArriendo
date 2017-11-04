@@ -32,13 +32,13 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
 //    byte[]  fotoB=new  byte[0];
     public JIFProveedores() {
         initComponents();
-        bloquearjbtn(true, false, false, false, false,false);
+        bloquearjbtn(true, false, false, false, false,false,false);
         bloquearjtf(false, false, false, false,false, false);
         listcliente = daocliente.viewbusiness(jtabla,"PROVEEDOR");
     }
     
      public void bloquearjbtn(boolean nuevo,boolean editar,boolean guardar,boolean eliminar,boolean cancelar,
-             boolean  adjuntar
+             boolean  adjuntar, boolean print
      ){
     jbtnnew.setEnabled(nuevo);
     jbtneditar.setEnabled(editar);
@@ -47,7 +47,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
     jbtncancelar.setEnabled(cancelar);
 //    jbtnsalir.setEnabled(salir);
     jbtnadjuntar.setEnabled(adjuntar);
-     
+     jbtnimprimir.setEnabled(print);
     
     }
      public void bloquearjtf(boolean nombre,boolean apellidos,boolean rut,boolean telefono,boolean domiciliopart,
@@ -122,7 +122,6 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         jlblruta = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -216,6 +215,12 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtabla);
 
         jLabel8.setText("Buscar:");
+
+        jtfbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfbuscarKeyReleased(evt);
+            }
+        });
 
         jbtnnew.setBackground(new java.awt.Color(255, 255, 255));
         jbtnnew.setText("NUEVO");
@@ -390,7 +395,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         cliente = new Cliente();
         cliente.setCopiacarne(new  byte[0]);
         bloquearjtf(true,true,true,true,true,true);
-        bloquearjbtn(true, false, false, false, true,true);
+        bloquearjbtn(true, false, false, false, true,true,false);
 
         limpiarjtf();
 
@@ -402,7 +407,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         bloquearjtf(true,true,true,true,true,true);
 
         editar=true;
-        bloquearjbtn(true, false, false, false, true,true);
+        bloquearjbtn(true, false, false, false, true,true,false);
     }//GEN-LAST:event_jbtneditarActionPerformed
 
     private void jbtnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnguardarActionPerformed
@@ -439,7 +444,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         }
 
         listcliente = daocliente.viewbusiness(jtabla,"PROVEEDOR");
-        bloquearjbtn(true, false, false, false, false,false);
+        bloquearjbtn(true, false, false, false, false,false,false);
         bloquearjtf(false, false, false,false,false,false);
         limpiarjtf();
     }//GEN-LAST:event_jbtnguardarActionPerformed
@@ -451,7 +456,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
             daocliente.delete(cliente.getId());
             listcliente = daocliente.viewbusiness(jtabla,"PROVEEDOR");
             limpiarjtf();
-            bloquearjbtn(true, false, false, false, false,false);
+            bloquearjbtn(true, false, false, false, false,false,false);
 
         }
 
@@ -465,13 +470,13 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         } else {
             limpiarjtf();
         }
-        bloquearjbtn(true, false, false, false, false,false);
+        bloquearjbtn(true, false, false, false, false,false,false);
         bloquearjtf(false, false, false,false,false,false);
     }//GEN-LAST:event_jbtncancelarActionPerformed
 
     private void jbtnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirActionPerformed
         // TODO add your handling code here:
-//        daocliente.print();
+        daocliente.print(cliente.getId());
     }//GEN-LAST:event_jbtnimprimirActionPerformed
 
     private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
@@ -483,7 +488,7 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         jtfdomiciliopart.setText(cliente.getDomiciliopart());
         jtfdomiciliotrab.setText(cliente.getDomiciliatrab());
         jtftelefono.setText(cliente.getTelefono());
-        bloquearjbtn(true, true, false, true, false,false); 
+        bloquearjbtn(true, true, false, true, false,false,true); 
         
                 
     }//GEN-LAST:event_jtablaMouseReleased
@@ -557,6 +562,28 @@ public class JIFProveedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         validaguardar();
     }//GEN-LAST:event_jtfdomiciliotrabKeyReleased
+
+    private void jtfbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarKeyReleased
+        // TODO add your handling code here:
+        listcliente= daocliente.searchsensitivebusines(jtabla,"PROVEEDOR", jtfbuscar.getText().toUpperCase());
+        if(jtabla.getSelectedRow()>=0){
+         cliente = listcliente.get(jtabla.getSelectedRow());
+        jtfnombre.setText(cliente.getNombre());
+//        jtfapellidos.setText(cliente.getApellido());
+        jtfrut.setText(cliente.getRut());
+        jtfdomiciliopart.setText(cliente.getDomiciliopart());
+        jtfdomiciliotrab.setText(cliente.getDomiciliatrab());
+        jtftelefono.setText(cliente.getTelefono());
+        bloquearjbtn(true, true, false, true, false,false,true); 
+        
+        
+        }else {
+        limpiarjtf();
+        bloquearjbtn(true, false, false, false, false,false,false);
+        bloquearjtf(false, false, false,false,false,false);
+        
+        }
+    }//GEN-LAST:event_jtfbuscarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
