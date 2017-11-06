@@ -47,7 +47,6 @@ public class JFLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jcbempresa = new javax.swing.JComboBox();
         jtfusuario = new javax.swing.JTextField();
         jtfclave = new javax.swing.JPasswordField();
@@ -58,14 +57,14 @@ public class JFLogin extends javax.swing.JFrame {
         jlblcerrar = new javax.swing.JLabel();
         jlblminimizar = new javax.swing.JLabel();
         jlblfondo = new javax.swing.JLabel();
-
-        jLabel2.setText("jLabel2");
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jcbempresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 692, -1));
+        jcbempresa.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        getContentPane().add(jcbempresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 490, -1));
 
         jtfusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,11 +91,11 @@ public class JFLogin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel1.setText("Empresa:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel3.setText("Usuario:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel4.setText("Clave:");
@@ -109,7 +108,7 @@ public class JFLogin extends javax.swing.JFrame {
                 jlblcerrarMouseReleased(evt);
             }
         });
-        getContentPane().add(jlblcerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 0, 30, 30));
+        getContentPane().add(jlblcerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 30, 30));
 
         jlblminimizar.setToolTipText("Minimizar");
         jlblminimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -118,7 +117,7 @@ public class JFLogin extends javax.swing.JFrame {
                 jlblminimizarMouseReleased(evt);
             }
         });
-        getContentPane().add(jlblminimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 0, 30, 30));
+        getContentPane().add(jlblminimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 30, 30));
 
         jlblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/banner-home2.jpg"))); // NOI18N
         jlblfondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -135,6 +134,9 @@ public class JFLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jlblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
