@@ -841,7 +841,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Ingrese cantidad valida en revision o mano de obra");
         }
         daorepuesto.delete(lisrepuestodelete);
-        
+        daoreparair.print(id);
         nuevo();
         
 //        detcaja.setImporte(10000.0);

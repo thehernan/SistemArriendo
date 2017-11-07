@@ -140,7 +140,7 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 			</textField>
 			<image>
 				<reportElement x="3" y="1" width="311" height="78" uuid="c8ad6395-e1ae-4d7e-a073-2e49d42fca9f"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="3" y="95" width="73" height="20" uuid="eb33d3f1-caec-46ac-b5dd-408a3f5dbcea"/>
@@ -165,7 +165,7 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 				<textElement>
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Sirvace Recibir Conforme Siguiente:]]></text>
+				<text><![CDATA[Sirvace Recibir Conforme lo Siguiente:]]></text>
 			</staticText>
 		</band>
 	</title>

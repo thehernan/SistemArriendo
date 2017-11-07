@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8e324308-28ba-4b44-95ab-d75e28708b71">
-	<queryString language="SQL">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idempresa" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
 		<![CDATA[SELECT miempresa.razonsocial,miempresa.rut,miempresa.domicilio, concat(maquina,marca,serie,modelo), precioarriendodia,estado
      
   FROM public.maquina  inner join miempresa on miempresa.id_empresa=maquina.id_empresa
-where estado <> 'BORRADO' AND propietario='EMPRESA';]]>
+where estado <> 'BORRADO' AND propietario='EMPRESA' and miempresa.id_empresa=$P{idempresa};]]>
 	</queryString>
 	<field name="razonsocial" class="java.lang.String"/>
 	<field name="rut" class="java.lang.String"/>
@@ -16,16 +22,82 @@ where estado <> 'BORRADO' AND propietario='EMPRESA';]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="179" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="268" height="117" uuid="0713080d-b4b1-4b64-8b37-84ac1522df20"/>
+				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="123" width="268" height="20" uuid="c8e7d039-9123-410c-a0d7-d6dbf5fffe76"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{domicilio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="153" width="555" height="20" uuid="bda3e67a-8acd-4803-9ee7-f4838c5d2925"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INVENTARIO ARRIENDO]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="355" height="20" uuid="29c02e09-ddd7-416d-9142-e8975a92025d"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maquinaria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="0" width="100" height="20" uuid="6daef957-51e1-4c50-933d-716208e928ef"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Arriendo Dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="d0567356-e602-4ff3-98b9-3493021fe3b4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="355" height="14" uuid="b5ed24f9-bfff-4015-9223-8e9553898db4"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="14" uuid="8855c1a1-a307-4846-9163-21b956e8dc2a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="14" width="555" height="1" uuid="31ee0544-0e15-4835-920e-1b8d9955f5bf"/>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement x="355" y="0" width="100" height="14" uuid="db72d710-50fa-445a-912a-2e76e1d8eaae"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precioarriendodia}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

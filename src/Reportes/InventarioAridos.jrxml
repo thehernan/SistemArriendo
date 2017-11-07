@@ -27,7 +27,7 @@ where aridos.activo = true and miempresa.id_empresa=$P{idempresa};]]>
 		<band height="152">
 			<image>
 				<reportElement x="4" y="4" width="420" height="88" uuid="500de721-e948-48b4-8661-6cbf028d2eeb"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="0" y="132" width="552" height="20" uuid="95cc9f80-ede4-4369-87ac-39aa99edd01f"/>

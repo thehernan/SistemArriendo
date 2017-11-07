@@ -2,13 +2,16 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="41f088fa-2f3d-432f-8250-dc4729b85d28">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="115"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\Reportes\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="idorden" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT * from public.sp_buscarreparacion(
-   13
+		<![CDATA[SELECT * from public.sp_buscarreparacion($P{idorden}
+   
 );]]>
 	</queryString>
 	<field name="vcodigo" class="java.lang.String"/>
@@ -54,7 +57,7 @@
 			</textField>
 			<image hAlign="Center">
 				<reportElement x="0" y="0" width="555" height="79" uuid="64c00ec9-846a-477a-9ec2-3332f899c533"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="0" y="99" width="130" height="20" uuid="625b0478-2dc4-412d-9e9e-868c38c15522"/>

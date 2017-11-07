@@ -61,7 +61,7 @@ detalle_cotizacion.valordia*detalle_cotizacion.dias as total
 		<band height="137" splitType="Stretch">
 			<image>
 				<reportElement x="1" y="1" width="308" height="87" uuid="fd6a7990-4966-4d50-b8b9-c4767c9702e3"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="272" y="13" width="70" height="51" uuid="ce229dff-264b-451a-b87d-94c8cf80e75c"/>

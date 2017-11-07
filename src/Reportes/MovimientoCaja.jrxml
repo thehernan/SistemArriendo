@@ -35,7 +35,7 @@
 		<band height="85" splitType="Stretch">
 			<image hAlign="Center">
 				<reportElement x="135" y="0" width="288" height="85" uuid="ffe40cfa-e124-454e-9799-575a100be140"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -131,7 +131,7 @@
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[  $F{vobservacion}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{vobservacion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="440" y="0" width="115" height="20" uuid="6ad0d89b-0398-45c6-bc68-0e1f32eafb11"/>

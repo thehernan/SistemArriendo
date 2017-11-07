@@ -67,7 +67,7 @@ detalle_guia.id_guia inner join maquina on maquina.id_maquina=detalle_guia.id_ma
 			</textField>
 			<image>
 				<reportElement x="3" y="0" width="324" height="85" uuid="59567c0a-9fa1-4711-8975-44794dfad94e"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="27" y="105" width="75" height="20" uuid="9ea9233b-09c9-43f0-811f-39655671c560"/>

@@ -88,7 +88,7 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 			</textField>
 			<image>
 				<reportElement x="5" y="0" width="353" height="76" uuid="5f3c8012-b9bc-425d-aa71-f051f91e8245"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

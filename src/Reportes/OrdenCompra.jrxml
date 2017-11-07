@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b8a4634-dcc8-42e7-af23-a79d2e255f95">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="26"/>
-	<property name="ireport.y" value="200"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="idorden" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -52,7 +52,7 @@ miempresa.rut as rutemp,miempresa.domicilio as domempr,miempresa.telefono as tel
 		<band height="138" splitType="Stretch">
 			<image>
 				<reportElement x="1" y="1" width="288" height="88" uuid="7647596b-7c55-45b0-be4e-1216095437d2"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\logoempresa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
 			</image>
 			<rectangle radius="10">
 				<reportElement x="363" y="6" width="187" height="71" uuid="ddc35695-2855-41c9-a332-015e9f99fc4f"/>
