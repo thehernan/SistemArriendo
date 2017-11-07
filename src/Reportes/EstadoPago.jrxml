@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="68b40038-560d-427b-9941-7636c9f10b05">
 	<property name="ireport.zoom" value="1.7715610000000013"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="142"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\Reportes\\"]]></defaultValueExpression>
@@ -109,7 +109,7 @@ where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 						<subreportParameterExpression><![CDATA[$F{id_contrato}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "EstadoPago_Abonos.jasper"]]></subreportExpression>
+					<subreportExpression><![CDATA["EstadoPago_Abonos.jasper"]]></subreportExpression>
 				</subreport>
 				<staticText>
 					<reportElement x="340" y="3" width="21" height="12" uuid="132b4852-a025-4a81-9b79-328e36b921e7"/>
@@ -124,7 +124,7 @@ where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 						<subreportParameterExpression><![CDATA[$F{id_contrato}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "EstadoPago_deudatotal.jasper"]]></subreportExpression>
+					<subreportExpression><![CDATA["EstadoPago_deudatotal.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 			<band height="20">

@@ -9,11 +9,6 @@ package Dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import javax.naming.Context;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,7 +40,7 @@ public class Conexion {
             Class.forName("org.postgresql.Driver");
             //Nombre del servidor. localhost:3306 es la ruta y el puerto de la conexión MySQL
             //panamahitek_text es el nombre que le dimos a la base de datos
-            String servidor = "jdbc:postgresql://localhost:5432/BDArriendoMaquinaria";
+            String servidor = "jdbc:postgresql://192.168.2.100:5432/BDArriendoMaquinaria";
             //El root es el nombre de usuario por default. No hay contraseña
             String usuario = "postgres";
             String pass = "hernan$123";

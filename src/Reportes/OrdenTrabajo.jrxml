@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="41f088fa-2f3d-432f-8250-dc4729b85d28">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="114"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\Reportes\\"]]></defaultValueExpression>
 	</parameter>
@@ -72,39 +72,39 @@
 		<band height="482" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="25" width="274" height="20" uuid="02d29fa4-4fc9-433f-9ca1-4b399eb85de7"/>
-				<textFieldExpression><![CDATA[$F{vrut}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R.U.T: "+$F{vrut}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="45" width="274" height="20" uuid="17ac3249-e87c-4b3c-9913-b9da52754e02"/>
-				<textFieldExpression><![CDATA[$F{vnombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Nombre: "+$F{vnombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="65" width="274" height="20" uuid="83f2bb7a-29a1-4262-8379-ea31a29fbccb"/>
-				<textFieldExpression><![CDATA[$F{vdomiciliopartcli}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Domicilio Part.: +"+$F{vdomiciliopartcli}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="85" width="274" height="20" uuid="1327beab-0290-4df2-8756-44664ba6afb5"/>
-				<textFieldExpression><![CDATA[$F{vdomiciliotrabcli}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Domicilio Trab.: "+$F{vdomiciliotrabcli}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="105" width="274" height="20" uuid="7eed2c2d-a023-4c44-a098-7b3ebf4e5676"/>
-				<textFieldExpression><![CDATA[$F{vtelefono}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Telefono: "+$F{vtelefono}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="210" width="274" height="20" uuid="832bd32f-8476-4d5b-852d-ceae94635f6f"/>
-				<textFieldExpression><![CDATA[$F{vmaquina}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Maquina: "+$F{vmaquina}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="150" width="274" height="20" uuid="5b45ab1f-7663-4798-9744-d47cf5cf3473"/>
-				<textFieldExpression><![CDATA[$F{vmarca}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Marca: "+$F{vmarca}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="170" width="274" height="20" uuid="93276641-0889-4276-9442-a474e3b07914"/>
-				<textFieldExpression><![CDATA[$F{vserie}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Serie: "+$F{vserie}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="190" width="274" height="20" uuid="38f0ad9d-7dfe-4806-bb48-28d172d56547"/>
-				<textFieldExpression><![CDATA[$F{vmodelo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Modelo: "+$F{vmodelo}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="5" width="177" height="20" forecolor="#FF3333" uuid="3c5feea6-2ee5-49eb-b579-fbc8cfeb7921"/>
@@ -142,8 +142,8 @@
 				<reportElement x="0" y="361" width="274" height="83" uuid="85352944-be5f-41f1-8eb4-d254344f06ff"/>
 				<textFieldExpression><![CDATA[$F{vtrabajoreal}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="0" y="452" width="177" height="20" uuid="18c8b0fc-69a8-4d42-81d0-4244c2148ee5"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="123" y="462" width="177" height="20" uuid="18c8b0fc-69a8-4d42-81d0-4244c2148ee5"/>
 				<textFieldExpression><![CDATA[$F{ventregadapor}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -154,42 +154,42 @@
 				<text><![CDATA[Valor de Reparacion]]></text>
 			</staticText>
 			<textField pattern="#,##0">
-				<reportElement x="300" y="25" width="255" height="20" uuid="ddc207e8-d976-4e4a-8ef9-9de0e80df78a"/>
+				<reportElement x="382" y="25" width="173" height="23" uuid="ddc207e8-d976-4e4a-8ef9-9de0e80df78a"/>
 				<textFieldExpression><![CDATA[$F{vrevision}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="300" y="45" width="255" height="20" uuid="00eb781b-130f-433d-80f9-66a5bf76e4a0"/>
+				<reportElement x="382" y="45" width="173" height="23" uuid="00eb781b-130f-433d-80f9-66a5bf76e4a0"/>
 				<textFieldExpression><![CDATA[$F{vrepuestos}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="300" y="65" width="255" height="20" uuid="6515bf29-9c2f-45cf-b607-8d6ad755a4b9"/>
+				<reportElement x="382" y="65" width="173" height="23" uuid="6515bf29-9c2f-45cf-b607-8d6ad755a4b9"/>
 				<textFieldExpression><![CDATA[$F{vmanoobra}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="300" y="85" width="255" height="20" uuid="c048192a-6f56-4b88-b826-53fa06d9d27c"/>
+				<reportElement x="382" y="85" width="173" height="23" uuid="c048192a-6f56-4b88-b826-53fa06d9d27c"/>
 				<textFieldExpression><![CDATA[$F{vsubtotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="300" y="105" width="255" height="20" uuid="bb85f249-f873-4117-9b79-177ee3b14c54"/>
+				<reportElement x="382" y="105" width="173" height="23" uuid="bb85f249-f873-4117-9b79-177ee3b14c54"/>
 				<textFieldExpression><![CDATA[$F{viva}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="300" y="125" width="255" height="20" uuid="bdfe6f04-c86a-4f00-88ed-4a7f811fc5ac"/>
+				<reportElement x="382" y="125" width="173" height="23" uuid="bdfe6f04-c86a-4f00-88ed-4a7f811fc5ac"/>
 				<textFieldExpression><![CDATA[$F{vtotal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="346" y="150" width="209" height="20" uuid="6bd6c344-b06c-48a9-b190-44f74bf1c7a4"/>
-				<textFieldExpression><![CDATA[$F{vacepta}]]></textFieldExpression>
+				<reportElement x="366" y="150" width="189" height="20" uuid="6bd6c344-b06c-48a9-b190-44f74bf1c7a4"/>
+				<textFieldExpression><![CDATA[$F{vacepta}==true? "Si":"No"]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="300" y="175" width="255" height="20" uuid="0f003ed7-4b3d-4fcf-8b43-c95be674a2fd"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="170" width="173" height="20" uuid="0f003ed7-4b3d-4fcf-8b43-c95be674a2fd"/>
 				<textFieldExpression><![CDATA[$F{vrutemple}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="300" y="195" width="255" height="20" uuid="15067c47-e5f0-4f13-a534-f4c9a944320a"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="190" width="173" height="20" uuid="15067c47-e5f0-4f13-a534-f4c9a944320a"/>
 				<textFieldExpression><![CDATA[$F{nombreemple}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd-MMM-yy">
+			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
 				<reportElement x="300" y="223" width="255" height="20" uuid="eacb8141-dc86-48e0-833f-dcfd4ef72802"/>
 				<textFieldExpression><![CDATA[$F{vfecha}]]></textFieldExpression>
 			</textField>
@@ -199,7 +199,7 @@
 					<subreportParameterExpression><![CDATA[$F{vidrepara}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "OrdenTrabajo_Repuestos.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["OrdenTrabajo_Repuestos.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
 				<reportElement x="300" y="250" width="177" height="20" forecolor="#FF3333" uuid="88ad7b55-9d5d-4e11-9169-f11634e2d050"/>
@@ -207,6 +207,46 @@
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Repuestos a Cambiar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="150" width="66" height="20" uuid="7862f97a-a05c-4cb7-a2c0-2ffbc389ca00"/>
+				<text><![CDATA[Acepta: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="462" width="100" height="20" uuid="ddb6c01e-38b5-47d1-878a-2e24424cbfb9"/>
+				<text><![CDATA[Entegado por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="25" width="82" height="20" uuid="941497b1-df28-4f30-97b0-b4ce8d4619ee"/>
+				<text><![CDATA[Revision:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="48" width="82" height="20" uuid="07642442-4d31-4f0b-9864-0d8f6b1e631c"/>
+				<text><![CDATA[Repuestos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="68" width="82" height="20" uuid="e7bd2bca-537c-4ff8-9e9b-785f7ac2a743"/>
+				<text><![CDATA[Mano de obra:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="88" width="82" height="20" uuid="e5a63cce-5e66-4bbd-b473-b53199d0ea0c"/>
+				<text><![CDATA[Subtotal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="110" width="82" height="20" uuid="43570fc0-2fff-4a71-abfe-56c3c8540ce9"/>
+				<text><![CDATA[I.V.A:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="128" width="82" height="20" uuid="6f9b6123-96bc-44e6-98b4-9e17955c289c"/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="170" width="82" height="20" uuid="2fc20d74-b3cd-44bb-86f3-3f2830135ab9"/>
+				<text><![CDATA[R.U.T Empleado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="190" width="82" height="20" uuid="0cc1aafb-e543-491c-bdba-ae7eae85fe54"/>
+				<text><![CDATA[Nombre:]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

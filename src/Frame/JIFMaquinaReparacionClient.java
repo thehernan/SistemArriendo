@@ -191,7 +191,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
     public void nuevo(){
     cliente = new Cliente();
     empleado= new Empleado();
-    reparacion = new Reparacion();
+//    reparacion = new Reparacion();
     maquina = new Maquinaria();
     listrepuesto = new ArrayList<>();
     lisrepuestodelete= new ArrayList<>();
@@ -228,7 +228,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
      
     jlblcodigo.setText("* * *");
     jtfrut.requestFocus();
-    
+    jbtnceptar.setEnabled(false);
     
     }
     
@@ -815,10 +815,10 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
                 System.out.println("insert");
                  if(empleado.getId()!=0){
                     reparacion.setIdempleado(empleado.getId());
-                    id= daoreparair.insertrepairclientemploye(reparacion);
+                    reparacion.setId(daoreparair.insertrepairclientemploye(reparacion));
                      System.out.println("idreoara"+id);
                 }    else {
-                    id= daoreparair.insertrepairclientnoemploye(reparacion);
+                    reparacion.setId(daoreparair.insertrepairclientnoemploye(reparacion));
                 }  
                      System.out.println("lisrtep"+listrepuesto.size());
                 daorepuesto.insert(listrepuesto, id);
@@ -841,9 +841,11 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Ingrese cantidad valida en revision o mano de obra");
         }
         daorepuesto.delete(lisrepuestodelete);
-        daoreparair.print(id);
+       
         nuevo();
-        
+       
+         daoreparair.print(reparacion.getId() );
+         reparacion=new Reparacion();
 //        detcaja.setImporte(10000.0);
 //        detcaja.setIdreparir(id);
 //        
@@ -992,6 +994,7 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(JOptionPane.showConfirmDialog(null,"Esta seguro de cancelar la operacion","",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
         nuevo();
+         reparacion=new Reparacion();
     }//GEN-LAST:event_jbtncancelarActionPerformed
 
 
