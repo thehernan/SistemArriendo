@@ -56,6 +56,8 @@ public class JFLogin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jlblcerrar = new javax.swing.JLabel();
         jlblminimizar = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jlblfondo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -118,6 +120,16 @@ public class JFLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jlblminimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 30, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 1, 9)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Desarrollado por: Infosegurity E.I.R.L");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, 20));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 1, 9)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Programador: Hernán Augusto Vilchez Acaro");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         jlblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/banner-home2.jpg"))); // NOI18N
         jlblfondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -238,6 +250,8 @@ public class JFLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbtnaceptar;
     private javax.swing.JComboBox jcbempresa;
     private javax.swing.JLabel jlblcerrar;

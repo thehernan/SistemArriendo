@@ -131,7 +131,7 @@ public class DAOArido implements Interface.IntArido{
         ps.setBigDecimal(3,new  BigDecimal(arido.getPrecio()));
         ps.setBigDecimal(4,new BigDecimal(arido.getInvinicial()));
         ps.setLong(5,empresa.getId());
-        ps.setLong(6,arido.getId());
+        ps.setLong(6,arido.getIdcatgoria());
         rs=ps.executeQuery();
       
         while (rs.next()){
@@ -302,11 +302,11 @@ public class DAOArido implements Interface.IntArido{
          boolean duplicado= false;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_duplicatearidos(?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_duplicatearidos(?,?,?,?)");
         ps.setLong(1, id);
         ps.setString(2, cadena);
         ps.setString(3,op);
-    
+        ps.setLong(4, empresa.getId());
         
         rs=ps.executeQuery();
      

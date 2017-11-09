@@ -70,8 +70,8 @@ public class JIFAridos extends javax.swing.JInternalFrame {
     public void validaguardar(){
      String descrip= jtfdescripcion.getText().replaceAll("\\s", "");
     
-     
-     if(!descrip.equals("")){
+//      categoria=listcategoria.get(jcbcategoria.getSelectedIndex());
+     if(!descrip.equals("") && listcategoria.size()>0){
          jbtnguardar.setEnabled(true);
      }else {
          jbtnguardar.setEnabled(false);

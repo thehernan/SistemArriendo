@@ -87,6 +87,7 @@ public class DAODetGuia implements Interface.IntDetalleGuia{
         
         for (DetalleContrato det : listdetcont){
             if(det.isEntregado()==true){
+                System.out.println("SELECT * from sp_insertdevolucion("+idguia+","+det.getIdmaq()+","+det.getId()+","+det.getIdcontr()+","+det.getImporte()+","+porfalla+")"); 
                 ps = c.prepareStatement("SELECT * from sp_insertdevolucion(?,?,?,?,?,?)");
                 ps.setLong(1,idguia);
                 ps.setLong(2, det.getIdmaq());
