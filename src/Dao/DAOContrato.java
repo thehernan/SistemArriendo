@@ -44,12 +44,13 @@ public class DAOContrato implements  Interface.IntContrato{
         long id= 0;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertcontrato(?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertcontrato(?,?,?,?,?,?)");
         ps.setLong(1, contrato.getIdempresa());
         ps.setLong(2, contrato.getIdcliente());
         ps.setBigDecimal(3,new BigDecimal(contrato.getFlete()));
         ps.setBigDecimal(4,new BigDecimal(contrato.getTotal()));
         ps.setString(5, contrato.getTipodoc());
+        ps.setString(6, contrato.getFecha());
     
         
         rs=ps.executeQuery();
@@ -149,7 +150,7 @@ public class DAOContrato implements  Interface.IntContrato{
             contrato.setId(rs.getLong("vidcontrato"));
             contrato.setIdempresa(rs.getLong("vidempresa"));
             contrato.setIdcliente(rs.getLong("vidcliente"));
-            contrato.setFecha(rs.getDate("vfechatimes"));
+            contrato.setFecha(rs.getString("vfechatimes"));
             datosR[0]=rs.getObject("vcodigo");
             datosR[1]=rs.getObject("vcliente");
             datosR[2]=rs.getObject("vrut");

@@ -66,6 +66,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jtfbuscarempresaclient = new javax.swing.JTextField();
         jbtneditarempresa = new javax.swing.JButton();
+        jlblmensaje = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -124,6 +125,11 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         jbtnimprimircliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print2.png"))); // NOI18N
         jbtnimprimircliente.setText("Imprimir");
         jbtnimprimircliente.setEnabled(false);
+        jbtnimprimircliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnimprimirclienteActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Cliente / Empresa:");
 
@@ -222,6 +228,19 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         jbtnimprimirempresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print2.png"))); // NOI18N
         jbtnimprimirempresa.setText("Imprimir");
         jbtnimprimirempresa.setEnabled(false);
+        jbtnimprimirempresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jbtnimprimirempresaMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbtnimprimirempresaMousePressed(evt);
+            }
+        });
+        jbtnimprimirempresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnimprimirempresaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Cliente / Empresa:");
 
@@ -240,6 +259,9 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
             }
         });
 
+        jlblmensaje.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jlblmensaje.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -255,13 +277,16 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfbuscarempresaclient)
+                        .addComponent(jtfbuscarempresaclient, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                         .addGap(211, 211, 211))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 650, Short.MAX_VALUE)
-                        .addComponent(jbtneditarempresa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbtnimprimirempresa)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbtneditarempresa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbtnimprimirempresa))
+                            .addComponent(jlblmensaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -277,9 +302,11 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtneditarempresa)
                     .addComponent(jbtnimprimirempresa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlblmensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("EMPRESA", jPanel1);
@@ -395,6 +422,30 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtfempresacodigoKeyReleased
 
+    private void jbtnimprimirclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirclienteActionPerformed
+        // TODO add your handling code here:
+            contrato = listcontrcli.get(jtablacliente.getSelectedRow());
+        daocontrato.print(contrato.getId());
+         jlblmensaje.setText("");
+    }//GEN-LAST:event_jbtnimprimirclienteActionPerformed
+
+    private void jbtnimprimirempresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirempresaActionPerformed
+        // TODO add your handling code here:
+        contrato = listcontrcli.get(jtablaempresa.getSelectedRow());
+        daocontrato.print(contrato.getId());
+         jlblmensaje.setText("");
+    }//GEN-LAST:event_jbtnimprimirempresaActionPerformed
+
+    private void jbtnimprimirempresaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnimprimirempresaMousePressed
+        // TODO add your handling code here:
+        jlblmensaje.setText("Generando Reporte ...");
+    }//GEN-LAST:event_jbtnimprimirempresaMousePressed
+
+    private void jbtnimprimirempresaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnimprimirempresaMouseExited
+        // TODO add your handling code here:
+           jlblmensaje.setText("");
+    }//GEN-LAST:event_jbtnimprimirempresaMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -412,6 +463,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtneditarempresa;
     private javax.swing.JButton jbtnimprimircliente;
     private javax.swing.JButton jbtnimprimirempresa;
+    private javax.swing.JLabel jlblmensaje;
     private javax.swing.JTable jtablacliente;
     private javax.swing.JTable jtablaempresa;
     private javax.swing.JTextField jtfbuscarclientecod;

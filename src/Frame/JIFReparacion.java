@@ -48,12 +48,11 @@ public class JIFReparacion extends javax.swing.JInternalFrame {
         jtfserie = new javax.swing.JTextField();
 
         setClosable(true);
-        setIconifiable(true);
 
-        jPanel1.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("MAQUINARIA EN REPARACION PROPIA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

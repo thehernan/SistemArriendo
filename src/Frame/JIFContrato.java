@@ -20,7 +20,10 @@ import Pojos.SingletonEmpresa;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -57,6 +60,8 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         DAODetGuia daodetguia = new DAODetGuia();
         DAODetCaja daodetcaja= new DAODetCaja();
         String tipodoc;
+        int  hora, minutos, segundos; 
+        java.util.Calendar calendario; 
     public JIFContrato(String tipodoc) {
         initComponents();
         modelo.setColumnIdentifiers(titulos);
@@ -66,6 +71,14 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         jlbltipoop.setText(tipodoc);
         this.tipodoc = tipodoc;
         jlblmensajedeudor.setVisible(false);
+        jdpfecha.setDate(new Date());
+        
+        ///// hora actual
+         calendario = new java.util.GregorianCalendar(); 
+        hora = calendario.get(Calendar.HOUR_OF_DAY); 
+        minutos = calendario.get(Calendar.MINUTE); 
+        segundos = calendario.get(Calendar.SECOND); 
+        jtfhora.setValue(hora+":"+minutos+":"+segundos);
     }
     
     public void setllenarmaquinaria(Maquinaria maq){
@@ -81,7 +94,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     }
     
     public void validagenerar(){
-    if (cliente.getId()!=0 && modelo.getRowCount()>0){
+    if (cliente.getId()!=0 && modelo.getRowCount()>0 && jdpfecha.getDate()!=null){
         jbtngenerar.setEnabled(true);
     }else {
         jbtngenerar.setEnabled(false);
@@ -120,6 +133,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         jlbltotal.setText("* * *");
         total=0.0;
         jtflete.setValue(0);
+        jdpfecha.setDate(new Date());
     }
             
     
@@ -157,6 +171,11 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jlbltotal = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jdpfecha = new org.jdesktop.swingx.JXDatePicker();
+        jLabel10 = new javax.swing.JLabel();
+        jtfhora = new javax.swing.JFormattedTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setClosable(true);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -353,6 +372,24 @@ public class JIFContrato extends javax.swing.JInternalFrame {
 
         jlbltotal.setText("* * *");
 
+        jLabel8.setText("Este contrato entrega en vigencia el dia:");
+
+        jdpfecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jdpfechaActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Hora:");
+
+        try {
+            jtfhora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jLabel11.setText("H24:MM:SS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -363,9 +400,6 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtnmaquinaria, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(11, 11, 11)
@@ -375,13 +409,34 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlbltotal, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtngenerar)))
+                        .addComponent(jbtngenerar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(jdpfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfhora, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel11))
+                            .addComponent(jbtnmaquinaria, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jdpfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jtfhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -395,7 +450,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel6)
                     .addComponent(jlbltotal))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -480,8 +535,13 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         contrato.setTotal(total + flete);
         
         
+         contrato.setFecha(new SimpleDateFormat("yyyy-MM-dd").format(jdpfecha.getDate())+" "+jtfhora.getValue());
+        
         JDFPagarDespacho pagar = new JDFPagarDespacho(new Frame(), isVisible(),contrato, this);
         pagar.setVisible(true);
+        
+       
+       
         
         
         
@@ -514,21 +574,31 @@ public class JIFContrato extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_jlblmensajedeudorMouseExited
 
+    private void jdpfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpfechaActionPerformed
+        // TODO add your handling code here:
+        validagenerar();
+        
+    }//GEN-LAST:event_jdpfechaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtngenerar;
     private javax.swing.JButton jbtnmaquinaria;
+    private org.jdesktop.swingx.JXDatePicker jdpfecha;
     private javax.swing.JLabel jlbldomiciliopart;
     private javax.swing.JTextField jlbldomiciliotrab;
     private javax.swing.JLabel jlblfono;
@@ -538,6 +608,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlbltipoop;
     private javax.swing.JLabel jlbltotal;
     private javax.swing.JTable jtabla;
+    private javax.swing.JFormattedTextField jtfhora;
     private javax.swing.JFormattedTextField jtflete;
     private javax.swing.JFormattedTextField jtfrut;
     // End of variables declaration//GEN-END:variables

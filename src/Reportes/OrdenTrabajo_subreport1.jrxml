@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajo_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0a99e24c-e98f-42d2-b203-5d37a8fb1a74">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idreparacion" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * from public.sp_verificadeudareparacion($P{idreparacion});]]>
+	</queryString>
+	<field name="vabonos" class="java.math.BigDecimal"/>
+	<field name="vtotal" class="java.math.BigDecimal"/>
+	<field name="vdeuda" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="9" y="0" width="100" height="20" uuid="00564de1-dd1a-439e-86d9-a64b10daa0f2"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="12"/>
+				</textElement>
+				<text><![CDATA[RESUMEN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="86" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="109" y="0" width="100" height="20" uuid="15cc611e-6097-4b94-a626-25c97da062e0"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vabonos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="109" y="32" width="100" height="20" uuid="f55b541c-0d7a-4f42-bc26-c9dc06e857f8"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vtotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="78" y="65" width="100" height="20" uuid="d0723493-7056-4fbe-9c7e-26d3225c6c87"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vdeuda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="0" width="99" height="20" uuid="4dc81ac3-d7b7-4c39-9f8f-be301ab6fe13"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="12"/>
+				</textElement>
+				<text><![CDATA[Total Abonado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="32" width="99" height="20" uuid="54de7735-d13e-4b29-85b8-e0aa9c698dcf"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="12"/>
+				</textElement>
+				<text><![CDATA[Total de Repación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="65" width="68" height="20" uuid="f2eaf148-e320-4557-8eef-6de313f9b4cf"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="12"/>
+				</textElement>
+				<text><![CDATA[Deuda total:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+</jasperReport>

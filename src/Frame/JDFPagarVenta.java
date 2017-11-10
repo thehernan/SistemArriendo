@@ -5,6 +5,7 @@
  */
 package Frame;
 
+import Pojos.DetalleCaja;
 import java.text.NumberFormat;
 
 /**
@@ -62,6 +63,11 @@ public class JDFPagarVenta extends javax.swing.JDialog {
         jLabel3.setText("Pago con:");
 
         jtfpagocon.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jtfpagocon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfpagoconActionPerformed(evt);
+            }
+        });
         jtfpagocon.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfpagoconKeyReleased(evt);
@@ -77,7 +83,6 @@ public class JDFPagarVenta extends javax.swing.JDialog {
         jlbltotal.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
         jlbltotal.setText("jLabel2");
 
-        jbtncobrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cobrar.png"))); // NOI18N
         jbtncobrar.setText("Cobrar");
         jbtncobrar.setEnabled(false);
         jbtncobrar.addActionListener(new java.awt.event.ActionListener() {
@@ -103,10 +108,9 @@ public class JDFPagarVenta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jlblmensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jtfpagocon)
-                        .addComponent(jlblvuelto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlbltotal, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)))
+                    .addComponent(jtfpagocon)
+                    .addComponent(jlblvuelto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlbltotal, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
                 .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
@@ -121,7 +125,7 @@ public class JDFPagarVenta extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jtfpagocon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jlblmensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addComponent(jlblmensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -175,9 +179,17 @@ public class JDFPagarVenta extends javax.swing.JDialog {
     private void jbtncobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtncobrarActionPerformed
         // TODO add your handling code here:
          this.dispose();
-        jifventa.setvender();
+         DetalleCaja detcaja= new DetalleCaja();
+         detcaja.setImporte(total);
+         
+        jifventa.setvender(detcaja);
        
     }//GEN-LAST:event_jbtncobrarActionPerformed
+
+    private void jtfpagoconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfpagoconActionPerformed
+        // TODO add your handling code here:
+        jbtncobrar.doClick();
+    }//GEN-LAST:event_jtfpagoconActionPerformed
 
     /**
      * @param args the command line arguments

@@ -95,6 +95,9 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfbuscarKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfbuscarKeyTyped(evt);
+            }
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,6 +160,10 @@ public class JDFBuscarReparacionCliente extends javax.swing.JDialog {
         // TODO add your handling code here:
         jbtnaceptar.doClick();
     }//GEN-LAST:event_jtfbuscarActionPerformed
+
+    private void jtfbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfbuscarKeyTyped
 
     /**
      * @param args the command line arguments

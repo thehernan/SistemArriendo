@@ -119,9 +119,10 @@ public class JIFMaquinaReparacionClient extends javax.swing.JInternalFrame {
             for(Repuesto rep : listrepuesto)
                 repues=repues+rep.getValor();
             
-            total= manoobra+revision+repues;
-            subtotal=total/1.19;
-            iva=total-subtotal;
+            subtotal= manoobra+revision+repues;
+            iva=subtotal*0.19;
+            total=subtotal+iva;
+            
             
             jtfrepuestos.setValue(repues);
 //            jtfrevision.setValue(revision);

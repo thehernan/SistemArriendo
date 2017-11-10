@@ -198,7 +198,7 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         rs=ps.executeQuery();
       
         while (rs.next()){
-            JOptionPane.showMessageDialog(null,"Egreso guardado con exito");	
+            JOptionPane.showMessageDialog(null,"Abono guardado con exito");	
         }
 	
         } catch(Exception e)

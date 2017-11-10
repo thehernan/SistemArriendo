@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -120,7 +121,7 @@ public class DAOReparacion implements Interface.IntReparacion{
         
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertreparacion(?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertreparacion(?,?,?,?)");
         ps.setString(1, repara.getDescripci());    
         ps.setLong(2, repara.getIdmaqui());
         ps.setString(3, estado);
@@ -607,6 +608,60 @@ public class DAOReparacion implements Interface.IntReparacion{
         JOptionPane.showMessageDialog(null, "ERROR EN EL REPORTE", "ERROR",JOptionPane.ERROR_MESSAGE);
         JOptionPane.showMessageDialog(null,ex.getMessage());
         }
+    }
+
+    @Override
+    public void verdeuda(JLabel total, JLabel abono, JLabel deuda,long id) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        
+      
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_verificadeudareparacion(?)");
+        ps.setLong(1, id);
+    
+        rs=ps.executeQuery();
+        
+      
+        
+        if (rs.next()){
+        total.setText(rs.getString("vtotal"));
+        abono.setText(rs.getString("vabonos"));
+        deuda.setText(rs.getString("vdeuda"));
+		
+        }
+     
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOReparacion.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        
+      
     }
     
 }

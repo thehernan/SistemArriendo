@@ -37,11 +37,11 @@ public class DAOVenta implements Interface.IntVenta{
         long id= 0;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertventa(?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertventa(?,?,?,?)");
         ps.setLong(1, venta.getIdcliente());
         ps.setLong(2, venta.getIdempresa());
         ps.setBigDecimal(3, new BigDecimal(venta.getDescuento()));
-   
+        ps.setString(4, venta.getFecha());
     
         
         rs=ps.executeQuery();
@@ -88,10 +88,10 @@ public class DAOVenta implements Interface.IntVenta{
         long id= 0;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertventanocliente(?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertventanocliente(?,?,?)");
         ps.setLong(1, venta.getIdempresa());
         ps.setBigDecimal(2, new BigDecimal(venta.getDescuento()));
-   
+        ps.setString(3, venta.getFecha());
     
         
         rs=ps.executeQuery();

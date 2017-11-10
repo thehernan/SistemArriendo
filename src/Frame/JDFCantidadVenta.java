@@ -57,6 +57,11 @@ public class JDFCantidadVenta extends javax.swing.JDialog {
 
         jLabel1.setText("Cantidad:");
 
+        jtfcantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfcantidadActionPerformed(evt);
+            }
+        });
         jtfcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfcantidadKeyReleased(evt);
@@ -66,7 +71,7 @@ public class JDFCantidadVenta extends javax.swing.JDialog {
             }
         });
 
-        jbtnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept.png"))); // NOI18N
+        jbtnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept2.png"))); // NOI18N
         jbtnaceptar.setText("Aceptar");
         jbtnaceptar.setEnabled(false);
         jbtnaceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -159,6 +164,11 @@ public class JDFCantidadVenta extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_jtfcantidadKeyReleased
+
+    private void jtfcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfcantidadActionPerformed
+        // TODO add your handling code here:
+        jbtnaceptar.doClick();
+    }//GEN-LAST:event_jtfcantidadActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,7 +7,9 @@ package Interface;
 
 import Pojos.Reparacion;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import sun.tools.jar.resources.jar;
 
 /**
  *
@@ -23,4 +25,5 @@ public interface IntReparacion {
     public void updatenoempleado(Reparacion repa);
     public List<Reparacion> searchsensitive (JTable tabla,boolean entreg,String tiop,String cadena); 
     public void print(long id);
+    public void verdeuda(JLabel total,JLabel abono,JLabel deuda,long id);
 }

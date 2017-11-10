@@ -6,14 +6,19 @@
 package Frame;
 
 import Dao.DAOCliente;
+import Dao.DAODetCaja;
 import Dao.DAODetVenta;
 import Dao.DAOVenta;
 import Pojos.Arido;
 import Pojos.Cliente;
+import Pojos.DetalleCaja;
 import Pojos.SingletonEmpresa;
 import Pojos.Venta;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -49,11 +54,23 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         DAODetVenta daodetventa= new DAODetVenta();
         Venta venta = new Venta();
         SingletonEmpresa singletonempresa= SingletonEmpresa.getinstancia();
+        
+        
+          int  hora, minutos, segundos; 
+        java.util.Calendar calendario; 
+        DAODetCaja daodetcaja= new DAODetCaja();
     public JIFVenta() {
         initComponents();
         modelo.setColumnIdentifiers(titulos);
         jtabla.setModel(modelo);
         total=0.0;
+   ///// hora actual
+         calendario = new java.util.GregorianCalendar(); 
+        hora = calendario.get(Calendar.HOUR_OF_DAY); 
+        minutos = calendario.get(Calendar.MINUTE); 
+        segundos = calendario.get(Calendar.SECOND); 
+        jtfhora.setValue(hora+":"+minutos+":"+segundos);
+        jdpfecha.setDate(new Date());
     }
     
     public void setarido(Arido arido){
@@ -72,9 +89,10 @@ public class JIFVenta extends javax.swing.JInternalFrame {
                 
     
     }
-    public void setvender(){
+    public void setvender(DetalleCaja detcaja){
         venta.setIdempresa(singletonempresa.getId());
         venta.setDescuento(0.0);
+        venta.setFecha(new SimpleDateFormat("yyyy-MM-dd").format(jdpfecha.getDate())+" "+jtfhora.getValue());
     if(cliente.getId()!=0){
         /// insert venta con cliente
         venta.setIdcliente(cliente.getId());
@@ -85,8 +103,29 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         venta.setId(daoventa.insertnoclient(venta));
         
         }
+    detcaja.setIdventa(venta.getId());
+    detcaja.setPago(0.0);
+    daodetcaja.insetpaysale(detcaja);
     daodetventa.insert(listarido, venta.getId());
     daoventa.print(venta.getId());
+    nuevo();
+    }
+    public void nuevo(){
+    cliente = new Cliente();
+    jtfrut.setValue(null);
+    jlblrazonsocial.setText("* * *");
+    jlbldominiciliopart.setText("* * *");
+    jlbldirecciontrab.setText("* * *");
+    jdpfecha.setDate(new Date());
+     calendario = new java.util.GregorianCalendar(); 
+    hora = calendario.get(Calendar.HOUR_OF_DAY); 
+    minutos = calendario.get(Calendar.MINUTE); 
+    segundos = calendario.get(Calendar.SECOND); 
+    jtfhora.setValue(hora+":"+minutos+":"+segundos);
+     for (int i = 0; i < jtabla.getRowCount(); i++) {
+        modelo.removeRow(i);
+        i-=1;
+        }
     }
 
     /**
@@ -118,11 +157,11 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         jlbltotal = new javax.swing.JLabel();
         jbtncancelar = new javax.swing.JButton();
         jlblmensajeventa = new javax.swing.JLabel();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        jdpfecha = new org.jdesktop.swingx.JXDatePicker();
         jLabel7 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jtfhora = new javax.swing.JFormattedTextField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -162,6 +201,11 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfrut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfrutActionPerformed(evt);
+            }
+        });
         jtfrut.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfrutKeyReleased(evt);
@@ -280,15 +324,20 @@ public class JIFVenta extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Fecha Entrega:");
 
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
         jLabel8.setText("Hora:");
 
         jLabel9.setText("24H:MM:SS");
+
+        try {
+            jtfhora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jtfhora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfhoraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -301,12 +350,12 @@ public class JIFVenta extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(22, 22, 22)
-                        .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
+                        .addComponent(jdpfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
                         .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(29, 29, 29)
+                        .addComponent(jtfhora, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
                         .addComponent(jLabel9))
                     .addComponent(jbtnagregar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -328,14 +377,16 @@ public class JIFVenta extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jdpfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel8)
+                        .addComponent(jtfhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnagregar)
@@ -388,7 +439,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
 
     private void jbtnvenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnvenderActionPerformed
         // TODO add your handling code here:
-       if(listarido.size()>0){
+       if(listarido.size()>0 && jdpfecha.getDate()!=null){
            JDFPagarVenta pagar=new JDFPagarVenta(new JFrame(),isVisible(),total,this);
             pagar.setVisible(true);
             jlblmensajeventa.setText("");
@@ -429,9 +480,16 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbtncancelarActionPerformed
 
+    private void jtfrutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfrutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfrutActionPerformed
+
+    private void jtfhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfhoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfhoraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -444,10 +502,10 @@ public class JIFVenta extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private javax.swing.JButton jbtnagregar;
     private javax.swing.JButton jbtncancelar;
     private javax.swing.JButton jbtnvender;
+    private org.jdesktop.swingx.JXDatePicker jdpfecha;
     private javax.swing.JLabel jlbldirecciontrab;
     private javax.swing.JLabel jlbldominiciliopart;
     private javax.swing.JLabel jlblmensaje;
@@ -455,6 +513,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlblrazonsocial;
     private javax.swing.JLabel jlbltotal;
     private javax.swing.JTable jtabla;
+    private javax.swing.JFormattedTextField jtfhora;
     private javax.swing.JFormattedTextField jtfrut;
     // End of variables declaration//GEN-END:variables
 }

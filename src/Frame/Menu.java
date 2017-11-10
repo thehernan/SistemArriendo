@@ -388,8 +388,8 @@ public class Menu extends javax.swing.JFrame {
          titulo.setFont(new java.awt.Font("Segoe UI Light", 1, 20));
          
          ////////////////////////////////////////////////////////
-         if(usu.isReparacioncliente()==true){
-         JButton repcliente= new JButton("REP. CLIENTE");
+         if(usu.isNuevarepcliente()==true){
+         JButton repcliente= new JButton("NUE. REP. CLIENTE");
          repcliente.addActionListener(new ActionListener() {
 
              @Override
@@ -436,6 +436,30 @@ public class Menu extends javax.swing.JFrame {
          reppropia.setBounds(20, 140, 200, 50);
          reppropia.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          reppropia.setBackground(new java.awt.Color(255, 204, 51));
+         }
+          if(usu.isReparacioncliente()==true){
+        JButton abono= new JButton("ABONO");
+         abono.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   JIFReparacionesCliente  repcli = new JIFReparacionesCliente();
+                Dimension desktopSize = jdesktop.getSize();
+                Dimension FrameSize = repcli.getSize();
+                repcli.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+                jdesktop.add(repcli);
+                repcli.show();
+                 panelconmin();
+                 
+             }
+         });
+         
+         
+         jpanelcontenedor.add(abono);
+         abono.setBounds(20, 210, 200, 50);
+         abono.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
+         abono.setBackground(new java.awt.Color(255, 204, 51));
          }
       }
       

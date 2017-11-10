@@ -432,7 +432,7 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
 
         if(editar==false){
             //  long id=Long.parseLong(jtabla.getValueAt(jtabla.getSelectedRow(), 0).toString());
-            if(daoMaquinaria.duplicate(0, jtfserie.getText().toUpperCase(), "GUARDAR")==true){
+            if(daoMaquinaria.duplicate(0, jtfserie.getText().toUpperCase(), "GUARDAR",categoria.getId())==true){
                 maquinaria.setPropietario("EMPRESA");
                 maquinaria.setIdempresa(singletonemp.getId());
                 daoMaquinaria.insert(maquinaria);
@@ -445,7 +445,7 @@ public class JIFMaquinaria extends javax.swing.JInternalFrame {
         }    else{
             //                    usuario.setUsuario(jtfusuario.getText());
 
-            if(daoMaquinaria.duplicate(maquinaria.getId(),jtfserie.getText().toUpperCase(), "EDITAR")==true){
+            if(daoMaquinaria.duplicate(maquinaria.getId(),jtfserie.getText().toUpperCase(), "EDITAR",categoria.getId())==true){
                 daoMaquinaria.update(maquinaria);
 
             }else {

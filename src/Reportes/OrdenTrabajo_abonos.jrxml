@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajo_abonos" language="groovy" pageWidth="340" pageHeight="802" columnWidth="340" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="511ce948-8870-43cb-8d66-5104ff68fcff">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idreparacion" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT  importe, observacion, fecha
+  FROM public.detalle_caja WHERE id_reparacion=$P{idreparacion};]]>
+	</queryString>
+	<field name="importe" class="java.math.BigDecimal"/>
+	<field name="observacion" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Timestamp"/>
+	<variable name="importe_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="0f5d57c7-f141-43bb-9990-b4ecbd0b3641"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ABONOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="73" height="20" uuid="e87c261b-c188-4812-9f9a-8720c5cd703c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="73" y="0" width="167" height="20" uuid="b85c4ec9-f319-46a5-b879-1c4648d8ef09"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="240" y="0" width="100" height="20" uuid="000c055a-bd8a-4874-8c4f-b937cf417977"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="73" height="20" uuid="66da3a27-988d-432a-91f8-8631f44fb981"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="0" width="167" height="20" uuid="f9c5f5cb-c269-46d4-827a-2cce3e8adfca"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[ Observacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="0" width="100" height="20" uuid="8e7dc39b-a49b-4893-935e-754fc743b223"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="73" height="20" uuid="ff14b31e-1853-4f66-8b7e-e712d24bc4d8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="73" y="0" width="167" height="20" uuid="2c7da448-7a70-4518-bfb9-c7c3ceaeb610"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="240" y="0" width="100" height="20" uuid="f167ab95-f9fa-4a51-9fb7-a0693a44bbe0"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="0" y="0" width="73" height="20" uuid="7f66ac1b-6525-478c-8939-b6db829c2b12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="0" width="167" height="20" uuid="ea8210a3-4913-4f3d-9109-df73fde3c501"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<textFieldExpression><![CDATA[ $F{observacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="100" height="20" uuid="d7e19cf4-57aa-4c57-a9b9-75dc62be3c6b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

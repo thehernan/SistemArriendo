@@ -17,8 +17,17 @@ public class DetalleCaja {
     private long idventa;
     private String observacion;
     private long idreparir;
+    private String fecha;
     public String getObservacion() {
         return observacion;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public long getIdreparir() {

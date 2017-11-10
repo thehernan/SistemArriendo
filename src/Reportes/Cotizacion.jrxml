@@ -65,19 +65,19 @@ detalle_cotizacion.valordia*detalle_cotizacion.dias as total
 			</image>
 			<image>
 				<reportElement x="272" y="13" width="70" height="51" uuid="ce229dff-264b-451a-b87d-94c8cf80e75c"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\icono1.png"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\icono1.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="342" y="13" width="62" height="48" uuid="d9e8da5b-d0d9-4be1-8933-bc49a1ab92da"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\icono2.png"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\icono2.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="404" y="13" width="80" height="51" uuid="4619eece-5c08-4b75-a5fd-bf2ffd83c968"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\icono3.png"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\icono3.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="467" y="13" width="63" height="51" uuid="a04018af-0738-4f90-bf1b-6e74344991b7"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\icono4.png"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\icono4.png"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="110" y="92" width="337" height="20" uuid="5bcb7158-8c72-481c-ba18-42c74ab44b25"/>

@@ -15,12 +15,21 @@ public class Venta {
     private long idempresa;
     private boolean extornado;
     private Double descuento;
+    private String fecha;
 
     public Venta() {
     }
 
     public long getId() {
         return id;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public void setId(long id) {

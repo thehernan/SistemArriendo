@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Contrato {
     private long id;
     private long idempresa;
-    private Date fecha;
+    private String fecha;
     private long idcliente;
     private String tipodoc;
     private Double flete;
@@ -23,13 +23,15 @@ public class Contrato {
     public Contrato() {
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+
 
     public long getId() {
         return id;

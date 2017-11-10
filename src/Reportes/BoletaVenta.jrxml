@@ -41,8 +41,8 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 	</background>
 	<title>
 		<band height="241" splitType="Stretch">
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="379" y="78" width="176" height="17" uuid="23253e32-9bc0-466c-9507-2492c100a6b8"/>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="426" y="95" width="129" height="17" uuid="23253e32-9bc0-466c-9507-2492c100a6b8"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
@@ -167,6 +167,10 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 				</textElement>
 				<text><![CDATA[Sirvace Recibir Conforme lo Siguiente:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="299" y="95" width="115" height="17" uuid="021bb437-5ea3-41b4-b251-bf59b6d86f37"/>
+				<text><![CDATA[Fecha/ Hora de Entrega:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
@@ -237,6 +241,26 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 			</textField>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="152">
+			<staticText>
+				<reportElement x="2" y="30" width="113" height="20" uuid="775e19ff-c375-4c44-afa8-de288e20a471"/>
+				<text><![CDATA[Recibi conforme de don:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="115" y="30" width="355" height="20" uuid="8b9b4dd6-8531-452a-a93a-23378163b2e3"/>
+				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="325" y="109" width="212" height="1" uuid="22daca39-5fbf-468a-b912-58bb4b0dac17"/>
+			</line>
+			<textField>
+				<reportElement x="326" y="110" width="211" height="20" uuid="a583aeca-b743-4dfa-99a0-c89664c9e652"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch">
 			<textField pattern="#,##0">
