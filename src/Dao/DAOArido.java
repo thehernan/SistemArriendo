@@ -294,7 +294,7 @@ public class DAOArido implements Interface.IntArido{
     }
 
     @Override
-    public boolean duplicate(long id, String cadena, String op) {
+    public boolean duplicate(long id, String cadena, String op,long idcat) {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
@@ -302,12 +302,12 @@ public class DAOArido implements Interface.IntArido{
          boolean duplicado= false;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_duplicatearidos(?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_duplicatearidos(?,?,?,?,?)");
         ps.setLong(1, id);
         ps.setString(2, cadena);
         ps.setString(3,op);
         ps.setLong(4, empresa.getId());
-        
+        ps.setLong(5, idcat);
         rs=ps.executeQuery();
      
         while (rs.next()){
@@ -395,6 +395,10 @@ public class DAOArido implements Interface.IntArido{
             listarido.add(arido);
 		
         }
+        if(modelo.getRowCount()>0)
+            tabla.setRowSelectionInterval(0, 0);
+            
+                
 	
         } catch(Exception e)
             {

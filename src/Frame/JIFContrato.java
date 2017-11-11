@@ -101,11 +101,13 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     }
     }
     
-    public void setpagar(DetalleCaja detcaja){
+    public void setpagar(DetalleCaja detcaja,Double desc){
         cliente.setDomiciliatrab(jlbldomiciliotrab.getText());
         daocliente.updatenophoto(cliente);
         contrato.setTipodoc(tipodoc);
+        contrato.setDescuento(desc);
         contrato.setId(daocontrato.insert(contrato));  /// devolver el id para poder imprimir      
+        
         daodetcontrato.insert(listmaquinaria,contrato.getId());
         daocontrato.print(contrato.getId()); 
         

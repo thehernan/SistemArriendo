@@ -20,6 +20,6 @@ public interface IntArido {
     public void update(Arido arido);
     public void delete(Long id);
     public void print();
-    public boolean duplicate(long id,String cadena,String op);
+    public boolean duplicate(long id,String cadena,String op,long idcat);
      public List<Arido> searchsensitive(JTable tabla,long idcat,String op,String caden); 
 }

@@ -19,8 +19,17 @@ public class Contrato {
     private String tipodoc;
     private Double flete;
     private Double total;
+    private Double descuento;
 
     public Contrato() {
+    }
+
+    public Double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Double descuento) {
+        this.descuento = descuento;
     }
 
     public String getFecha() {

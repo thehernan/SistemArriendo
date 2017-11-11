@@ -416,11 +416,11 @@ public class JIFAridos extends javax.swing.JInternalFrame {
     private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
         // TODO add your handling code here:
        System.out.println("getselect"+jcbbuscarcate.getSelectedIndex());
-        categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
-        if(jcbbuscarcate.getSelectedIndex()!=0)
-        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"CONCATEGORIA",jtfbuscar.getText().toUpperCase());
-        else
-        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"SINCATEGORIA",jtfbuscar.getText().toUpperCase());
+//        categoriab=listcategoriabusc.get(jcbbuscarcate.getSelectedIndex());
+//        if(jcbbuscarcate.getSelectedIndex()!=0)
+//        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"CONCATEGORIA",jtfbuscar.getText().toUpperCase());
+//        else
+//        listaridos=daoaridos.searchsensitive(jtabla, categoriab.getId(),"SINCATEGORIA",jtfbuscar.getText().toUpperCase());
         
         
         if(jtabla.getSelectedRow()>=0){
@@ -469,7 +469,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         arido.setIdcatgoria(categoria.getId());
         if(editar==false){
             //  long id=Long.parseLong(jtabla.getValueAt(jtabla.getSelectedRow(), 0).toString());
-            if(daoaridos.duplicate(0, jtfdescripcion.getText().toUpperCase(), "GUARDAR")==true){
+            if(daoaridos.duplicate(0, jtfdescripcion.getText().toUpperCase(), "GUARDAR",categoria.getId())==true){
 //                arido.setIdempresa(singletonemp.getId());
                 daoaridos.insert(arido);
 
@@ -481,7 +481,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         }    else{
             //                    usuario.setUsuario(jtfusuario.getText());
             
-            if(daoaridos.duplicate(arido.getId(), jtfdescripcion.getText(), "EDITAR")==true){
+            if(daoaridos.duplicate(arido.getId(), jtfdescripcion.getText(), "EDITAR",categoria.getId())==true){
                 daoaridos.update(arido);
 
             }else {
