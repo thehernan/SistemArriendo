@@ -43,7 +43,7 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertdetcajaguia(?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertdetcajaguia(?,?,?,?,?,?)");
         ps.setBigDecimal(1, new BigDecimal(detcaja.getImporte()));
         ps.setBigDecimal(2,new BigDecimal(detcaja.getPago()));
         ps.setLong(3, detcaja.getIdcontrato());

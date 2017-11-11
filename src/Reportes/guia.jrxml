@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb238bb3-4042-4fe8-9442-d2fa9d1ee067">
 	<property name="ireport.zoom" value="1.4641000000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="25"/>
+	<property name="ireport.y" value="62"/>
 	<parameter name="idguia" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -14,7 +14,7 @@ then concat('000',guia.id_guia) when length(guia.id_guia::text)=4 then concat('0
 when length(guia.id_guia::text)=5 then concat('0',guia.id_guia)else guia.id_guia::text end as cod ,guia.tipoop,guia.fecha, 
 concat(cliente.nombre,' ',cliente.apellido) as client, cliente.rut,cliente.domicilioparticular, cliente.telefono,
 concat(maquina.maquina,' ',maquina.marca,' ',maquina.serie,' ',maquina.modelo)as maq,detalle_guia.importe,
-guia.total  from guia inner join miempresa on miempresa.id_empresa= guia.id_empresa 
+guia.total, guia.descuento,guia.flete  from guia inner join miempresa on miempresa.id_empresa= guia.id_empresa 
 inner join cliente on cliente.id_cliente=guia.id_cliente inner join detalle_guia on guia.id_guia=
 detalle_guia.id_guia inner join maquina on maquina.id_maquina=detalle_guia.id_maquina where guia.id_guia = $P{idguia};]]>
 	</queryString>
@@ -33,6 +33,8 @@ detalle_guia.id_guia inner join maquina on maquina.id_maquina=detalle_guia.id_ma
 	<field name="maq" class="java.lang.String"/>
 	<field name="importe" class="java.math.BigDecimal"/>
 	<field name="total" class="java.math.BigDecimal"/>
+	<field name="descuento" class="java.math.BigDecimal"/>
+	<field name="flete" class="java.math.BigDecimal"/>
 	<variable name="importe_1" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
 	</variable>
@@ -253,26 +255,66 @@ detalle_guia.id_guia inner join maquina on maquina.id_maquina=detalle_guia.id_ma
 		</band>
 	</detail>
 	<summary>
-		<band height="42" splitType="Stretch">
+		<band height="67" splitType="Stretch">
 			<rectangle>
-				<reportElement x="384" y="0" width="78" height="20" uuid="ae9f1117-47ad-4609-982c-2ad1b89c10a2"/>
+				<reportElement x="384" y="40" width="78" height="20" uuid="ae9f1117-47ad-4609-982c-2ad1b89c10a2"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="463" y="0" width="92" height="20" uuid="629b4cfe-815b-4c6e-b9d2-28583f92c699"/>
+				<reportElement x="463" y="40" width="92" height="20" uuid="629b4cfe-815b-4c6e-b9d2-28583f92c699"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="385" y="0" width="78" height="20" uuid="96373b27-1abd-4189-a132-908002c81ef9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="463" y="0" width="92" height="20" uuid="2cf3eb7d-87f7-4463-8ea3-c7e19f1bd692"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="385" y="20" width="77" height="20" uuid="f01f2e36-970b-4a85-8335-472a8f72583d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="463" y="20" width="92" height="20" uuid="076e45c0-4c81-4c6f-8174-641f7f264df8"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="384" y="0" width="78" height="20" uuid="bca2ed39-0ebe-4e21-9a68-81d9476b77fc"/>
+				<reportElement x="386" y="40" width="77" height="20" uuid="bca2ed39-0ebe-4e21-9a68-81d9476b77fc"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Total $.]]></text>
 			</staticText>
 			<textField pattern="#,##0">
-				<reportElement x="463" y="0" width="92" height="20" uuid="21066f7d-3a09-454a-ad83-5c5599e3ccd4"/>
+				<reportElement x="463" y="0" width="92" height="20" uuid="c6b758ec-7af3-4a4d-90d4-a60b46ae4cb3"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{importe_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{flete}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="463" y="20" width="92" height="20" uuid="4495858a-de51-4c14-9e96-68a7b34fa675"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="384" y="0" width="79" height="20" uuid="8dc5a0a8-f9b7-446f-a2e2-f17d20e04309"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flete:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="384" y="20" width="78" height="20" uuid="9ccb1027-babe-4cde-adda-7552797741ee"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descuento:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="463" y="40" width="92" height="20" uuid="a52f99ff-70be-4aeb-a93e-19b2f4cf6d84"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{importe}+$F{flete})-$F{descuento}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

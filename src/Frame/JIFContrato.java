@@ -19,6 +19,7 @@ import Pojos.Maquinaria;
 import Pojos.SingletonEmpresa;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,8 +61,8 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         DAODetGuia daodetguia = new DAODetGuia();
         DAODetCaja daodetcaja= new DAODetCaja();
         String tipodoc;
-        int  hora, minutos, segundos; 
-        java.util.Calendar calendario; 
+        
+    
     public JIFContrato(String tipodoc) {
         initComponents();
         modelo.setColumnIdentifiers(titulos);
@@ -74,11 +75,10 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         jdpfecha.setDate(new Date());
         
         ///// hora actual
-         calendario = new java.util.GregorianCalendar(); 
-        hora = calendario.get(Calendar.HOUR_OF_DAY); 
-        minutos = calendario.get(Calendar.MINUTE); 
-        segundos = calendario.get(Calendar.SECOND); 
-        jtfhora.setValue(hora+":"+minutos+":"+segundos);
+        Date fecha = new Date();
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        jtfhora.setValue(df.format(fecha));
+        
     }
     
     public void setllenarmaquinaria(Maquinaria maq){
@@ -136,6 +136,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         total=0.0;
         jtflete.setValue(0);
         jdpfecha.setDate(new Date());
+        jlblmensajedeudor.setText("");
     }
             
     
@@ -389,6 +390,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfhora.setText("");
 
         jLabel11.setText("H24:MM:SS");
 
@@ -558,13 +560,18 @@ public class JIFContrato extends javax.swing.JInternalFrame {
 
     private void jlblmensajedeudorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblmensajedeudorMousePressed
         // TODO add your handling code here:
-        jlblmensajedeudor.setText("Generando Reporte ....");
+          if(daocliente.verifyclientdebtor(cliente.getId())==true){
+            jlblmensajedeudor.setText("Generando Reporte ....");
+       }
+       
     }//GEN-LAST:event_jlblmensajedeudorMousePressed
 
     private void jlblmensajedeudorMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblmensajedeudorMouseReleased
         // TODO add your handling code here:
+         if(daocliente.verifyclientdebtor(cliente.getId())==true){
         daocliente.printdebtor(cliente.getId());
         jlblmensajedeudor.setText("Reporte generado correctamente");
+         }
     }//GEN-LAST:event_jlblmensajedeudorMouseReleased
 
     private void jlblmensajedeudorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblmensajedeudorMouseExited

@@ -12,6 +12,7 @@
 	<field name="vtotal" class="java.math.BigDecimal"/>
 	<field name="vabonos" class="java.math.BigDecimal"/>
 	<field name="vdeuda" class="java.math.BigDecimal"/>
+	<field name="vdesc" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -25,14 +26,14 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Segoe UI Light" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Resumen:]]></text>
+				<text><![CDATA[Resumen Deuda Arriendo:]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="62" splitType="Stretch">
+		<band height="86" splitType="Stretch">
 			<rectangle>
-				<reportElement x="8" y="0" width="187" height="60" uuid="9333b282-5d03-4fc3-a7e8-6cf570c1b23b"/>
+				<reportElement x="8" y="0" width="187" height="80" uuid="9333b282-5d03-4fc3-a7e8-6cf570c1b23b"/>
 			</rectangle>
 			<textField pattern="#,##0">
 				<reportElement x="72" y="0" width="121" height="20" uuid="4f01dc65-2191-40cf-8a3b-68f62d8dcaf3"/>
@@ -42,14 +43,14 @@
 				<textFieldExpression><![CDATA[$F{vtotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="45" y="20" width="148" height="20" uuid="2bd8c809-0fb3-4a01-940b-69fdc9574556"/>
+				<reportElement x="42" y="20" width="151" height="20" uuid="2bd8c809-0fb3-4a01-940b-69fdc9574556"/>
 				<textElement>
 					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{vabonos}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="82" y="40" width="110" height="20" uuid="ef50a858-edf3-4b08-bf18-b7a1d48f4198"/>
+				<reportElement x="79" y="60" width="114" height="20" uuid="ef50a858-edf3-4b08-bf18-b7a1d48f4198"/>
 				<textElement>
 					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
@@ -63,19 +64,33 @@
 				<text><![CDATA[Total Contrato:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="20" width="34" height="20" uuid="1cbbca29-561e-484b-a776-8b2dbafaeb98"/>
+				<reportElement x="8" y="20" width="34" height="20" uuid="1cbbca29-561e-484b-a776-8b2dbafaeb98"/>
 				<textElement>
 					<font fontName="Segoe UI Light" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Abonos: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="40" width="71" height="20" uuid="43f4c6b7-e957-44bb-ab61-16948f32098e"/>
+				<reportElement x="8" y="60" width="71" height="20" uuid="43f4c6b7-e957-44bb-ab61-16948f32098e"/>
 				<textElement>
 					<font fontName="Segoe UI Light" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Deuda Contrato: ]]></text>
+				<text><![CDATA[Deuda Arriendo: ]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="8" y="40" width="47" height="20" uuid="61c3a6f9-98ec-4494-9bee-d35e7d0615da"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descuentos:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="55" y="40" width="138" height="20" uuid="6a8e4c90-7a55-49bc-9975-ea97f3a1262d"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vdesc}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 </jasperReport>

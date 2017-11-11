@@ -51,7 +51,7 @@ public class DAOContrato implements  Interface.IntContrato{
         ps.setBigDecimal(4,new BigDecimal(contrato.getTotal()));
         ps.setString(5, contrato.getTipodoc());
         ps.setString(6, contrato.getFecha());
-        ps.setDouble(7, contrato.getDescuento());
+        ps.setBigDecimal(7,new BigDecimal(contrato.getDescuento()));
         
         rs=ps.executeQuery();
       

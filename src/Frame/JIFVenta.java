@@ -14,6 +14,7 @@ import Pojos.Cliente;
 import Pojos.DetalleCaja;
 import Pojos.SingletonEmpresa;
 import Pojos.Venta;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,8 +57,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         SingletonEmpresa singletonempresa= SingletonEmpresa.getinstancia();
         
         
-          int  hora, minutos, segundos; 
-        java.util.Calendar calendario; 
+        
         DAODetCaja daodetcaja= new DAODetCaja();
     public JIFVenta() {
         initComponents();
@@ -65,11 +65,9 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         jtabla.setModel(modelo);
         total=0.0;
    ///// hora actual
-         calendario = new java.util.GregorianCalendar(); 
-        hora = calendario.get(Calendar.HOUR_OF_DAY); 
-        minutos = calendario.get(Calendar.MINUTE); 
-        segundos = calendario.get(Calendar.SECOND); 
-        jtfhora.setValue(hora+":"+minutos+":"+segundos);
+        Date fecha = new Date();
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        jtfhora.setValue(df.format(fecha));
         jdpfecha.setDate(new Date());
     }
     
@@ -117,11 +115,12 @@ public class JIFVenta extends javax.swing.JInternalFrame {
     jlbldominiciliopart.setText("* * *");
     jlbldirecciontrab.setText("* * *");
     jdpfecha.setDate(new Date());
-     calendario = new java.util.GregorianCalendar(); 
-    hora = calendario.get(Calendar.HOUR_OF_DAY); 
-    minutos = calendario.get(Calendar.MINUTE); 
-    segundos = calendario.get(Calendar.SECOND); 
-    jtfhora.setValue(hora+":"+minutos+":"+segundos);
+     
+     ///// hora actual
+        Date fecha = new Date();
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        jtfhora.setValue(df.format(fecha));
+    
      for (int i = 0; i < jtabla.getRowCount(); i++) {
         modelo.removeRow(i);
         i-=1;

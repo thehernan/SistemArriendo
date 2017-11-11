@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EstadoPago_Reparacion" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="32e794e9-67ec-4a4d-abf3-d5d3c34069dc">
+	<queryString language="SQL">
+		<![CDATA[sELECT reparacion.id_reparacion,case when length(reparacion.id_reparacion::text)=1 then concat('N°. 00000',reparacion.id_reparacion)
+when length(reparacion.id_reparacion::text)=2 then concat('N°. 0000',reparacion.id_reparacion) when length(reparacion.id_reparacion::text)=3 
+then concat('N°. 000',reparacion.id_reparacion) when length(reparacion.id_reparacion::text)=4 then concat('N°. 00',reparacion.id_reparacion)
+when length(reparacion.id_reparacion::text)=5 then concat('N°. 0',reparacion.id_reparacion)else concat('N°. ',reparacion.id_reparacion) end,
+ concat(cliente.nombre,' ',cliente.apellido),to_char(reparacion.fecha,'YYYY-MM-DD HH24:MI:SS'),total,
+coalesce(sum(detalle_caja.importe),0) as abono,total-coalesce(sum(detalle_caja.importe),0) as deuda
+  FROM public.reparacion inner join cliente on cliente.id_cliente=
+  reparacion.id_cliente left join detalle_caja on detalle_caja.id_reparacion=reparacion.id_reparacion
+   where    propiedad='CLIENTE' group by reparacion.id_reparacion,cliente.nombre,cliente.apellido,reparacion.fecha,total order by id_reparacion DESC;]]>
+	</queryString>
+	<field name="id_reparacion" class="java.lang.Long"/>
+	<field name="concat" class="java.lang.String"/>
+	<field name="to_char" class="java.lang.String"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="abono" class="java.math.BigDecimal"/>
+	<field name="deuda" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

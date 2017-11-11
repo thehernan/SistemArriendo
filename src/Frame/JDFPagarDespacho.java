@@ -32,6 +32,28 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
         this.jifcontrato = jifcontrato;
         this.setLocationRelativeTo(null);
     }
+        public void valida(){
+        
+          try {
+            Double abono=Double.parseDouble(jtfabono.getText());
+            Double vuelto = 0.0;
+            Double desc = Double.parseDouble(jtfdescuento.getText());
+            if(abono <= contrato.getTotal() && abono>=0 && desc <= contrato.getTotal()){
+           
+            jlblmensaje.setText("");
+            jbtngenerar.setEnabled(true);
+            }else {
+            jlblmensaje.setText("Ingrese un monto valido");
+            jbtngenerar.setEnabled(false);
+            }
+            
+        } catch (Exception e) {
+             jlblmensaje.setText("Ingrese un monto valido");
+             jbtngenerar.setEnabled(false);
+        }
+        
+        
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,6 +88,11 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
 
         jLabel2.setText("Abono:");
 
+        jtfabono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfabonoActionPerformed(evt);
+            }
+        });
         jtfabono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfabonoKeyReleased(evt);
@@ -91,7 +118,15 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
 
         jLabel3.setText("Desc.:");
 
+        jtfdescuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfdescuentoActionPerformed(evt);
+            }
+        });
         jtfdescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfdescuentoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtfdescuentoKeyTyped(evt);
             }
@@ -174,23 +209,8 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
 
     private void jtfabonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfabonoKeyReleased
         // TODO add your handling code here:
-         try {
-            Double abono=Double.parseDouble(jtfabono.getText());
-            Double vuelto = 0.0;
-            Double desc = Double.parseDouble(jtfdescuento.getText());
-            if(abono <= contrato.getTotal() && abono>=0 && desc> contrato.getTotal()){
-           
-            jlblmensaje.setText("");
-            jbtngenerar.setEnabled(true);
-            }else {
-            jlblmensaje.setText("Ingrese un monto valido");
-            jbtngenerar.setEnabled(false);
-            }
-            
-        } catch (Exception e) {
-             jlblmensaje.setText("Ingrese un monto valido");
-             jbtngenerar.setEnabled(false);
-        }
+         valida();
+       
     }//GEN-LAST:event_jtfabonoKeyReleased
 
     private void jbtngenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtngenerarActionPerformed
@@ -216,6 +236,21 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
         evt.consume();
         }  
     }//GEN-LAST:event_jtfdescuentoKeyTyped
+
+    private void jtfdescuentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfdescuentoKeyReleased
+        // TODO add your handling code here:
+        valida();
+    }//GEN-LAST:event_jtfdescuentoKeyReleased
+
+    private void jtfdescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfdescuentoActionPerformed
+        // TODO add your handling code here:
+        jbtngenerar.doClick();
+    }//GEN-LAST:event_jtfdescuentoActionPerformed
+
+    private void jtfabonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfabonoActionPerformed
+        // TODO add your handling code here:
+        jbtngenerar.doClick();
+    }//GEN-LAST:event_jtfabonoActionPerformed
 
     /**
      * @param args the command line arguments
