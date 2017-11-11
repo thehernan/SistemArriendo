@@ -116,7 +116,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
          daoguia.print(id);
          
         detcaja.setIdcontrato(contrato.getId());
-        daodetcaja.insertpaycontrato(detcaja);  
+        daodetcaja.insertpaycontrato(detcaja,desc);  
     }
     public void nuevo(){
         jtfrut.setText("");

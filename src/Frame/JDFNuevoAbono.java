@@ -34,9 +34,28 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.contrato=contrato;
-        daocontrato.debtor(contrato.getId(), jtftotal, jtfabono, jtfdeuda);
+        daocontrato.debtor(contrato.getId(), jtftotal, jtfabono, jtfdeuda,jtfdescuento);
         this.setLocationRelativeTo(null);
     }
+     public void validacobro(){
+      try {
+            Double deuda=Double.parseDouble(jtfdeuda.getValue().toString());
+            Double paga =Double.parseDouble(jtfnuevoabono.getText());
+            Double desc= Double.parseDouble(jtfdescuento.getText());
+            if(deuda >= paga && deuda >=desc){
+               jbtnabonar.setEnabled(true);
+               jlblmensaje.setText("");
+            }else {
+            jbtnabonar.setEnabled(false);
+            jlblmensaje.setText("Ingrese cantidad valida");
+            }
+            
+        } catch (Exception e) {
+            jbtnabonar.setEnabled(false);
+             jlblmensaje.setText("Ingrese cantidad valida");
+        }
+     
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,6 +79,10 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtfaobservacion = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        jtfdescuento = new javax.swing.JFormattedTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jtfnuevodesc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -104,13 +127,28 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
         jtfaobservacion.setRows(5);
         jScrollPane1.setViewportView(jtfaobservacion);
 
+        jLabel6.setText("Desc.:");
+
+        jtfdescuento.setEnabled(false);
+
+        jLabel7.setText("Nuevo desc.:");
+
+        jtfnuevodesc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfnuevodescKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfnuevodescKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtnabonar))
                     .addGroup(layout.createSequentialGroup()
@@ -120,16 +158,25 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(23, 23, 23)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                            .addComponent(jtftotal)
-                            .addComponent(jtfdeuda)
-                            .addComponent(jtfabono)
-                            .addComponent(jtfnuevoabono)
-                            .addComponent(jlblmensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtftotal)
+                                    .addComponent(jtfdeuda)
+                                    .addComponent(jtfabono)
+                                    .addComponent(jtfnuevoabono)
+                                    .addComponent(jtfdescuento)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlblmensaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtfnuevodesc))))))
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,6 +190,10 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jtfabono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jtfdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jtfdeuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -150,10 +201,17 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtfnuevoabono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlblmensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jtfnuevodesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jlblmensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -166,34 +224,21 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
 
     private void jbtnabonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnabonarActionPerformed
         // TODO add your handling code here:
-        Double paga =Double.parseDouble(jtfnuevoabono.getText().toString());
+        Double paga =Double.parseDouble(jtfnuevoabono.getText());
+        double desc= Double.parseDouble(jtfdescuento.getText());
          detcaja.setIdcontrato(contrato.getId());
          detcaja.setImporte(paga);
          detcaja.setPago(0.0);
          detcaja.setObservacion(jtfaobservacion.getText().toUpperCase());
-        daodetcaja.insertpaycontrato(detcaja);
+        daodetcaja.insertpaycontrato(detcaja,desc);
         this.dispose();
         JOptionPane.showMessageDialog(null, "Abonado con exito");
     }//GEN-LAST:event_jbtnabonarActionPerformed
 
     private void jtfnuevoabonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfnuevoabonoKeyReleased
         // TODO add your handling code here:
-        try {
-            Double deuda=Double.parseDouble(jtfdeuda.getValue().toString());
-            Double paga =Double.parseDouble(jtfnuevoabono.getText().toString());
-           
-            if(deuda >= paga ){
-               jbtnabonar.setEnabled(true);
-               jlblmensaje.setText("");
-            }else {
-            jbtnabonar.setEnabled(false);
-            jlblmensaje.setText("Ingrese cantidad valida");
-            }
-            
-        } catch (Exception e) {
-            jbtnabonar.setEnabled(false);
-             jlblmensaje.setText("Ingrese cantidad valida");
-        }
+        validacobro();
+       
        
         
         
@@ -208,6 +253,20 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
             evt.consume();
 }
     }//GEN-LAST:event_jtfnuevoabonoKeyTyped
+
+    private void jtfnuevodescKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfnuevodescKeyTyped
+        // TODO add your handling code here:
+             char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) 
+        && (caracter != KeyEvent.VK_BACK_SPACE)
+        && (caracter != '-' || jtfnuevoabono.getText().contains("-")) ) 
+            evt.consume();
+    }//GEN-LAST:event_jtfnuevodescKeyTyped
+
+    private void jtfnuevodescKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfnuevodescKeyReleased
+        // TODO add your handling code here:
+        validacobro();
+    }//GEN-LAST:event_jtfnuevodescKeyReleased
 
     /**
      * @param args the command line arguments
@@ -257,13 +316,17 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnabonar;
     private javax.swing.JLabel jlblmensaje;
     private javax.swing.JFormattedTextField jtfabono;
     private javax.swing.JTextArea jtfaobservacion;
+    private javax.swing.JFormattedTextField jtfdescuento;
     private javax.swing.JFormattedTextField jtfdeuda;
     private javax.swing.JTextField jtfnuevoabono;
+    private javax.swing.JTextField jtfnuevodesc;
     private javax.swing.JFormattedTextField jtftotal;
     // End of variables declaration//GEN-END:variables
 }

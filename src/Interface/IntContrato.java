@@ -20,7 +20,8 @@ public interface IntContrato {
     public void print(long id);
     public List<Contrato> view (JTable tabla,long idempre,boolean activo,String tipodoc); 
     public List<DetalleContrato> viewpay(List<DetalleContrato> listdetc,JTable tabla,JFormattedTextField total);
-    public void debtor(long icontr,JFormattedTextField total,JFormattedTextField abono, JFormattedTextField deuda);
+    public void debtor(long icontr,JFormattedTextField total,JFormattedTextField abono, JFormattedTextField deuda
+    ,JFormattedTextField descuento);
 //    public void pay();
     public List<Contrato> searchsensitive(JTable tabla,long idempre,String tipoB,long cod,String cli,boolean activo);
     public boolean validateedit(long idcontr);

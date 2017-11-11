@@ -35,7 +35,7 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
     SingletonEmpresa singletonempresa = SingletonEmpresa.getinstancia();
 
     @Override
-    public void insertpaycontrato(DetalleCaja detcaja) {
+    public void insertpaycontrato(DetalleCaja detcaja,double desc) {
 //        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
@@ -49,6 +49,7 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         ps.setLong(3, detcaja.getIdcontrato());
         ps.setString(4, detcaja.getObservacion());
         ps.setLong(5, singletonempresa.getId());
+        ps.setBigDecimal(6,new BigDecimal(desc));
         rs=ps.executeQuery();
       
 //        while (rs.next()){

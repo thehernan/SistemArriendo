@@ -227,7 +227,7 @@ public class JDFPagarDevolucion extends javax.swing.JDialog {
         detallecaja.setImporte(abono);
         detallecaja.setPago(0.0);
         detallecaja.setObservacion(jtaobservacion.getText().toUpperCase());
-        daodetcaja.insertpaycontrato(detallecaja);
+//        daodetcaja.insertpaycontrato(detallecaja);
         jifecojo.setbuscardetcontrato();
         this.dispose();
         daoguia.print(id);

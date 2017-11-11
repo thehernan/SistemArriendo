@@ -14,7 +14,7 @@ import javax.swing.JTable;
  * @author info2017
  */
 public interface IntDetalleCaja {
-    public void insertpaycontrato(DetalleCaja detcaja);
+    public void insertpaycontrato(DetalleCaja detcaja,double desc);
     public void insetpaysale(DetalleCaja detcaja);
     public void insertdischarge(DetalleCaja detcaja);
     public void insertrepair(DetalleCaja detcaja);

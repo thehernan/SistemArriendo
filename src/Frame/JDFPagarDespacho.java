@@ -177,8 +177,8 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
          try {
             Double abono=Double.parseDouble(jtfabono.getText());
             Double vuelto = 0.0;
-        
-            if(abono <= contrato.getTotal() && abono>=0){
+            Double desc = Double.parseDouble(jtfdescuento.getText());
+            if(abono <= contrato.getTotal() && abono>=0 && desc> contrato.getTotal()){
            
             jlblmensaje.setText("");
             jbtngenerar.setEnabled(true);

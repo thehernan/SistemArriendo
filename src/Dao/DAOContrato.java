@@ -44,14 +44,14 @@ public class DAOContrato implements  Interface.IntContrato{
         long id= 0;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertcontrato(?,?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertcontrato(?,?,?,?,?,?,?)");
         ps.setLong(1, contrato.getIdempresa());
         ps.setLong(2, contrato.getIdcliente());
         ps.setBigDecimal(3,new BigDecimal(contrato.getFlete()));
         ps.setBigDecimal(4,new BigDecimal(contrato.getTotal()));
         ps.setString(5, contrato.getTipodoc());
         ps.setString(6, contrato.getFecha());
-    
+        ps.setDouble(7, contrato.getDescuento());
         
         rs=ps.executeQuery();
       
@@ -271,7 +271,8 @@ public class DAOContrato implements  Interface.IntContrato{
     }
 
     @Override
-    public void debtor(long idcont,JFormattedTextField total, JFormattedTextField abono, JFormattedTextField deuda) {
+    public void debtor(long idcont,JFormattedTextField total, JFormattedTextField abono, JFormattedTextField deuda,
+    JFormattedTextField descuento) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
          Connection c =null;
         PreparedStatement ps= null;
@@ -286,11 +287,11 @@ public class DAOContrato implements  Interface.IntContrato{
         
         rs=ps.executeQuery();
       
-        while (rs.next()){
+        if (rs.next()){
            total.setValue(rs.getLong("vtotal"));
            abono.setValue(rs.getLong("vabonos"));
            deuda.setValue(rs.getLong("vdeuda"));
-           
+           descuento.setValue(rs.getLong("vdesc"));
         }
 	
         } catch(Exception e)

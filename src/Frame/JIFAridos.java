@@ -39,7 +39,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         listcategoria = daocategoria.jcombobox(jcbcategoria, "VENTA","");
         listcategoriabusc= daocategoria.jcombobox(jcbbuscarcate, "VENTA","BUSCAR");
         bloquearjbtn(true, false, false, false, false);
-        bloquearjtf(false, false, false,false,false);
+        bloquearjtf(false, false, false,false,false,false);
     }
     public void bloquearjbtn(boolean nuevo,boolean editar,boolean guardar,boolean eliminar,boolean cancelar
      ){
@@ -52,12 +52,13 @@ public class JIFAridos extends javax.swing.JInternalFrame {
      
     
     }
-    public void bloquearjtf(boolean descrip, boolean cant,boolean und,boolean inv,boolean precio){
+    public void bloquearjtf(boolean descrip, boolean cant,boolean und,boolean inv,boolean precio,boolean cat){
      jtfdescripcion.setEnabled(descrip);
      jtfcantidad.setEnabled(cant);
      jcbunidmed.setEnabled(und);
      jtfinvinicial.setEnabled(inv);
      jtfprecioventa.setEnabled(precio);
+     jcbcategoria.setEnabled(cat);
      }
     public void limpiarjtf(){
      jtfdescripcion.setText("");
@@ -435,14 +436,14 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         }else {
             limpiarjtf();
             bloquearjbtn(true, false, false, false, false);
-            bloquearjtf(false, false, false,false,false);
+            bloquearjtf(false, false, false,false,false,false);
         }
       
     }//GEN-LAST:event_jtablaMouseReleased
 
     private void jbtnnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnnewActionPerformed
         // TODO add your handling code here:
-        bloquearjtf(true, false,true,true,true );
+        bloquearjtf(true, false,true,true,true,true);
         bloquearjbtn(true, false, false, false, true);
 
         limpiarjtf();
@@ -452,7 +453,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
 
     private void jbtneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneditarActionPerformed
         // TODO add your handling code here:
-        bloquearjtf(true, false,true,true,true);
+        bloquearjtf(true, false,true,true,true,true);
 
         editar=true;
         bloquearjbtn(true, false, false, false, true);
@@ -493,7 +494,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
 
          listaridos = daoaridos.view(jtabla);
         bloquearjbtn(true, false, false, false, false);
-        bloquearjtf(false, false, false,false,false);
+        bloquearjtf(false, false, false,false,false,false);
         limpiarjtf();
 
     }//GEN-LAST:event_jbtnguardarActionPerformed
@@ -523,7 +524,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
             limpiarjtf();
         }
         bloquearjbtn(true, false, false, false, false);
-        bloquearjtf(false, false, false,false,false);
+        bloquearjtf(false, false, false,false,false,false);
 
     }//GEN-LAST:event_jbtncancelarActionPerformed
 
@@ -584,7 +585,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         }else {
             limpiarjtf();
             bloquearjbtn(true, false, false, false, false);
-            bloquearjtf(false, false, false,false,false);
+            bloquearjtf(false, false, false,false,false,false);
         }
     }//GEN-LAST:event_jtfbuscarKeyReleased
 
@@ -613,7 +614,7 @@ public class JIFAridos extends javax.swing.JInternalFrame {
         }else {
             limpiarjtf();
             bloquearjbtn(true, false, false, false, false);
-            bloquearjtf(false, false, false,false,false);
+            bloquearjtf(false, false, false,false,false,false);
         }
         
         
