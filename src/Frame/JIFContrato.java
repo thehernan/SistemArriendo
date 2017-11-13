@@ -82,6 +82,14 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     }
     
     public void setllenarmaquinaria(Maquinaria maq){
+    boolean valida=true;    
+    for(Maquinaria maqui:listmaquinaria){
+        if(maqui.getId()==maq.getId()){
+        valida=false;
+        }
+    
+    }
+    if(valida==true){
     listmaquinaria.add(maq);
     NumberFormat nf= NumberFormat.getInstance();
     datosmaq[0]=maq.getMaquina();
@@ -91,6 +99,11 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     validagenerar();
     total = total + maq.getPreciodiario();
     jlbltotal.setText(nf.format(total));
+    
+    }else{
+    JOptionPane.showMessageDialog(null,"La maquina: "+ maq.getMaquina()+" "+maq.getMarca()+" "+maq.getModelo()+" ya se encuentra ingresada");
+    }
+    
     }
     
     public void validagenerar(){

@@ -27,6 +27,7 @@ public class JDFClaveEdicionContrato extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.contrato=contrato;
+        this.setLocationRelativeTo(null);
     }
 
     /**

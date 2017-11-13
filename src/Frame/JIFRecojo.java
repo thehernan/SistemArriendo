@@ -243,7 +243,8 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
     private void jbtngenerarguiadevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtngenerarguiadevActionPerformed
         // TODO add your handling code here:
         
-         
+         contrato.setFlete(0.0);
+         contrato.setDescuento(0.0);
          long id=daoguia.insert(contrato, "DEVOLUCION");      
          System.out.println("idguia"+id);
         daodetguia.update(listdetcont,id,false);
