@@ -105,7 +105,7 @@ public class Menu extends javax.swing.JFrame {
          /////////////////////////////////////////////////////////
          if(usu.isContratosvig()==true){
      
-        JButton contratovig= new JButton("CONTRATOS VIGENT.");
+        JButton contratovig= new JButton("CONTRATOS");
          contratovig.addActionListener(new ActionListener() {
 
              @Override
@@ -177,6 +177,31 @@ public class Menu extends javax.swing.JFrame {
          devolucion.setBounds(20, 280, 200, 50);
          devolucion.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
          devolucion.setBackground(new java.awt.Color(255, 204, 51));
+         }
+         /////////////////////////////////
+           if(usu.isGuia()==true){
+         JButton guia= new JButton("GUIAS");
+         guia.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            JIFGuias fromguia = new JIFGuias();
+            Dimension desktopSize = jdesktop.getSize();
+            Dimension FrameSize = fromguia.getSize();
+            fromguia.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+            jdesktop.add(fromguia);
+            fromguia.show();
+             panelconmin();
+                 
+             }
+         });
+         
+         
+         jpanelcontenedor.add(guia);
+         guia.setBounds(20, 350, 200, 50);
+         guia.setFont(new java.awt.Font("Segoe UI Light", 1, 14));
+         guia.setBackground(new java.awt.Color(255, 204, 51));
          }
      }
      

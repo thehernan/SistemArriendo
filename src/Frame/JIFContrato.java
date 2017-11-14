@@ -92,7 +92,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     if(valida==true){
     listmaquinaria.add(maq);
     NumberFormat nf= NumberFormat.getInstance();
-    datosmaq[0]=maq.getMaquina();
+    datosmaq[0]=maq.getMaquina()+" "+maq.getMarca()+" "+maq.getModelo();
     datosmaq[1]=maq.getSerie();
     datosmaq[2]=nf.format(maq.getPreciodiario());
     modelo.addRow(datosmaq);
@@ -115,7 +115,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     }
     
     public void setpagar(DetalleCaja detcaja,Double desc){
-        cliente.setDomiciliatrab(jlbldomiciliotrab.getText());
+        cliente.setDomiciliatrab(jlbldomiciliotrab.getText().toUpperCase());
         daocliente.updatenophoto(cliente);
         contrato.setTipodoc(tipodoc);
         contrato.setDescuento(desc);

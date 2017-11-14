@@ -25,53 +25,55 @@
           <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="588" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jtfprecio" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="jcbcategoria" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="jtfmaquina" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfserie" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfmodelo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfmarca" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jbtnnew" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <Component id="jbtneditar" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <Component id="jbtnguardar" min="-2" pref="90" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jbtneliminar" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <Component id="jbtncancelar" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jbtnimprimir" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jtfbbuscar" min="-2" pref="186" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jcbbuscarcate" min="-2" pref="169" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jtfprecio" min="-2" pref="185" max="-2" attributes="0"/>
-                          <Component id="jcbcategoria" min="-2" pref="185" max="-2" attributes="0"/>
-                          <Component id="jtfmaquina" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jtfserie" alignment="0" pref="209" max="32767" attributes="0"/>
-                          <Component id="jtfmodelo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jtfmarca" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jbtnnew" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="jbtneditar" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="jbtnguardar" min="-2" pref="90" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jbtneliminar" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="jbtncancelar" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Component id="jtfbbuscar" min="-2" pref="258" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jbtnimprimir" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcbbuscarcate" min="-2" pref="528" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,23 +82,21 @@
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtfbbuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jcbbuscarcate" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jbtnnew" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="jbtneditar" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="jbtnguardar" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtfbbuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbbuscarcate" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="290" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jbtnnew" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="jbtneditar" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="jbtnguardar" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="290" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="jbtneliminar" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>

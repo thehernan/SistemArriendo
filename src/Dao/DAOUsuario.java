@@ -33,7 +33,7 @@ public class DAOUsuario implements Interface.IntUsuario{
         
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertusuarios(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertusuarios(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
   
         ps.setString(1,user.getUsuario());
         ps.setString(2,user.getClave());
@@ -63,7 +63,7 @@ public class DAOUsuario implements Interface.IntUsuario{
         ps.setBoolean(25,user.isOrdencompra());
         ps.setBoolean(26,user.isUsuariobo());
         ps.setBoolean(27,user.isMiempresa());
-
+        ps.setBoolean(28,user.isGuia());
 
        
 //        ps.setLong(5, arido.getIdempresa());
@@ -208,7 +208,7 @@ public class DAOUsuario implements Interface.IntUsuario{
             usuario.setOrdencompra(rs.getBoolean("vordenescompra"));
             usuario.setUsuariobo(rs.getBoolean("vusuariobo"));
             usuario.setMiempresa(rs.getBoolean("vmiempresa"));
-                    
+            usuario.setGuia(rs.getBoolean("vguia"));
             
             
             
@@ -259,7 +259,7 @@ public class DAOUsuario implements Interface.IntUsuario{
         
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_updateusuarios(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_updateusuarios(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         ps.setLong(1, user.getId());
         ps.setString(2,user.getUsuario());
         ps.setString(3,user.getClave());
@@ -289,7 +289,7 @@ public class DAOUsuario implements Interface.IntUsuario{
         ps.setBoolean(26,user.isOrdencompra());
         ps.setBoolean(27,user.isUsuariobo());
         ps.setBoolean(28,user.isMiempresa());
-
+        ps.setBoolean(29,user.isGuia());
 
        
 //        ps.setLong(5, arido.getIdempresa());
@@ -425,6 +425,7 @@ public class DAOUsuario implements Interface.IntUsuario{
             usuario.setOrdencompra(rs.getBoolean("vordenescompra"));
             usuario.setUsuariobo(rs.getBoolean("vusuariobo"));
             usuario.setMiempresa(rs.getBoolean("vmiempresa"));  
+            usuario.setGuia(rs.getBoolean("vguia"));
         }
 	
         } catch(Exception e)

@@ -95,7 +95,8 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         /// insert venta con cliente
         venta.setIdcliente(cliente.getId());
         venta.setId(daoventa.insert(venta));
-        
+        cliente.setDomiciliatrab(jlbldirecciontrab.getText().toUpperCase());
+        daocliente.updatenophoto(cliente);
     }else {
         /// insert venta sin cliente
         venta.setId(daoventa.insertnoclient(venta));
@@ -146,8 +147,8 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         jtfrut = new javax.swing.JFormattedTextField();
         jlblrazonsocial = new javax.swing.JLabel();
         jlbldominiciliopart = new javax.swing.JLabel();
-        jlbldirecciontrab = new javax.swing.JLabel();
         jlblmensaje = new javax.swing.JLabel();
+        jlbldirecciontrab = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtabla = new javax.swing.JTable();
         jbtnagregar = new javax.swing.JButton();
@@ -215,8 +216,6 @@ public class JIFVenta extends javax.swing.JInternalFrame {
 
         jlbldominiciliopart.setText("* * *");
 
-        jlbldirecciontrab.setText("* * *");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -242,7 +241,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
                         .addComponent(jlblrazonsocial, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
                         .addGap(100, 100, 100))
                     .addComponent(jlbldominiciliopart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlbldirecciontrab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jlbldirecciontrab))
                 .addGap(73, 73, 73))
         );
         jPanel2Layout.setVerticalGroup(
@@ -265,7 +264,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jlbldirecciontrab))
+                    .addComponent(jlbldirecciontrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -385,7 +384,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
                         .addComponent(jLabel9)
                         .addComponent(jLabel8)
                         .addComponent(jtfhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnagregar)
@@ -423,14 +422,14 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         jlbldirecciontrab.setText(cliente.getDomiciliatrab());
        
         jlblmensaje.setText("");
-       
+       jlbldirecciontrab.setEnabled(true);
         }else {
         
         jlblmensaje.setText("Cliente no encontrado");
         jlblrazonsocial.setText("* * *");
         jlbldominiciliopart.setText("* * *");
         jlbldirecciontrab.setText("* * *");
-       
+        jlbldirecciontrab.setEnabled(false);
         
         }
         
@@ -505,7 +504,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtncancelar;
     private javax.swing.JButton jbtnvender;
     private org.jdesktop.swingx.JXDatePicker jdpfecha;
-    private javax.swing.JLabel jlbldirecciontrab;
+    private javax.swing.JTextField jlbldirecciontrab;
     private javax.swing.JLabel jlbldominiciliopart;
     private javax.swing.JLabel jlblmensaje;
     private javax.swing.JLabel jlblmensajeventa;

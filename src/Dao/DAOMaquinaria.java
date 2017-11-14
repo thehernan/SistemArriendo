@@ -76,7 +76,7 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
             maquina.setPreciodiario(rs.getDouble("vprecio"));
             maquina.setCategoria(rs.getString("vcategoria"));
         
-            datosR[0]=maquina.getMaquina();
+            datosR[0]=maquina.getMaquina()+" "+maquina.getMarca()+" "+maquina.getModelo();
             datosR[1]=maquina.getSerie();
             datosR[2]=maquina.getEstado();
             datosR[3]=maquina.getCategoria();

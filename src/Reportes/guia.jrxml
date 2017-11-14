@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb238bb3-4042-4fe8-9442-d2fa9d1ee067">
 	<property name="ireport.zoom" value="1.4641000000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="62"/>
+	<property name="ireport.y" value="61"/>
 	<parameter name="idguia" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -36,6 +36,9 @@ detalle_guia.id_guia inner join maquina on maquina.id_maquina=detalle_guia.id_ma
 	<field name="descuento" class="java.math.BigDecimal"/>
 	<field name="flete" class="java.math.BigDecimal"/>
 	<variable name="importe_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
+	<variable name="importe_2" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
 	</variable>
 	<background>
@@ -99,6 +102,17 @@ detalle_guia.id_guia inner join maquina on maquina.id_maquina=detalle_guia.id_ma
 				</textElement>
 				<textFieldExpression><![CDATA["R.U.T.: "+$F{rutemp}]]></textFieldExpression>
 			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="396" y="113" width="154" height="20" uuid="f52b784a-02dd-4d38-831b-6b0849f4fb3a"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="273" y="113" width="123" height="20" uuid="bf18dcd3-2fe9-42b8-993b-053e2b8dd88d"/>
+				<text><![CDATA[Fecha y Hora de Entrega:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -106,13 +120,6 @@ detalle_guia.id_guia inner join maquina on maquina.id_maquina=detalle_guia.id_ma
 			<rectangle radius="10">
 				<reportElement x="3" y="8" width="552" height="85" uuid="75173d4a-051a-4ae2-932c-7343d42d7848"/>
 			</rectangle>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="339" y="11" width="208" height="20" uuid="f52b784a-02dd-4d38-831b-6b0849f4fb3a"/>
-				<textElement textAlignment="Right">
-					<font fontName="Segoe UI Light" size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="59" y="31" width="472" height="20" uuid="c940bf35-5915-4efc-a183-666e08a64e15"/>
 				<textElement>
@@ -275,21 +282,21 @@ detalle_guia.id_guia inner join maquina on maquina.id_maquina=detalle_guia.id_ma
 				<reportElement x="463" y="20" width="92" height="20" uuid="076e45c0-4c81-4c6f-8174-641f7f264df8"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="386" y="40" width="77" height="20" uuid="bca2ed39-0ebe-4e21-9a68-81d9476b77fc"/>
+				<reportElement x="385" y="40" width="77" height="20" uuid="bca2ed39-0ebe-4e21-9a68-81d9476b77fc"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Total $.]]></text>
 			</staticText>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="463" y="0" width="92" height="20" uuid="c6b758ec-7af3-4a4d-90d4-a60b46ae4cb3"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{flete}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
-				<reportElement x="463" y="20" width="92" height="20" uuid="4495858a-de51-4c14-9e96-68a7b34fa675"/>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="464" y="20" width="91" height="20" uuid="4495858a-de51-4c14-9e96-68a7b34fa675"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
@@ -303,18 +310,18 @@ detalle_guia.id_guia inner join maquina on maquina.id_maquina=detalle_guia.id_ma
 				<text><![CDATA[Flete:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="384" y="20" width="78" height="20" uuid="9ccb1027-babe-4cde-adda-7552797741ee"/>
+				<reportElement x="385" y="20" width="78" height="20" uuid="9ccb1027-babe-4cde-adda-7552797741ee"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descuento:]]></text>
 			</staticText>
-			<textField pattern="#,##0">
-				<reportElement x="463" y="40" width="92" height="20" uuid="a52f99ff-70be-4aeb-a93e-19b2f4cf6d84"/>
-				<textElement textAlignment="Center">
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="464" y="40" width="91" height="20" uuid="061c1f55-b0d1-4961-9b79-208b191234ae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{importe}+$F{flete})-$F{descuento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{importe_2}+$F{flete}-$F{descuento}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ef19f734-ceac-46c4-9b1f-ace7720c0ffb">
 	<property name="ireport.zoom" value="1.331000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="162"/>
 	<parameter name="idventa" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -244,19 +244,17 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 	<pageFooter>
 		<band height="152">
 			<staticText>
-				<reportElement x="2" y="30" width="113" height="20" uuid="775e19ff-c375-4c44-afa8-de288e20a471"/>
-				<text><![CDATA[Recibi conforme de don:]]></text>
+				<reportElement x="2" y="30" width="148" height="20" uuid="775e19ff-c375-4c44-afa8-de288e20a471"/>
+				<text><![CDATA[Recibi conforme de SERINGCO:]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="30" width="355" height="20" uuid="8b9b4dd6-8531-452a-a93a-23378163b2e3"/>
-				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
-			</textField>
 			<line>
-				<reportElement x="325" y="109" width="212" height="1" uuid="22daca39-5fbf-468a-b912-58bb4b0dac17"/>
+				<reportElement x="299" y="109" width="238" height="1" uuid="22daca39-5fbf-468a-b912-58bb4b0dac17"/>
 			</line>
 			<textField>
-				<reportElement x="326" y="110" width="211" height="20" uuid="a583aeca-b743-4dfa-99a0-c89664c9e652"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="299" y="110" width="238" height="15" uuid="a583aeca-b743-4dfa-99a0-c89664c9e652"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
 			</textField>
 		</band>

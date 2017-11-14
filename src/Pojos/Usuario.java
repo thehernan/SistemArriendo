@@ -38,12 +38,20 @@ public class Usuario {
     private boolean ordencompra;
     private boolean usuariobo;
     private boolean miempresa;
-
+    private boolean guia;
     public Usuario() {
     }
 
     public boolean isEmpleados() {
         return empleados;
+    }
+
+    public boolean isGuia() {
+        return guia;
+    }
+
+    public void setGuia(boolean guia) {
+        this.guia = guia;
     }
 
     public void setEmpleados(boolean empleados) {
