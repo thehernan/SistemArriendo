@@ -66,10 +66,10 @@ public class JDFMovimientosMaquina extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jtabla);
 
-        jPanel1.setBackground(new java.awt.Color(102, 51, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("HISTORIAL MOVIMIENTOS MAQUINARIA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

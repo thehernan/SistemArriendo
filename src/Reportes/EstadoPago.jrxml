@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="68b40038-560d-427b-9941-7636c9f10b05">
-	<property name="ireport.zoom" value="1.7715610000000013"/>
-	<property name="ireport.x" value="142"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="2.8531167061100047"/>
+	<property name="ireport.x" value="776"/>
+	<property name="ireport.y" value="609"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\Reportes\\"]]></defaultValueExpression>
 	</parameter>
@@ -14,18 +14,33 @@
 when length(contrato.id_contrato::text)=2 then concat('N°. 0000',contrato.id_contrato) when length(contrato.id_contrato::text)=3 
 then concat('N°. 000',contrato.id_contrato) when length(contrato.id_contrato::text)=4 then concat('N°. 00',contrato.id_contrato)
 when length(contrato.id_contrato::text)=5 then concat('N°. 0',contrato.id_contrato)else concat('N°. ',contrato.id_contrato) end
+
 , miempresa.domicilio, miempresa.telefono as telemp,miempresa.celular as celemp,flete,
+
       contrato.fecha,detalle_contrato.fechaentrega,cliente.nombre,cliente.apellido,cliente.telefono,cliente.domicilioparticular,cliente.domiciliotrabajo,
+      
  id_detallecontrato,detalle_contrato.id_maquina,concat(maquina.maquina,' ',maquina.marca,' ',maquina.serie,' ',maquina.modelo) as maquina,
- to_char(fechaprestamo,'DD-MM-YYYY HH24:MI') as fechapres, case when DATE_PART('hour',current_timestamp - fechaentregapredeterminada) <= 0 
- then 'Dias(s) 0 Hora(s) 0' when DATE_PART('hour',current_timestamp - fechaentregapredeterminada) > 0 then 
-concat('Dia(s) ',DATE_PART('day',current_timestamp - fechaentregapredeterminada),' Hora(s) ',
-DATE_PART('hour',current_timestamp - fechaentregapredeterminada)) end,case when 
+ 
+ fechaprestamo as fechapres,
+
+
+  case when entregado=true 
+ then concat('Dia(s) ',DATE_PART('day',detalle_contrato.fechaentrega - fechaprestamo),' Hora(s) ',
+DATE_PART('hour',current_timestamp - fechaentregapredeterminada)) else 
+concat('Dia(s) ',DATE_PART('day',current_timestamp - fechaprestamo),' Hora(s) ',
+DATE_PART('hour',current_timestamp - fechaentregapredeterminada)) end as tiempopres,
+
+
+case when 
 DATE_PART('hour',current_timestamp - fechaentregapredeterminada) >= 1 and DATE_PART('day',current_timestamp - fechaentregapredeterminada) >= 1 then 
 (DATE_PART('day',current_timestamp - fechaentregapredeterminada)+1)
 * (maquina.precioarriendodia) when DATE_PART('hour',current_timestamp - fechaentregapredeterminada) >= 1 and DATE_PART('day',current_timestamp - fechaentregapredeterminada) = 0
 then maquina.precioarriendodia when DATE_PART('hour',current_timestamp - fechaentregapredeterminada) = 0 and DATE_PART('day',current_timestamp - fechaentregapredeterminada) >= 1 then
- DATE_PART('day',current_timestamp - fechaentregapredeterminada) * maquina.precioarriendodia  else 0 end, entregado,detalle_contrato.importe,
+ DATE_PART('day',current_timestamp - fechaentregapredeterminada) * maquina.precioarriendodia  else 0 end
+
+
+
+ , entregado,detalle_contrato.importe,
 
 
 case when entregado=false and devueltoporfalla=false then 
@@ -53,7 +68,7 @@ detalle_contrato.importe else 0 end
     
   FROM public.contrato inner join cliente on cliente.id_cliente=contrato.id_cliente inner join miempresa on miempresa.id_empresa=contrato.id_empresa inner join
   detalle_contrato on detalle_contrato.id_contrato=contrato.id_contrato inner join maquina on maquina.id_maquina=detalle_contrato.id_maquina
-where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
+where contrato.pagado=false and contrato.id_cliente=$P{idcliente}; ]]>
 	</queryString>
 	<field name="id_contrato" class="java.lang.Long"/>
 	<field name="concat" class="java.lang.String"/>
@@ -71,8 +86,9 @@ where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 	<field name="id_detallecontrato" class="java.lang.Long"/>
 	<field name="id_maquina" class="java.lang.Long"/>
 	<field name="maquina" class="java.lang.String"/>
-	<field name="fechapres" class="java.lang.String"/>
-	<field name="case" class="java.lang.String"/>
+	<field name="fechapres" class="java.sql.Timestamp"/>
+	<field name="tiempopres" class="java.lang.String"/>
+	<field name="case" class="java.lang.Double"/>
 	<field name="entregado" class="java.lang.Boolean"/>
 	<field name="importe" class="java.math.BigDecimal"/>
 	<field name="?column?" class="java.lang.Double"/>
@@ -87,24 +103,24 @@ where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 		<groupHeader>
 			<band height="77">
 				<line>
-					<reportElement x="-23" y="0" width="599" height="1" forecolor="#666666" uuid="78064bbc-b4a6-4a9b-9a38-9047b314b22e"/>
+					<reportElement x="-23" y="4" width="599" height="1" forecolor="#666666" uuid="78064bbc-b4a6-4a9b-9a38-9047b314b22e"/>
 				</line>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-					<reportElement x="361" y="3" width="139" height="12" uuid="e5c295b3-b828-4753-8cb6-c423abd0f43c"/>
+					<reportElement x="361" y="10" width="139" height="12" uuid="e5c295b3-b828-4753-8cb6-c423abd0f43c"/>
 					<textElement>
 						<font fontName="Segoe UI Light" size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{flete}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement mode="Opaque" x="0" y="1" width="340" height="14" forecolor="#006699" backcolor="#FFFFFF" uuid="aebe16c8-78a5-4f8e-84b4-cbe9ec88fbc7"/>
+					<reportElement mode="Opaque" x="0" y="8" width="340" height="14" forecolor="#006699" backcolor="#FFFFFF" uuid="aebe16c8-78a5-4f8e-84b4-cbe9ec88fbc7"/>
 					<textElement>
 						<font fontName="Segoe UI Light" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Contrato: "+$F{concat}]]></textFieldExpression>
 				</textField>
 				<subreport>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="19" width="324" height="44" uuid="89b16bb9-7049-43a4-9006-65f70169ff49"/>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="26" width="324" height="44" uuid="89b16bb9-7049-43a4-9006-65f70169ff49"/>
 					<subreportParameter name="idcontrato">
 						<subreportParameterExpression><![CDATA[$F{id_contrato}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -112,14 +128,14 @@ where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 					<subreportExpression><![CDATA["EstadoPago_Abonos.jasper"]]></subreportExpression>
 				</subreport>
 				<staticText>
-					<reportElement x="340" y="3" width="21" height="12" uuid="132b4852-a025-4a81-9b79-328e36b921e7"/>
+					<reportElement x="340" y="10" width="21" height="12" uuid="132b4852-a025-4a81-9b79-328e36b921e7"/>
 					<textElement>
 						<font fontName="Segoe UI Light" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Flete: ]]></text>
 				</staticText>
 				<subreport>
-					<reportElement x="374" y="19" width="179" height="40" uuid="ecd7993d-2698-4f21-b2a5-4865e10546c4"/>
+					<reportElement x="374" y="26" width="179" height="40" uuid="ecd7993d-2698-4f21-b2a5-4865e10546c4"/>
 					<subreportParameter name="idcontrato">
 						<subreportParameterExpression><![CDATA[$F{id_contrato}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -218,26 +234,26 @@ where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 		<band/>
 	</background>
 	<title>
-		<band height="116">
+		<band height="214">
 			<image>
 				<reportElement x="0" y="0" width="238" height="78" uuid="5caa27fb-7aba-4be0-a48f-ae69c1b16a76"/>
 				<imageExpression><![CDATA["..\\img\\logoempresa.jpg"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="220" y="10" width="52" height="47" uuid="f579afce-b5fb-4827-a06e-3c632a971c1b"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\icono1.png"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\icono1.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="272" y="10" width="68" height="47" uuid="a019553b-c954-49e8-9b91-7e86e808e9cb"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\icono2.png"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\icono2.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="340" y="10" width="68" height="47" uuid="114e11c0-8e75-4ce5-92df-8f1033a2d448"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\icono3.png"]]></imageExpression>
+				<imageExpression><![CDATA["..\\img\\icono3.png"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="413" y="10" width="63" height="47" uuid="cc834678-2ac2-4b6b-8e6d-ecd1d0f90691"/>
-				<imageExpression><![CDATA["C:\\Users\\info2017\\Documents\\NetBeansProjects\\SistemaArriendo1309\\src\\img\\icono4.png"]]></imageExpression>
+				<reportElement x="408" y="10" width="63" height="47" uuid="cc834678-2ac2-4b6b-8e6d-ecd1d0f90691"/>
+				<imageExpression><![CDATA["..\\img\\icono4.png"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="2" y="78" width="247" height="14" uuid="905c7ccb-b65d-4a51-a1f2-77c3631f38f3"/>
@@ -260,103 +276,120 @@ where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{celemp}]]></textFieldExpression>
 			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="98">
 			<rectangle radius="10">
-				<reportElement x="0" y="2" width="408" height="91" uuid="5e01e432-b158-44a9-8c3b-9bf8c5fed1ab"/>
+				<reportElement x="0" y="117" width="408" height="91" uuid="5e01e432-b158-44a9-8c3b-9bf8c5fed1ab"/>
 			</rectangle>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="11" y="7" width="385" height="20" uuid="616da596-316b-4e9c-ad0c-0cd61201d1e8"/>
+				<reportElement x="12" y="122" width="385" height="20" uuid="616da596-316b-4e9c-ad0c-0cd61201d1e8"/>
 				<textElement>
 					<font fontName="Segoe UI Light" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Nombre: "+$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="11" y="27" width="385" height="20" uuid="791be1ae-15d3-44e5-b4d4-8ec1b1f2894a"/>
+				<reportElement x="12" y="142" width="385" height="20" uuid="791be1ae-15d3-44e5-b4d4-8ec1b1f2894a"/>
 				<textElement>
 					<font fontName="Segoe UI Light" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Apellido: "+$F{apellido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="11" y="47" width="385" height="20" uuid="808b72de-eb00-4d48-a890-271d2b6227cf"/>
+				<reportElement x="12" y="162" width="385" height="20" uuid="808b72de-eb00-4d48-a890-271d2b6227cf"/>
 				<textElement>
 					<font fontName="Segoe UI Light" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Domicilio Part.: "+$F{domicilioparticular}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="11" y="69" width="385" height="20" uuid="d86e46c5-412b-4670-971e-f8c5446bb479"/>
+				<reportElement x="12" y="184" width="385" height="20" uuid="d86e46c5-412b-4670-971e-f8c5446bb479"/>
 				<textElement>
 					<font fontName="Segoe UI Light" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Domicilio trab.:"+$F{domiciliotrabajo}]]></textFieldExpression>
 			</textField>
 		</band>
-	</pageHeader>
+	</title>
 	<detail>
-		<band height="21">
+		<band height="14">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="21" uuid="2a2cef9a-ef53-4f91-8a40-4e2056ade431"/>
+				<reportElement x="0" y="0" width="23" height="14" uuid="2a2cef9a-ef53-4f91-8a40-4e2056ade431"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="23" y="0" width="23" height="14" uuid="c5b4bf21-ca66-41c9-92aa-a67a05ce87e9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="46" y="0" width="192" height="14" uuid="96f7dd91-e199-4891-94d0-8464580ad4c5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="238" y="0" width="65" height="14" uuid="824d8d21-5378-44d3-9071-95e2b84d7836"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="303" y="0" width="76" height="14" uuid="c70e1bb6-e7a2-4973-8e04-3411075f0c58"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="379" y="0" width="73" height="14" uuid="3a7acc63-0c1b-4dee-808f-bd31fea2fa93"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="452" y="0" width="54" height="14" uuid="261b6125-696a-4715-91fb-17c61bd70c51"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="506" y="0" width="49" height="14" uuid="74d89ae0-daab-4467-8131-1b145836f5ce"/>
 			</rectangle>
 			<textField>
-				<reportElement x="46" y="0" width="192" height="20" uuid="fce77bcd-bacd-423b-bc29-c68b9889d520"/>
+				<reportElement x="46" y="0" width="192" height="13" uuid="fce77bcd-bacd-423b-bc29-c68b9889d520"/>
 				<textElement>
 					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{maquina}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="23" y="0" width="23" height="20" uuid="01f6fdd6-274e-4023-a275-4f7305e0cd7c"/>
+				<reportElement x="23" y="0" width="23" height="13" uuid="01f6fdd6-274e-4023-a275-4f7305e0cd7c"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
 				<text><![CDATA[1]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="0" width="23" height="20" uuid="652ae912-2d94-47de-9f6c-00e682769501"/>
+				<reportElement x="0" y="-1" width="23" height="15" uuid="652ae912-2d94-47de-9f6c-00e682769501"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{importe_1}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0">
-				<reportElement x="452" y="0" width="54" height="20" uuid="fb1d5f54-9b98-41c1-88e2-f3e3089f2210"/>
+				<reportElement x="452" y="0" width="54" height="13" uuid="fb1d5f54-9b98-41c1-88e2-f3e3089f2210"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="238" y="0" width="64" height="20" uuid="169459ec-2d77-434c-a18f-e464bfe72a75"/>
+				<reportElement x="238" y="0" width="64" height="13" uuid="169459ec-2d77-434c-a18f-e464bfe72a75"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fechapres}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="379" y="0" width="73" height="20" uuid="172bb97d-7df7-4eea-9658-f9fff34ca442"/>
-				<textElement textAlignment="Center">
-					<font fontName="Segoe UI Light" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{case}]]></textFieldExpression>
-			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="303" y="0" width="76" height="20" uuid="21c4eb72-3599-47d6-baef-1b7ac39eeac6"/>
+				<reportElement x="303" y="0" width="76" height="13" uuid="21c4eb72-3599-47d6-baef-1b7ac39eeac6"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fechaentrega}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="506" y="0" width="49" height="20" uuid="6c5a7c85-6200-4232-95af-c91d7ea4659b"/>
+				<reportElement x="506" y="0" width="49" height="13" uuid="6c5a7c85-6200-4232-95af-c91d7ea4659b"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{?column?}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="73" height="13" uuid="8928bd97-3b2b-44c7-8e74-fd16705b2df4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tiempopres}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -370,7 +403,7 @@ where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#FFFFFF" uuid="7ce574b3-32b5-4a9e-b41e-063b4aca90b7"/>
@@ -389,6 +422,15 @@ where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band/>
+		<band height="802">
+			<subreport>
+				<reportElement x="0" y="0" width="553" height="294" uuid="6c480df1-b717-4f80-8260-7cb65b72f33d"/>
+				<subreportParameter name="idcliente">
+					<subreportParameterExpression><![CDATA[$P{idcliente}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["EstadoPago_Reparacion.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
 	</summary>
 </jasperReport>

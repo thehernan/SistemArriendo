@@ -18,7 +18,7 @@ import javax.swing.JTable;
 public interface IntGuia {
      public long insert(Contrato contrato,String tipoop);
     
-    public void print(long id);
+    public void print(long id,String doc);
     public List<Guia> view(JTable tabla);
     public List<Guia> searchsensitive(JTable tabla, String cadena);
 }

@@ -126,7 +126,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         
         long id=daoguia.insert(contrato, "DESPACHO");
         daodetguia.insert(listmaquinaria, id, true);
-         daoguia.print(id);
+         daoguia.print(id,"DESPACHO");
          
         detcaja.setIdcontrato(contrato.getId());
         daodetcaja.insertpaycontrato(detcaja,desc);  

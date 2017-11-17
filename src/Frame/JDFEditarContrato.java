@@ -47,6 +47,8 @@ public class JDFEditarContrato extends javax.swing.JDialog {
         List<Maquinaria> listmaquinaria = new ArrayList<>();
         listmaquinaria.add(maq);
         daodetcontrato.insert(listmaquinaria,contrato.getId());
+        contrato.setFlete(0.0);
+        contrato.setDescuento(0.0);
         if(idguia==0){
             idguia=daoguia.insert(contrato, "DESPACHO");
             
@@ -95,10 +97,10 @@ public class JDFEditarContrato extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("EDITAR CONTRATO");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -223,13 +225,13 @@ public class JDFEditarContrato extends javax.swing.JDialog {
          System.out.println("idguia"+id);
         daodetguia.update(listdetcontrato,id,true);
         listdetcontrato = daodetcontrato.search(jtabla, contrato.getId());
-        daoguia.print(id);
+        daoguia.print(id,"DEVOLUCION");
         jbtnevolver.setEnabled(false);
     }//GEN-LAST:event_jbtnevolverActionPerformed
 
     private void jbtnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirActionPerformed
         // TODO add your handling code here:
-        daoguia.print(idguia);
+        daoguia.print(idguia,"DEVOLUCION");
     }//GEN-LAST:event_jbtnimprimirActionPerformed
 
     /**

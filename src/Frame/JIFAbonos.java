@@ -136,14 +136,13 @@ public class JIFAbonos extends javax.swing.JInternalFrame {
                         .addComponent(jtfbuscarclient, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
@@ -184,7 +183,7 @@ public class JIFAbonos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
               long cod= Long.parseLong(jtfbuscarcod.getText());
-              listcontr=daocontrato.searchsensitive(jtabla, singletonempre.getId(), "CODIGO", cod,null,true);
+              listcontr=daocontrato.searchsensitive(jtabla, singletonempre.getId(), "CODIGO", jtfbuscarcod.getText(),null,true);
         } catch (Exception e) {
             
         }
@@ -193,7 +192,7 @@ public class JIFAbonos extends javax.swing.JInternalFrame {
 
     private void jtfbuscarclientKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarclientKeyReleased
         // TODO add your handling code here:
-        listcontr=daocontrato.searchsensitive(jtabla, singletonempre.getId(), "CLIENTE", 0, jtfbuscarclient.getText(),true);
+        listcontr=daocontrato.searchsensitive(jtabla, singletonempre.getId(), "CLIENTE", "", jtfbuscarclient.getText(),true);
     }//GEN-LAST:event_jtfbuscarclientKeyReleased
 
     private void jtfbuscarcodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarcodKeyTyped

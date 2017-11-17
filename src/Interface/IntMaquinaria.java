@@ -27,5 +27,6 @@ public interface IntMaquinaria {
     public boolean duplicate(long id,String cadena,String op,long idcat);
     public void movement(JTable tabla, long idmaq);
     public List<Maquinaria> searchsentitive(JTable tabla,String estado,String propiedad, long idcategoria,String cadena);
+    public boolean validaarrendar(long id);
     
 }

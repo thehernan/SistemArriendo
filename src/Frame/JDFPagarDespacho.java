@@ -38,7 +38,7 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
             Double abono=Double.parseDouble(jtfabono.getText());
             Double vuelto = 0.0;
             Double desc = Double.parseDouble(jtfdescuento.getText());
-            if(abono <= contrato.getTotal() && abono>=0 && desc <= contrato.getTotal()){
+            if( abono>=0 && desc >=0){
            
             jlblmensaje.setText("");
             jbtngenerar.setEnabled(true);
@@ -80,12 +80,14 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
         setTitle("Pago de Despacho");
         setResizable(false);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel1.setText("Total:");
 
         jtfotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
         jtfotal.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         jtfotal.setEnabled(false);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel2.setText("Abono:");
 
         jtfabono.addActionListener(new java.awt.event.ActionListener() {
@@ -110,12 +112,14 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel4.setText("Observacion:");
 
         jtaobservacion.setColumns(20);
         jtaobservacion.setRows(5);
         jScrollPane1.setViewportView(jtaobservacion);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel3.setText("Desc.:");
 
         jtfdescuento.addActionListener(new java.awt.event.ActionListener() {

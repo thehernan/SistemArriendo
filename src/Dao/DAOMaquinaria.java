@@ -604,7 +604,7 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
             maquina.setPreciodiario(rs.getDouble("vprecio"));
             maquina.setCategoria(rs.getString("vcategoria"));
         
-            datosR[0]=maquina.getMaquina();
+            datosR[0]=maquina.getMaquina()+" "+maquina.getMarca()+" "+maquina.getModelo();
             datosR[1]=maquina.getSerie();
             datosR[2]=maquina.getEstado();
             datosR[3]=maquina.getCategoria();
@@ -680,24 +680,75 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
                    try {
                        c.close();
                    } catch (SQLException ex) {
-                       Logger.getLogger(DAOArido.class.getName()).log(Level.SEVERE, null, ex);
+                       Logger.getLogger(DAOMaquinaria.class.getName()).log(Level.SEVERE, null, ex);
                    }
                }
                if(ps!= null){
                    try {
                        ps.close();
                    } catch (SQLException ex) {
-                       Logger.getLogger(DAOArido.class.getName()).log(Level.SEVERE, null, ex);
+                       Logger.getLogger(DAOMaquinaria.class.getName()).log(Level.SEVERE, null, ex);
                    }
                }
                if(rs != null){
                    try {
                        rs.close();
                    } catch (SQLException ex) {
-                       Logger.getLogger(DAOArido.class.getName()).log(Level.SEVERE, null, ex);
+                       Logger.getLogger(DAOMaquinaria.class.getName()).log(Level.SEVERE, null, ex);
                    }
                }
             }  
+    }
+
+    @Override
+    public boolean validaarrendar(long id) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        boolean valida=false;
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_validaarrendarmaquina(?)");
+        ps.setLong(1, id);
+     
+       
+//        ps.setLong(6, maq.getIdempresa());
+//        ps.setBigDecimal(7,new  BigDecimal(maq.getPreciodiario()));
+        
+        rs=ps.executeQuery();
+      
+        if (rs.next()){
+            valida=rs.getBoolean("valida");
+        }
+	
+        } catch(SQLException e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOMaquinaria.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOMaquinaria.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAOMaquinaria.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            } 
+        return valida;
     }
 
    

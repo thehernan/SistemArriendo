@@ -56,6 +56,12 @@ public class JDFClaveEdicionContrato extends javax.swing.JDialog {
             }
         });
 
+        jtfclave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfclaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,13 +99,18 @@ public class JDFClaveEdicionContrato extends javax.swing.JDialog {
         if(new String(jtfclave.getPassword()).equals("seringco2017")){
         JDFEditarContrato  editcontrato = new JDFEditarContrato(new Frame(), isVisible(),contrato);
          editcontrato.setVisible(true);
-        
+        this.dispose();
         }else {
             JOptionPane.showMessageDialog(null,"Clave erronea" );
             
         }
          
     }//GEN-LAST:event_jbtnaceptarActionPerformed
+
+    private void jtfclaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfclaveActionPerformed
+        // TODO add your handling code here:
+        jbtnaceptar.doClick();
+    }//GEN-LAST:event_jtfclaveActionPerformed
 
     /**
      * @param args the command line arguments

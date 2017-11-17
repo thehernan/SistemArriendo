@@ -12,6 +12,7 @@ import Pojos.Maquinaria;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,7 +42,7 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
     public JDFBuscarMaquinaria(java.awt.Frame parent, boolean modal,JIFContrato contrato) {
         super(parent, modal);
         initComponents();
-        listmaquinaria = daomaquinaria.view(jtabla,"ACTIVO","EMPRESA");
+        listmaquinaria = daomaquinaria.view(jtabla,"TODO","EMPRESA");
         this.contrato= contrato;
         this.setLocationRelativeTo(null);
         form="CONTRATO";
@@ -50,7 +51,7 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
     public JDFBuscarMaquinaria(java.awt.Frame parent, boolean modal,JDFEditarContrato jifeditar) {
         super(parent, modal);
         initComponents();
-        listmaquinaria = daomaquinaria.view(jtabla,"ACTIVO","EMPRESA");
+        listmaquinaria = daomaquinaria.view(jtabla,"TODO","EMPRESA");
         this.jifeditar=jifeditar;
         this.setLocationRelativeTo(null);
         form="EDITAR";
@@ -198,16 +199,29 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
         if(form.equals("CONTRATO")){
               int index=jtabla.getSelectedRow() ;
             if(index>=0){
-            contrato.setllenarmaquinaria(listmaquinaria.get(index));
-            this.dispose();
+            if(daomaquinaria.validaarrendar(listmaquinaria.get(index).getId())==true){
+                 contrato.setllenarmaquinaria(listmaquinaria.get(index));
+                 this.dispose();
+            }else {
+                    JOptionPane.showMessageDialog(null,"Imposible arrendar maquina");
+                
+                }
+           
+            
             }
         
         }
        if(form.equals("EDITAR")){
            int index=jtabla.getSelectedRow() ;
             if(index>=0){
-            jifeditar.setinsertar(listmaquinaria.get(index));
-            this.dispose();
+                if(daomaquinaria.validaarrendar(listmaquinaria.get(index).getId())==true){
+                 jifeditar.setinsertar(listmaquinaria.get(index));
+                this.dispose();
+                }else {
+                    JOptionPane.showMessageDialog(null,"Imposible arrendar maquina");
+                
+                }
+           
             }
        
        

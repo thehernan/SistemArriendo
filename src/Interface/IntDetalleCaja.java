@@ -14,10 +14,11 @@ import javax.swing.JTable;
  * @author info2017
  */
 public interface IntDetalleCaja {
-    public void insertpaycontrato(DetalleCaja detcaja,double desc);
+    public long insertpaycontrato(DetalleCaja detcaja,double desc);
     public void insetpaysale(DetalleCaja detcaja);
     public void insertdischarge(DetalleCaja detcaja);
     public void insertrepair(DetalleCaja detcaja);
     public String view(JTable tabla,String tipob,Timestamp fecha,String mes);
     public void print(String titulo,String tipob,Timestamp fecha,String mes);   
+    public void printabono(long id);
 }

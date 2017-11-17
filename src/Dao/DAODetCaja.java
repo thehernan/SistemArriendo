@@ -35,12 +35,12 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
     SingletonEmpresa singletonempresa = SingletonEmpresa.getinstancia();
 
     @Override
-    public void insertpaycontrato(DetalleCaja detcaja,double desc) {
+    public long insertpaycontrato(DetalleCaja detcaja,double desc) {
 //        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
         ResultSet rs= null;
-        
+        long id=0;
         try{
 	c = Conexion.Connect();
         ps = c.prepareStatement("SELECT * from sp_insertdetcajaguia(?,?,?,?,?,?)");
@@ -52,9 +52,9 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         ps.setBigDecimal(6,new BigDecimal(desc));
         rs=ps.executeQuery();
       
-//        while (rs.next()){
-//            JOptionPane.showMessageDialog(null,"Arido guardado con exito");	
-//        }
+        if (rs.next()){
+            id= rs.getLong("id");
+        }
 	
         } catch(Exception e)
             {
@@ -81,7 +81,8 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
                        Logger.getLogger(DAODetCaja.class.getName()).log(Level.SEVERE, null, ex);
                    }
                }
-            }  
+            }
+        return id;
     }
 
     @Override
@@ -338,5 +339,35 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         JOptionPane.showMessageDialog(null,ex.getMessage());
         }
     }
+
+    @Override
+    public void printabono(long id) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try{
+            Conexion conexion = new Conexion();
+            Connection  cn = null;           
+            String  rutaInforme  = "src/Reportes/ComprobantePago.jasper";
+            
+            Map parametros = new HashMap();
+            parametros.put("iddetcaja",  id);
+       
+            
+            JasperPrint informe=null;
+            informe = JasperFillManager.fillReport(rutaInforme, parametros,Conexion.Connect());
+            
+           // JasperPrintManager.printReport(informe, true);
+            
+            JasperViewer jv = new JasperViewer(informe,false);  
+        
+             jv.setVisible(true);
+             jv.setTitle(rutaInforme);
+            
+          
+        }catch (HeadlessException | JRException ex) {
+        JOptionPane.showMessageDialog(null, "ERROR EN EL REPORTE", "ERROR",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null,ex.getMessage());
+        }
+    }
+    
     
 }

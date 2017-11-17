@@ -144,7 +144,7 @@ public class JIFGuias extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         guia = listguia.get(jtabla.getSelectedRow());
-        daoguia.print(guia.getId());
+        daoguia.print(guia.getId(),guia.getTipoop());
         
         
     }//GEN-LAST:event_jbtnimprimirActionPerformed

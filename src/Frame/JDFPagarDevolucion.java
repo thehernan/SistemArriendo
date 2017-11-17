@@ -230,7 +230,7 @@ public class JDFPagarDevolucion extends javax.swing.JDialog {
 //        daodetcaja.insertpaycontrato(detallecaja);
         jifecojo.setbuscardetcontrato();
         this.dispose();
-        daoguia.print(id);
+        daoguia.print(id, "DEVOLUCION");
     }//GEN-LAST:event_jbtngenerarguiaActionPerformed
 
     /**

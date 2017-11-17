@@ -251,7 +251,7 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
         setbuscardetcontrato();
         listcontr=daocontrato.view(jtablacontrato, singletonempre.getId(),true,"TODOACTIVO");
         
-        daoguia.print(id);
+        daoguia.print(id,"DEVOLUCION");
         jbtngenerarguiadev.setEnabled(false);
 //        System.out.println(fecha.extraer());
 //        JDFPagarDevolucion pagar = new JDFPagarDevolucion(new JFrame(), isVisible(),listdetcont,contrato,fecha.extraer(),this);
@@ -262,7 +262,7 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
 
     private void jtfclienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfclienteKeyReleased
         // TODO add your handling code here:
-        listcontr=daocontrato.searchsensitive(jtablacontrato, singletonempre.getId(), "TODOVIGENTE", 0
+        listcontr=daocontrato.searchsensitive(jtablacontrato, singletonempre.getId(), "TODOVIGENTE", ""
                 , jtfcliente.getText().toUpperCase(),true);
          setbuscardetcontrato();
     }//GEN-LAST:event_jtfclienteKeyReleased

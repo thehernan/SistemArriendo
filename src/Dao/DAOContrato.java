@@ -342,7 +342,7 @@ public class DAOContrato implements  Interface.IntContrato{
             } 
     }
      @Override
-     public List<Contrato> searchsensitive(JTable tabla, long idempre,String tipob,long cod,String cli,boolean activo) {
+     public List<Contrato> searchsensitive(JTable tabla, long idempre,String tipob,String cod,String cli,boolean activo) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
@@ -354,7 +354,7 @@ public class DAOContrato implements  Interface.IntContrato{
         ps = c.prepareStatement("SELECT * from sp_busquedasensitivacontrato(?,?,?,?,?)");
         ps.setLong(1, idempre);
         ps.setString(2, tipob);
-        ps.setLong(3, cod);
+        ps.setString(3, cod);
         ps.setString(4, cli);
         ps.setBoolean(5, activo);
         rs=ps.executeQuery();

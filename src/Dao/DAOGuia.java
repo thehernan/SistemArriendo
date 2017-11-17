@@ -92,12 +92,14 @@ public class DAOGuia implements Interface.IntGuia{
     }
 
     @Override
-    public void print(long id) {
+    public void print(long id,String doc) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         try{
             Conexion conexion = new Conexion();
             Connection  cn = null;           
             String  rutaInforme  = "src/Reportes/guia.jasper";
+            if(doc.equals("DEVOLUCION"))
+             rutaInforme  = "src/Reportes/guiadevolucion.jasper";   
             
             Map parametros = new HashMap();
             parametros.put("idguia",  id);                 
@@ -149,10 +151,11 @@ public class DAOGuia implements Interface.IntGuia{
         while (rs.next()){
             Guia guia = new Guia();
             guia.setId(rs.getLong("vidguia"));
+            guia.setTipoop(rs.getString("vtipoop"));
             datosR[0]=rs.getString("vcodguia");
             datosR[1]=rs.getString("vcodcontrato");
             datosR[2]=rs.getString("vcliente");
-            datosR[3]=rs.getString("vtipoop");
+            datosR[3]=guia.getTipoop();
             datosR[4]=rs.getString("vfecha");
             modelo.addRow(datosR);
            listguia.add(guia);
