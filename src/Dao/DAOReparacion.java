@@ -611,12 +611,12 @@ public class DAOReparacion implements Interface.IntReparacion{
     }
 
     @Override
-    public void verdeuda(JLabel total, JLabel abono, JLabel deuda,long id) {
+    public List<Double> verdeuda(long id) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
           Connection c =null;
         PreparedStatement ps= null;
         ResultSet rs= null;
-        
+        List<Double> resul = new ArrayList<>();
       
         try{
 	c = Conexion.Connect();
@@ -628,9 +628,9 @@ public class DAOReparacion implements Interface.IntReparacion{
       
         
         if (rs.next()){
-        total.setText(rs.getString("vtotal"));
-        abono.setText(rs.getString("vabonos"));
-        deuda.setText(rs.getString("vdeuda"));
+       resul.add(rs.getDouble("vtotal"));
+       resul.add(rs.getDouble("vabonos"));
+       resul.add(rs.getDouble("vdeuda"));
 		
         }
      
@@ -660,7 +660,7 @@ public class DAOReparacion implements Interface.IntReparacion{
                    }
                }
             }  
-        
+        return resul;
       
     }
     

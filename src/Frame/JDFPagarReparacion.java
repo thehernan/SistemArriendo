@@ -9,6 +9,8 @@ import Dao.DAODetCaja;
 import Dao.DAOReparacion;
 import Pojos.DetalleCaja;
 import Pojos.Reparacion;
+import java.text.NumberFormat;
+import java.util.List;
 
 /**
  *
@@ -22,6 +24,9 @@ public class JDFPagarReparacion extends javax.swing.JDialog {
     Reparacion reparacion;
     DAOReparacion daoreparacion = new DAOReparacion();
     DAODetCaja daodetcaja= new DAODetCaja();
+    double total,abonos,deuda;
+    NumberFormat nf = NumberFormat.getInstance();
+    List<Double> resul;
     public JDFPagarReparacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -31,7 +36,14 @@ public class JDFPagarReparacion extends javax.swing.JDialog {
         initComponents();
         this.reparacion=reparacion;
         jlblcodigo.setText(reparacion.getCodigo());
-        daoreparacion.verdeuda(jlbltotal, jlblabonos, jlbldeuda, reparacion.getId());
+        resul=daoreparacion.verdeuda(reparacion.getId());
+        total=resul.get(0);
+        abonos=resul.get(1);
+        deuda=Math.ceil(resul.get(2));
+        
+        jlbltotal.setText(nf.format(Math.ceil(total)));
+        jlblabonos.setText(nf.format(Math.ceil(abonos)));
+        jlbldeuda.setText(nf.format(Math.ceil(deuda)));
         this.setLocationRelativeTo(null);
         
     }
@@ -176,7 +188,7 @@ public class JDFPagarReparacion extends javax.swing.JDialog {
     private void jtfimporteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfimporteKeyReleased
         // TODO add your handling code here:
         try{
-         Double deuda=Double.parseDouble(jlbldeuda.getText());
+         
         Double paga = Double.parseDouble(jtfimporte.getText());
         if(paga <= deuda){
         jbtncobrar.setEnabled(true);

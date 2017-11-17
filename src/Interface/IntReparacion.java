@@ -25,5 +25,5 @@ public interface IntReparacion {
     public void updatenoempleado(Reparacion repa);
     public List<Reparacion> searchsensitive (JTable tabla,boolean entreg,String tiop,String cadena); 
     public void print(long id);
-    public void verdeuda(JLabel total,JLabel abono,JLabel deuda,long id);
+    public List<Double> verdeuda(long id);
 }
