@@ -17,8 +17,9 @@ public interface IntDetalleCaja {
     public long insertpaycontrato(DetalleCaja detcaja,double desc);
     public void insetpaysale(DetalleCaja detcaja);
     public void insertdischarge(DetalleCaja detcaja);
-    public void insertrepair(DetalleCaja detcaja);
+    public long insertrepair(DetalleCaja detcaja);
     public String view(JTable tabla,String tipob,Timestamp fecha,String mes);
     public void print(String titulo,String tipob,Timestamp fecha,String mes);   
     public void printabono(long id);
+    public void printrepair(long id);
 }

@@ -210,8 +210,10 @@ public class JDFPagarReparacion extends javax.swing.JDialog {
         detcaja.setObservacion(jtfaobservacion.getText().toUpperCase());
         detcaja.setIdreparir(reparacion.getId());
         
-        daodetcaja.insertrepair(detcaja);
-        this.dispose();
+        detcaja.setId(daodetcaja.insertrepair(detcaja));
+         this.dispose();
+        daodetcaja.printrepair(detcaja.getId());
+       
         
     }//GEN-LAST:event_jbtncobrarActionPerformed
 

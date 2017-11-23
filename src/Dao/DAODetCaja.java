@@ -183,12 +183,12 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
     }
 
     @Override
-    public void insertrepair(DetalleCaja detcaja) {
+    public long insertrepair(DetalleCaja detcaja) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
         ResultSet rs= null;
-        
+        long id=0;
         try{
 	c = Conexion.Connect();
         ps = c.prepareStatement("SELECT * from sp_insertdetcajarepair(?,?,?,?)");
@@ -200,7 +200,8 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         rs=ps.executeQuery();
       
         while (rs.next()){
-            JOptionPane.showMessageDialog(null,"Abono guardado con exito");	
+            JOptionPane.showMessageDialog(null,"Abono guardado con exito");
+            id=rs.getLong("vid");
         }
 	
         } catch(Exception e)
@@ -228,7 +229,8 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
                        Logger.getLogger(DAODetCaja.class.getName()).log(Level.SEVERE, null, ex);
                    }
                }
-            }  
+            } 
+        return id;
     }
 
     @Override
@@ -347,6 +349,35 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
             Conexion conexion = new Conexion();
             Connection  cn = null;           
             String  rutaInforme  = "src/Reportes/ComprobantePago.jasper";
+            
+            Map parametros = new HashMap();
+            parametros.put("iddetcaja",  id);
+       
+            
+            JasperPrint informe=null;
+            informe = JasperFillManager.fillReport(rutaInforme, parametros,Conexion.Connect());
+            
+           // JasperPrintManager.printReport(informe, true);
+            
+            JasperViewer jv = new JasperViewer(informe,false);  
+        
+             jv.setVisible(true);
+             jv.setTitle(rutaInforme);
+            
+          
+        }catch (HeadlessException | JRException ex) {
+        JOptionPane.showMessageDialog(null, "ERROR EN EL REPORTE", "ERROR",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null,ex.getMessage());
+        }
+    }
+
+    @Override
+    public void printrepair(long id) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            Conexion conexion = new Conexion();
+            Connection  cn = null;           
+            String  rutaInforme  = "src/Reportes/ComprobantePagoReparacion.jasper";
             
             Map parametros = new HashMap();
             parametros.put("iddetcaja",  id);

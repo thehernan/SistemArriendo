@@ -41,8 +41,8 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
       try {
             Double deuda=Double.parseDouble(jtfdeuda.getValue().toString());
             Double paga =Double.parseDouble(jtfnuevoabono.getText());
-            Double desc= Double.parseDouble(jtfdescuento.getText());
-            if(paga >= 0 && desc >=0){
+            Double desc= Double.parseDouble(jtfnuevodesc.getText());
+            if(paga >= 0.0 && desc >=0.0){
                jbtnabonar.setEnabled(true);
                jlblmensaje.setText("");
             }else {
@@ -94,13 +94,13 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
         jtfdeuda.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         jtfdeuda.setEnabled(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel1.setText("Total:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel2.setText("Abono:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel3.setText("Deuda Restante:");
 
         jbtnabonar.setText("Abonar");
@@ -113,7 +113,7 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
 
         jtfabono.setEnabled(false);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel4.setText("Nuevo Abono:");
 
         jtfnuevoabono.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -125,19 +125,19 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel5.setText("Observación:");
 
         jtfaobservacion.setColumns(20);
         jtfaobservacion.setRows(5);
         jScrollPane1.setViewportView(jtfaobservacion);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel6.setText("Desc.:");
 
         jtfdescuento.setEnabled(false);
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel7.setText("Nuevo desc.:");
 
         jtfnuevodesc.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -232,7 +232,7 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
     private void jbtnabonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnabonarActionPerformed
         // TODO add your handling code here:
         Double paga =Double.parseDouble(jtfnuevoabono.getText());
-        double desc= Double.parseDouble(jtfdescuento.getText());
+        double desc= Double.parseDouble(jtfnuevodesc.getText());
          detcaja.setIdcontrato(contrato.getId());
          detcaja.setImporte(paga);
          detcaja.setPago(0.0);
