@@ -50,6 +50,7 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         ps.setString(4, detcaja.getObservacion());
         ps.setLong(5, singletonempresa.getId());
         ps.setBigDecimal(6,new BigDecimal(desc));
+       
         rs=ps.executeQuery();
       
         if (rs.next()){
@@ -94,12 +95,14 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertdetcajaventa(?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertdetcajaventa(?,?,?,?,?,?,?)");
         ps.setBigDecimal(1, new BigDecimal(detcaja.getImporte()));
         ps.setBigDecimal(2,new BigDecimal(detcaja.getPago()));
         ps.setLong(3, detcaja.getIdventa());
         ps.setString(4, detcaja.getObservacion());
         ps.setLong(5, singletonempresa.getId());
+        ps.setBigDecimal(6,new BigDecimal(detcaja.getDescuento()));
+        ps.setBigDecimal(7,new BigDecimal(detcaja.getTotal()));
         rs=ps.executeQuery();
       
 //        while (rs.next()){
@@ -258,23 +261,26 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
          return false;
         }
         };
-        String titulos[]={"Cod. Venta","Cod. Contrato","Cod. Reparación","Importe","Observación","Fecha"};
+        String titulos[]={"Cod. Venta","Cod. Contrato","Cod. Reparación","Importe","Descuento","Total","Observación","Fecha"};
         modelo.setColumnIdentifiers(titulos);
         tabla.setModel(modelo);
-        Object datosR[] = new Object[6];
+        Object datosR[] = new Object[8];
        
              
         
         while (rs.next()){
-           importe=rs.getDouble("vimporte");
+           importe=rs.getDouble("vtotal");
            total=total+importe;
                    
             datosR[0]=rs.getObject("vcodventa");
             datosR[1]=rs.getObject("vcodcontrato");
             datosR[2]=rs.getObject("vcodreparacion");
-            datosR[3]=nf.format(importe);
-            datosR[4]=rs.getObject("vobservacion");
-            datosR[5]=rs.getObject("vfecha");
+            datosR[3]=nf.format(rs.getDouble("vimporte"));
+            datosR[4]=nf.format(rs.getDouble("vdescuento"));
+            datosR[5]=nf.format(importe);
+            
+            datosR[6]=rs.getObject("vobservacion");
+            datosR[7]=rs.getObject("vfecha");
             modelo.addRow(datosR);
           
 		

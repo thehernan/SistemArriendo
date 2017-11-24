@@ -48,7 +48,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         String titulos[]={"Descripcion","Cantidad","Precio und.","Importe"};
         Object datos[] = new Object[4];
     
-        Double total;
+        
         DAOCliente daocliente = new DAOCliente();
         Cliente cliente= new Cliente();
         DAOVenta daoventa= new DAOVenta();
@@ -63,7 +63,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         initComponents();
         modelo.setColumnIdentifiers(titulos);
         jtabla.setModel(modelo);
-        total=0.0;
+     
    ///// hora actual
         Date fecha = new Date();
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
@@ -73,24 +73,39 @@ public class JIFVenta extends javax.swing.JInternalFrame {
     
     public void setarido(Arido arido){
         this.arido=arido;
-        listarido.add(arido);
+        
         Double importe;
         NumberFormat nf = NumberFormat.getInstance();
         importe = arido.getCantidad() * arido.getPrecio();
+        arido.setImporte(importe);
+        
         datos[0] = arido.getDescripcion();
         datos[1] = arido.getCantidad();
         datos[2] = nf.format(arido.getPrecio());
         datos[3] = nf.format(importe);
         modelo.addRow(datos);
-        total=total+importe;
-        jlbltotal.setText(nf.format(total));
+        listarido.add(arido);
+      calcula();
+       
                 
     
     }
+    public double calcula(){
+     NumberFormat nf = NumberFormat.getInstance();
+     double total=0.0;
+     for(Arido arido: listarido){
+         total=total+arido.getImporte();
+     }
+      jlbltotal.setText(nf.format(total));
+      return total;
+    }
+    
     public void setvender(DetalleCaja detcaja){
         venta.setIdempresa(singletonempresa.getId());
-        venta.setDescuento(0.0);
+        venta.setDescuento(detcaja.getDescuento());
         venta.setFecha(new SimpleDateFormat("yyyy-MM-dd").format(jdpfecha.getDate())+" "+jtfhora.getValue());
+        double total=detcaja.getImporte()-detcaja.getDescuento();
+        detcaja.setTotal(total);
     if(cliente.getId()!=0){
         /// insert venta con cliente
         venta.setIdcliente(cliente.getId());
@@ -103,7 +118,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         
         }
     detcaja.setIdventa(venta.getId());
-    detcaja.setPago(0.0);
+//    detcaja.setPago(0.0);
     daodetcaja.insetpaysale(detcaja);
     daodetventa.insert(listarido, venta.getId());
     daoventa.print(venta.getId());
@@ -126,6 +141,8 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         modelo.removeRow(i);
         i-=1;
         }
+     listarido = new ArrayList<>();
+    calcula();
     }
 
     /**
@@ -438,7 +455,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
     private void jbtnvenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnvenderActionPerformed
         // TODO add your handling code here:
        if(listarido.size()>0 && jdpfecha.getDate()!=null){
-           JDFPagarVenta pagar=new JDFPagarVenta(new JFrame(),isVisible(),total,this);
+           JDFPagarVenta pagar=new JDFPagarVenta(new JFrame(),isVisible(),calcula(),this);
             pagar.setVisible(true);
             jlblmensajeventa.setText("");
        }else {
@@ -462,6 +479,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
                 daodetventa.returnstock(arido.getId(),arido.getCantidad());
                 listarido.remove(index);
                 modelo.removeRow(index);
+                calcula();
             }
             
             

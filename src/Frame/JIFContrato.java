@@ -119,6 +119,8 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         daocliente.updatenophoto(cliente);
         contrato.setTipodoc(tipodoc);
         contrato.setDescuento(desc);
+        
+        System.out.println("fechacontratopagar "+contrato.getFecha());
         contrato.setId(daocontrato.insert(contrato));  /// devolver el id para poder imprimir      
         
         daodetcontrato.insert(listmaquinaria,contrato.getId());
@@ -554,6 +556,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         
          contrato.setFecha(new SimpleDateFormat("yyyy-MM-dd").format(jdpfecha.getDate())+" "+jtfhora.getValue());
         
+         System.out.println("fecha"+contrato.getFecha());
         JDFPagarDespacho pagar = new JDFPagarDespacho(new Frame(), isVisible(),contrato, this);
         pagar.setVisible(true);
         

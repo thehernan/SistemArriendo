@@ -18,8 +18,26 @@ public class DetalleCaja {
     private String observacion;
     private long idreparir;
     private String fecha;
+    private Double descuento;
+    private Double total;
     public String getObservacion() {
         return observacion;
+    }
+
+    public Double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Double descuento) {
+        this.descuento = descuento;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public String getFecha() {

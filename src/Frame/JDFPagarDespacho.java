@@ -219,10 +219,12 @@ public class JDFPagarDespacho extends javax.swing.JDialog {
 
     private void jbtngenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtngenerarActionPerformed
         // TODO add your handling code here:
-        Double pago=Double.parseDouble(jtfabono.getText());
-        Double desc =Double.parseDouble(jtfdescuento.getText());
-        
+        double pago=Double.parseDouble(jtfabono.getText());
+        double desc =Double.parseDouble(jtfdescuento.getText());
+        double total=pago-desc;
         detcaja.setImporte(pago);
+//        detcaja.setDescuento(desc);
+//        detcaja.setTotal(total);
         detcaja.setPago(0.0);
         detcaja.setObservacion(jtaobservacion.getText().toUpperCase());
         this.dispose();

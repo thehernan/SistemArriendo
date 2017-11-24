@@ -33,6 +33,32 @@ public class JDFPagarVenta extends javax.swing.JDialog {
         jlbltotal.setText(nf.format(total));
         this.jifventa=jifventa;
     }
+    public void validapago(){
+     try {
+        double pago = Double.parseDouble(jtfpagocon.getText());
+        double vuelto=0.0;
+        double descuento = Double.parseDouble(jtfdescuento.getText());
+        double totalp=total-descuento;
+        NumberFormat nf = NumberFormat.getInstance();
+        if(pago>=totalp && descuento<=totalp && descuento>=0){
+            vuelto=pago-totalp;
+            jlblvuelto.setText(nf.format(vuelto));
+            jlblmensaje.setText("");
+            jbtncobrar.setEnabled(true);
+        }else {
+            jbtncobrar.setEnabled(false);
+            jlblmensaje.setText("Ingrese un monto valido");
+            jlblvuelto.setText("* * *");
+        }
+            
+            
+        } catch (Exception e) {
+            jbtncobrar.setEnabled(false);
+            jlblmensaje.setText("Ingrese un monto valido");
+            jlblvuelto.setText("* * *");
+        }
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,19 +76,21 @@ public class JDFPagarVenta extends javax.swing.JDialog {
         jlbltotal = new javax.swing.JLabel();
         jbtncobrar = new javax.swing.JButton();
         jlblmensaje = new javax.swing.JLabel();
+        jlbldescuento = new javax.swing.JLabel();
+        jtfdescuento = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel1.setText("Total:");
 
-        jlblvuelto.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
+        jlblvuelto.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jlblvuelto.setText("* * *");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel3.setText("Pago con:");
 
-        jtfpagocon.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jtfpagocon.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jtfpagocon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfpagoconActionPerformed(evt);
@@ -77,10 +105,11 @@ public class JDFPagarVenta extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel4.setText("Vuelto:");
 
-        jlbltotal.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
+        jlbltotal.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
+        jlbltotal.setForeground(new java.awt.Color(255, 51, 51));
         jlbltotal.setText("jLabel2");
 
         jbtncobrar.setText("Cobrar");
@@ -91,27 +120,49 @@ public class JDFPagarVenta extends javax.swing.JDialog {
             }
         });
 
+        jlbldescuento.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
+        jlbldescuento.setText("Descuento:");
+
+        jtfdescuento.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
+        jtfdescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfdescuentoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfdescuentoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtncobrar)
-                .addGap(28, 28, 28))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlblmensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                    .addComponent(jtfpagocon)
-                    .addComponent(jlblvuelto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlbltotal, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
-                .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jbtncobrar)
+                                .addGap(28, 28, 28))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jlblmensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jtfpagocon, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                                        .addComponent(jlbltotal, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                                        .addComponent(jtfdescuento))
+                                    .addComponent(jlblvuelto, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 47, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlbldescuento)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,14 +171,18 @@ public class JDFPagarVenta extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jlbltotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlbldescuento)
+                    .addComponent(jtfdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfpagocon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jlblmensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlblmensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jlblvuelto))
                 .addGap(18, 18, 18)
@@ -140,28 +195,7 @@ public class JDFPagarVenta extends javax.swing.JDialog {
 
     private void jtfpagoconKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfpagoconKeyReleased
         // TODO add your handling code here:
-        try {
-            Double pago = Double.parseDouble(jtfpagocon.getText());
-        Double vuelto=0.0;
-        NumberFormat nf = NumberFormat.getInstance();
-        if(pago>=total){
-            vuelto=pago-total;
-            jlblvuelto.setText(nf.format(vuelto));
-            jlblmensaje.setText("");
-            jbtncobrar.setEnabled(true);
-        }else {
-            jbtncobrar.setEnabled(false);
-            jlblmensaje.setText("Ingrese un monto valido");
-            jlblvuelto.setText("* * *");
-        }
-            
-            
-        } catch (Exception e) {
-            jbtncobrar.setEnabled(false);
-            jlblmensaje.setText("Ingrese un monto valido");
-            jlblvuelto.setText("* * *");
-        }
-        
+        validapago();
         
     }//GEN-LAST:event_jtfpagoconKeyReleased
 
@@ -181,7 +215,8 @@ public class JDFPagarVenta extends javax.swing.JDialog {
          this.dispose();
          DetalleCaja detcaja= new DetalleCaja();
          detcaja.setImporte(total);
-         
+         detcaja.setDescuento(Double.parseDouble(jtfdescuento.getText()));
+         detcaja.setPago(Double.parseDouble(jtfpagocon.getText()));
         jifventa.setvender(detcaja);
        
     }//GEN-LAST:event_jbtncobrarActionPerformed
@@ -190,6 +225,22 @@ public class JDFPagarVenta extends javax.swing.JDialog {
         // TODO add your handling code here:
         jbtncobrar.doClick();
     }//GEN-LAST:event_jtfpagoconActionPerformed
+
+    private void jtfdescuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfdescuentoKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) ||
+        (c == evt.VK_BACK_SPACE) ||
+        (c == evt.VK_DELETE))) {
+        getToolkit().beep();
+        evt.consume();
+        }  
+    }//GEN-LAST:event_jtfdescuentoKeyTyped
+
+    private void jtfdescuentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfdescuentoKeyReleased
+        // TODO add your handling code here:
+        validapago();
+    }//GEN-LAST:event_jtfdescuentoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -238,9 +289,11 @@ public class JDFPagarVenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbtncobrar;
+    private javax.swing.JLabel jlbldescuento;
     private javax.swing.JLabel jlblmensaje;
     private javax.swing.JLabel jlbltotal;
     private javax.swing.JLabel jlblvuelto;
+    private javax.swing.JTextField jtfdescuento;
     private javax.swing.JTextField jtfpagocon;
     // End of variables declaration//GEN-END:variables
 }

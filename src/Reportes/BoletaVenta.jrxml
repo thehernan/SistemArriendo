@@ -2,19 +2,19 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ef19f734-ceac-46c4-9b1f-ace7720c0ffb">
 	<property name="ireport.zoom" value="1.331000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="162"/>
+	<property name="ireport.y" value="211"/>
 	<parameter name="idventa" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select fecha,case when length(venta.id_venta::character)=1 then concat('00000',venta.id_venta)
+		<![CDATA[select fecha,case when length(venta.id_venta::text)=1 then concat('00000',venta.id_venta)
 when length(venta.id_venta::text)=2 then concat('0000',venta.id_venta) when length(venta.id_venta::text)=3 
 then concat('000',venta.id_venta) when length(venta.id_venta::text)=4 then concat('00',venta.id_venta)
 when length(venta.id_venta::text)=5 then concat('0',venta.id_venta)else venta.id_venta::text end as cod,miempresa.razonsocial,miempresa.rut,miempresa.domicilio,miempresa.telefono as teleemp,miempresa.celular as celemp,
 concat(cliente.nombre,' ',cliente.apellido),cliente.rut as rutcli,
 cliente.domicilioparticular,cliente.domiciliotrabajo,detalle_venta.cantidad,
  aridos.descripcion, detalle_venta.cantidad *
-detalle_venta.importe as valor from venta left join cliente on venta.id_cliente
+detalle_venta.importe as valor, descuento from venta left join cliente on venta.id_cliente
 =cliente.id_cliente inner join miempresa on miempresa.id_empresa=venta.id_empresa 
 inner join detalle_venta on detalle_venta.id_venta=venta.id_venta
 inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta=$P{idventa};]]>
@@ -33,7 +33,11 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 	<field name="cantidad" class="java.math.BigDecimal"/>
 	<field name="descripcion" class="java.lang.String"/>
 	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="descuento" class="java.math.BigDecimal"/>
 	<variable name="valor_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<variable name="valor_2" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
 	</variable>
 	<background>
@@ -242,7 +246,7 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="152">
+		<band height="159">
 			<staticText>
 				<reportElement x="2" y="30" width="148" height="20" uuid="775e19ff-c375-4c44-afa8-de288e20a471"/>
 				<text><![CDATA[Recibi conforme de SERINGCO:]]></text>
@@ -260,7 +264,7 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch">
+		<band height="72" splitType="Stretch">
 			<textField pattern="#,##0">
 				<reportElement x="439" y="2" width="100" height="20" uuid="6e63594c-6dc3-438e-a664-5ea508051ec1"/>
 				<textElement textAlignment="Center">
@@ -269,24 +273,40 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 				<textFieldExpression><![CDATA[$V{valor_1}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="393" y="2" width="46" height="20" uuid="cabebdc2-969c-446f-8f66-06a6e4270e38"/>
-				<textElement>
+				<reportElement x="368" y="2" width="71" height="20" uuid="cabebdc2-969c-446f-8f66-06a6e4270e38"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ TOTAL $]]></text>
+				<text><![CDATA[IMPORTE: $]]></text>
 			</staticText>
-			<line>
-				<reportElement x="393" y="16" width="146" height="1" uuid="7848937c-6ed4-458e-98e0-74b35d934277"/>
-			</line>
-			<line>
-				<reportElement x="393" y="2" width="145" height="1" uuid="7fbf549c-3320-4604-9ea6-80f9b123da79"/>
-			</line>
-			<line>
-				<reportElement x="393" y="3" width="1" height="13" uuid="ff8531fa-a893-4774-b73b-5596fc7106d1"/>
-			</line>
-			<line>
-				<reportElement x="537" y="2" width="1" height="14" uuid="f1f77023-c59c-49d3-84b7-9eacc6ec6730"/>
-			</line>
+			<staticText>
+				<reportElement x="362" y="22" width="76" height="20" uuid="994a7c28-8c94-4ab0-8a6e-b57c16f51187"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCUENTO: $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="42" width="71" height="20" uuid="62d4537e-21ba-4f4e-a8a5-b959fa257f64"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ TOTAL: $]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="440" y="22" width="97" height="20" uuid="4d1896c5-ac37-4042-aa6b-2b954c87a9f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="440" y="42" width="100" height="20" uuid="6326ec2e-75e3-4065-9c61-bb6f66dad7e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{valor_2}-$F{descuento}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

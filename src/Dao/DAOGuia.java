@@ -44,7 +44,7 @@ public class DAOGuia implements Interface.IntGuia{
         long id= 0;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_insertguia(?,?,?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_insertguia(?,?,?,?,?,?,?)");
         ps.setLong(1, contrato.getId());
         ps.setLong(2, contrato.getIdempresa());
         ps.setLong(3, contrato.getIdcliente());
@@ -54,7 +54,8 @@ public class DAOGuia implements Interface.IntGuia{
         ps.setString(4, tipoop);
          ps.setBigDecimal(5,new BigDecimal(contrato.getFlete()));
         ps.setBigDecimal(6,new BigDecimal(contrato.getDescuento()));
-    
+        ps.setString(7, contrato.getFecha());
+        
         
         rs=ps.executeQuery();
       

@@ -19,7 +19,16 @@ public class Arido {
     private Long idempresa;
     private Long idcatgoria;
     private String categoria;
+    private double importe;
     public Arido() {
+    }
+
+    public double getImporte() {
+        return importe;
+    }
+
+    public void setImporte(double importe) {
+        this.importe = importe;
     }
 
     public Arido(Long id, String descripcion, Double cantidad, String undmed, Double precio, Double invinicial, Long idempresa) {
