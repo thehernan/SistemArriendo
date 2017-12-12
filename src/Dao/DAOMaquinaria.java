@@ -308,11 +308,12 @@ public class DAOMaquinaria implements Interface.IntMaquinaria{
          boolean duplicado= false;
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_duplicatemaquina(?,?,?,?)");
+        ps = c.prepareStatement("SELECT * from sp_duplicatemaquina(?,?,?,?,?)");
         ps.setLong(1, id);
         ps.setString(2, cadena);
         ps.setString(3,op);
         ps.setLong(4, idcat);
+        ps.setLong(5, singletonempresa.getId());
     
         
         rs=ps.executeQuery();
