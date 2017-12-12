@@ -36,6 +36,8 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
         this.contrato=contrato;
         daocontrato.debtor(contrato.getId(), jtftotal, jtfabono, jtfdeuda,jtfdescuento);
         this.setLocationRelativeTo(null);
+        jlblcontrato.setText("Contrato: N°"+String.format("%06d", contrato.getId()));
+        
     }
      public void validacobro(){
       try {
@@ -83,6 +85,7 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
         jtfdescuento = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         jtfnuevodesc = new javax.swing.JTextField();
+        jlblcontrato = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -149,6 +152,10 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
             }
         });
 
+        jlblcontrato.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jlblcontrato.setForeground(new java.awt.Color(255, 51, 51));
+        jlblcontrato.setText("jLabel8");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,37 +165,44 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtnabonar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jtftotal)
-                                    .addComponent(jtfdeuda)
-                                    .addComponent(jtfabono)
-                                    .addComponent(jtfnuevoabono)
-                                    .addComponent(jtfdescuento)))
+                                .addComponent(jlblcontrato)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlblmensaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jtfnuevodesc))))))
-                .addGap(45, 45, 45))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                                            .addComponent(jtftotal)
+                                            .addComponent(jtfdeuda)
+                                            .addComponent(jtfabono)
+                                            .addComponent(jtfnuevoabono)
+                                            .addComponent(jtfdescuento)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlblmensaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jtfnuevodesc))))))))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
+                .addComponent(jlblcontrato)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtftotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -329,6 +343,7 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnabonar;
+    private javax.swing.JLabel jlblcontrato;
     private javax.swing.JLabel jlblmensaje;
     private javax.swing.JFormattedTextField jtfabono;
     private javax.swing.JTextArea jtfaobservacion;

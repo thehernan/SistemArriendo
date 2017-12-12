@@ -47,8 +47,8 @@ public class JIFContrato extends javax.swing.JInternalFrame {
          return false;
         }
         };
-        String titulos[]={"Maquina","Serie","Valor Dia"};
-        Object datosmaq[] = new Object[3];
+        String titulos[]={"Maquina","Serie","Valor Dia","Dias Arriendo","Importe"};
+        Object datosmaq[] = new Object[5];
         DAOCliente daocliente = new DAOCliente();
         Cliente cliente= new Cliente() ;
         Double total;
@@ -92,12 +92,16 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     if(valida==true){
     listmaquinaria.add(maq);
     NumberFormat nf= NumberFormat.getInstance();
+    double importe = maq.getDias()*maq.getPreciodiario();
+    maq.setImporte(importe);
     datosmaq[0]=maq.getMaquina()+" "+maq.getMarca()+" "+maq.getModelo();
     datosmaq[1]=maq.getSerie();
     datosmaq[2]=nf.format(maq.getPreciodiario());
+    datosmaq[3]=maq.getDias();
+    datosmaq[4]=nf.format(importe);
     modelo.addRow(datosmaq);
     validagenerar();
-    total = total + maq.getPreciodiario();
+    total = total + maq.getImporte();
     jlbltotal.setText(nf.format(total));
     
     }else{
@@ -131,7 +135,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
          daoguia.print(id,"DESPACHO");
          
         detcaja.setIdcontrato(contrato.getId());
-        daodetcaja.insertpaycontrato(detcaja,desc);  
+        daodetcaja.insertpaycontrato(detcaja,0.0);  
     }
     public void nuevo(){
         jtfrut.setText("");
@@ -340,9 +344,9 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                             .addComponent(jlblfono))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jlblmensajedeudor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                        .addContainerGap())))
         );
 
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -458,7 +462,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnmaquinaria)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -496,8 +500,9 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         if(JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE RETIRAR LA MAQUINA DEL CONTRATO","",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
          
         Maquinaria maq= listmaquinaria.get(index);
-        total = total - maq.getPreciodiario();
-        jlbltotal.setText(total.toString());
+        total = total - maq.getImporte();
+        NumberFormat nf= NumberFormat.getInstance();
+        jlbltotal.setText(nf.format(total));
         listmaquinaria.remove(index);
         modelo.removeRow(index);
         }

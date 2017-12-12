@@ -17,9 +17,11 @@ public class DetalleContrato {
     private boolean  entregado;
     private String fechapres;
     private String fechaent;
-
+   
     public DetalleContrato() {
     }
+
+  
 
     public long getId() {
         return id;

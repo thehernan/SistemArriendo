@@ -12,6 +12,7 @@ import Pojos.Maquinaria;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -100,7 +101,7 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,10 +170,10 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jtfbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jtfbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jcbbuscarcate, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnaceptar)))
                 .addContainerGap())
         );
@@ -200,7 +201,12 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
               int index=jtabla.getSelectedRow() ;
             if(index>=0){
             if(daomaquinaria.validaarrendar(listmaquinaria.get(index).getId())==true){
-                 contrato.setllenarmaquinaria(listmaquinaria.get(index));
+                 maquina=listmaquinaria.get(index);
+               
+                
+                JDFDiasContrato dias=new JDFDiasContrato(new JFrame(),isVisible(),contrato,maquina);
+                dias.setVisible(true);
+               
                  this.dispose();
             }else {
                     JOptionPane.showMessageDialog(null,"Imposible arrendar maquina");

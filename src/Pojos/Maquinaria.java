@@ -22,6 +22,9 @@ public class Maquinaria {
     private String estado;
     private long idcliente;
     private String propietario;
+    private int dias;
+    private Double importe;
+    
     public Maquinaria(long id, String maquina, String marca, String serie, String modelo, long idcategoria, long idempresa, Double preciodiario, String estado) {
         this.id = id;
         this.maquina = maquina;
@@ -34,8 +37,24 @@ public class Maquinaria {
         this.estado = estado;
     }
 
+    public Double getImporte() {
+        return importe;
+    }
+
+    public void setImporte(Double importe) {
+        this.importe = importe;
+    }
+
     public String getCategoria() {
         return categoria;
+    }
+
+    public int getDias() {
+        return dias;
+    }
+
+    public void setDias(int dias) {
+        this.dias = dias;
     }
 
     public void setCategoria(String categoria) {

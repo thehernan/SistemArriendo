@@ -35,11 +35,12 @@ public class DAODetGuia implements Interface.IntDetalleGuia{
 	c = Conexion.Connect();
         
         for (Maquinaria maq : listdet){
-            ps = c.prepareStatement("SELECT * from sp_insertdetguia(?,?,?,?)");
+            ps = c.prepareStatement("SELECT * from sp_insertdetguia(?,?,?,?,?)");
             ps.setBigDecimal(1,new BigDecimal(maq.getPreciodiario()));
             ps.setLong(2, idguia);
             ps.setLong(3, maq.getId());
             ps.setBoolean(4, entre);
+            ps.setInt(5,maq.getDias());
             rs=ps.executeQuery();
         
         }    

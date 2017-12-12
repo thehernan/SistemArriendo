@@ -12,7 +12,9 @@ import Dao.DAOGuia;
 import Pojos.Contrato;
 import Pojos.DetalleContrato;
 import Pojos.SingletonEmpresa;
+import java.awt.Frame;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -80,6 +82,7 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
         jtfcliente = new javax.swing.JTextField();
 
         setClosable(true);
+        setResizable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -95,7 +98,7 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(511, Short.MAX_VALUE))
+                .addContainerGap(672, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,20 +180,21 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbtngenerarguiadev))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbtngenerarguiadev)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfcliente)))
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jtfcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,6 +257,14 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
         
         daoguia.print(id,"DEVOLUCION");
         jbtngenerarguiadev.setEnabled(false);
+        
+        if(JOptionPane.showConfirmDialog(null,"Desea realizar un abono al contrato", "",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+            System.out.println("id"+contrato.getId());
+             JDFNuevoAbono abono= new JDFNuevoAbono(new Frame(), isVisible(),contrato);
+                abono.setVisible(true);
+        
+        }
+        
 //        System.out.println(fecha.extraer());
 //        JDFPagarDevolucion pagar = new JDFPagarDevolucion(new JFrame(), isVisible(),listdetcont,contrato,fecha.extraer(),this);
 //        pagar.setVisible(true);
