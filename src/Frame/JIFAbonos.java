@@ -192,7 +192,7 @@ public class JIFAbonos extends javax.swing.JInternalFrame {
 
     private void jtfbuscarclientKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarclientKeyReleased
         // TODO add your handling code here:
-        listcontr=daocontrato.searchsensitive(jtabla, singletonempre.getId(), "CLIENTE", "", jtfbuscarclient.getText(),true);
+        listcontr=daocontrato.searchsensitive(jtabla, singletonempre.getId(), "CLIENTE", "", jtfbuscarclient.getText().toUpperCase(),true);
     }//GEN-LAST:event_jtfbuscarclientKeyReleased
 
     private void jtfbuscarcodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfbuscarcodKeyTyped

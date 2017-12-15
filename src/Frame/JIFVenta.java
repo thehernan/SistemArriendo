@@ -214,7 +214,7 @@ public class JIFVenta extends javax.swing.JInternalFrame {
         jLabel5.setText("Dirección Trabajo:");
 
         try {
-            jtfrut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-#")));
+            jtfrut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-A")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

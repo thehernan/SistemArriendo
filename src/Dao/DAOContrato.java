@@ -359,18 +359,29 @@ public class DAOContrato implements  Interface.IntContrato{
         ps.setString(4, cli);
         ps.setBoolean(5, activo);
         rs=ps.executeQuery();
+         DefaultTableModel modelo= new DefaultTableModel(
+                new String[]{"Codigo","Cliente","R.U.T","Fecha","Dias Prestamo","Tipo Contrato","Vigente"}, 0) {
+ 
+            Class[] types = new Class[]{
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                    , java.lang.Object.class, java.lang.Object.class,java.lang.Boolean.class
+              
+            };
+ 
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+             public boolean isCellEditable(int row, int column) {
+//              if (column == 4) return true;
+//            else
+            return false;
+            }
+            };
         
-         DefaultTableModel modelo= new DefaultTableModel(){
-        public boolean isCellEditable(int row, int column) {
-        //      if (column == 5) return true;
-        //else
-         return false;
-        }
-        };
-        String titulos[]={"Codigo","Cliente","R.U.T","Fecha"};
-        modelo.setColumnIdentifiers(titulos);
+        
+        
         tabla.setModel(modelo);
-        Object datosR[] = new Object[4];
+        Object datosR[] = new Object[7];
        
              
         
@@ -383,6 +394,9 @@ public class DAOContrato implements  Interface.IntContrato{
             datosR[1]=rs.getObject("vcliente");
             datosR[2]=rs.getObject("vrut");
             datosR[3]=rs.getObject("vfecha");
+            datosR[4]=rs.getObject("vdiasprestamo");
+            datosR[5]=rs.getObject("btipodoc");
+            datosR[6]=rs.getObject("vactivo");
             modelo.addRow(datosR);
             listcontrato.add(contrato);
 		

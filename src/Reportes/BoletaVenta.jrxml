@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ef19f734-ceac-46c4-9b1f-ace7720c0ffb">
 	<property name="ireport.zoom" value="1.331000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="211"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="idventa" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -14,7 +14,7 @@ when length(venta.id_venta::text)=5 then concat('0',venta.id_venta)else venta.id
 concat(cliente.nombre,' ',cliente.apellido),cliente.rut as rutcli,
 cliente.domicilioparticular,cliente.domiciliotrabajo,detalle_venta.cantidad,
  aridos.descripcion, detalle_venta.cantidad *
-detalle_venta.importe as valor, descuento from venta left join cliente on venta.id_cliente
+detalle_venta.importe as valor, descuento,cliente.telefono from venta left join cliente on venta.id_cliente
 =cliente.id_cliente inner join miempresa on miempresa.id_empresa=venta.id_empresa 
 inner join detalle_venta on detalle_venta.id_venta=venta.id_venta
 inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta=$P{idventa};]]>
@@ -34,6 +34,7 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 	<field name="descripcion" class="java.lang.String"/>
 	<field name="valor" class="java.math.BigDecimal"/>
 	<field name="descuento" class="java.math.BigDecimal"/>
+	<field name="telefono" class="java.lang.String"/>
 	<variable name="valor_1" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
 	</variable>
@@ -44,7 +45,7 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="241" splitType="Stretch">
+		<band height="259" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy h.mm a">
 				<reportElement x="426" y="95" width="129" height="17" uuid="23253e32-9bc0-466c-9507-2492c100a6b8"/>
 				<textElement>
@@ -84,59 +85,59 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 				<textFieldExpression><![CDATA["N°: "+$F{cod}]]></textFieldExpression>
 			</textField>
 			<rectangle radius="10">
-				<reportElement x="3" y="117" width="536" height="100" uuid="a1c792c7-9df4-4682-92ef-2267d6e459b1"/>
+				<reportElement x="0" y="117" width="536" height="112" uuid="a1c792c7-9df4-4682-92ef-2267d6e459b1"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="10" y="126" width="53" height="20" uuid="2547d9f9-f957-4eed-a0af-e041bce4a511"/>
+				<reportElement x="10" y="122" width="53" height="20" uuid="2547d9f9-f957-4eed-a0af-e041bce4a511"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
 				<text><![CDATA[Señor(es):]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="146" width="53" height="20" uuid="0da562ef-2000-4d78-ac5e-6fb04c47f519"/>
+				<reportElement x="10" y="142" width="53" height="20" uuid="0da562ef-2000-4d78-ac5e-6fb04c47f519"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
 				<text><![CDATA[R.U.T.:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="166" width="79" height="20" uuid="d0a5f021-2c35-4bb4-abe1-a0a027a5b9ed"/>
+				<reportElement x="10" y="162" width="79" height="20" uuid="d0a5f021-2c35-4bb4-abe1-a0a027a5b9ed"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
 				<text><![CDATA[Domicilio Part.:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="188" width="79" height="20" uuid="d43f112d-96a3-4a33-b797-500777d4685e"/>
+				<reportElement x="10" y="184" width="79" height="20" uuid="d43f112d-96a3-4a33-b797-500777d4685e"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
 				<text><![CDATA[Domicilio Trab.:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="63" y="126" width="363" height="20" uuid="62059710-c7af-4d19-88da-45c527ec705e"/>
+				<reportElement x="63" y="122" width="363" height="20" uuid="62059710-c7af-4d19-88da-45c527ec705e"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="63" y="146" width="152" height="20" uuid="cf5d79b5-f023-4d05-aba0-9fd62833a6d5"/>
+				<reportElement x="63" y="142" width="152" height="20" uuid="cf5d79b5-f023-4d05-aba0-9fd62833a6d5"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rutcli}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="89" y="168" width="261" height="20" uuid="1cb81d41-e7ae-4fe5-8651-9b79024368b9"/>
+				<reportElement x="89" y="164" width="261" height="20" uuid="1cb81d41-e7ae-4fe5-8651-9b79024368b9"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{domicilioparticular}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="89" y="188" width="261" height="20" uuid="e9f1422c-2edd-49af-81a6-3cc4cd165969"/>
+				<reportElement x="89" y="184" width="261" height="20" uuid="e9f1422c-2edd-49af-81a6-3cc4cd165969"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
@@ -165,7 +166,7 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 				<text><![CDATA[,]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="221" width="377" height="20" uuid="25244871-c45b-4bd2-92fa-248f13124006"/>
+				<reportElement x="2" y="239" width="377" height="20" uuid="25244871-c45b-4bd2-92fa-248f13124006"/>
 				<textElement>
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
@@ -174,6 +175,20 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 			<staticText>
 				<reportElement x="299" y="95" width="115" height="17" uuid="021bb437-5ea3-41b4-b251-bf59b6d86f37"/>
 				<text><![CDATA[Fecha/ Hora de Entrega:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="204" width="178" height="20" uuid="97fd0f9a-533c-48f7-9afc-66e97e614f3e"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="204" width="79" height="20" uuid="980c2e5a-6aab-4371-9732-c4866c2ff3ae"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[Telefono:]]></text>
 			</staticText>
 		</band>
 	</title>
