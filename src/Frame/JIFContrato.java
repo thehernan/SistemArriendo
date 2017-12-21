@@ -93,7 +93,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     listmaquinaria.add(maq);
     NumberFormat nf= NumberFormat.getInstance();
     double importe = maq.getDias()*maq.getPreciodiario();
-    maq.setImporte(importe);
+//    maq.setImporte(importe);
     datosmaq[0]=maq.getMaquina()+" "+maq.getMarca()+" "+maq.getModelo();
     datosmaq[1]=maq.getSerie();
     datosmaq[2]=nf.format(maq.getPreciodiario());

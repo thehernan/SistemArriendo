@@ -39,7 +39,7 @@ public class DAODetContrato implements Interface.IntDetContrato{
         
         for (Maquinaria maq : listdet){
             ps = c.prepareStatement("SELECT * from sp_insertdetcontrato(?,?,?,?)");
-            ps.setBigDecimal(1,new BigDecimal(maq.getImporte()));
+            ps.setBigDecimal(1,new BigDecimal(maq.getPreciodiario()));
             ps.setLong(2, maq.getId());
             ps.setLong(3, idcontr);
             ps.setInt(4, maq.getDias());
