@@ -234,7 +234,7 @@ public class JIFRecojo extends javax.swing.JInternalFrame {
     private void jtabladetalleMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtabladetalleMouseReleased
         // TODO add your handling code here:
         int index = jtabladetalle.getSelectedRow();
-        boolean devolver = Boolean.parseBoolean(jtabladetalle.getValueAt(index, 4).toString());
+        boolean devolver = Boolean.parseBoolean(jtabladetalle.getValueAt(index, 5).toString());
         
         detcontrato = listdetcont.get(jtabladetalle.getSelectedRow());
         detcontrato.setEntregado(devolver);

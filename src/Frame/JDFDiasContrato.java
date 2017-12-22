@@ -18,6 +18,8 @@ public class JDFDiasContrato extends javax.swing.JDialog {
      */
     JIFContrato jifcontrato;
     Maquinaria maq= new Maquinaria();
+    String op;
+    JDFEditarContrato jdfeditarc;
     public JDFDiasContrato(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -28,6 +30,15 @@ public class JDFDiasContrato extends javax.swing.JDialog {
         this.jifcontrato=jifcontrato;
         this.maq=maq;
         this.setLocationRelativeTo(null);
+        this.op="CONTRATO";
+    }
+     public JDFDiasContrato(java.awt.Frame parent, boolean modal,JDFEditarContrato jdfeditarc,Maquinaria maq) {
+        super(parent, modal);
+        initComponents();
+        this.jdfeditarc=jdfeditarc;
+        this.maq=maq;
+        this.setLocationRelativeTo(null);
+        this.op="EDITAR";
     }
 
     /**
@@ -47,7 +58,7 @@ public class JDFDiasContrato extends javax.swing.JDialog {
 
         jLabel1.setText("Dias de arriendo:");
 
-        jsdias.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), null, null, Integer.valueOf(1)));
+        jsdias.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
         jbtnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accept2.png"))); // NOI18N
         jbtnaceptar.setText("Aceptar");
@@ -87,7 +98,15 @@ public class JDFDiasContrato extends javax.swing.JDialog {
     private void jbtnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnaceptarActionPerformed
         // TODO add your handling code here:
         maq.setDias(Integer.parseInt(jsdias.getValue().toString()));
+        
+        if(op.equals("CONTRATO")){
          jifcontrato.setllenarmaquinaria(maq);
+        }
+        if(op.equals("EDITAR")){
+        jdfeditarc.setinsertar(maq);
+        
+        }
+        
          this.dispose();
     }//GEN-LAST:event_jbtnaceptarActionPerformed
 

@@ -40,6 +40,7 @@ public class JDFEditarContrato extends javax.swing.JDialog {
         initComponents();
         this.contrato=contrato;
         listdetcontrato=daodetcontrato.search(jtabla,contrato.getId());
+        jlblcontrato.setText(" N°"+String.format("%06d", contrato.getId()));
        this.setLocationRelativeTo(null);
     }
      
@@ -87,6 +88,7 @@ public class JDFEditarContrato extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jlblcontrato = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtabla = new javax.swing.JTable();
         jbtnmaquina = new javax.swing.JButton();
@@ -103,6 +105,11 @@ public class JDFEditarContrato extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("EDITAR CONTRATO");
 
+        jlblcontrato.setBackground(new java.awt.Color(255, 51, 51));
+        jlblcontrato.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
+        jlblcontrato.setForeground(new java.awt.Color(255, 51, 51));
+        jlblcontrato.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -110,12 +117,16 @@ public class JDFEditarContrato extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel3)
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlblcontrato)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel3)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jlblcontrato))
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
@@ -204,7 +215,7 @@ public class JDFEditarContrato extends javax.swing.JDialog {
     private void jtablaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaMouseReleased
         // TODO add your handling code here:
           int index = jtabla.getSelectedRow();
-        boolean devolver = Boolean.parseBoolean(jtabla.getValueAt(index, 4).toString());
+        boolean devolver = Boolean.parseBoolean(jtabla.getValueAt(index, 5).toString());
         
         detcontrato = listdetcontrato.get(jtabla.getSelectedRow());
         detcontrato.setEntregado(devolver);
@@ -221,6 +232,8 @@ public class JDFEditarContrato extends javax.swing.JDialog {
 
     private void jbtnevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnevolverActionPerformed
         // TODO add your handling code here:
+        contrato.setFlete(0.0);
+        contrato.setDescuento(0.0);
         long id=daoguia.insert(contrato, "DEVOLUCION");      
          System.out.println("idguia"+id);
         daodetguia.update(listdetcontrato,id,true);
@@ -284,6 +297,7 @@ public class JDFEditarContrato extends javax.swing.JDialog {
     private javax.swing.JButton jbtnevolver;
     private javax.swing.JButton jbtnimprimir;
     private javax.swing.JButton jbtnmaquina;
+    private javax.swing.JLabel jlblcontrato;
     private javax.swing.JTable jtabla;
     // End of variables declaration//GEN-END:variables
 }

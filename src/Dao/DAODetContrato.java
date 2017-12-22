@@ -90,15 +90,16 @@ public class DAODetContrato implements Interface.IntDetContrato{
         List<DetalleContrato> listdetc= new ArrayList<>();
         try{
 	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_buscardetcontrato(?)");
+        ps = c.prepareStatement("SELECT * from sp_buscardetcontrato(?,?)");
         ps.setLong(1, idcontr);
+        ps.setString(2, "DEVOLUCION");
         rs=ps.executeQuery();
         
          DefaultTableModel modelo= new DefaultTableModel(
-                new String[]{"Maquinaria","Fecha Prestamo","Atraso","Total","Devolver"}, 0) {
+                new String[]{"Maquinaria","Fecha Prestamo","Valor Dia","Tiempo Acordado en contrato","Total","Devolver"}, 0) {
  
             Class[] types = new Class[]{
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,java.lang.Boolean.class
               
             };
  
@@ -106,13 +107,13 @@ public class DAODetContrato implements Interface.IntDetContrato{
                 return types[columnIndex];
             }
              public boolean isCellEditable(int row, int column) {
-              if (column == 4) return true;
+              if (column == 5) return true;
             else
             return false;
             }
             };
         tabla.setModel(modelo);
-        Object datosR[] = new Object[5];
+        Object datosR[] = new Object[6];
        NumberFormat nf = NumberFormat.getInstance();
              
         
@@ -126,10 +127,11 @@ public class DAODetContrato implements Interface.IntDetContrato{
             detcont.setImporte(rs.getDouble("vimportdetcont"));
             datosR[0]=rs.getObject("vmaquina");
             datosR[1]=detcont.getFechaent();
-            datosR[2]=rs.getObject("vatraso");
-            datosR[3]=nf.format(rs.getObject("total"));
+            datosR[2]=nf.format(rs.getObject("vimportdetcont"));
+            datosR[3]=rs.getObject("vprestamo");
+            datosR[4]=nf.format(rs.getObject("total"));
             
-            datosR[4]=detcont.isEntregado();
+            datosR[5]=detcont.isEntregado();
             modelo.addRow(datosR);
             listdetc.add(detcont);
 		
@@ -255,6 +257,95 @@ public class DAODetContrato implements Interface.IntDetContrato{
 //       return  listdetc;
 //    }
 //    
+
+    @Override
+    public List<DetalleContrato> view(JTable tabla, long idcontr) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection c =null;
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        
+        List<DetalleContrato> listdetc= new ArrayList<>();
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_buscardetcontrato(?,?)");
+        ps.setLong(1, idcontr);
+        ps.setString(2, "TODO");
+        rs=ps.executeQuery();
+        
+         DefaultTableModel modelo= new DefaultTableModel(
+                new String[]{"Maquinaria","Fecha Prestamo","Valor Dia","Tiempo Acordado en contrato","Total","Entregado","Devuelto por Falla"}, 0) {
+ 
+            Class[] types = new Class[]{
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,java.lang.Boolean.class,
+                java.lang.Boolean.class
+              
+            };
+ 
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+             public boolean isCellEditable(int row, int column) {
+//              if (column == 4) return true;
+//            else
+            return false;
+            }
+            };
+        tabla.setModel(modelo);
+        Object datosR[] = new Object[7];
+       NumberFormat nf = NumberFormat.getInstance();
+             
+        
+        while (rs.next()){
+            DetalleContrato detcont = new DetalleContrato();
+            detcont.setId(rs.getLong("viddet"));
+            detcont.setIdmaq(rs.getLong("vidmaq"));
+            detcont.setIdcontr(rs.getLong("vidcont"));
+            detcont.setFechaent(rs.getString("vfecha"));
+            detcont.setEntregado(rs.getBoolean("ventregado"));
+            detcont.setImporte(rs.getDouble("vimportdetcont"));
+            datosR[0]=rs.getObject("vmaquina");
+            datosR[1]=detcont.getFechaent();
+            datosR[2]=nf.format(rs.getObject("vimportdetcont"));
+            datosR[3]=rs.getObject("vprestamo");
+            datosR[4]=nf.format(rs.getObject("total"));
+            
+            datosR[5]=detcont.isEntregado();
+            datosR[6]=rs.getObject("vdevueltoporfalla");
+            modelo.addRow(datosR);
+            listdetc.add(detcont);
+		
+        }
+	
+        } catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }finally{
+               if (c != null){
+                   try {
+                       c.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAODetContrato.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(ps!= null){
+                   try {
+                       ps.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAODetContrato.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+               if(rs != null){
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       Logger.getLogger(DAODetContrato.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
+            }  
+        
+       return  listdetc;
+    }
     
    
 }

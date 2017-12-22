@@ -7,6 +7,7 @@ package Frame;
 
 import Dao.DAOContrato;
 import Dao.DAODetCaja;
+import Dao.DAODetContrato;
 import Pojos.Contrato;
 import Pojos.DetalleCaja;
 import java.awt.event.KeyEvent;
@@ -25,7 +26,7 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
     DAOContrato daocontrato= new DAOContrato();
     DAODetCaja daodetcaja = new DAODetCaja();
     DetalleCaja detcaja= new DetalleCaja();
-    
+    DAODetContrato dodetcontr = new DAODetContrato();
     public JDFNuevoAbono(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -34,10 +35,10 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.contrato=contrato;
-        daocontrato.debtor(contrato.getId(), jtftotal, jtfabono, jtfdeuda,jtfdescuento);
+        daocontrato.debtor(contrato.getId(),jftflete, jtftotal, jtfabono, jtfdeuda,jtfdescuento);
         this.setLocationRelativeTo(null);
         jlblcontrato.setText("Contrato: N°"+String.format("%06d", contrato.getId()));
-        
+        dodetcontr.view(jtabla,  contrato.getId());
     }
      public void validacobro(){
       try {
@@ -86,6 +87,11 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jtfnuevodesc = new javax.swing.JTextField();
         jlblcontrato = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtabla = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jftflete = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -156,6 +162,28 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
         jlblcontrato.setForeground(new java.awt.Color(255, 51, 51));
         jlblcontrato.setText("jLabel8");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        jLabel8.setText("Detalle:");
+
+        jtabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jtabla);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel9.setText("Flete:");
+
+        jftflete.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        jftflete.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,30 +207,48 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                                            .addComponent(jtftotal)
-                                            .addComponent(jtfdeuda)
-                                            .addComponent(jtfabono)
-                                            .addComponent(jtfnuevoabono)
-                                            .addComponent(jtfdescuento)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(21, 21, 21)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jlblmensaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jtfnuevodesc))))))))
-                .addGap(30, 30, 30))
+                                            .addComponent(jtfnuevodesc)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                                            .addComponent(jtftotal)
+                                            .addComponent(jtfdeuda)
+                                            .addComponent(jtfabono)
+                                            .addComponent(jtfnuevoabono)
+                                            .addComponent(jtfdescuento)
+                                            .addComponent(jftflete))))))))
+                .addGap(51, 51, 51))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane2)
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jlblcontrato)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jftflete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtftotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -341,10 +387,15 @@ public class JDFNuevoAbono extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtnabonar;
+    private javax.swing.JFormattedTextField jftflete;
     private javax.swing.JLabel jlblcontrato;
     private javax.swing.JLabel jlblmensaje;
+    private javax.swing.JTable jtabla;
     private javax.swing.JFormattedTextField jtfabono;
     private javax.swing.JTextArea jtfaobservacion;
     private javax.swing.JFormattedTextField jtfdescuento;

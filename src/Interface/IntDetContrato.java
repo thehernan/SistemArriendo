@@ -19,4 +19,5 @@ public interface IntDetContrato {
     public List<DetalleContrato>search(JTable tabla,long idcontr);
 //     public List<DetalleContrato>searchedit(JTable tabla,long idcontr);
     public void update(List<DetalleContrato> listdet);
+    public List<DetalleContrato>view(JTable tabla,long idcontr);
 }

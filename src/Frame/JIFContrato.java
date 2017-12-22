@@ -93,7 +93,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     listmaquinaria.add(maq);
     NumberFormat nf= NumberFormat.getInstance();
     double importe = maq.getDias()*maq.getPreciodiario();
-//    maq.setImporte(importe);
+    maq.setImporte(importe);
     datosmaq[0]=maq.getMaquina()+" "+maq.getMarca()+" "+maq.getModelo();
     datosmaq[1]=maq.getSerie();
     datosmaq[2]=nf.format(maq.getPreciodiario());
@@ -101,7 +101,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
     datosmaq[4]=nf.format(importe);
     modelo.addRow(datosmaq);
     validagenerar();
-    total = total + maq.getImporte();
+    total = total + importe;
     jlbltotal.setText(nf.format(total));
     
     }else{
@@ -125,6 +125,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         contrato.setDescuento(desc);
         
         System.out.println("fechacontratopagar "+contrato.getFecha());
+        System.out.println("flete"+contrato.getFlete());
         contrato.setId(daocontrato.insert(contrato));  /// devolver el id para poder imprimir      
         
         daodetcontrato.insert(listmaquinaria,contrato.getId());
@@ -344,7 +345,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
                             .addComponent(jlblfono))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addComponent(jlblmensajedeudor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -390,7 +391,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Flete:");
 
-        jLabel6.setText("Total:");
+        jLabel6.setText("Total Maquinaria:");
 
         jlbltotal.setText("* * *");
 
@@ -555,7 +556,7 @@ public class JIFContrato extends javax.swing.JInternalFrame {
         Double flete = Double.parseDouble(jtflete.getValue().toString());
         contrato.setIdcliente(cliente.getId());
         contrato.setIdempresa(singletonemp.getId());
-        contrato.setFlete(Double.parseDouble(jtflete.getValue().toString()));
+        contrato.setFlete(flete);
         contrato.setTotal(total + flete);
         
         

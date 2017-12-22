@@ -1,0 +1,64 @@
+21/12/17
+sp_buscardeudacontrato
+
+
+
+-- Function: public.sp_buscardeudacontrato(bigint)
+
+-- DROP FUNCTION public.sp_buscardeudacontrato(bigint);
+
+CREATE OR REPLACE FUNCTION public.sp_buscardeudacontrato(
+    IN vidcontrato bigint,
+    OUT vtotal numeric,
+    OUT vabonos numeric,
+    OUT vdeuda numeric,
+    OUT vdesc numeric)
+  RETURNS record AS
+$BODY$
+DECLARE 
+--total numeric;
+--abono numeric;
+--deuda numeric;
+begin
+
+SELECT sum(case when entregado=false and devueltoporfalla=false then 
+
+case when 
+DATE_PART('hour',fechaprestamo - fechaentregapredeterminada) >= 2 and DATE_PART('day',fechaprestamo - fechaentregapredeterminada) >= 1 then 
+(DATE_PART('day',fechaprestamo - fechaentregapredeterminada)+1)
+* (detalle_contrato.importe) 
+when DATE_PART('hour',fechaprestamo - fechaentregapredeterminada) >= 2 and DATE_PART('day',fechaprestamo - fechaentregapredeterminada) = 0
+then detalle_contrato.importe
+when DATE_PART('hour',fechaprestamo - fechaentregapredeterminada) = 0 and DATE_PART('day',fechaprestamo - fechaentregapredeterminada) >= 1 then
+ DATE_PART('day',fechaprestamo - fechaentregapredeterminada) * detalle_contrato.importe  else 0 end 
+ 
+ when entregado=true and devueltoporfalla=false then
+ 
+case when 
+DATE_PART('hour',detalle_contrato.fechaentrega - fechaentregapredeterminada) >= 2 and DATE_PART('day',detalle_contrato.fechaentrega - fechaentregapredeterminada) >= 1 then 
+(DATE_PART('day',detalle_contrato.fechaentrega - fechaentregapredeterminada)+1)
+* (detalle_contrato.importe) when DATE_PART('hour',detalle_contrato.fechaentrega - fechaentregapredeterminada) >= 2 and DATE_PART('day',detalle_contrato.fechaentrega - fechaentregapredeterminada) = 0
+then detalle_contrato.importe when DATE_PART('hour',detalle_contrato.fechaentrega - fechaentregapredeterminada) = 0 and DATE_PART('day',detalle_contrato.fechaentrega - fechaentregapredeterminada) >= 1 then
+ DATE_PART('day',detalle_contrato.fechaentrega - fechaentregapredeterminada) * detalle_contrato.importe else 0   end else 0  end)+ sum(case when devueltoporfalla=false then
+detalle_contrato.importe else 0 end) + flete into vtotal
+
+
+ 
+ FROM contrato inner join public.detalle_contrato  on contrato.id_contrato=detalle_contrato.id_contrato where detalle_contrato.id_contrato=vidcontrato  group by flete ;
+
+select coalesce(sum(importe),0) into vabonos from detalle_caja where id_contrato=vidcontrato;
+
+select coalesce(descuento,0) into vdesc from contrato where id_contrato=vidcontrato;
+
+vdeuda=vtotal-vabonos-vdesc;
+--vdeuda=deuda;
+--vtotal=total;
+--vabonos=abono;
+ 
+ return;
+end;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION public.sp_buscardeudacontrato(bigint)
+  OWNER TO postgres;

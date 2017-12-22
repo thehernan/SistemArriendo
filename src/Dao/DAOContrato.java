@@ -137,7 +137,7 @@ public class DAOContrato implements  Interface.IntContrato{
         
         
          DefaultTableModel modelo= new DefaultTableModel(
-                new String[]{"Codigo","Cliente","R.U.T","Fecha","Dias Prestamo","Tipo Contrato","Vigente"}, 0) {
+                new String[]{"Codigo","Cliente","R.U.T","Fecha de Prestamo","Tiempo Transcurrido","Tipo Contrato","Vigente"}, 0) {
  
             Class[] types = new Class[]{
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
@@ -292,7 +292,7 @@ public class DAOContrato implements  Interface.IntContrato{
     }
 
     @Override
-    public void debtor(long idcont,JFormattedTextField total, JFormattedTextField abono, JFormattedTextField deuda,
+    public void debtor(long idcont,JFormattedTextField flete,JFormattedTextField total, JFormattedTextField abono, JFormattedTextField deuda,
     JFormattedTextField descuento) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
          Connection c =null;
@@ -313,6 +313,7 @@ public class DAOContrato implements  Interface.IntContrato{
            abono.setValue(rs.getLong("vabonos"));
            deuda.setValue(rs.getLong("vdeuda"));
            descuento.setValue(rs.getLong("vdesc"));
+           flete.setValue(rs.getLong("vflete"));
         }
 	
         } catch(Exception e)

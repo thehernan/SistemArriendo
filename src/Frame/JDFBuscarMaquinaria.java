@@ -189,7 +189,7 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
                     .addComponent(jcbbuscarcate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,7 +221,12 @@ public class JDFBuscarMaquinaria extends javax.swing.JDialog {
            int index=jtabla.getSelectedRow() ;
             if(index>=0){
                 if(daomaquinaria.validaarrendar(listmaquinaria.get(index).getId())==true){
-                 jifeditar.setinsertar(listmaquinaria.get(index));
+                    
+                    
+                 
+                 maquina=listmaquinaria.get(index);
+                 JDFDiasContrato dias=new JDFDiasContrato(new JFrame(),isVisible(),jifeditar,maquina);
+                dias.setVisible(true);
                 this.dispose();
                 }else {
                     JOptionPane.showMessageDialog(null,"Imposible arrendar maquina");
