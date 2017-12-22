@@ -14,13 +14,104 @@ when length(contrato.id_contrato::text)=5 then concat('N°. 0',contrato.id_contr
 miempresa.rutrepresentante,miempresa.domiciliorepresentante,miempresa.telefonorepresentante,
 concat(cliente.nombre,' ',cliente.apellido) as cliente,cliente.rut,cliente.domicilioparticular,
 cliente.domiciliotrabajo,cliente.telefono, 
-concat(maquina.maquina,' ',maquina.marca,' ',maquina.serie,' ',maquina.modelo)AS MAQUINA,extract(days from (fechaentregapredeterminada - 
-fechaprestamo)) as dias ,maquina.precioarriendodia,detalle_contrato.importe,contrato.flete,contrato.total,coalesce(contrato.descuento,0) as desc
+concat(maquina.maquina,' ',maquina.marca,' ',maquina.serie,' ',maquina.modelo)AS MAQUINA,
+
+
+case when current_timestamp > fechaentregapredeterminada and entregado = false and  devueltoporfalla=false then
+
+concat('Dia(s) ',DATE_PART('day',current_timestamp - fechaprestamo),' Hora(s) ',
+DATE_PART('hour',current_timestamp - fechaprestamo)) 
+
+when current_timestamp <= fechaentregapredeterminada and entregado = false and  devueltoporfalla=false then
+concat('Dia(s) ',DATE_PART('day',fechaentregapredeterminada - fechaprestamo),' Hora(s) ',
+DATE_PART('hour',fechaentregapredeterminada - fechaprestamo))
+
+when detalle_contrato.fechaentrega > fechaentregapredeterminada and entregado = true and  devueltoporfalla=false then
+concat('Dia(s) ',DATE_PART('day',detalle_contrato.fechaentrega - fechaprestamo),' Hora(s) ',
+DATE_PART('hour',detalle_contrato.fechaentrega - fechaprestamo))
+
+when detalle_contrato.fechaentrega <= fechaentregapredeterminada and entregado = true and  devueltoporfalla=false then
+concat('Dia(s) ',DATE_PART('day',fechaentregapredeterminada - fechaprestamo ),' Hora(s) ',
+DATE_PART('hour',fechaentregapredeterminada - fechaprestamo))
+else 
+ 
+concat('Dia(s) ',DATE_PART('day',detalle_contrato.fechaentrega - fechaprestamo),' Hora(s) ',
+DATE_PART('hour',detalle_contrato.fechaentrega - fechaprestamo))
+ end as prestamo
+
+
+
+
+
+
+
+
+ ,detalle_contrato.importe,
+
+case when current_timestamp > fechaentregapredeterminada and entregado=false and devueltoporfalla=false then 
+
+
+
+case when
+
+DATE_PART('hour',current_timestamp - fechaprestamo) >= 2 then 
+(DATE_PART('day',current_timestamp - fechaprestamo)+1)
+* (detalle_contrato.importe) 
+when DATE_PART('hour',current_timestamp - fechaprestamo) < 2 then
+DATE_PART('day',current_timestamp - fechaprestamo)* detalle_contrato.importe
+end 
+
+
+ when current_timestamp <= fechaentregapredeterminada and entregado=false and devueltoporfalla=false then
+ 
+case when
+ DATE_PART('hour',fechaentregapredeterminada-fechaprestamo) >= 2 then 
+(DATE_PART('day',fechaentregapredeterminada-fechaprestamo)+1)
+* (detalle_contrato.importe) 
+when DATE_PART('hour',fechaentregapredeterminada -fechaprestamo) < 2 
+then DATE_PART('day',fechaentregapredeterminada-fechaprestamo) * detalle_contrato.importe
+ end 
+
+ 
+ when detalle_contrato.fechaentrega > fechaentregapredeterminada and entregado=true and devueltoporfalla=false then
+ 
+case when 
+DATE_PART('hour',detalle_contrato.fechaentrega - fechaprestamo) >= 2 then 
+(DATE_PART('day',detalle_contrato.fechaentrega - fechaprestamo)+1)
+* (detalle_contrato.importe) when DATE_PART('hour',detalle_contrato.fechaentrega - fechaprestamo) < 2 
+then DATE_PART('day',detalle_contrato.fechaentrega - fechaprestamo) * detalle_contrato.importe  end
+
+when detalle_contrato.fechaentrega <= fechaentregapredeterminada and entregado=true and devueltoporfalla=false then
+
+case when
+DATE_PART('hour',fechaentregapredeterminada-fechaprestamo) >= 2 then 
+(DATE_PART('day',fechaentregapredeterminada-fechaprestamo)+1)
+* (detalle_contrato.importe) 
+when DATE_PART('hour',fechaentregapredeterminada -fechaprestamo) < 2 
+then DATE_PART('day',fechaentregapredeterminada-fechaprestamo) * detalle_contrato.importe
+ end else 0  end as total,
+
+
+
+
+
+ contrato.flete
+
+
+
+
+
+
+
+ 
+
+
+ ,coalesce(contrato.descuento,0) as desc
 FROM public.contrato
 inner join miempresa on miempresa.id_empresa=contrato.id_empresa inner join 
 cliente on cliente.id_cliente=contrato.id_cliente inner join detalle_contrato
 on contrato.id_contrato = detalle_contrato.id_contrato inner join maquina on
-maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{idcontrato};]]>
+maquina.id_maquina = detalle_contrato.id_maquina  where contrato.id_contrato=$P{idcontrato};]]>
 	</queryString>
 	<field name="concat" class="java.lang.String"/>
 	<field name="fecha" class="java.sql.Timestamp"/>
@@ -36,11 +127,10 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 	<field name="domiciliotrabajo" class="java.lang.String"/>
 	<field name="telefono" class="java.lang.String"/>
 	<field name="maquina" class="java.lang.String"/>
-	<field name="dias" class="java.lang.Double"/>
-	<field name="precioarriendodia" class="java.math.BigDecimal"/>
+	<field name="prestamo" class="java.lang.String"/>
 	<field name="importe" class="java.math.BigDecimal"/>
+	<field name="total" class="java.lang.Double"/>
 	<field name="flete" class="java.math.BigDecimal"/>
-	<field name="total" class="java.math.BigDecimal"/>
 	<field name="desc" class="java.math.BigDecimal"/>
 	<variable name="maquina_1" class="java.lang.Integer" resetType="Column" calculation="Count">
 		<variableExpression><![CDATA[$F{maquina}]]></variableExpression>
@@ -51,9 +141,12 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 	<variable name="importe_2" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
 	</variable>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
+	<variable name="total_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
 	<title>
 		<band height="116" splitType="Stretch">
 			<staticText>
@@ -307,14 +400,14 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 				<text><![CDATA[MAQUINARIA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="358" y="157" width="82" height="17" uuid="0f7883d7-9413-4b48-8844-354572363071"/>
+				<reportElement x="367" y="157" width="90" height="17" uuid="0f7883d7-9413-4b48-8844-354572363071"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<text><![CDATA[DIAS ARRIENDO]]></text>
+				<text><![CDATA[ARRIENDO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="157" width="80" height="17" uuid="50b68354-a079-4e23-b3e4-d347e6100f36"/>
+				<reportElement x="466" y="157" width="87" height="17" uuid="50b68354-a079-4e23-b3e4-d347e6100f36"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
@@ -338,13 +431,6 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 				</textElement>
 				<textFieldExpression><![CDATA[$F{maquina}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
-				<reportElement x="440" y="1" width="80" height="17" uuid="19cb2646-9e9f-4b9c-b9eb-3418ff8633ba"/>
-				<textElement textAlignment="Center">
-					<font fontName="Segoe UI Light" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="1" y="0" width="16" height="17" uuid="ec6e4581-977e-4ad6-99bd-6b1f1bbe7075"/>
 				<textElement>
@@ -353,23 +439,30 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 				<text><![CDATA[*]]></text>
 			</staticText>
 			<textField pattern="#,##0">
-				<reportElement x="282" y="1" width="76" height="16" uuid="02256658-eac7-4a56-aecf-c1b2306515c5"/>
-				<textElement textAlignment="Center">
+				<reportElement x="466" y="1" width="87" height="16" uuid="01d3bc4a-1dfc-4ae3-8d89-1e421da2394b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{precioarriendodia}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0">
-				<reportElement x="361" y="0" width="79" height="17" uuid="633cdf23-0485-4e33-bde1-3d04eb26f608"/>
-				<textElement textAlignment="Center">
+			<textField pattern="#,##0">
+				<reportElement x="282" y="1" width="76" height="16" uuid="c7b71864-7629-4d0c-b6e9-21747ae32172"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dias}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="367" y="1" width="90" height="16" uuid="4903618e-fbe4-406b-939d-4d57a6465747"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prestamo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<summary>
-		<band height="417" splitType="Stretch">
+		<band height="417" splitType="Immediate">
 			<staticText>
 				<reportElement x="370" y="0" width="41" height="15" uuid="49230e79-d221-4add-a517-837a25140426"/>
 				<textElement>
@@ -565,13 +658,6 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 			<line>
 				<reportElement x="408" y="363" width="130" height="1" uuid="9823f3cd-ebe9-4889-8800-8b6fd9bedd27"/>
 			</line>
-			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="182" y="8" width="100" height="15" uuid="87de0293-93cb-456c-9422-5e2afe41cfa8"/>
-				<textElement>
-					<font fontName="Segoe UI Light" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{importe_1}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="370" y="15" width="41" height="15" uuid="45ad20b6-feed-4313-8322-85b37188269f"/>
 				<textElement>
@@ -591,7 +677,12 @@ maquina.id_maquina = detalle_contrato.id_maquina where contrato.id_contrato=$P{i
 				<textElement>
 					<font fontName="Segoe UI Light" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{importe_2}+$F{flete})-$F{desc}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{total_2}+$F{flete})-$F{desc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="182" y="8" width="100" height="15" uuid="deacbbd6-f9d4-4bc2-bc0a-7abc3fc83934"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

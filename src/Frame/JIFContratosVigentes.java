@@ -608,7 +608,7 @@ public class JIFContratosVigentes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     try {
 //            long cod=Long.parseLong(jtfbuscarcodtodo.getText());
-            listcontremp=daocontrato.searchsensitive(jtablatodocontrato, singletonempre.getId(), "CODIGO", jtfbuscarcodtodo.getText(), null,true);
+            listconttodo=daocontrato.searchsensitive(jtablatodocontrato, singletonempre.getId(), "CODIGO", jtfbuscarcodtodo.getText(), null,true);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jtfbuscarcodtodoKeyReleased

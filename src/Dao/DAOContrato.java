@@ -361,7 +361,7 @@ public class DAOContrato implements  Interface.IntContrato{
         ps.setBoolean(5, activo);
         rs=ps.executeQuery();
          DefaultTableModel modelo= new DefaultTableModel(
-                new String[]{"Codigo","Cliente","R.U.T","Fecha","Dias Prestamo","Tipo Contrato","Vigente"}, 0) {
+                new String[]{"Codigo","Cliente","R.U.T","Fecha","Tiempo Transcurrido","Tipo Contrato","Vigente"}, 0) {
  
             Class[] types = new Class[]{
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class

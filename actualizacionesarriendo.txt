@@ -1,6 +1,6 @@
 21/12/17
-sp_buscardeudacontrato
-
+sp_buscardeudacontrato*
+sp_buscardetcontrato*
 
 
 -- Function: public.sp_buscardeudacontrato(bigint)
