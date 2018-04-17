@@ -16,7 +16,7 @@
 	</background>
 	<title>
 		<band height="802" splitType="Stretch">
-			<image scaleImage="FillFrame">
+			<image scaleImage="FillFrame" onErrorType="Blank">
 				<reportElement x="9" y="10" width="542" height="778" uuid="0fadfca5-a009-438b-9ed5-75574918e55d"/>
 				<imageExpression><![CDATA[$F{copiacarne}]]></imageExpression>
 			</image>

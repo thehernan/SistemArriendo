@@ -176,7 +176,7 @@ inner join aridos on aridos.id_arido=detalle_venta.id_arido where venta.id_venta
 				<reportElement x="299" y="95" width="115" height="17" uuid="021bb437-5ea3-41b4-b251-bf59b6d86f37"/>
 				<text><![CDATA[Fecha/ Hora de Entrega:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="89" y="204" width="178" height="20" uuid="97fd0f9a-533c-48f7-9afc-66e97e614f3e"/>
 				<textElement>
 					<font fontName="Segoe UI Light"/>

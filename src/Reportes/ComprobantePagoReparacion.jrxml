@@ -2,28 +2,27 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8e5c130d-4a02-42bf-8d4a-7db35a387b98">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="12"/>
 	<parameter name="iddetcaja" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[
-SELECT case when length(id_detallecaja::text)=1 then concat('N°. 00000',id_detallecaja)
+		<![CDATA[SELECT case when length(id_detallecaja::text)=1 then concat('N°. 00000',id_detallecaja)
 when length(id_detallecaja::text)=2 then concat('N°. 0000',id_detallecaja) when length(id_detallecaja::text)=3 
 then concat('N°. 000',id_detallecaja) when length(id_detallecaja::text)=4 then concat('N°. 00',id_detallecaja)
 when length(id_detallecaja::text)=5 then concat('N°. 0',id_detallecaja)else concat('N°. ',id_detallecaja) end as codpago,
 
-case when length(detalle_caja.id_contrato::text)=1 then concat('N°. 00000',detalle_caja.id_contrato)
-when length(detalle_caja.id_contrato::text)=2 then concat('N°. 0000',detalle_caja.id_contrato) when length(detalle_caja.id_contrato::text)=3 
-then concat('N°. 000',detalle_caja.id_contrato) when length(detalle_caja.id_contrato::text)=4 then concat('N°. 00',detalle_caja.id_contrato)
-when length(detalle_caja.id_contrato::text)=5 then concat('N°. 0',detalle_caja.id_contrato)else concat('N°. ',detalle_caja.id_contrato) end as codcont, 
-       observacion, detalle_caja.fecha,importe,concat(nombre,' ',apellido), cliente.rut, cliente.telefono, domicilioparticular, 
+case when length(detalle_caja.id_reparacion::text)=1 then concat('N°. 00000',detalle_caja.id_reparacion)
+when length(detalle_caja.id_reparacion::text)=2 then concat('N°. 0000',detalle_caja.id_reparacion) when length(detalle_caja.id_reparacion::text)=3 
+then concat('N°. 000',detalle_caja.id_reparacion) when length(detalle_caja.id_reparacion::text)=4 then concat('N°. 00',detalle_caja.id_reparacion)
+when length(detalle_caja.id_reparacion::text)=5 then concat('N°. 0',detalle_caja.id_reparacion)else concat('N°. ',detalle_caja.id_reparacion) end as codrep, 
+       detalle_caja.observacion, detalle_caja.fecha,importe,concat(nombre,' ',apellido), cliente.rut, cliente.telefono, domicilioparticular, 
        domiciliotrabajo,miempresa.rut as rutempr, miempresa.domicilio as empdomic,miempresa.telefono as telemp, miempresa.celular as celemp
-  FROM public.detalle_caja inner join miempresa on detalle_caja.id_empresa=miempresa.id_empresa inner join contrato on contrato.id_contrato=
-detalle_caja.id_contrato inner join cliente on cliente.id_cliente=contrato.id_cliente where detalle_caja.id_detallecaja=$P{iddetcaja} ;]]>
+  FROM public.detalle_caja inner join miempresa on detalle_caja.id_empresa=miempresa.id_empresa inner join reparacion on reparacion.id_reparacion=
+detalle_caja.id_reparacion inner join cliente on cliente.id_cliente=reparacion.id_cliente where detalle_caja.id_detallecaja=$P{iddetcaja} ;]]>
 	</queryString>
 	<field name="codpago" class="java.lang.String"/>
-	<field name="codcont" class="java.lang.String"/>
+	<field name="codrep" class="java.lang.String"/>
 	<field name="observacion" class="java.lang.String"/>
 	<field name="fecha" class="java.sql.Timestamp"/>
 	<field name="importe" class="java.math.BigDecimal"/>
@@ -202,7 +201,7 @@ detalle_caja.id_contrato inner join cliente on cliente.id_cliente=contrato.id_cl
 				<textElement>
 					<font fontName="Segoe UI Light"/>
 				</textElement>
-				<textFieldExpression><![CDATA[   $F{observacion}+" Contrato "+$F{codcont}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{observacion}+" Cod. Reparación "+$F{codrep}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="118" width="207" height="20" uuid="5594e134-dac6-4ab6-931e-0253b5d800d4"/>

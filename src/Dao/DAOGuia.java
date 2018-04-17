@@ -226,6 +226,7 @@ public class DAOGuia implements Interface.IntGuia{
         while (rs.next()){
             Guia guia = new Guia();
             guia.setId(rs.getLong("vidguia"));
+            guia.setTipoop(rs.getString("vtipoop"));
             datosR[0]=rs.getString("vcodguia");
             datosR[1]=rs.getString("vcodcontrato");
             datosR[2]=rs.getString("vcliente");

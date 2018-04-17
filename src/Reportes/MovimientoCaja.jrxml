@@ -126,7 +126,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{vimporte}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="300" y="0" width="140" height="20" uuid="66f4a9bd-a0a7-44d1-bd45-daf886df992a"/>
 				<textElement>
 					<font size="8"/>

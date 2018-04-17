@@ -25,7 +25,7 @@ public class JIFIngresosCaja extends javax.swing.JInternalFrame {
          Date fecha = new Date();
         jdpfecha.setDate(fecha);
          Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        jlbltotal.setText(daodetcaja.view(jtabla, "INGRESOSDIA", time, null));
+        daodetcaja.view(jtabla, "INGRESOSDIA", time, null,jlbltotal);
     }
 
     /**
@@ -190,7 +190,7 @@ public class JIFIngresosCaja extends javax.swing.JInternalFrame {
             jcbmes.setEnabled(true);
             jdpfecha.setEnabled(false);
         }
-         jlbltotal.setText(daodetcaja.view(jtabla, "INGRESOSMES", null, jcbmes.getSelectedItem().toString()));
+         daodetcaja.view(jtabla, "INGRESOSMES", null, jcbmes.getSelectedItem().toString(),jlbltotal);
     }//GEN-LAST:event_jrbtnmesActionPerformed
 
     private void jrbtndiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtndiaActionPerformed
@@ -201,18 +201,18 @@ public class JIFIngresosCaja extends javax.swing.JInternalFrame {
 
         }
          Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        jlbltotal.setText(daodetcaja.view(jtabla, "INGRESOSDIA", time, null));
+        daodetcaja.view(jtabla, "INGRESOSDIA", time, null,jlbltotal);
     }//GEN-LAST:event_jrbtndiaActionPerformed
 
     private void jcbmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbmesActionPerformed
         // TODO add your handling code here:
-         jlbltotal.setText(daodetcaja.view(jtabla, "INGRESOSMES", null, jcbmes.getSelectedItem().toString()));
+         daodetcaja.view(jtabla, "INGRESOSMES", null, jcbmes.getSelectedItem().toString(),jlbltotal);
     }//GEN-LAST:event_jcbmesActionPerformed
 
     private void jdpfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpfechaActionPerformed
         // TODO add your handling code here:
          Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        jlbltotal.setText(daodetcaja.view(jtabla, "INGRESOSDIA", time, null));
+        daodetcaja.view(jtabla, "INGRESOSDIA", time, null,jlbltotal);
     }//GEN-LAST:event_jdpfechaActionPerformed
 
     private void jbtnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirActionPerformed

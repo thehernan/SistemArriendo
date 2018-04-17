@@ -7,6 +7,8 @@ package Interface;
 
 import Pojos.DetalleCaja;
 import java.sql.Timestamp;
+import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 
 /**
@@ -18,7 +20,7 @@ public interface IntDetalleCaja {
     public void insetpaysale(DetalleCaja detcaja);
     public void insertdischarge(DetalleCaja detcaja);
     public long insertrepair(DetalleCaja detcaja);
-    public String view(JTable tabla,String tipob,Timestamp fecha,String mes);
+    public List<DetalleCaja> view(JTable tabla,String tipob,Timestamp fecha,String mes,JLabel total);
     public void print(String titulo,String tipob,Timestamp fecha,String mes);   
     public void printabono(long id);
     public void printrepair(long id);

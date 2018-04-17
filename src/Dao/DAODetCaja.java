@@ -8,6 +8,7 @@ package Dao;
 import Pojos.DetalleCaja;
 import Pojos.SingletonEmpresa;
 import java.awt.HeadlessException;
+import java.awt.Label;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,10 +16,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -237,7 +241,7 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
     }
 
     @Override
-    public String view(JTable tabla,String tipob, Timestamp fecha, String mes) {
+    public List<DetalleCaja> view(JTable tabla,String tipob, Timestamp fecha, String mes,JLabel jtotal) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Connection c =null;
         PreparedStatement ps= null;
@@ -245,16 +249,9 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         Double total=0.0;
         Double importe=0.0;
         NumberFormat nf=  NumberFormat.getInstance();
-        try{
-	c = Conexion.Connect();
-        ps = c.prepareStatement("SELECT * from sp_mostrarmovimientocaja(?,?,?,?)");
-        ps.setLong(1, singletonempresa.getId());
-        ps.setString(2, tipob);
-        ps.setTimestamp(3, fecha);
-        ps.setString(4, mes);
-        rs=ps.executeQuery();
         
-         DefaultTableModel modelo= new DefaultTableModel(){
+        
+           DefaultTableModel modelo= new DefaultTableModel(){
         public boolean isCellEditable(int row, int column) {
         //      if (column == 5) return true;
         //else
@@ -264,14 +261,29 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
         String titulos[]={"Cod. Venta","Cod. Contrato","Cod. Reparación","Importe","Descuento","Total","Observación","Fecha"};
         modelo.setColumnIdentifiers(titulos);
         tabla.setModel(modelo);
+        List<DetalleCaja> listdetcaja = new ArrayList<>();
+        try{
+	c = Conexion.Connect();
+        ps = c.prepareStatement("SELECT * from sp_mostrarmovimientocaja(?,?,?,?)");
+        ps.setLong(1, singletonempresa.getId());
+        ps.setString(2, tipob);
+        ps.setTimestamp(3, fecha);
+        ps.setString(4, mes);
+        rs=ps.executeQuery();
+        
+      
         Object datosR[] = new Object[8];
        
-             
+        
         
         while (rs.next()){
            importe=rs.getDouble("vtotal");
            total=total+importe;
-                   
+           DetalleCaja detcaja = new DetalleCaja();
+           detcaja.setId(rs.getLong("viddetcaja"));
+           detcaja.setIdcontrato(rs.getLong("vidcontra"));
+           detcaja.setIdventa(rs.getLong("vidventa"));
+           detcaja.setIdreparir(rs.getLong("vidrepa"));
             datosR[0]=rs.getObject("vcodventa");
             datosR[1]=rs.getObject("vcodcontrato");
             datosR[2]=rs.getObject("vcodreparacion");
@@ -282,7 +294,7 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
             datosR[6]=rs.getObject("vobservacion");
             datosR[7]=rs.getObject("vfecha");
             modelo.addRow(datosR);
-          
+            listdetcaja.add(detcaja);
 		
         }
 	
@@ -312,7 +324,8 @@ public class DAODetCaja implements Interface.IntDetalleCaja{
                    }
                }
             }  
-       return "Total $: "+nf.format(total);
+       jtotal.setText("Total $: "+nf.format(total));
+       return listdetcaja;
     }
 
     @Override

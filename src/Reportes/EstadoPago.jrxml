@@ -68,7 +68,7 @@ detalle_contrato.importe else 0 end
     
   FROM public.contrato inner join cliente on cliente.id_cliente=contrato.id_cliente inner join miempresa on miempresa.id_empresa=contrato.id_empresa inner join
   detalle_contrato on detalle_contrato.id_contrato=contrato.id_contrato inner join maquina on maquina.id_maquina=detalle_contrato.id_maquina
-where contrato.pagado=false and contrato.id_cliente=$P{idcliente}; ]]>
+where contrato.pagado=false and contrato.id_cliente=$P{idcliente};]]>
 	</queryString>
 	<field name="id_contrato" class="java.lang.Long"/>
 	<field name="concat" class="java.lang.String"/>

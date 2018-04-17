@@ -9,6 +9,7 @@ import AppPackage.AnimationClass;
 import ClasesGlobales.ImagenFondo;
 import Pojos.SingletonEmpresa;
 import Pojos.Usuario;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -53,10 +54,11 @@ public class Menu extends javax.swing.JFrame {
 //        reloj();
         this.usu=usu;
          jlblbienvenido.setText(usu.getUsuario());
+         this.getContentPane().setBackground(new Color(121, 102, 87));
     }
      public void cargarImagen(){
     try{
-        InputStream fondo=this.getClass().getResourceAsStream("/img/fondo.jpg");
+        InputStream fondo=this.getClass().getResourceAsStream("/img/excavador.jpg");
         BufferedImage image=ImageIO.read(fondo);
         jdesktop.setBorder(new ImagenFondo(image));}
     catch (Exception e){
@@ -860,6 +862,7 @@ public class Menu extends javax.swing.JFrame {
         jpanelcontenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(121, 102, 87));
         setUndecorated(true);
 
         jdesktop.setBackground(new java.awt.Color(255, 255, 255));
@@ -869,23 +872,22 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(238, 238, 238));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBackground(new java.awt.Color(237, 197, 72));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(121, 102, 87));
         jLabel1.setText("BIENVENIDO:");
 
         jlblbienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jlblbienvenido.setForeground(new java.awt.Color(0, 0, 0));
+        jlblbienvenido.setForeground(new java.awt.Color(121, 102, 87));
         jlblbienvenido.setText("jLabel9");
 
         jlblempresa.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jlblempresa.setForeground(new java.awt.Color(0, 0, 0));
+        jlblempresa.setForeground(new java.awt.Color(121, 102, 87));
         jlblempresa.setText("jLabel12");
 
         jlbldireccion.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jlbldireccion.setForeground(new java.awt.Color(0, 0, 0));
+        jlbldireccion.setForeground(new java.awt.Color(121, 102, 87));
         jlbldireccion.setText("jLabel13");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -933,7 +935,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jdesktopLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1367, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1371, Short.MAX_VALUE)
                 .addComponent(jlblminimizar)
                 .addContainerGap())
         );
@@ -958,7 +960,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jpanelmenu.setBackground(new java.awt.Color(185, 139, 90));
+        jpanelmenu.setBackground(new java.awt.Color(237, 197, 72));
         jpanelmenu.setForeground(new java.awt.Color(231, 76, 60));
         jpanelmenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1047,7 +1049,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jpanelmenu.add(jlblusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(-65, 310, -1, -1));
 
-        jpanelcontenedor.setBackground(new java.awt.Color(238, 238, 238));
+        jpanelcontenedor.setBackground(new java.awt.Color(121, 102, 87));
         jpanelcontenedor.setForeground(new java.awt.Color(41, 128, 185));
         jpanelcontenedor.setPreferredSize(new java.awt.Dimension(2, 0));
 
@@ -1086,9 +1088,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpanelmenu, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
                     .addComponent(jpanelcontenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jdesktop)
-                .addContainerGap())
+            .addComponent(jdesktop)
         );
 
         pack();

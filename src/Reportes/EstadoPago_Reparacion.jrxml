@@ -1,6 +1,12 @@
-<?xml version="1.0" encoding="UTF8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EstadoPago_Reparacion" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="32e794e9-67ec-4a4d-abf3-d5d3c34069dc">
-	<queryString language="SQL">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="431"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idcliente" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
 		<![CDATA[sELECT reparacion.id_reparacion,case when length(reparacion.id_reparacion::text)=1 then concat('N°. 00000',reparacion.id_reparacion)
 when length(reparacion.id_reparacion::text)=2 then concat('N°. 0000',reparacion.id_reparacion) when length(reparacion.id_reparacion::text)=3 
 then concat('N°. 000',reparacion.id_reparacion) when length(reparacion.id_reparacion::text)=4 then concat('N°. 00',reparacion.id_reparacion)
@@ -9,7 +15,7 @@ when length(reparacion.id_reparacion::text)=5 then concat('N°. 0',reparacion.id
 coalesce(sum(detalle_caja.importe),0) as abono,total-coalesce(sum(detalle_caja.importe),0) as deuda
   FROM public.reparacion inner join cliente on cliente.id_cliente=
   reparacion.id_cliente left join detalle_caja on detalle_caja.id_reparacion=reparacion.id_reparacion
-   where    propiedad='CLIENTE' group by reparacion.id_reparacion,cliente.nombre,cliente.apellido,reparacion.fecha,total order by id_reparacion DESC;]]>
+   where    propiedad='CLIENTE' and reparacion.id_cliente=$P{idcliente} group by reparacion.id_reparacion,cliente.nombre,cliente.apellido,reparacion.fecha,total order by id_reparacion DESC;]]>
 	</queryString>
 	<field name="id_reparacion" class="java.lang.Long"/>
 	<field name="concat" class="java.lang.String"/>
@@ -17,28 +23,126 @@ coalesce(sum(detalle_caja.importe),0) as abono,total-coalesce(sum(detalle_caja.i
 	<field name="total" class="java.math.BigDecimal"/>
 	<field name="abono" class="java.math.BigDecimal"/>
 	<field name="deuda" class="java.math.BigDecimal"/>
+	<variable name="deuda_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{deuda}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="79" splitType="Stretch"/>
-	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="23" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="496" height="23" uuid="d4491713-20a0-4088-a146-b678190f4ba1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="496" height="23" forecolor="#006699" uuid="7fb3e3ee-2ce9-44b0-b422-ff7fd14f9804"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumen Deuda por Reparaciones]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="496" height="20" uuid="b93453b5-a6f8-407e-a1be-3402605924b6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="86" height="20" uuid="d7157556-b962-4faf-a847-29be2919e6e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod. Reparación}]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="0" width="105" height="20" uuid="13c3437b-00ae-488f-a588-4add66455046"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="0" width="105" height="20" uuid="c4ec2d5a-9266-4363-924e-f12d2232d04f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="0" width="100" height="20" uuid="6d3480cb-3a67-4ae9-95ce-df5d802038e0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="0" width="100" height="20" uuid="ea041fc4-b368-4a88-b5e9-c18ef3cf0ed5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Light" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deuda]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="496" height="20" uuid="e72cb9b1-e8f5-46d3-bc8b-830597b16c93"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="86" height="20" uuid="7ecd5673-b205-4fcf-b88f-798e492b1ad5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="0" width="105" height="20" uuid="687aafda-b2bf-43cb-a9fb-ce9ee21f9d3b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="191" y="0" width="105" height="20" uuid="34fe6057-93fc-46e5-9433-1ef29b2c9c14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="296" y="0" width="100" height="20" uuid="5097b82f-ef66-4e04-b0e0-9a30ac983e33"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{abono}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="396" y="0" width="100" height="20" uuid="2dce15e8-24a9-4b6d-9c6f-f34ed831385d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{deuda}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="26" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="396" y="0" width="100" height="20" uuid="403f24ce-1546-4f00-94d7-b4b7d8d526bf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{deuda_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="286" y="0" width="110" height="20" uuid="24e13ce3-5b43-4fcb-9b2c-820c574238d1"/>
+				<textElement>
+					<font fontName="Segoe UI Light" size="8"/>
+				</textElement>
+				<text><![CDATA[Total Deuda por Reparaciones:]]></text>
+			</staticText>
+		</band>
 	</summary>
 </jasperReport>

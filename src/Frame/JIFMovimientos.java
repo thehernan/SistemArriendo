@@ -5,9 +5,15 @@
  */
 package Frame;
 
+import Dao.DAOContrato;
 import Dao.DAODetCaja;
+import Dao.DAOReparacion;
+import Dao.DAOVenta;
+import Pojos.DetalleCaja;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,12 +25,17 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
      * Creates new form JIFCajaMov
      */
     DAODetCaja daodetcaja = new DAODetCaja();
+    List<DetalleCaja> listdetcaja;
+    DetalleCaja detcaja;
+    DAOContrato daocontrato= new DAOContrato();
+    DAOVenta daoventa=new DAOVenta();
+    DAOReparacion daoreparacion = new DAOReparacion();
     public JIFMovimientos() {
         initComponents();
         Date fecha = new Date();
         jdpfecha.setDate(fecha);
         Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        jlbltotal.setText(daodetcaja.view(jtabla, "TODODIA", time, null));
+        listdetcaja=daodetcaja.view(jtabla, "TODODIA", time, null,jlbltotal);
     }
 
     /**
@@ -47,6 +58,7 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
         jrbtndia = new javax.swing.JRadioButton();
         jrbtnmes = new javax.swing.JRadioButton();
         jbtnimprimir = new javax.swing.JButton();
+        jbtnprintdoc = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -125,10 +137,18 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
         });
 
         jbtnimprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print2.png"))); // NOI18N
-        jbtnimprimir.setText("Imprimir");
+        jbtnimprimir.setText("Todo");
         jbtnimprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnimprimirActionPerformed(evt);
+            }
+        });
+
+        jbtnprintdoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print2.png"))); // NOI18N
+        jbtnprintdoc.setText("Documento");
+        jbtnprintdoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnprintdocActionPerformed(evt);
             }
         });
 
@@ -151,7 +171,9 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
                         .addComponent(jrbtnmes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcbmes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                        .addComponent(jbtnprintdoc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbtnimprimir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
@@ -168,7 +190,8 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
                     .addComponent(jcbmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jrbtndia)
                     .addComponent(jrbtnmes)
-                    .addComponent(jbtnimprimir))
+                    .addComponent(jbtnimprimir)
+                    .addComponent(jbtnprintdoc))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -187,7 +210,7 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
 
         }
         Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-       jlbltotal.setText(daodetcaja.view(jtabla, "TODODIA", time, null));
+       listdetcaja=daodetcaja.view(jtabla, "TODODIA", time, null,jlbltotal);
     }//GEN-LAST:event_jrbtndiaActionPerformed
 
     private void jrbtnmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtnmesActionPerformed
@@ -196,18 +219,18 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
             jcbmes.setEnabled(true);
             jdpfecha.setEnabled(false);
         }
-       jlbltotal.setText(daodetcaja.view(jtabla, "TODOMES", null, jcbmes.getSelectedItem().toString()));
+       listdetcaja=daodetcaja.view(jtabla, "TODOMES", null, jcbmes.getSelectedItem().toString(),jlbltotal);
     }//GEN-LAST:event_jrbtnmesActionPerformed
 
     private void jdpfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpfechaActionPerformed
         // TODO add your handling code here:
         Timestamp time= new Timestamp(jdpfecha.getDate().getTime());
-        jlbltotal.setText(daodetcaja.view(jtabla, "TODODIA", time, null));
+        listdetcaja=daodetcaja.view(jtabla, "TODODIA", time, null,jlbltotal);
     }//GEN-LAST:event_jdpfechaActionPerformed
 
     private void jcbmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbmesActionPerformed
         // TODO add your handling code here:
-          jlbltotal.setText(daodetcaja.view(jtabla, "TODOMES", null, jcbmes.getSelectedItem().toString()));
+          listdetcaja=daodetcaja.view(jtabla, "TODOMES", null, jcbmes.getSelectedItem().toString(),jlbltotal);
     }//GEN-LAST:event_jcbmesActionPerformed
 
     private void jbtnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnimprimirActionPerformed
@@ -220,6 +243,28 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
            daodetcaja.print("Movimientos del dia / Mes",  "TODOMES", time, jcbmes.getSelectedItem().toString());   
     }//GEN-LAST:event_jbtnimprimirActionPerformed
 
+    private void jbtnprintdocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnprintdocActionPerformed
+        // TODO add your handling code here:
+        int index= jtabla.getSelectedRow();
+        if(index>=0){
+            detcaja=listdetcaja.get(index);
+            if(detcaja.getIdcontrato()!=0 ){
+               daodetcaja.printabono(detcaja.getId());
+                System.out.println("iddetcaja"+detcaja.getId());
+            }else if(detcaja.getIdreparir()!=0 ){
+                daodetcaja.printrepair(detcaja.getId());
+            
+            }else if(detcaja.getIdventa()!=0){
+            
+               daoventa.print(detcaja.getIdventa());
+            }else {
+                JOptionPane.showMessageDialog(null, "El egreso no genera documento","",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else {
+            JOptionPane.showMessageDialog(null,"Seleccione documento","",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jbtnprintdocActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -227,6 +272,7 @@ public class JIFMovimientos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnimprimir;
+    private javax.swing.JButton jbtnprintdoc;
     private javax.swing.JComboBox jcbmes;
     private org.jdesktop.swingx.JXDatePicker jdpfecha;
     private javax.swing.JLabel jlbltotal;
